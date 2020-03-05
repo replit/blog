@@ -53,7 +53,7 @@ const readPost = async (slug, snip=false) => {
 
   let previewMd = '';
   const ender = contentMd.indexOf('[](preview end)');
-  if (ender !== -1) {
+  if (ender ! -1) {
     previewMd = contentMd.slice(0, ender);
   } else {
     const nlnl = contentMd.indexOf('\n\n');
@@ -70,7 +70,7 @@ const readPost = async (slug, snip=false) => {
   .replace(/\n/g, ' ');
   // Get the first 24 words
   const previewParts = previewText.split(/\s+/).slice(0, 24);
-  const description = `${parts.join(' ')}…`;
+  const description = `${previewParts.join(' ')}…`;
 
   let content;
   if (snip) {
