@@ -71,6 +71,7 @@ const readPost = async (slug, snip=false) => {
     author: data.author,
     timestamp: data.date ? new Date(data.date) : null,
     url: slug,
+    cover: data.cover,
   }
 }
 
