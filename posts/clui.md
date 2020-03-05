@@ -81,7 +81,7 @@ Because the tree is hierarchical, you might think that it actually resembles a l
 
 On a technical level, a CLUI command is conceptually similar to a file path or URL. Since a complete CLUI command is simply a path down the command tree, each potential subcommand is like a portion of a file path or URL. Flags, on the other hand, function like query parameters. CLUI’s resemblance to URL paths means *you can send someone a complete, executable CLUI command as a URL.* They’re mapped 1:1.
 
-Since we have a GraphQL backend, we know all the potential fields and arguments a client can use. By using an [introspection](https://graphql.org/learn/introspection/) query we generate a tree of commands/sub-commands that map onto their respective resolve functions. Now, to add a new admin command all that's needed a new field on a GraphQL type.
+Since we have a GraphQL backend, we know all the potential fields and arguments a client can use. By using an [introspection](https://graphql.org/learn/introspection/) query we generate a tree of commands/sub-commands that map onto their respective resolve functions. Now, to add a new admin command all that's needed is a new field on a GraphQL type.
 
 CLUI’s architecture thus makes it easy to create a direct mapping between our data primitives and UI primitives. For example, booleans are mapped to toggles or checkboxes and JSON is mapped to an auto-generated form. That means that we can focus on features of our product in isolation and trust that CLUI will help us manage their complexity.
 
