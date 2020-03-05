@@ -53,7 +53,7 @@ const readPost = async (slug, snip=false) => {
 
   let previewMd = '';
   const ender = contentMd.indexOf('[](preview end)');
-  if (ender ! -1) {
+  if (ender != -1) {
     previewMd = contentMd.slice(0, ender);
   } else {
     const nlnl = contentMd.indexOf('\n\n');

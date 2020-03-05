@@ -22,6 +22,7 @@
     "express": "^4.17.1",
     "gray-matter": "^4.0.2",
     "highlight.js": "^9.15.10",
+    "html-to-text": "^5.1.1",
     "marked": "^0.7.0",
     "moment": "^2.24.0",
     "request": "^2.88.0"
