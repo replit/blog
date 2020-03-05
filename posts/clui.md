@@ -2,6 +2,7 @@
 title: "CLUI: Building a Graphical Command Line"
 author: Tyler Angert and Moudy Elkammash
 date: 2020-03-05T00:00:00.000Z
+cover: ""
 ---
 
 > “Command line interfaces. Once that was all we had. Then they disappeared, replaced by what we thought was a great advance: GUIs. GUIs were - and still are - valuable, but they fail to scale to the demands of today's systems. So now command line interfaces are back again, hiding under the name of search. Now you see them, now you don't. Now you see them again. And they will get better and better with time: mark my words, that is my prediction for the future of interfaces.” [1]
@@ -47,7 +48,7 @@ At Repl.it, where our goal is to build a simple yet powerful programming environ
 
 There are a few requirements for a CLI to be approachable:
 
-1. __You should be able to use it with a mouse.__ This may seem contradictory to CLIs as a paradigm since their real power comes from using the keyboard, but being able to click through commands does two things: gives beginners a chance to explore "level up" to the keyboard and makes the interface more approachable. It also paves the way to make programming environments more accessible via touch and mobile.
+1. __You should be able to use it with a mouse.__ This may seem contradictory to CLIs as a paradigm since their real power comes from using the keyboard, but being able to click through commands does two things: gives beginners a chance to "level up" to the keyboard and makes the interface more approachable. It also paves the way to make programming environments more accessible via touch and mobile.
 2. __It needs to be discoverable.__ That means context-aware autocomplete with clear and concise language providing the right level of detail about a command. The primary issue with discoverability in CLIs is that the commands are invisible. You either need to have memorized the commands already or use some form of documentation to gain access. In CLUI, the commands come to you.
 3. __The output should support rich and interactive media.__ That means that images, gifs, video, graphs, interactive diagrams, buttons, and forms should be able to integrate directly into the CLI experience. ASCII art is fun, but text is only as useful as the information it can convey. Interactive media should be treated as a first class citizen.
 

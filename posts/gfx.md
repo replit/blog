@@ -10,7 +10,7 @@ seconds. With [live deployments](deploy), we made web hosting a breeze. With [Mu
 we've removed the drudgery from coding with friends. And today, we're excited to
 bring native GUI applications and game development to the browser.
 
-<video controls webkit-playsinline="true" playsinline="" src="/public/images/blog/gfx.mp4"></video>
+<video controls webkit-playsinline="true" playsinline="" src="https://repl.it/public/images/blog/gfx.mp4"></video>
 
 Before we go on, you have to see this in action: Just run the repl below, wait a few
 seconds for it to load, focus on the output window and start playing Tetris in
@@ -64,7 +64,7 @@ might feel a delay, which we're also
 working on making better by replicating our data center (watch out [Google
 Stadia](https://store.google.com/magazine/stadia)).
 
-Please leave us [feedback](/feedback) so we can improve. Or come [work with
+Please leave us [feedback](https://repl.it/feedback) so we can improve. Or come [work with
 us](/jobs) so we can make it better together.
 
 

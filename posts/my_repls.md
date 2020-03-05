@@ -12,11 +12,11 @@ easy way to, for example, quickly go back to a project that you continue to work
 on every day.
 
 Today we're excited to announce some of the changes that we've
-been testing for the past couple of weeks. Going to ["my repls"](/repls) the
+been testing for the past couple of weeks. Going to ["my repls"](https://repl.it/repls) the
 first thing you'll notice is a big "Continue coding" section with the projects
 that we think you might want to go back and work on.
 
-![my repls](/public/images/blog/my_repls.png)
+![my repls](https://repl.it/public/images/blog/my_repls.png)
 
 ## Starring
 
@@ -44,4 +44,4 @@ Paging can be clunky and slow; it's much easier just to scroll.
 
 We're not done yet; there's a lot more left to be desired. Look out for a new
 and improved search bar. But for now, if you have any feedback, we'd love to
-[hear it](/feedback)!
+[hear it](https://repl.it/feedback)!

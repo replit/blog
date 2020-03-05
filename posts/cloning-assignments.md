@@ -22,4 +22,4 @@ You should now be able to see the assignment under "Drafts" in the chosen classr
 
 ![](/public/images/blog/clone-assignment-result.png)
 
-We hope you enjoy this feature!  As always, we welcome feedback over at our [feedback boards](/feedback)
+We hope you enjoy this feature!  As always, we welcome feedback over at our [feedback boards](https://repl.it/feedback)

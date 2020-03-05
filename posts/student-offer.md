@@ -37,4 +37,4 @@ height: 100%;
 }
 </style>
 
-Got questions? Please [let us know](/feedback).
+Got questions? Please [let us know](https://repl.it/feedback).
