@@ -311,8 +311,8 @@ body {
 
 @media all and (max-width: 720px) {
 	.post-item {
-	width: auto;
-	margin: 50px 18px;
+		width: auto;
+		margin: 50px 18px;
 	}
 
 	.post-content {

@@ -6,12 +6,13 @@
 
   <link rel="shortcut icon" href="https://repl.it/public/images/favicon.ico" type="image/vnd.microsoft.icon">
 
-  <meta property="og:title" content="Blog">
+  <meta property="og:title" content="<%= post.title %>">
   <meta property="og:description" content="<%= post.description %>">
   <meta property="og:type" content="article" >
   <meta property="og:image" content="<%= post.cover %>" >
-  <meta property="og:site_name" content="repl.it" ><meta property="fb:app_id" content="1775481339348651" >
-
+  <meta property="og:site_name" content="repl.it" >
+  <meta property="fb:app_id" content="1775481339348651" >
+  <meta property="og:url" content="https://blog.repl.it/<%= post.url%>" >
 
   <meta itemprop="name" content="repl.it" >
   <meta itemprop="description" content="<%= post.description %>" >
