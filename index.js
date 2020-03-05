@@ -5,6 +5,7 @@ const path = require('path');
 const moment = require('moment');
 const hljs = require('highlight.js');
 const gm = require('gray-matter');
+const htmlToText = require('html-to-text');
 
 require('ejs');
 
@@ -45,27 +46,42 @@ const readPost = async (slug, snip=false) => {
 
 	let raw = await fs.readFile(p, 'utf8');
 
-  let { content, data } = gm(raw);
-
-  content = content.trim();
-
-	if (snip) {
-		const ender = content.indexOf('[](preview end)');
-		if (ender !== -1) {
-			content = content.slice(0, ender);
-		} else {
-			const nlnl = content.indexOf('\n\n');
-			if (nlnl !== -1) {
-				content = content.slice(0, nlnl);
-			}
-		}
-	}
+  let { content: rawContent, data } = gm(raw);
 
 	// try to resolve absolute links back to repl.it
-	content = content.replace(/(\]\()(\/.+\))/g, '$1https://repl.it$2');
+  const contentMd = rawContent.trim().replace(/(\]\()(\/.+\))/g, '$1https://repl.it$2');
+
+  let previewMd = '';
+  const ender = contentMd.indexOf('[](preview end)');
+  if (ender !== -1) {
+    previewMd = contentMd.slice(0, ender);
+  } else {
+    const nlnl = contentMd.indexOf('\n\n');
+    if (nlnl !== -1) {
+      previewMd = contentMd.slice(0, nlnl);
+    }
+  }
+
+  const previewHtml = marked(previewMd);
+  const previewText = htmlToText.fromString(previewHtml, {
+    ignoreHref: true,
+    ignoreImage: true,
+  })
+  .replace(/\n/g, ' ');
+  // Get the first 24 words
+  const previewParts = previewText.split(/\s+/).slice(0, 24);
+  const description = `${parts.join(' ')}…`;
+
+  let content;
+  if (snip) {
+    content = previewHtml;
+  } else {
+    content = marked(contentMd);
+  }
 
 	return {
-    content: marked(content),
+    content,
+    description,
     snipped: snip,
     title: data.title,
     author: data.author,
