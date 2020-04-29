@@ -36,6 +36,8 @@ const buildPostCache = async () => {
 
 buildPostCache();
 
+setInterval(buildPostCache, 60000);
+
 const postPreviews = async () => {
   return previewCache || [];
 }

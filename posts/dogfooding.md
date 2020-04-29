@@ -1,10 +1,15 @@
+---
+title: This Blog Hosts Itself
+author: Mason Clayton
+---
+
 As Repl.it has become more powerful we've used it to build and host many of our internal tools and parts of the site itself. This gives us a great opportunity to [eat our own dog food](https://en.wikipedia.org/wiki/Eating_your_own_dog_food) and in the process make Repl.it better.
 
 Most recently we moved our blog (the one you're reading right now) into a repl! Notice the "edit on Repl.it" in the upper right corner? That takes you straight to the markdown file for this particular blog post. The same repl is also embedded below, you can explore it right here, even fork and play around with it.
 
 <iframe height="400px" width="100%" src="https://repl.it/@turbio/replit-blog?lite=true" scrolling="no" frameborder="no" allowtransparency="true" allowfullscreen="true" sandbox="allow-forms allow-pointer-lock allow-popups allow-same-origin allow-scripts allow-modals"></iframe>
 
-But this isn't the only page build in a repl. When creating any new feature we try to first prototype on Repl.it and, if possible, host it there forever. Pages like our [docs](https://docs.repl.it), [jobs](https://repl.it/site/jobs), and even the [repl.run](https://repl.run) product are all hosted entirely in a repl. We've found repls lend themselves especially well to simple self contained services. Many of our internal tools work very well with the repl model. We're on a quest to eventually self host all of replit as we pull bits and pieces into repls.
+But this isn't the only page build in a repl. When creating any new feature we try to first prototype on Repl.it and, if possible, host it there forever. Pages like our [docs](https://docs.repl.it), [jobs](https://repl.it/site/jobs), and even the [repl.run](https://repl.run) product are all hosted entirely in a repl. We've found repls lend themselves especially well to light self contained services. Many of our internal tools and some parts of the site work very well with the repl model.
 
 ## Boops
 
@@ -37,4 +42,12 @@ Our [jobs page](https://repl.it/site/jobs) is actually just [a bash repl](ttps:/
 - deploys
 - 
 
-# musk commit
+# /deploy
+
+repl forks and runs another repl for every deploy
+
+# map reduce?
+
+- python packge resolver
+
+install every package on pypi to figure out what it provides
