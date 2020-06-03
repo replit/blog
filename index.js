@@ -78,7 +78,7 @@ const readPost = async (slug, snip=false) => {
   if (snip) {
     content = previewHtml;
   } else {
-    content = marked(contentMd);
+    content = marked(contentMd.replace('[](preview end)', ''));
   }
 
 	return {
