@@ -20,11 +20,8 @@ If you want more granularity in your links, you can add `:line` or `:line:col` t
 
 Alternatively, removing the ":12" here would link you to the beginning of the 5th line.
 
-<!-- Add back when flag is removed -->
-<!-- For example, here's a link to the start of the `draw` function in `script.js` in one of our templates: -->
-<!--<iframe height="500px" width="100%" src="https://repl.it/@templates/p5js-Game-Starter?lite=true&embed=true&tab=code#script.js:7" scrolling="no" frameborder="no" allowtransparency="true" allowfullscreen="true" sandbox="allow-forms allow-pointer-lock allow-popups allow-same-origin allow-scripts allow-modals"></iframe>-->
-
-> Note that for now deeplinking only works if you're logged in, but will be rolled out to anonymous sessions soon.
+For example, here's a link to the start of the `draw` function in `script.js` in one of our templates:
+<iframe height="500px" width="100%" src="https://repl.it/@templates/p5js-Game-Starter?lite=true&embed=true&tab=code#script.js:7" scrolling="no" frameborder="no" allowtransparency="true" allowfullscreen="true" sandbox="allow-forms allow-pointer-lock allow-popups allow-same-origin allow-scripts allow-modals"></iframe>
 
 In the future, we could expand this feature to include things like named deeplinks so that you can easily create aliases for important parts of your codebase.
 
