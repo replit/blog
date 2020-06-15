@@ -72,4 +72,12 @@ Have you already mastered most of the concepts above? That’s great -- you’re
 
 As you master more Python concepts, you’ll be able to build more and more impressive applications. From analyzing and cleaning datasets to building games, the sky's the limit. But, of course, your learning will never really be over. That’s the fun part about programming: there’s always more you can do and learn.
 
+<hr>
+
 *We’ve only covered a few Python concepts in this article. If you’re looking to learn more about Python, check out the full [beginner’s guide to learning Python](https://careerkarma.com/blog/python-for-beginners/) on the Career Karma blog.*
+
+**_About the author_**
+
+<img src="https://careerkarma.com/blog/wp-content/uploads/2020/01/james-gallagher-300x300.jpg" alt="James Gallagher" style="height:150px; width:150px; display:inline-block; horizontal-align:left;">
+
+_James Gallagher is a writer at [Career Karma](https://careerkarma.com/) where he focuses on coding tutorials and technical articles. ([twitter](https://twitter.com/jamesg_oca))_
