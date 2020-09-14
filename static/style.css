@@ -94,30 +94,9 @@ body {
 	padding-left: 25px;
 }
 
-.markdown ul {
-	list-style: none;
-}
-
 .markdown ul,
 .markdown ol {
 	margin: 20px 0;
-}
-
-.markdown ul>li:before {
-	content: '• ';
-	line-height: 0;
-	color: rgb(89, 89, 89);
-}
-
-.markdown ul>li>ul>li:before {
-	content: '◦ ';
-	line-height: 0;
-	color: rgb(89, 89, 89);
-}
-
-.markdown ul>li {
-	padding-left: 0.5em;
-	text-indent: -0.7em;
 }
 
 .markdown ol>li {
@@ -361,31 +340,9 @@ body {
 	padding-left: 25px;
 }
 
-.post-content ul {
-	list-style: none;
-}
-
 .post-content ul,
 .post-content ol {
 	margin: 20px 0;
-}
-
-.post-content ul > li:before {
-	content: '• ';
-	line-height: 0;
-	color: #807f7f;
-}
-
-/* Nested */
-.post-content ul > li > ul > li:before {
-	content: '◦ ';
-	line-height: 0;
-	color: #807f7f;
-}
-
-.post-content ul > li {
-	padding-left: 1em;
-	text-indent: -0.7em;
 }
 
 .post-content ol > li {

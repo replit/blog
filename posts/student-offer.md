@@ -7,7 +7,7 @@ date: 2019-09-24T17:37:43.197Z
 We believe everyone should have instant access to a complete coding environment in their browser. That’s why Repl.it has joined the <a href="https://education.github.com/pack">GitHub Student Developer Pack</a>, giving eligible students free access to private repls, unlimited multiplayer sessions, and additional processing power. Students can now focus on learning and collaborating with their classmates in new ways, without the hassle of setting up a new environment each time.
 
 ## How To Claim a Free Hacker Plan
-To claim a free [Hacker plan](/site/pricing), eligible students should apply for the [GitHub Student Developer Pack](https://education.github.com/pack) and then [log in to Repl.it using their GitHub credentials](https://repl.it/login). All eligible accounts will be automatically upgraded to a Hacker plan free of charge for one year.
+To claim a free [Hacker plan](/site/pricing), eligible students should apply for the [GitHub Student Developer Pack](https://education.github.com/pack) and then [log in to Repl.it using their GitHub credentials](https://repl.it/login). All eligible accounts will be automatically upgraded to a Hacker plan free of charge for 6 months.
 
 ## Free Private Repls
 Students sometimes need a private place to practice, make mistakes, and learn at their own place. With a free Hacker plan students will be able to create unlimited private repls. Private repls are a great place to learn new languages, study for an assignment, or put the finishing touches on a project.
