@@ -57,9 +57,14 @@
     </script>
 </head>
 <body>
+
+<section class ="page_container">
 <%- include('header'); %>
-<a class="repl-link" href="/__repl?fileName=posts/<%= post.url %>.md">view on Repl.it</a>
+<a class="back" href="https://blog.repl.it/">← <span>Back to blogs</span></a>
+<a class="repl-link" href="/__repl?fileName=posts/<%= post.url %>.md">Edit on Repl.it</a>
 <%- include('post.ejs', { post }); %>
+</section>
+
 <%- include('footer'); %>
 </body>
 </html>
