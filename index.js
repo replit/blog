@@ -93,7 +93,6 @@ const readPost = async (slug, snip=false) => {
   }
 }
 
-
 const errPage = (res, err) => {
 	res.locals.err = err;
 	res.render('error.ejs')
