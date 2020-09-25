@@ -472,6 +472,9 @@ body {
  font-size:14px;
  font-family:Questrial;
 }
+
+
+
 @media all and (max-width:900px) {
  .footer {
   position:relative;
