@@ -18,7 +18,10 @@ However, with growth comes problems:
 - Disconnects, when they happen, have been terrible user experience
 - Hosting could be more reliable, repls should never get stuck
 - The website has become hard to navigate and needs a coherent design sense
+<<<<<<< HEAD
 - Legacy Classroom product is putting a lot of strain on our infrastructure leading to outages
+=======
+>>>>>>> origin/master
 
 Because of all this, we've decided to pause work on new features until we get the foundations in a good state. We've already started working on addressing all these issues, and have some early wins we can share.  
 
@@ -45,8 +48,12 @@ You'll notice that things will get faster, better, and more polished. For the ma
 We're also going to have to pause new feature work while we work on the foundations. Our plans will likely change, but currently, we've planned to make the following changes:
 
 - We're pausing work on always-on repls, the alpha feature that lets explorers keep their repls up. We'll get back to this later, possibly this year, when the foundations are in a better place (there will be less of a need to keep your repls up if wake-ups are faster, which they will be)
+<<<<<<< HEAD
 - We will not be adding any new languages for the time being. Polygott, our underlying base OS image that runs your repls, has ballooned to more than 6GB, and suffers from [dependency hell](https://en.wikipedia.org/wiki/Dependency_hell), which makes deploying it like playing Russian roulette. 
 - Classroom will be deprecated. Check out [Teams for Education](https://blog.repl.it/teams-for-education) for a transformative way of teaching using Repl.it
+=======
+- We will not be adding any new languages for the time being. Polygott, our underlying base OS image that runs your repls, has ballooned to more than 6GB, and suffers from [dependency hell](https://en.wikipedia.org/wiki/Dependency_hell), which makes deploying it like playing Russian roulette.
+>>>>>>> origin/master
 - There are undermaintained and underused sections of the website that are worth cleaning up or modernizing. For example, we're will update our social platform to be more integrated with the core coding experience.
 
 Overall, we think this will allow us to build a solid foundation and platform to expand from once we get back to feature development. 

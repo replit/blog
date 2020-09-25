@@ -58,11 +58,14 @@
     </script>
   </head>
   <body>
-    <%- include('header'); %>
-    <a class="repl-link" href="/__repl">view on Repl.it</a>
+
+  <section class = "page_container">
+  <%- include('header'); %>
+    <a class="repl-link" href="/__repl">Edit on Repl.it</a>
     <% for (const post of posts) { %>
       <%- include('post.ejs', { post }); %>
     <% } %>
-    <%- include('footer'); %>
+</section>
+  <%- include('footer'); %>
   </body>
 </html>

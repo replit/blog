@@ -1,4 +1,5 @@
 <article class="post-item">
+
 	<h1 class="post-title">
 		<a href="/<%= post.url%>"><%= post.title %></a>
 	</h1>
@@ -10,7 +11,7 @@
 	</div>
 	<% if (post.snipped) { %>
 		<a href="/<%= post.url %>" class="read-more">
-			Read more...
+			Read more <span class ="arrow"> → </span>
 		</a>
 		<div class="post-seperator" />
 	<% } %>

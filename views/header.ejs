@@ -1,158 +1,89 @@
 <style>
-  .left-links.jsx-3411775297 {
-  position: absolute;
-  left: 155px;
+  .navigation {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    margin: 0 auto 40px auto;
+    max-width: 1800px;
+    flex: 1;
+    width: 100%;
+    padding: 16px 0;
   }
-  .right-links.jsx-3411775297 {
-  position: absolute;
-  top: 0;
-  right: 0;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
+
+.navigation-container {
   display: flex;
-  -webkit-flex-direction: row;
-  -ms-flex-direction: row;
-  flex-direction: row;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
   align-items: center;
-  }
-  .nav-mobile-shown.jsx-3411775297,
-  .nav-mobile.jsx-3411775297 {
-  display: none;
-  }
-  .nav.jsx-3411775297 {
-  font-family: 'IBM Plex Sans', sans-serif;
-  position: absolute;
-  right: 0;
-  left: 0;
-  }
-  .nav.jsx-3411775297 .nav-link.jsx-3411775297 {
-  margin-right: 15px;
-  color: #767777;
-  height: 60px;
-  line-height: 60px;
-  display: inline-block;
-  padding-top: 3px;
-  -webkit-text-decoration: none;
+ }
+
+ .navigation-links {
   text-decoration: none;
-  }
-  .nav.jsx-3411775297 .nav-link.jsx-3411775297:hover,
-  .nav.jsx-3411775297 .nav-auth-button.jsx-3411775297:hover {
-  color: #7896a3;
-  border-bottom: 1px solid #7896a3;
-  }
-  .nav.jsx-3411775297 .nav-auth-button.jsx-3411775297 {
-  margin: 0 18px;
-  color: #767777;
-  height: 60px;
-  display: inline-block;
-  line-height: 60px;
-  border-bottom: 1px solid #767777;
-  -webkit-text-decoration: none;
-  text-decoration: none;
-  }
-  .nav.jsx-3411775297 .signup-form .btn-primary,
-  .nav.jsx-3411775297 .login-form .btn-primary {
-  background-color: #F06A60 !important;
-  }
-  .nav.jsx-3411775297 .signup-form .btn-primary:hover,
-  .nav.jsx-3411775297 .login-form .btn-primary:hover {
-  background-color: #F1584B !important;
-  }
-  @media all and (max-width:720px) {
-  .nav.jsx-3411775297 {
-  display: none;
-  }
-  .nav-mobile-shown.jsx-3411775297 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column;
-  position: absolute;
-  top: 59px;
-  right: 0;
-  width: 150px;
-  background: #fff;
-  text-align: center;
-  border: 1px solid #ececec;
-  border-top: none;
-  }
-  .nav-link-mobile.jsx-3411775297 {
-  font-family: 'IBM Plex Sans', sans-serif;
-  color: #767777;
-  -webkit-text-decoration: none;
-  text-decoration: none;
-  padding: 10px;
-  }
-  .nav-link-mobile.jsx-3411775297:hover {
-  font-family: 'IBM Plex Sans', sans-serif;
-  background-color: rgb(245, 245, 245);
-  }
-  }
+  padding: 4px 8px 8px 8px;
+  margin: 4px;
+  color: black;
+  transition: .2s color ease-in-out;
+ }
+
+ .navigation-links:hover {
+  color: #0070E0;
+ }
+
+.navigation .sign-up {
+ margin: 0 0 4px 12px;
+ padding: 8px 16px; 
+background-color: #0070E0;
+ border-radius: 4px;
+
+font-weight: 500;
+ text-decoration: none;
+  color: white;
+  transition: .2s opacity ease-in-out
+}
+
+.navigation .sign-up:hover {
+opacity: .9;
+}
+
+.navigation-container img {
+ margin: 0 12px;
+width: 110px;
+}
+
+@media all and (max-width:800px) {
+
+.navigation {
+padding: 16px 0;
+margin: 24px auto 32px auto;
+}
+.navigation img {
+margin: 0;
+}
+
+.navigation-links {
+display: none;
+}
+
+.navigation .sign-up{
+margin: 0;
+}
+
+
+}
+
 </style>
-<style>
-  * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  }
-  html,
-  body {
-  min-height: 100%;
-  }
-  body {
-  margin-top: 60px;
-  }
-  button {
-  border-radius: 0;
-  }
-  a {
-  color: #4183c4;
-  cursor: pointer;
-  -webkit-text-decoration: none;
-  text-decoration: none;
-  }
-  a:hover,
-  a:active,
-  a:focus {
-  -webkit-text-decoration: underline;
-  text-decoration: underline;
-  }
-  header {
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 99;
-  height: 60px;
-  width: 100%;
-  background-color: rgba(255, 255, 255, 0.9);
-  border-bottom: 1px solid #ececec;
-  }
-  header .logo {
-  position: absolute;
-  left: 25px;
-  height: 60px;
-  line-height: 94px;
-  }
-  header .logo img {
-  width: 116px;
-  }
-</style>
-  <header style="background:;border-bottom:">
-    <div style="position:relative">
-      <a class="logo" href="//repl.it"><img src="//repl.it/public/images/logo-small.png" alt="repl.it"/></a>
-      <div class="jsx-3411775297">
-        <nav class="jsx-3411775297 nav-mobile"><a href="//repl.it/signup" class="jsx-3411775297 nav-link-mobile">sign up</a><a href="//repl.it/site/jobs" class="jsx-3411775297 nav-link-mobile">jobs</a><a href="//repl.it/site/blog" class="jsx-3411775297 nav-link-mobile">blog</a><a href="//repl.it/site/ide" class="jsx-3411775297 nav-link-mobile">features</a><a href="//repl.it/jam?from=static" class="jsx-3411775297 nav-link-mobile">challenge</a></nav>
-        <nav class="jsx-3411775297 nav">
-          <div class="jsx-3411775297 left-links"><a href="//repl.it/site/jobs" class="jsx-3411775297 nav-link">jobs</a><a href="//repl.it/site/blog" class="jsx-3411775297 nav-link">blog</a><a href="//repl.it/site/ide" class="jsx-3411775297 nav-link">features</a><a href="//repl.it/jam?from=static" class="jsx-3411775297 nav-link">challenge</a></div>
-          <div class="jsx-3411775297 right-links"><a href="//repl.it/signup" class="jsx-3411775297 nav-auth-button">Sign Up</a></div>
-        </nav>
-      </div>
-    </div>
-  </header>
+
+
+
+<nav class= "navigation">
+
+<div class ="navigation-container">
+ <a class="logo" href="//repl.it"><img src="//repl.it/public/images/logo-small.png" alt="repl.it"/></a>
+
+  <a class ="navigation-links" href ="//repl.it/site/ide">Features</a>
+  <a class ="navigation-links" href ="//repl.it/site/jobs">Jobs</a>
+  <a class ="navigation-links" href ="//blog.repl.it">Blog</a>
+  <a class ="navigation-links" href ="//repl.it/jam?from=static">Jam</a>
+</div>
+
+ <a class ="sign-up" href ="//repl.it/signup">Sign up</a>
+</nav>
