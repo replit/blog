@@ -48,7 +48,6 @@ We're also going to have to pause new feature work while we work on the foundati
 - We're pausing work on always-on repls, the alpha feature that lets explorers keep their repls up. We'll get back to this later, possibly this year, when the foundations are in a better place (there will be less of a need to keep your repls up if wake-ups are faster, which they will be)
 - We will not be adding any new languages for the time being. Polygott, our underlying base OS image that runs your repls, has ballooned to more than 6GB, and suffers from [dependency hell](https://en.wikipedia.org/wiki/Dependency_hell), which makes deploying it like playing Russian roulette. 
 - Classroom will be deprecated. Check out [Teams for Education](https://blog.repl.it/teams-for-education) for a transformative way of teaching using Repl.it
-- We will not be adding any new languages for the time being. Polygott, our underlying base OS image that runs your repls, has ballooned to more than 6GB, and suffers from [dependency hell](https://en.wikipedia.org/wiki/Dependency_hell), which makes deploying it like playing Russian roulette.
 - There are undermaintained and underused sections of the website that are worth cleaning up or modernizing. For example, we're will update our social platform to be more integrated with the core coding experience.
 
 Overall, we think this will allow us to build a solid foundation and platform to expand from once we get back to feature development. 

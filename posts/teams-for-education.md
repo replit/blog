@@ -113,17 +113,7 @@ So that all said, in order to make it easy and so you don’t have to worry abou
 
 **Pricing tiers**
 
-- Single-classroom teachers (up to 50 students): **$20/month**
-- College professors (up to 250 students): **$50/month**
-- Schools and departments (unlimited students): **$100/month**
-
-And if you’re used to having to get annual budget approval or pausing your edtech subscriptions over the summer, we’ll give you two months off for an annual plan.
-
-- 50 students: ~~$240~~ **$200/year**
-- 250 students: ~~$600~~ **$500/year**
-- Unlimited: ~~$1,200~~ **$1,000/year**
-
-*Note: must be an accredited/non-profit educational institution (we will be announcing plans for business and for-profit institutions soon)*
+[Update as of September 29, 2020] We're excited to announce that we've simplified and reduced our Teams pricing to to $35/team/month or $350/team/year (2 months free) with an unlimited number of students. And there are more billing improvements on the roadmap.
 
 # Release timeline
 

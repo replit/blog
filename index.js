@@ -23,11 +23,11 @@ const buildPostCache = async () => {
 
   let posts = [];
 
-	for (const f of ls) {
+  for (const f of ls) {
     posts.push(await readPost(f.slice(0, -3), true));
-	}
+  }
 
-  posts = posts.filter(p => p.timestamp);
+  posts = posts.filter(p => p.timestamp && p.timestamp < new Date());
 
   posts.sort((l, r) => r.timestamp - l.timestamp)
 

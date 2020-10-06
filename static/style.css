@@ -276,6 +276,7 @@ p>em {
 .markdown img {
   width: 70%;
   margin: var(--spacing-6) auto;
+  display: block
 }
 
 .markdown a img {
