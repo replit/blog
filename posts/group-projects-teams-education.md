@@ -13,7 +13,7 @@ When creating a project from the Team Dashboard, teachers may toggle-on "Group P
 
 <img src="https://blog.repl.it/images/group-projects-teams-education/project-publish.png" alt="Group assignment interface" style="max-width: 450px" />
 
-Group Projects integrates with our Teams Dashboard for viewing student submissions and providing feedback via *[Code Annotations](https://blog.repl.it/annotations-for-education)*.
+*Group Projects* integrates with our Teams Dashboard for viewing student submissions and providing feedback via *[Code Annotations](https://blog.repl.it/annotations-for-education)*.
 
 **Repl.it Teams for Education is purpose-built for collaborative learning.**  We have opened up awesome new ways people can collaborate on the Repl.it platform with *Code Annotations* and *Group Projects*, and we continue striving to *make it easier for anyone to start coding.*
 
