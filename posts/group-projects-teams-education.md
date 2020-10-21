@@ -9,7 +9,7 @@ Repl.it is proud to be teachers' favorite platform for teaching code.  We want t
 
 Today we are excited to introduce **Group Projects on *Teams for Education***.  *Group Projects* enables students to collaborate as groups on teacher-created lessons in 50+ programing languages via our familiar and powerful online IDE.
 
-When creating a project from the Team Dashboard, teachers may toggle-on "Group Project".  This allows teachers to publish the template with automatically assigned or hand-selected student groups for collaboration.
+When creating a project from the Team Dashboard, teachers may toggle-on "Group Project".  This allows teachers to publish the project with automatically assigned or hand-selected student groups for collaboration.
 
 <img src="https://blog.repl.it/images/group-projects-teams-education/project-publish.png" alt="Group assignment interface" style="max-width: 300px" />
 
