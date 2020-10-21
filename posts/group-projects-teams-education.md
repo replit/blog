@@ -3,11 +3,11 @@ title: Group Projects on Teams for Education
 author: David Cako
 date: 2020-10-21T08:00:00.000Z
 cover: https://blog.repl.it/images/group-projects-teams-education/project-publish.png
----
-
-Repl.it is proud to be teachers' favorite platform for teaching code.  We want to give our users the best collaborative coding experience for programmers of any skill level, and now we are making the student experience even better in [Teams For Education](https://blog.repl.it/teams-for-education).  
+--- 
 
 Today we are excited to introduce **Group Projects on Teams for Education**.  *Group Projects* enables students to collaborate as groups on teacher-created lessons in 50+ programing languages via our familiar and powerful online IDE.
+
+Repl.it is proud to be teachers' favorite platform for teaching code.  We want to give our users the best collaborative coding experience for programmers of any skill level, and now we are making the student experience even better in [Teams For Education](https://blog.repl.it/teams-for-education). 
 
 When creating a project from the Team Dashboard, teachers may toggle-on "Group Project".  This allows teachers to publish the project with automatically assigned or hand-selected student groups for collaboration.
 
