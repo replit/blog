@@ -5,6 +5,9 @@ date: 2020-09-29T07:00:00.000Z
 cover: https://blog.repl.it/images/teams_edu/replitroom.png
 ---
 
+*Edit on Thursday, November 12:*
+*We've prolonged the Classroom deprecation date to 1/31/2021 to give teachers whose fall classes carry over into the new year extra time to transition.*
+
 *Edit on Friday, October 2:*
 *You can now ***migrate your Classroom assignments to a free Team*** by [clicking on this link](https://repl.it/classroom-migration) and choosing which Classrooms to migrate. [Check out these helpful resources](https://teamsforeducationresources.obaidaa.repl.co/) to get the most out of Teams.*
 
