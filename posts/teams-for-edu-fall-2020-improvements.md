@@ -1,7 +1,7 @@
 ---
 title: Teams for Education, Fall 2020 Updates
 author: Arnav Bansal and Derrick McMillen
-cover: https://blog.repl.it/images/teams_edu/mention.png
+cover: https://blog.repl.it/images/teams_edu/replitroom.png
 date: 2020-11-19
 ---
 
@@ -18,7 +18,7 @@ You can also use the Project Switcher to seamlessly navigate between Projects. W
 ## Bulk Invite Students via CSV File
 
 ![CSV file upload](https://blog.repl.it/images/teams_edu/csv_invites.gif)
-Invite all of your students to your Team at once by uploading a single CSV file. No need for students to even have a Repl.it account before hand - just provide their email addresses.
+Invite all of your students to your Team at once by uploading a single CSV file. No need for students to have a Repl.it account beforehand - just provide their email addresses.
 
 
 
