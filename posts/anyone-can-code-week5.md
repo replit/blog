@@ -1,10 +1,13 @@
 ---
 title: Anyone Can Code - Week 5
 author: Brittany Pirkle
-cover: https://blog.repl.it/images/anyone-can-code/week4.png
+date: 2020-11-23
+cover: https://blog.repl.it/images/anyone-can-code/week5.png
 ---
 
 How are we already into week 5 of this project? It’s amazing how much I have learned in such a short time. (If you need a recap of the last four weeks, you can go [here](https://blog.repl.it/)). When the basic foundational steps are broken down into small chunks, the world of code doesn’t seem as overwhelming as I thought it would be!
+
+![week 5](https://blog.repl.it/images/anyone-can-code/week5.png)
 
 This week the focus was on responsive design. Responsive design is all about creating web pages that work with any screen size. Do you notice how a website shows up differently on your mobile device versus a desktop device? This is responsive design at work. Responsive design is all about using HTML and CSS to shrink, enlarge, resize, etc. various parts of a website so they are aesthetically pleasing on all devices. Here's a [quick 5-minute course from FreeCodeCamp and Scrimba](https://www.freecodecamp.org/news/learn-responsive-web-design-in-5-minutes/) that I read to get started.
 
