@@ -157,6 +157,7 @@ body {
 	overflow-x: auto;
 	color: #000;
 	border: none;
+  white-space: pre;
 }
 
 .post-content code,
@@ -312,6 +313,10 @@ p>em {
 .markdown li {
   margin: 0 0 0 var(--spacing-3);
   list-style-type: disc;
+}
+
+.markdown ol li {
+  list-style-type: decimal;
 }
 
 .markdown ul,
