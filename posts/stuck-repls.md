@@ -1,176 +1,30 @@
 ---
-title: Destroying Stuck Repls
+title: Stuck Repls
 author: Connor Brewster
 ---
 
-**NOTE**: I am splitting this into some smaller posts.
+Recently, we have been focusing on improving the stability of Replit. For an overview of our progress, you can read [How Far We've Come](https://blog.repl.it/how-far).
 
-Outline:
-  * What is a stuck repl?
-    * Different kinds
-    * How often this happened
-  * First step is to start tracking it
-    * Unable to proxy log entries
-    * Tracking unable to proxy errors in prom/grafana
-    * Used a repl to scrape the logs and look for repls that have proxy errors over a span of time
-    * Aggegrate these stuck repls into buckets of "time stuck"
-    * Export these metrics to prometheus
-    * Add a nice graph in Grafana
-  * Core Invariant of Repl.it
-    * Only ever 0-1 container alive for a repl
-    * Essential for things like multiplayer to work
-    * Really bad things can happen if this invariant is broken
-  * Fixing repls that get stuck for hours
-  * Fixing stuck repls due to slow container destroys on shutdown
-    * Preemptible machines
-      * Why?
-      * Causes 100-200 repl containers to be destroyed at once
-    * Maybe talk about systemd dependencies since docker was shutting at the same time as conman?
-    * Docker is slow to kill this many containers
-      * `docker destroy` vs `docker kill`
-        * Destroy is graceful, gives time for container to shutdown gracefully
-        * Kill should be immediate
-      * Why isn't kill immediate?
-        * Docker probably isn't designed to immediately kill hundreds of containers in a few seconds
-        * Custom docker install
-        * Lock contention
-        * Waiting for cleanup of network interfaces
-        * Serial interface of netlink was a bottleneck
-      * What can we do about it?
-        * Kill the container's pid ourselves
-        * Since pid1 is the init process in its namespace, killing that kills all processes in the namespace
-  * Where are we now?
-    * We track both stuck repls and new session error rates
-      * New session error rate comfortably below 0.5%
-      * Stuck repl rate is very low, the ones that are stuck are only stuck for ~5 sec
-
-[TODO: Come up with a more inspiring intro?]
-You may have heard that we recently squashed a gnarly bug on our platform, but you may be curious about what was causing this issue and how we went about fixing it.
-
-[TODO: Include a gif of a stuck repl]
+You may have seen that we recently fixed one of the most irritating issues on the platform: stuck repls.
 
 <div style="display: flex; justify-content: center;">
 <blockquote class="twitter-tweet"><p lang="en" dir="ltr">One of the worst bugs on our platform SQUASHED.<br><br>SMASHED.<br><br>E R A D I C A T E D<br><br>Ahem... so yeah, it&#39;s just gone now. <a href="https://t.co/4z8djrtDW6">pic.twitter.com/4z8djrtDW6</a></p>&mdash; Repl.it (@replit) <a href="https://twitter.com/replit/status/1318777999789969408?ref_src=twsrc%5Etfw">October 21, 2020</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script> 
 </div>
 
-We had heard numerous reports of repls that would get stuck in an endless reconnecting loop. Sometimes the repls would be stuck for a couple minutes, other times they could be stuck in this look for multiple hours. This was no good; especially if you were needing to work on a homework assignment or were excited to work on your side project only to find out you can't connect. This is why we spent some time focusing on stability to make sure you can always access your repls.
+There were many different causes of stuck repls, varying from: unhealthy machines, race conditions that lead to deadlock, and slow container shutdowns. This post focuses how we fixed the last cause, slow container shutdowns. Slow container shutdowns affected nearly everyone using the platform and would cause a repl to be inaccesible for up to a minute.
 
-When we would get reports of stuck repls, it was difficult to figure out the precise root cause. Sometimes the repls would already be working again by the time we went to diagnose the issue. This was clearly a problem, but the root cause was hard to identify. We needed to take a different approach to tracking down these issues.
+### Replit Architecture
+Before going in depth on fixing slow container shutdowns, you'll need some knowledge of Replit's architecture.
 
-One of the best things to do is to collect more metrics. Since this issue causes infinite reconnect loops, that means connections to the backend evaluation server were failing for some reason. In our effort to improve stability, successful connection rate was the first metric we started tracking. While adding new metrics is great, sometimes it uncovers some unfortunate realities that weren't aparent before. In our case, we discovered that our connection failure rate was around 3% [TODO: Verify this number, finding a graph would be great too] with occasional spikes that could go up to 10% or more.
+When you open up a repl in your browser you are connected to a repl container which is running on our infrastructure. These are custom docker containers that are packed with all sorts of development tools and a special init process which facilitates interactions between the IDE and the container.
 
-## Breaking it down
+To run these docker containers, we need a host machine. This is where conman (container manager) comes in. The IDE connects to conman and requests to connect to a repl's container. Conman will connect to the existing container for the repl, or create a new container if one doesn't exist.
 
-While the failure rate was much disappointingly than we expected, it meant that we had room for improvement. We got right to work and began to break the problem down.
-
-While overall failure rate is a great metric to have, it doesn't really tell us the full story. Is the connection failure happening across all repls? Is it due to a smaller set of repls that are continually having connection errors?
-
-To answer these questions, we needed to drill further into the problem. There's no better place to do this than to dig into the logs of a repl that has failed connection attempts. We have nice indexed logs which allow us to quickly investigate a handful of these repls and look for any patterns.
-
-It became clear that there were 2 different classes of stuck repls:
- * Repls that were stuck for less than 2 minutes
- * Repls that were stuck for an hour or more
-
-Manually reading the logs can only get you so far. With the volume of logs and the number of repls we run, it's difficult to tell how frequent these different classes stuck repls occur. Our logging solution provides some basic aggregation tools, but it doesn't allow us to look at consecutive errors for a specific repl over time.
-
-At repl.it we love using our own product to build tools to make our jobs easier. It's kind of a super power.
-
-To determine how many stuck repls we have, I dumped some logs from the past 24 hours into a repl and began writing a script to crunch the log messages and spit out a nice table and bar graph of stuck repls bucketed by how long they have been stuck.
-
-__Example output from my stuck repl finder__
-```
-Tue Oct 06 2020 00:00:00 GMT+0000 (Coordinated Universal Time)
-Log Interval: 24.00 hours
-Total stuck: 7427
-
-Bucketed by time stuck (bucket name = max time in seconds)
-     10 | ############################################################ | 2894
-     15 | ############################################                 | 2125
-     20 | ###############                                              | 722
-     25 | ####################                                         | 941
-     30 | #####                                                        | 238
-     40 | ####                                                         | 169
-     60 | ####                                                         | 207
-     90 | ##                                                           | 92
-    120 |                                                              | 13
-    180 |                                                              | 14
-    240 |                                                              | 4
-    360 |                                                              | 2
-    600 |                                                              | 0
-   1200 |                                                              | 0
-   3600 |                                                              | 2
-  10000 |                                                              | 3
-```
-
-With this log-crunching repl, the data informed us that thousands of repls were stuck for less than 2 minutes per day and 5-10 repl would be stuck for almost and hour or more.
-
-Frustration may ensue while waiting almost a minute to access your repl, but imagine not being able to access your repl for over an hour. We need to figure out why these repls are getting stuck for so long and fix the underlying cause, pronto!
-
-## Fixing **Really** Stuck Repls
-
-Armed with our new information, I set out to find the root cause of the forever-stuck-repls. Since there are so few of these, going back to the logs is a good place to see where it all went wrong.
-
-> Digging through logs can be quite fun and provides good insight into how a system actually works.
-
-First, we need to filter down the logs we want to look at. This is critical because we have a massive volume of log messages. Just in the past 15 minutes of writing this, over 4 million log messages were recorded!
-
-Luckily, the stuck repl finder spits out a few repls that were stuck for over an hour. Using the repl IDs in this list, we can filter the logs down to only entries that are relevant to that repl.
-
-Most of these repls had a recurring log entry: `session exited unexpectedly startup lock took too long for`
-
-So, what is a startup lock and why is taking so long to get one? I'll go more into detail of our infrastructure in a bit. For now all you need to know is we use a locking mechanism to ensure that only one container ever exists at one time for a repl.
-
-Seeing this log message repeatedly for over an hour likely means one thing: a **deadlock**.
-
-We have a couples to determine how these deadlocks occur:
- * If we catch one in the act, we can dump the goroutines and look for goroutines blocked on things like `semacquire`.
- * Add more log messages and look at the order of events to determine if that could lead to a deadlock.
-
-Unfortunately, there were a few different race conditions that lead to deadlocks that we had to track down and each one could have a blog post of its own.
-
-[TODO: Maybe talk about chaos for writing tests to prevent regressions. That would be a cool blog post for Zach to write.]
-
-## Leveling up our tools
-While the repl I wrote earlier to crunch the logs messages worked, I still had to manually run the thing every day to get the results for the past 24 hours. This was starting to get old and Dan wanted to see how the metric was changing over time.
-
-[TODO: Can we make this image smaller?]
-
-![Dan suggests making this better](images/destroying-stuck-repls/dan_msg.png)
-
-> If you find yourself doing the same manual task over and over, it's a sign that it might need to be automated.
-
-What I really wanted was a nice real time chart in grafana that shows stuck repls over time. After talking with my team, Mason, recommended turning the repl into a hosted repl which serves metrics that our prometheus instance could scrape. I refactored the repl to make use of [repl.it database](https://blog.repl.it/database) and to serve a web page for prometheus to scrape. With just a couple hours of work, we now had real-time metrics for stuck repls.
-
-[TODO: Should I make the repl public and link it here?]
-
-![Graph of stuck repls](images/destroying-stuck-repls/stuck_repls_graph.png)
-> This is a recent screenshot of the graph, so it looks much better than it used to!
-
-Not only does this metric help us make sure our patches are actually reducing the number of stuck repls, but it will also help us make sure we don't accidentally regress in the future.
-
-[TODO: Maybe this is its own blog post]
-
-## Fixing *Sorta* Stuck Repls
-Now that we've patched up all the deadlocks we know about, it's time to shift our eyes to repls that get stuck for a minute or two.
-
-With a dashboard full of new stability-related metrics, we are able to find interesting correlations. _Aha!_ There is a spike in session connection errors whenever a group of conman instances shut down at the same time.
-
-> Hold up! What does any of this mean? What is conman? And why do they shutdown frequently?
-
-To answer that, we need to take a quick detour and talk about how repl.it actually works behind the scenes.
-
-Let's talk about the most fundamental atom in the repl.it universe: the repl. 
-
-[TODO: What is a repl? What is a repl container?]
-
-[TODO: Talk about the importance of single repl container per repl]
-
-When you open up a repl in your browser you are connected to a repl container which is running on our infrastructure. These are custom docker containers that are packed with all sorts of development tools.
-
-To run these docker containers, we need a host machine. This is where conman comes in; it's name is short for container manager. Since we have so many repls running at any given time, a single conman cannot run all of these docker containers. So we have a group of conman instances which manage all the repl containers. A loadbalancer is used to distribute containers across conman instances. It is not uncommon for a single conman instance to be running 100-200 repl docker containers.
+Since we have so many repls running at any given time, a single conman cannot run all of these docker containers. We run hundreds of conman instances to hold all these repl containers. A loadbalancer is used to distribute containers across conman instances. It's common for a single conman instance to be running 100-200 repl containers; however, most of these containers are sitting idle.
 
 We run the majority of our conman instances using Google Cloud's preemptible instances. These are machines that can be taken away from us at any time with 30 seconds notice. The important thing is that these machines have an 80% discounted cost. That's a massive savings, but it requires us to architect replit to be resilient to machines disappearing at any time with short notice.
 
+### Slow Container Shutdowns
 With some foundational knowledge of our architecture, lets focus in on the failure mode that happens when a conman instance is shut down.
 
 ![Simplified diagram of repl.it conman architecture](images/destroying-stuck-repls/simplified_arch.png)

@@ -1,7 +1,7 @@
 ---
-title: 7 Top HTML Questions to Practice for an Interview
+title: Top 7 CSS Interview Questions
 author: Christina Kopecky 
-date: 2020-09-18
+date: 2020-10-09
 ---
 
 As one the first topics a [full stack web developer](https://careerkarma.com/blog/full-stack-developer) or [web designer](https://careerkarma.com/careers/design/) learns, Hypertext Markup Language ([HTML](https://careerkarma.com/blog/learn-html/)) is the basis of a website. It is one of the most popular languages to use in the construction of a web page, used by web developers and designers.
