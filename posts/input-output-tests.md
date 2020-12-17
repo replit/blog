@@ -46,6 +46,8 @@ All changes applied to Input/Output tests within a project will be applied to th
 
 Input/Ouput tests created within Repl.it Classroom assignments can now be migrated to Teams for Education using the [Classroom Migration Tool](https://repl.it/classroom-migration). 
 
+If you migrated your Classroom since 12/11/2020, you'll see your input/output tests in your new Team. If you migrated your Classroom before then, you'll be able to migrate your Classroom again.
+
 ## Giving Feedback Goes a Long Way
 
 Teachers continue to express their enthusiasm for multiplayer Repls, annotations, and group projects. We will continue to build on these new platform features to provide a seamless collaborative experience for project based learning. 
