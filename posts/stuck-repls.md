@@ -5,6 +5,7 @@ author: Connor Brewster
 
 Recently, we have been focusing on improving the stability of Replit. For an overview of our progress, you can read [How Far We've Come](https://blog.repl.it/how-far).
 
+One of the most 
 You may have seen that we recently fixed one of the most irritating issues on the platform: stuck repls.
 
 <div style="display: flex; justify-content: center;">

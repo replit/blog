@@ -1,5 +1,5 @@
 ---
-title: "Repl.it 1.0: the IDE That Grows—from Playgrounds to Fullstack Apps"
+title: "Repl.it: the IDE That Grows—from Playgrounds to Fullstack Apps"
 author: Amjad Masad
 date: 2018-03-13T07:00:00.000Z
 ---
