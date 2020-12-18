@@ -189,6 +189,7 @@ You can search for Python developer jobs on various freelance portals. This can 
 *   [Upwork](https://upwork.com/?dfh_uid=1)
 *   [People Per Hour](https://peopleperhour.com/?dfh_uid=1)
 *   <span style="text-decoration:underline;">Freelancer.com</span>
+*   [Top 10 Freelance Sites for Python Devs](https://recruitment.com/recommendations/hire-python-developers)
 
 Begin exploring these portals to get a rough estimate of salaries, job requirements, etc. If you can multitask and manage profiles on multiple freelance platforms, you can access the finest jobs and work remotely at your own will.
 
