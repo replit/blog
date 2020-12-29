@@ -15,7 +15,7 @@ This pane contains tools designed to simplify testing code. Instead of manually 
 
 Input/Output tests is only available for projects created within the [Teams for Education](https://repl.it/teams) product. This feature is available on all projects - new and existing. 
 
-Click on the <img src="https://cms.repl.it/assets/flask-icon.png" style="width: 38px; margin: 0; display: inline-block; vertical-align: middle;"> icon within the workspace sidebar nav to reveal the Input/Output tests pane.
+Click on the <img src="https://cms.repl.it/assets/input-output-tests-checkmark.png" style="width: 30px; margin: 0; display: inline-block; vertical-align: middle;"> icon within the workspace sidebar nav to reveal the Input/Output tests pane.
 
 Click on the <img src="https://cms.repl.it/assets/input-output-tests-create-test.png" style="width: 100px; margin: 0; display: inline-block; vertical-align: middle;"> button to reveal a form with the following fields:
 
