@@ -322,6 +322,7 @@ p>em {
 .markdown ul,
 .markdown ol {
   line-height: 180%;
+  word-break: break-word;
 }
 
 

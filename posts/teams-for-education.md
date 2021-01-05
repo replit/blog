@@ -41,14 +41,6 @@ We’re looking to go even further with Teams. We want to build a new way to hav
 
 This is still in early development, but once it lands, upgrading to Team will give you the ability to give contextual feedback on code. 
 
-## Code-centered discussion boards
-
-[Repl Talk](https://repl.it/talk), our code-centered forum, started out when we noticed our users wanted to help each other by answering questions, sharing programs, and finding mentors and collaborators. 
-
-![qa](https://blog.repl.it/images/teams_edu/qa.png)
-
-Teams will ship with its own discussion board instance private for you and your students for Q&A, sharing, and discussion. 
-
 ## Expanded language support
 
 You may have noticed that Classroom includes only a subset of the [languages](https://repl.it/languages) that we support, and that’s because it takes a lot of effort to integrate a language into a bespoke environment. However, the Repl.it IDE is generic enough that languages are much easier to add. And even if we don’t support your favorite language, you’ll likely be able to get it working on our base bash repl--many of our users have done before. 
