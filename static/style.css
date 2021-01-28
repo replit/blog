@@ -179,6 +179,12 @@ body {
 	max-width: 90%;
 	display: block;
 }
+.post-item figure video {
+    margin: inherit;
+}
+.post-item figure figcaption {
+    text-align: center;
+}
 
 
 

@@ -1,16 +1,19 @@
 ---
-title: Graphics Love ❤️
+title: Native Graphics Love ❤️
 author: Luis Héctor Chávez
-date:
+date: 2021-01-15T23:30:00.000Z
 ---
 
-Some of you might have already noticed that we have released a change that made the graphics stack a lot faster and more reliable, prompted by [the feedback we received about our graphics performance](/fix-gfx).
+We have reimagined the native graphics experience on Replit. Our community of educators and hackers have given us [immense feedback on graphics performance and reliability](https://blog.repl.it/fix-gfx).
 
-![glxgears running smoothly in repl.it](https://blog.repl.it/images/graphics-love/glxgears-320px-low-fps.gif)
+<figure>
+    <video width="720" height="480" controls src="https://blog.repl.it/images/native-graphics-love/doom.m4v"></video>
+    <figcaption>Yes, <a href="https://itrunsdoom.tumblr.com/">It Runs DOOM!</a></figcaption>
+</figure>
 
-You should now be able to have a much better experience writing (and playing) your own games!
+Our engineers have built a native graphics experience that is faster, more reliable, and elegant. Games and other native GUI applications launch quickly and reliably on our platform. Common issues like applications not launching and window resizing have been fixed. Among our most popular use cases is Pygame for beginner game programming and Java Swing for AP CSA students.
 
-## So, what was the problem?
+## Engineering behind the scenes
 
 Before we take a peek behind the curtain, let's look at a very high-level view ofhow graphics work in practice. Like many Linux systems, Repl.it uses the [X Windows System](https://en.wikibooks.org/wiki/Guide_to_X11/Introduction) to display graphics. The X Windows System is natively a network-ready system: so there is one process that directly interacts with the hardware (the server), which doesn't need to be the on same machine where the program (the client) is being run. Nowadays, the networking capabilities of X are rarely used, since many optimizations rely on the fact that both the server and client processes run on the same machine and are able to share memory between them cheaply, to avoid having to move around massive amounts of graphics data through a narrow networking pipe. In order to support being able to view and interact with graphical user interfaces remotely other techologies are used, like [VNC](https://en.wikipedia.org/wiki/Virtual_Network_Computing). And just for completeness' sake, X is not the only solution for graphics in Linux, and [Wayland](https://wayland.freedesktop.org/) is slowly becoming the alternative of choice for X. Android users will be more familiar with [SurfaceFlinger](https://source.android.com/devices/graphics/surfaceflinger-windowmanager).
 
@@ -22,6 +25,26 @@ The solution for the performance issue was to use a more modern, combined X serv
 
 Finally, the solution for the crashes on launch was significantly simpler: just make sure that Fluxbox has finished initializing so that windows are not moved unintentionally and all the inputs are routed to the correct coordinates.
 
-## What's next?
+## Improving the Java Swing experience
 
-We're not done with this. One other common feedback is that system-wide audio is not supported at all. We're exploring ways of making it happen, so stay tuned to see if we found a way!
+As part of this undertaking, we have boosted our Java repls to with more powerful virtual conatiners. Every Teams for Education user will now have 4x the power to compile and run *any* Java project. This was essential to ensure that the Java Swing experience could be quick and reliable for teachers and students. Chromebook users should now see a dramatic improvement for all new Java projects.
+
+Checkout Barb Ericson's AP CS PhotoLab from the [official CollegeBoard lab curriculum](https://secure-media.collegeboard.org/digitalServices/pdf/ap/ap-compscia-picture-lab-student-guide.pdf):
+
+<iframe height="400px" width="100%" src="https://repl.it/@demcrepl/PhotoLab?lite=true" scrolling="no" frameborder="no" allowtransparency="true" allowfullscreen="true" sandbox="allow-forms allow-pointer-lock allow-popups allow-same-origin allow-scripts allow-modals"></iframe>
+
+## Connect with us
+
+We will continue to invest in an improved native graphics experience. Native audio integration is next. Stay tuned! Want to chat about the future of native graphics? Connect directly with [Luis](mailto:luis@repl.it).
+
+If building tools that redefine how people learn to code interests you, [join us](https://repl.it/site/careers).  
+
+## Giving Feedback Goes a Long Way
+
+Teachers continue to express their enthusiasm for multiplayer Repls, annotations, and group projects. We will continue to build on these new platform features to provide a seamless collaborative experience for project based learning.
+
+Are you dreaming of Repl.it features to make you a superhero in your classroom? We want to hear about it! Contact [Derrick McMillen](mailto:derrick@repl.it) directly via email. You can also leave feedback for us [via Canny](https://repl.it/feedback/p/improved-gfx-and-gui).
+
+
+Learn more about *Teams for Education* in our [documentation](https://docs.repl.it/Teams/).
+

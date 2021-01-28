@@ -16,7 +16,7 @@ Before we go on, you have to see this in action: Just run the repl below, wait a
 seconds for it to load, focus on the output window and start playing Tetris in
 Pygame:
 
-<iframe height="600px" width="100%" src="https://repl.it/@amasad/Tetris?lite=true" scrolling="no" frameborder="no" allowtransparency="true" allowfullscreen="true" sandbox="allow-forms allow-pointer-lock allow-popups allow-same-origin allow-scripts allow-modals"></iframe>
+<iframe height="600px" width="100%" src="https://repl.it/@demcrepl/Tetris-in-Pygame?lite=true" scrolling="no" frameborder="no" allowtransparency="true" allowfullscreen="true" sandbox="allow-forms allow-pointer-lock allow-popups allow-same-origin allow-scripts allow-modals"></iframe>
 
 Let's take it up a notch and boot up this nifty desktop app we all love (might
 take up to a minute to load but then can be done recursively):

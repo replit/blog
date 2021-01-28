@@ -26,7 +26,7 @@ Here are some awesome new features we've recently released:
 
 **Feedback/Review Enhancements**
 
-<img src='https://i.imgur.com/GaUsQR4.gif' alt="image">
+<img src='https://i.imgur.com/9k5ZUe0.gif' alt="image">
 
 **Improved Organization**
 
