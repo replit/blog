@@ -16,7 +16,7 @@ The following documents have been updated or added:
 - [Global Data Processing Agreement](https://repl.it/site/dpa)
 - [US Student Data Protection Addendum](https://docs.repl.it/Teams/US_Student_DPA)
 - [Replit Subprocessors](https://repl.it/site/subprocessors)
-- [Privacy FAQS for educational institutions](https://docs.repl.it/Teams/privacyFAQs)
+- [Privacy FAQS for educational institutions](https://docs.repl.it/Teams/privacyFAQs) (including how children under 13 can use Replit)
 
 We believe that these changes better protect you and your data, but as always if you have any concerns, please contact us at [privacy@repl.it](mailto:privacy@repl.it).
 
