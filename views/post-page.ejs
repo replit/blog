@@ -4,17 +4,17 @@
   <meta charset="utf-8"/>
 	<meta name="viewport" content="initial-scale=1.0, width=device-width">
 
-  <link rel="shortcut icon" href="https://repl.it/public/images/favicon.ico" type="image/vnd.microsoft.icon">
+  <link rel="shortcut icon" href="https://replit.com/public/images/favicon.ico" type="image/vnd.microsoft.icon">
 
   <meta property="og:title" content="<%= post.title %>">
   <meta property="og:description" content="<%= post.description %>">
   <meta property="og:type" content="article" >
   <meta property="og:image" content="<%= post.cover %>" >
-  <meta property="og:site_name" content="repl.it" >
+  <meta property="og:site_name" content="Replit Blog" >
   <meta property="fb:app_id" content="1775481339348651" >
-  <meta property="og:url" content="https://blog.repl.it/<%= post.url%>" >
+  <meta property="og:url" content="https://blog.replit.com/<%= post.url%>" >
 
-  <meta itemprop="name" content="repl.it" >
+  <meta itemprop="name" content="Replit Blog" >
   <meta itemprop="description" content="<%= post.description %>" >
   <meta itemprop="image" content="<%= post.cover %>" >
 
@@ -60,8 +60,8 @@
 
 <section class ="page_container">
 <%- include('header'); %>
-<a class="back" href="https://blog.repl.it/">← <span>Back to blog</span></a>
-<a class="repl-link" href="/__repl?fileName=posts/<%= post.url %>.md">Edit on Repl.it</a>
+<a class="back" href="https://blog.replit.com/">← <span>Back to blog</span></a>
+<a class="repl-link" href="/__repl?fileName=posts/<%= post.url %>.md">Edit on Replit</a>
 <%- include('post.ejs', { post }); %>
 </section>
 

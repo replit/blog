@@ -42,10 +42,6 @@ JavaScript, parsed and compiled to ES5 and then parsed again and minified and
 then parsed yet again to finally run in your browser which most likely runs
 ES2016 (back full-circle).
 
-I'm not claiming to have the solution for this nor do I think a single company
-or developer can solve it. The first step is to recognize the
-problem and then it requires a big cultural shift in the programming community.
-
 However, we'd like to take a stab at the problem from an angle that we, at
 Replit, are uniquely situated to do. Our mission is to make programming more
 accessible, so when we design we focus on the hobbyist and the learner (although
