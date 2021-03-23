@@ -94,9 +94,9 @@ const readPost = async (slug, snip = false) => {
 	}
 }
 
-const errPage = (res, err) => {
+const errPage = (res, err, status) => {
 	res.locals.err = err;
-  res.status(500);
+  res.status(status || 500);
 	res.render('error.ejs')
 }
 
@@ -134,7 +134,13 @@ app.get('/:slug', (req, res) => {
 			res.locals.moment = moment;
 			res.render('post-page.ejs');
 		})
-		.catch(err => errPage(res, err));
+		.catch(err => {
+      if (err.code === 'ENOENT') {
+        errPage(res, err, 404);
+      } else {
+        errPage(res, err);
+      }
+    });
 });
 
 app.listen(3000, () => { console.log('blog is running'); });
