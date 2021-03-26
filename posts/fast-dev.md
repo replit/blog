@@ -1,13 +1,11 @@
- ---
- title: Replit Case Study - Creating a 700+ User Web App in a Month
- author: Rishabh Anand
- date: 
- --- 
-
-# Replit Case Study - Creating a 700+ User Web App in a Month
+---
+title: Replit Case Study - Creating a 700+ User Web App in a Month
+author: Rishabh Anand
+date: 2021-03-23T00:00:00.000Z
+cover: https://blog.replit.com/images/fast-dev.png
+--- 
 
 Hey there 👋🏻
-
 My name is [Rishabh Anand](https://twitter.com/rishabh16_) and I am an ex-resident at the National University of Singapore's (NUS) [Raffles Hall of residence](https://nus.edu.sg/osa/raffleshall). It's one of the on-campus student accommodations that houses students from all levels of undergraduate education at NUS with the majority being freshmen and sophomores.
 
 [RHDEVS](https://www.linkedin.com/company/rhdevs/) – the software development club at Raffles – was tasked by upper management to build a convenience app for the Hall’s student body. The app itself was nothing new; it has some basic features students would potentially use in their daily hall lives:
@@ -22,7 +20,7 @@ Here’s the catch: we only had a month and half from design, to implementation,
 
 Well, not here. We had to build for over 700 students from scratch.
 
-Here’s how Repl.it saved my team during “hell month”.
+Here’s how Replit saved my team during “hell month”.
 
 ## Serving and Deploying
 
@@ -36,13 +34,13 @@ Our first one and half weeks were spent planning excessively. We charted schemat
 
 The design team regularly sent us wireframes based on user feedback and we had to tweak our plans here and there.
 
-## Where Repl.it Really Shines
+## Where Replit Really Shines
 
 ### Faster Prototyping
 
-In some way or the other, Repl.it definitely sped up our iteration cycles. From a motley crew that was once clueless on building servers, we became rapid-action deployers. The [tutorials](https://docs.replit.com/repls/http-servers) and [forums](https://replit.com/talk/all) saved us from a lot of Googling and Stack Overflow-ing.
+In some way or the other, Replit definitely sped up our iteration cycles. From a motley crew that was once clueless on building servers, we became rapid-action deployers. The [tutorials](https://docs.replit.com/repls/http-servers) and [forums](https://replit.com/talk/all) saved us from a lot of Googling and Stack Overflow-ing.
 
-Deploying on Repl.it allowed us to focus our energy on writing stable backend code. In fact, it gave us time to set a standard for writing code. We came up with a contribution and programming style guide – a luxury we wouldn’t have been able to afford if we spent our time fiddling around with complex server hosting platforms instead. It really set us up for future projects!
+Deploying on Replit allowed us to focus our energy on writing stable backend code. In fact, it gave us time to set a standard for writing code. We came up with a contribution and programming style guide – a luxury we wouldn’t have been able to afford if we spent our time fiddling around with complex server hosting platforms instead. It really set us up for future projects!
 
 ### Ease of Deployment
 
@@ -50,7 +48,7 @@ The team comprised of students who were well-versed in basic Python, but had nev
 
 Clicking the “Run” button in the IDE was enough to trigger a deployment, and this was a blessing for most of the beginner students. This meant we no longer had to worry about Procfiles, configurations, requirements, and virtual machine types.
 
-For the unaware, most Python server hosting services require a user-submitted requirements.txt file with the packages and their right versions (the VM would then install them when deployed). Personally, the biggest “flex” Repl.it has over the other cloud providers is the automatic requirements.txt and config files generation; all we had to do is write our code and the IDE takes care of the rest.
+For the unaware, most Python server hosting services require a user-submitted requirements.txt file with the packages and their right versions (the VM would then install them when deployed). Personally, the biggest “flex” Replit has over the other cloud providers is the automatic requirements.txt and config files generation; all we had to do is write our code and the IDE takes care of the rest.
 
 An added bonus was the ability to add a .env file with our database keys and administrative credentials without worrying about intrusion or hacking.
 
@@ -68,7 +66,7 @@ We’re broke college students, remember? Our budget mainly went into frontend d
 
 The other guys (GCP, AWS, Heroku, DigitalOcean) were definitely out of our budget and expertise if we looked at the long term. The app would be used by a large percentage of the student body simultaneously in a day and naturally, these server costs would balloon up. We were not prepared for that just yet.
 
-Perhaps, the most important benefit of using Repl.it was the inexpensive Hacker plan we were on. 
+Perhaps, the most important benefit of using Replit was the inexpensive Hacker plan we were on. 
 
 ICYMI: It’s free for students!
 
@@ -76,18 +74,18 @@ ICYMI: It’s free for students!
 
 I mentioned above that many students would be using the app at any given time. Though, during non-peak hours (like those pesky late-night study sessions), there may be pockets of time where user activity is effectively zero.
 
-Repl.it servers are designed to wake up automatically after periods of inactivity. My team was fortunate in that we did not have to build a heartbeat server to wake up dead servers, i.e., an additional manhour-intensive task we had no time for. It’s all taken care of under the hood.
+Replit servers are designed to wake up automatically after periods of inactivity. My team was fortunate in that we did not have to build a heartbeat server to wake up dead servers, i.e., an additional manhour-intensive task we had no time for. It’s all taken care of under the hood.
 
 ## The Present
 
-It seems like I’m overexaggerating certain things here. I assure you, I’m not. Repl.it was definitely a lifesaver when it came to creating servers without worrying about a lot of technical issues. For a fairly novice team, this was the best option we had. I’d definitely recommend starting out projects (like organisation intranets, game servers, application portals, and more) with Repl.it regardless of the team’s experience. 
+It seems like I’m overexaggerating certain things here. I assure you, I’m not. Replit was definitely a lifesaver when it came to creating servers without worrying about a lot of technical issues. For a fairly novice team, this was the best option we had. I’d definitely recommend starting out projects (like organisation intranets, game servers, application portals, and more) with Replit regardless of the team’s experience. 
 
-It enabled fast prototyping, minimal but fruitful testing, faster deployments, and got us to launch faster than we had imagined. It has all the backend infrastructure services you need on a silver platter. For the skilled many out there, Repl.it offers support for practically every language out there!
+It enabled fast prototyping, minimal but fruitful testing, faster deployments, and got us to launch faster than we had imagined. It has all the backend infrastructure services you need on a silver platter. For the skilled many out there, Replit offers support for practically every language out there!
 
 Here’s a crusty screenshot of a COVID-19 rules-compliant call with the team:
 
-![team screenshot](https://blog.repl.it/images/fast-dev.png)
+![team screenshot](https://blog.replit.com/images/fast-dev.png)
 
-Till date, RHDEVS is actively maintaining the app and is still using Repl.it as our backend. There are no plans of switching to the other guys anytime soon so lots more to explore, for sure!
+Till date, RHDEVS is actively maintaining the app and is still using Replit as our backend. There are no plans of switching to the other guys anytime soon so lots more to explore, for sure!
 
-Want to banter about Repl.it or tech in general? Slide into my DMs on [Twitter](https://twitter.com/rishabh16_)!
+Want to banter about Replit or tech in general? Slide into my DMs on [Twitter](https://twitter.com/rishabh16_)!

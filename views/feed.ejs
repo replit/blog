@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+<channel>
+  <title>Replit Blog</title>
+  <link>https://blog.replit.com/</link>
+  <description>The blog of the Repl.it team where we talk about new features, design, and engineering!</description>
+  <atom:link href="https://blog.replit.com/feed.xml" rel="self" type="application/rss+xml" />
+
+  <% for (const post of posts) { %>
+  <item>
+    <title><%= post.title %></title>
+    <guid>https://blog.replit.com/<%= post.url%></guid>
+    <description><%= striptags(post.content) %></description>
+    <pubDate><%= moment.utc(post.timestamp).format("ddd, DD MMM YYYY HH:mm:ss ZZ") %></pubDate>
+  </item>
+  <% } %>
+
+</channel>
+</rss>

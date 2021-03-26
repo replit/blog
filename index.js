@@ -7,6 +7,7 @@ const hljs = require('highlight.js');
 const gm = require('gray-matter');
 const htmlToText = require('html-to-text');
 const Filter = require('bad-words');
+const striptags = require('striptags');
 
 require('ejs');
 
@@ -52,7 +53,7 @@ const readPost = async (slug, snip = false) => {
 	let { content: rawContent, data } = gm(raw);
 
 	// try to resolve absolute links back to repl.it
-	const contentMd = rawContent.trim().replace(/(\]\()(\/.+\))/g, '$1https://repl.it$2');
+	const contentMd = rawContent.trim().replace(/(\]\()(\/.+\))/g, '$1https://replit.com$2');
 
 	let previewMd = '';
 	const ender = contentMd.indexOf('[](preview end)');
@@ -112,6 +113,20 @@ app.get('/', (req, res) => {
 			res.locals.posts = p;
 			res.locals.moment = moment;
 			res.render('index.ejs');
+		})
+		.catch(err => errPage(res, err));
+});
+
+app.get('/feed.xml', (req, res) => {
+	console.log('GET /feed.xml')
+	postPreviews()
+		.then(p => {
+      res.set('Cache-Control', 'public, max-age=600, stale-if-error=60, stale-while-revalidate=60')
+      res.set('Content-Type', 'application/xml')
+			res.locals.posts = p;
+			res.locals.moment = moment;
+      res.locals.striptags = striptags;
+			res.render('feed.ejs');
 		})
 		.catch(err => errPage(res, err));
 });
