@@ -8,6 +8,7 @@ const gm = require('gray-matter');
 const htmlToText = require('html-to-text');
 const Filter = require('bad-words');
 const striptags = require('striptags');
+const promMid = require('express-prometheus-middleware');
 
 require('ejs');
 
@@ -21,19 +22,24 @@ marked.setOptions({
 let previewCache = null;
 
 const buildPostCache = async () => {
-	const ls = await fs.readdir('./posts');
+    try {
+        const ls = await fs.readdir('./posts');
 
-	let posts = [];
+        let posts = [];
 
-	for (const f of ls) {
-		posts.push(await readPost(f.slice(0, -3), true));
-	}
+        for (const f of ls) {
+            posts.push(await readPost(f.slice(0, -3), true));
+        }
 
-	posts = posts.filter(p => p.timestamp && p.timestamp < new Date());
+        posts = posts.filter(p => p.timestamp && p.timestamp < new Date());
 
-	posts.sort((l, r) => r.timestamp - l.timestamp)
+        posts.sort((l, r) => r.timestamp - l.timestamp)
 
-	previewCache = posts;
+        previewCache = posts;
+    } catch (e) {
+        // Instead of dying, let's try to contain the damage.
+        console.error('Failed to build the post cache: ', e);
+    }
 }
 
 buildPostCache();
@@ -104,6 +110,14 @@ const errPage = (res, err, status) => {
 const app = express();
 
 app.use(express.static('static'))
+
+app.use(promMid({
+  metricsPath: '/metrics',
+  collectDefaultMetrics: true,
+  requestDurationBuckets: [0.1, 0.5, 1, 1.5],
+  requestLengthBuckets: [512, 1024, 5120, 10240, 51200, 102400],
+  responseLengthBuckets: [512, 1024, 5120, 10240, 51200, 102400],
+}));
 
 app.get('/', (req, res) => {
 	console.log('GET /')

@@ -104,3 +104,9 @@ Ultimately, all user interfaces-- command driven or graphical-- are supposed to 
 5. https://www.nngroup.com/articles/ten-usability-heuristics/
 6. https://en.wikipedia.org/wiki/Progressive_disclosure
 7. https://sketchrunner.com/
+
+### Update
+
+Since we've posted this article last year, we've made some progress integrating the CLUI paradigm into our app:
+
+<blockquote class="twitter-tweet"><p lang="en" dir="ltr">And inside the IDE. Notice I can search, find files, manage multiplayer, and even start a new repl <a href="https://t.co/zTAmT5zZPk">pic.twitter.com/zTAmT5zZPk</a></p>&mdash; Amjad Masad ⠕ (@amasad) <a href="https://twitter.com/amasad/status/1390005984597221378?ref_src=twsrc%5Etfw">May 5, 2021</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
