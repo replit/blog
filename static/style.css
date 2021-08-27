@@ -281,23 +281,20 @@ p>em {
 }
 
 .markdown img {
-  width: 70%;
-  margin: var(--spacing-6) auto;
+  width: 75%;
+  margin: var(--spacing-5) auto;
   display: block
 }
 
 .markdown a img {
-	max-width: 70%;
+	max-width: 75%;
 	display: block;
-	margin: var(--spacing-6) auto;
+	margin: var(--spacing-5) auto;
 }
 
 .markdown a {
 	color: var(--primary-color);
 }
-
-
-
 
 /* UL and LI */
 

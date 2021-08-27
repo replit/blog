@@ -1,6 +1,6 @@
 ---
 title: Announcing Replit Ventures
-author: Soren Rood
+author: Søren Rood
 date: 2021-04-13
 cover: https://blog.repl.it/images/ventures/ventures.jpg
 ---

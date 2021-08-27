@@ -4,6 +4,12 @@ author: Amjad Masad
 date: 2017-03-20T07:00:00.000Z
 ---
 
+**EDIT - This article is now outdated**
+
+If you're looking for up-to-date videos about Replit, the best place to loook is [our Youtube channel](https://www.youtube.com/channel/UCgoJjdR6-7AMu9fDitb6nVw). The videos below may be inaccurate, or missing. 
+
+---
+
 We've been seeing more and more coding video tutorials using YouTube and
 Twitch.tv. Today we're sharing some of our favorite YouTube videos that uses
 Repl.it [](preview end):
