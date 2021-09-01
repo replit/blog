@@ -25,7 +25,6 @@ As an ambassador, you'll support other educators in our community channels and c
 Fill out [this survey](https://docs.google.com/forms/d/e/1FAIpQLSdPgBjKeCV6nhiQmH69hJ_Okd_XX7WaO1LC7aFiZdN5ur6qKQ/viewform?usp=sf_link) to let us know you're interested and share your thoughts! 
 
 ___ 
-
 ### Propose a project for our Curriculum Jam! 
 Do you have a great idea for a Computer Science project but haven't had the time or money to get it done?
 
