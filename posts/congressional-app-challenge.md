@@ -17,7 +17,7 @@ In addition to improving access to CS tools, Replit and the Congressional App Ch
 
 By combining personally relevant projects on an accessible and easy-to-use platform, young people are making a difference in the world with their digital innovations and ideas. 
 
-Already, Replit has been used by Congressional App Challenge winners in projects such as [AbilityX](https://youtu.be/D-oefvWg1XA), [ClubSpace](https://www.youtube.com/watch?v=ZT1dNkgOddk), [Cooklify](https://youtu.be/RnP_Dl9QyfE), and [Vote Genius](https://youtu.be/j1JjFqF5WnU). Each of these submissions demonstrates the world-changing ideas that young developers can offer as well as the range of possibilities that can flourish with the right tools and resources.
+Already, Replit has been used by Congressional App Challenge participants in projects such as [AbilityX](https://youtu.be/D-oefvWg1XA), [ClubSpace](https://www.youtube.com/watch?v=ZT1dNkgOddk), [Cooklify](https://youtu.be/RnP_Dl9QyfE), and [Vote Genius](https://youtu.be/j1JjFqF5WnU). Each of these submissions demonstrates the world-changing ideas that young developers can offer as well as the range of possibilities that can flourish with the right tools and resources.
 
 Replit will be offering a [workshop for Congressional App Challenge participants](https://www.eventbrite.com/e/congressional-app-challenge-webinar-code-anywhere-with-replit-tickets-168951575711) on September 29 as well as a series of live mentoring sessions with Replit engineers throughout the Fall. 
 
