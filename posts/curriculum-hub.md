@@ -29,6 +29,10 @@ With the Curriculum Hub, admins on Teams for Education accounts can quickly peru
 
 We've also highlighted the curriculum developed during our recent professional development by **Replit Certified Teachers** that showcases the incredible ingenuity within Replit's teacher community. Peruse their curriculum on focused skills such as [Repetition with Java](https://replit.com/curriculum/Repetition-with-Java), [Pointers in C](https://replit.com/curriculum/Pointers-in-C), and [File Handling with JavaScript](https://replit.com/curriculum/File-Handling-with-JavaScript). 
 
+### Coming soon:
+* Intro to Java by Brendan McCart 
+* Intro to C++ by Alfonso Torres
+
 *[If you'd like your own CS education resources to be highlighted in the Curriculum Hub, submit a proposal!](https://docs.google.com/forms/d/e/1FAIpQLSdmvwugpvNlvpVGvkticht5LMn3d5YLw16jHU1JP_qQ1iPrwQ/viewform?usp=sf_link)*
 
 *Oh, and one more thing...*Drag-and-drop project management! ![drag and dropping projects in a team](https://media3.giphy.com/media/gugGoz1tfg6vQkI2ZO/giphy.gif)
