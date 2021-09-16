@@ -6,7 +6,11 @@ date: 2021-09-01T10:00:00.000Z
 
 Fall is right around the corner, and its time for the August edition of our monthly changelog!
 
+Our awesome community has also been hard at work on some exiting projects this month. Check out the monthly repls [here](https://replit.com/talk/announcements/Monthly-Repls-August-2021/144996)!
+
 We love hearing from you! Please leave any feedback you have [here](https://replit.canny.io/general-feedback).
+
+
 
 ## Features
 - We're up to 21% of all languages running via nix. https://arewenixyet.com.
