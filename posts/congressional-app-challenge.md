@@ -2,7 +2,7 @@
 title: Coding for Change
 author: Lena Vu Sawyer
 date: 2021-09-01
-cover: https://replit.com/@util/replit-blog#static/images/teams_edu/cac_logo.png
+cover: https://blog.replit.com/images/teams_edu/cac_logo.png 
 ---
 
 *Replit and Congressional App Challenge are joining efforts to increase Computer Science literacy and access in the U.S.* 
