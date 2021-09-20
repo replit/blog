@@ -1,8 +1,8 @@
 ---
-title: Back to School 101: The Replit Teacher Community  
+title: "Back to School 101: The Replit Teacher Community"
 author: Lena Vu Sawyer
 date: 2021-09-20
-cover:https://blog.replit.com/images/teams_edu/back-to-school-robot.jpg
+cover: https://blog.replit.com/images/teams_edu/back-to-school-robot.jpg
 ---
 
 *Part 1 of our back-to-school series.* 

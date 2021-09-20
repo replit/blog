@@ -62,6 +62,23 @@
 <%- include('header'); %>
 <a class="back" href="https://blog.replit.com/">← <span>Back to blog</span></a>
 <a class="repl-link" href="/__repl?fileName=posts/<%= post.url %>.md">Edit on Replit</a>
+
+<% if (tagsEnabled == 1) { %>
+<section style="width: 720px; margin-top: 10px;">
+<div id="categories-container" class="categories-container"></div>
+</section>
+<script>
+	let categories = "<%= post.categories %>".split(',');
+
+	let finalInner = "";
+
+	categories.forEach((categoryName) => {
+		finalInner += `<p><a href="/?tags=1&category=${categoryName}" id="category-${categoryName}" class="categories-child category">${categoryName}</a><p>`
+	})
+
+	document.getElementById('categories-container').innerHTML = finalInner;
+</script>
+<% } %>
 <%- include('post.ejs', { post }); %>
 </section>
 

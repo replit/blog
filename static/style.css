@@ -186,7 +186,54 @@ body {
     text-align: center;
 }
 
+/* Tags Selection */
 
+.categories-container {
+    display: flex;
+	align-self: flex-start;
+	justify-content: flex-start;
+	margin-bottom: 0px;
+}
+
+.categories-child {
+    flex: 1;
+}  
+
+.category-holder {
+	margin-right: 5px;
+}
+
+.categories-holder:last-child {
+	margin-right: 0px;
+}
+
+.category {
+   transition-duration: 0.25s;
+   border-radius: 100px;
+   color: #000000;
+   font-family: 'IBM Plex Sans', sans-serif;
+   font-weight: 200;
+   font-size: 20px;
+   padding: 3px;
+   padding-left: 12px;
+   padding-right: 12px;
+   background-color: #FFFFFF;
+   border: solid #9C9C9C 1px;
+   text-decoration: none;
+   display: inline-block;
+   cursor: pointer;
+   text-align: center;
+}
+
+.category-selected, .category:hover {
+   color: #FFFFFF;
+   background-color: #2998FF;
+   border: solid #2998FF 1px;
+}
+
+.category > p {
+	margin: 0;
+}
 
 /* Edit on Repl.it button */
  

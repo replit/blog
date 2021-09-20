@@ -89,12 +89,34 @@ const readPost = async (slug, snip = false) => {
 		content = marked(contentMd.replace('[](preview end)', ''));
 	}
 
+	let validCategories = ["all", "eng", "edu", "news", "events", "ventures", "other"];
+
+	let categories;
+	if (data.categories != undefined) {
+		categories = data.categories.split(',');
+		categories.every((categoryTemp, index) => {
+			if (validCategories.indexOf(categoryTemp) == -1) {
+				categories[index] = 'other';
+			}
+		})
+	} else {
+		categories = ['other'];
+	}
+
+	let uniqueCategories = [];
+	categories.forEach((c) => {
+		if (!uniqueCategories.includes(c)) {
+			uniqueCategories.push(c);
+		}
+	});
+
 	return {
 		content,
 		description,
 		snipped: snip,
 		title: data.title,
 		author: data.author,
+		categories: uniqueCategories,
 		timestamp: data.date ? new Date(data.date) : null,
 		url: slug,
 		cover: data.cover,
@@ -126,6 +148,8 @@ app.get('/', (req, res) => {
       res.set('Cache-Control', 'public, max-age=600, stale-if-error=60, stale-while-revalidate=60')
 			res.locals.posts = p;
 			res.locals.moment = moment;
+			res.locals.tagsEnabled = req.query.tags;
+			res.locals.category = req.query.category || 'all';
 			res.render('index.ejs');
 		})
 		.catch(err => errPage(res, err));
@@ -161,6 +185,7 @@ app.get('/:slug', (req, res) => {
       res.set('Cache-Control', 'public, max-age=600, stale-if-error=60, stale-while-revalidate=60')
 			res.locals.post = post;
 			res.locals.moment = moment;
+			res.locals.tagsEnabled = req.query.tags;
 			res.render('post-page.ejs');
 		})
 		.catch(err => {

@@ -1,0 +1,15 @@
+<section style="width: 720px; margin-top: 10px;"><div id="categories-container" class="categories-container"></div></section>
+<script>
+	let listOfCategories = ["all", "eng", "edu", "news", "events", "ventures", "other"];
+
+	let finalInner = "";
+
+	listOfCategories.forEach((categoryName) => {
+		finalInner += `<p class="category-holder"><a href="/?tags=1&category=${categoryName}" id="category-${categoryName}" class="categories-child category">${categoryName}</a></p>`
+	})
+
+	document.getElementById('categories-container').innerHTML = finalInner;
+
+	let selectedCategory = `category-<%= category || 'all' %>`;
+	document.getElementById(selectedCategory).className = "categories-child category category-selected";
+</script>
