@@ -61,9 +61,11 @@
 	<% } %>
 	<div id="post_container">
 	
+	<% let numOnPage = 0; %>
 	<% for (const [index, post] of posts.entries()) { %>
 	  <% if (post.categories.indexOf(category) > -1 || category == 'all') { %>
-      <% if (index != 0) { %>
+	  <% numOnPage += 1; %>
+      <% if (index != 0 && numOnPage == 0) { %>
 		<div class="post-seperator"></div>
       <% } %>
 	  <%- include('post.ejs', { post }); %>
