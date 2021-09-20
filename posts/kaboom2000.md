@@ -2,6 +2,7 @@
 title: New Kaboom Workspace
 author: Tiga Wu
 date: 2021-09-09
+categories: news
 ---
 
 ![kaboom2000](https://blog.repl.it/images/kaboom2000/kaboom2000.png)
