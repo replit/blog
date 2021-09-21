@@ -92,19 +92,20 @@ const readPost = async (slug, snip = false) => {
 	let validCategories = ["all", "eng", "edu", "news", "events", "ventures", "other"];
 
 	let categories;
+	let categoriesNew = [];
 	if (data.categories != undefined) {
 		categories = data.categories.split(',');
-		categories.every((categoryTemp, index) => {
+		categories.forEach((categoryTemp) => {
 			if (validCategories.indexOf(categoryTemp) == -1) {
-				categories[index] = 'other';
+				categoriesNew.push('other');
 			}
 		})
 	} else {
-		categories = ['other'];
+		categoriesNew = ['other'];
 	}
 
 	let uniqueCategories = [];
-	categories.forEach((c) => {
+	categoriesNew.forEach((c) => {
 		if (!uniqueCategories.includes(c)) {
 			uniqueCategories.push(c);
 		}
