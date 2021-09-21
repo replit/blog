@@ -73,7 +73,7 @@
 		<div class="post-seperator"></div>
       <% } %>
 	  <% numOnPage += 1; %>
-	  <%- include('post.ejs', { post }); %>
+	  <%- include('post.ejs', { post, betaEnabled }); %>
 	  <% } %>
     <% } %>
 	</div>

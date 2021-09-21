@@ -1,6 +1,10 @@
 <article class="post-item">
+	<% let betaEnding = ""; %>
+	<% if (betaEnabled == 1) { %>
+	<% betaEnding += "?beta=1" %>
+	<% } %>
 	<h1 class="post-title">
-		<a href="/<%= post.url%>?beta=1"><%= post.title %></a>
+		<a href="/<%= post.url + betaEnding %>"><%= post.title %></a>
 	</h1>
 	<h3 class="post-author">
 		<%= moment.utc(post.timestamp).format("ddd MMM D YYYY") %> by <%= post.author %>
@@ -9,7 +13,7 @@
 		<%- post.content %>
 	</div>
 	<% if (post.snipped) { %>
-		<a href="/<%= post.url %>?beta=1" class="read-more">
+		<a href="/<%= post.url + betaEnding %>" class="read-more">
 			Read more <span class ="arrow"> → </span>
 		</a>
 	<% } %>
