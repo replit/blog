@@ -12,6 +12,7 @@
     <guid>https://blog.replit.com/<%= post.url%></guid>
     <description><%= striptags(post.content) %></description>
     <pubDate><%= moment.utc(post.timestamp).format("ddd, DD MMM YYYY HH:mm:ss ZZ") %></pubDate>
+	<category><%= post.categories[0] %></category>
   </item>
   <% } %>
 

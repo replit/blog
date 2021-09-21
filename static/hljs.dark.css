@@ -1,0 +1,12 @@
+:root {
+	--hljs-markdown-background: #1c2333;
+	--hljs-markdown-subst: var(--text-color);
+	--hljs-markdown-comment: #608b4e;
+	--hljs-markdown-deletion: #ce9a78;
+	--hljs-markdown-selection: #ce9a78;
+	--hljs-markdown-pseudo: #bc6060;
+	--hljs-markdown-literal: #9cdcfe;
+	--hljs-markdown-addition: #569cd6;
+	--hljs-markdown-meta: #1f7199;
+	--hljs-markdown-meta-string: #4d99bf;
+}

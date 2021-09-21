@@ -8,10 +8,8 @@
   --code-snippet-text: #C10000;
   --code-snippet-highlight: #FFEDED;
 
-
---dark-grey200: #21242C;
---dark-grey300: rgb(33,36,44,0.64);
-
+  --dark-grey200: #21242C;
+  --dark-grey300: rgb(33,36,44,0.64);
 
   --light-grey400: #E4E4E4;
   --light-grey500: #F1F1F1;
@@ -44,6 +42,7 @@ body {
   font-family: 'IBM Plex Sans', sans-serif;
   font-size: 16px;
   line-height: 160%;
+  background-color: var(--bg-color);
 }
 
 .page_container {
@@ -219,14 +218,14 @@ body {
 .category {
    transition-duration: 0.25s;
    border-radius: 100px;
-   color: #000000;
+   color: var(--text-color);
    font-family: 'IBM Plex Sans', sans-serif;
-   font-weight: 200;
+   font-weight: 300;
    font-size: 20px;
    padding: 3px;
    padding-left: 12px;
    padding-right: 12px;
-   background-color: #FFFFFF;
+   background-color: var(--bg-color);
    border: solid #9C9C9C 1px;
    text-decoration: none;
    display: inline-block;
@@ -268,6 +267,31 @@ body {
   text-decoration: none;
 }
 
+/* Change Theme Button */
+ 
+.theme-button {
+	position: fixed;
+  bottom: 5.75em;
+	right: 1.22em;
+  font-weight: 500;
+
+	padding: 12px var(--spacing-2);
+  border-radius: 6px;
+	
+	background:var(--text-color);
+	color: var(--bg-color);
+  box-shadow: 0px 4px 8px 0px rgba(0,0,0,0.25);
+
+	text-decoration: none;
+  transition: .2s background ease-in-out;
+
+  border: transparent;
+}
+
+.theme-button:hover {
+	background:var(--dark-grey200);
+  text-decoration: none;
+}
 
 /* Markdown blog */
 

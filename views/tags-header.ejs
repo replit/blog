@@ -5,7 +5,7 @@
 	let finalInner = "";
 
 	listOfCategories.forEach((categoryName) => {
-		finalInner += `<p class="category-holder"><a href="/?tags=1&category=${categoryName}" id="category-${categoryName}" class="categories-child category">${categoryName}</a></p>`
+		finalInner += `<p class="category-holder"><a href="/?beta=1&category=${categoryName}" id="category-${categoryName}" class="categories-child category">${categoryName}</a></p>`
 	})
 
 	document.getElementById('categories-container').innerHTML = finalInner;

@@ -148,7 +148,7 @@ app.get('/', (req, res) => {
       res.set('Cache-Control', 'public, max-age=600, stale-if-error=60, stale-while-revalidate=60')
 			res.locals.posts = p;
 			res.locals.moment = moment;
-			res.locals.tagsEnabled = req.query.tags;
+			res.locals.betaEnabled = req.query.beta;
 			res.locals.category = req.query.category || 'all';
 			res.render('index.ejs');
 		})
@@ -163,7 +163,7 @@ app.get('/feed.xml', (req, res) => {
       res.set('Content-Type', 'application/xml')
 			res.locals.posts = p;
 			res.locals.moment = moment;
-      res.locals.striptags = striptags;
+      		res.locals.striptags = striptags;
 			res.render('feed.ejs');
 		})
 		.catch(err => errPage(res, err));
@@ -185,7 +185,7 @@ app.get('/:slug', (req, res) => {
       res.set('Cache-Control', 'public, max-age=600, stale-if-error=60, stale-while-revalidate=60')
 			res.locals.post = post;
 			res.locals.moment = moment;
-			res.locals.tagsEnabled = req.query.tags;
+			res.locals.betaEnabled = req.query.beta;
 			res.render('post-page.ejs');
 		})
 		.catch(err => {

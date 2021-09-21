@@ -25,8 +25,11 @@
     <meta name="twitter:description" content="The blog of the Replit team where we talk about new features, design, and engineering!">
     <meta name="twitter:image" content="https://repl.it/public/images/sm.png">
 
-    <link rel="stylesheet" type="text/css" href="/style.css?v=20">
+    <link id="lightCSS" rel="stylesheet" type="text/css" href="/style.css?v=20">
+
     <link rel="stylesheet" type="text/css" href="/hljs.min.css">
+
+	<style id="cssHolder"></style>
 
     <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Sans:100,200,300,400,500,700&display=swap" rel="stylesheet">
 
@@ -56,8 +59,10 @@
   <section class="page_container">
   <%- include('header'); %>
     <a class="repl-link" href="/__repl">Edit on Replit</a>
-    <% if (tagsEnabled == 1) { %>
+
+    <% if (betaEnabled == 1) { %>
       <%- include('tags-header'); %>
+	  <%- include('theme-control'); %>
 	<% } %>
 	<div id="post_container">
 	
@@ -74,7 +79,7 @@
 	</div>
 	<script>
 		if (document.getElementById("post_container").children.length == 0) {
-			document.getElementById("post_container").innerHTML = "<br><br><br><br><p>Aw, there aren't any posts in this category yet 😔</p>";
+			document.getElementById("post_container").innerHTML = "<br><br><br><br><p style=\"color: var(--text-color);\">Aw, there aren't any posts in this category yet 😔</p>";
 		}
 	</script>
 </section>

@@ -1,0 +1,79 @@
+:root {
+	--hljs-markdown-background: #f0f0f0;
+	--hljs-markdown-subst: #444;
+	--hljs-markdown-comment: #888888;
+	--hljs-markdown-deletion: #880000;
+	--hljs-markdown-selection: #880000;
+	--hljs-markdown-pseudo: #bc6060;
+	--hljs-markdown-literal: #78a960;
+	--hljs-markdown-addition: #397300;
+	--hljs-markdown-meta: #1f7199;
+	--hljs-markdown-meta-string: #4d99bf;
+}
+
+.hljs {
+    display: block;
+    overflow-x: auto;
+    padding: 0.5em;
+    background: var(--hljs-markdown-background);
+}
+.hljs,
+.hljs-subst {
+    color: var(--hljs-markdown-subst);
+}
+.hljs-comment {
+    color: var(--hljs-markdown-comment);;
+}
+.hljs-keyword,
+.hljs-attribute,
+.hljs-selector-tag,
+.hljs-meta-keyword,
+.hljs-doctag,
+.hljs-name {
+    font-weight: bold;
+}
+.hljs-type,
+.hljs-string,
+.hljs-number,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-quote,
+.hljs-template-tag,
+.hljs-deletion {
+    color: var(--hljs-markdown-deletion);
+}
+.hljs-title,
+.hljs-section {
+    color: var(--hljs-markdown-selection);
+    font-weight: bold;
+}
+.hljs-regexp,
+.hljs-symbol,
+.hljs-variable,
+.hljs-template-variable,
+.hljs-link,
+.hljs-selector-attr,
+.hljs-selector-pseudo {
+    color: var(--hljs-markdown-pseudo);
+}
+.hljs-literal {
+    color: var(--hljs-markdown-literal);
+}
+.hljs-built_in,
+.hljs-bullet,
+.hljs-code,
+.hljs-addition {
+    color: var(--hljs-markdown-addition);
+}
+.hljs-meta {
+    color: var(--hljs-markdown-meta);
+}
+.hljs-meta-string {
+    color: var(--hljs-markdown-meta-string);
+}
+.hljs-emphasis {
+    font-style: italic;
+}
+.hljs-strong {
+    font-weight: bold;
+}
