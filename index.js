@@ -98,6 +98,8 @@ const readPost = async (slug, snip = false) => {
 		categories.forEach((categoryTemp) => {
 			if (validCategories.indexOf(categoryTemp) == -1) {
 				categoriesNew.push('other');
+			} else {
+				categoriesNew.push(categoryTemp)
 			}
 		})
 	} else {
