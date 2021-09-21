@@ -188,10 +188,17 @@ body {
 
 /* Tags Selection */
 
+.categories-container-holder {
+	max-width: 720px;
+	width: 100%;
+	margin-top: 10px;
+}
+
 .categories-container {
     display: flex;
-	align-self: flex-start;
+	align-self: left;
 	justify-content: flex-start;
+	flex-wrap: wrap;
 	margin-bottom: 0px;
 }
 
@@ -201,6 +208,8 @@ body {
 
 .category-holder {
 	margin-right: 5px;
+	margin-top: 5px;
+	margin-bottom: 5px;
 }
 
 .categories-holder:last-child {
