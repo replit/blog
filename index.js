@@ -42,8 +42,6 @@ const buildPostCache = async () => {
     }
 }
 
-buildPostCache();
-
 setInterval(buildPostCache, 60000);
 
 const postPreviews = async () => {
@@ -151,8 +149,6 @@ app.get('/', (req, res) => {
       res.set('Cache-Control', 'public, max-age=600, stale-if-error=60, stale-while-revalidate=60')
 			res.locals.posts = p;
 			res.locals.moment = moment;
-			res.locals.betaEnabled = req.query.beta;
-			res.locals.category = req.query.category || 'all';
 			res.render('index.ejs');
 		})
 		.catch(err => errPage(res, err));
@@ -200,4 +196,6 @@ app.get('/:slug', (req, res) => {
     });
 });
 
-app.listen(3000, () => { console.log('blog is running'); });
+buildPostCache().then(() => {
+	app.listen(3000, () => { console.log('blog is running'); });
+})

@@ -30,6 +30,7 @@
     <link rel="stylesheet" type="text/css" href="/hljs.min.css">
 
 	<style id="cssHolder"></style>
+	<style id="cssHolderCategories"></style>
 
     <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Sans:100,200,300,400,500,700&display=swap" rel="stylesheet">
 
@@ -56,32 +57,34 @@
   </head>
   <body>
 
-  <section class="page_container">
+  <section id="page_container" class="page_container">
   <%- include('header'); %>
     <a class="repl-link" href="/__repl">Edit on Replit</a>
 
-    <% if (betaEnabled == 1) { %>
-      <%- include('tags-header'); %>
-	  <%- include('theme-control'); %>
-	<% } %>
-	<div id="post_container">
+   <%- include('tags-header'); %>
+
+	<%- include('theme-control'); %>
 	
-	<% var numOnPage = 0; %>
-	<% for (const [index, post] of posts.entries()) { %>
-	  <% if (post.categories.indexOf(category) > -1 || category == 'all') { %>
-      <% if (index != 0 && numOnPage != 0) { %>
-		<div class="post-seperator"></div>
-      <% } %>
-	  <% numOnPage += 1; %>
-	  <%- include('post.ejs', { post }); %>
-	  <% } %>
+	<div class="post-container" id="post_container">
+	
+	<% for (const post of posts) { %>
+		<%- include('post', { post }); %>
     <% } %>
-	</div>
+
+	<div id="noPostsNotifier" style="display: none;"><br><br><br><br><p style="color: var(--text-color);">Aw, there aren't any posts in this category yet 😔</p></div>
+
 	<script>
-		if (document.getElementById("post_container").children.length == 0) {
-			document.getElementById("post_container").innerHTML = "<br><br><br><br><p style=\"color: var(--text-color);\">Aw, there aren't any posts in this category yet 😔</p>";
-		}
+		const urlParams = new URLSearchParams(window.location.search);
+		console.log(urlParams)
+		if (urlParams.get('category')) {
+			switchCategory('all')
+			console.log(urlParams.get('category'));
+			switchCategory(urlParams.get('category')) //dont ask
+		};
 	</script>
+
+	</div>
+
 </section>
   <%- include('footer'); %>
   </body>

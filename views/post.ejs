@@ -1,6 +1,15 @@
-<article class="post-item">
+<% let listOfCategories = post.categories; %>
+<% let finalCategoriesClass = ""; %>
+
+<% for (category of post.categories) { %>
+<%	finalCategoriesClass += ` post-category-${category}`; %>
+<% } %>
+
+<div class="post-seperator<%= finalCategoriesClass %>"></div>
+
+<article class="post-item<%= finalCategoriesClass %>">
 	<h1 class="post-title">
-		<a href="/<%= post.url%>?beta=1"><%= post.title %></a>
+		<a href="/<%= post.url%>"><%= post.title %></a>
 	</h1>
 	<h3 class="post-author">
 		<%= moment.utc(post.timestamp).format("ddd MMM D YYYY") %> by <%= post.author %>
@@ -9,7 +18,7 @@
 		<%- post.content %>
 	</div>
 	<% if (post.snipped) { %>
-		<a href="/<%= post.url %>?beta=1" class="read-more">
+		<a href="/<%= post.url %>" class="read-more">
 			Read more <span class ="arrow"> → </span>
 		</a>
 	<% } %>

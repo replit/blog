@@ -5,11 +5,49 @@
 	let finalInner = "";
 
 	listOfCategories.forEach((categoryName) => {
-		finalInner += `<p class="category-holder"><a href="/?beta=1&category=${categoryName}" id="category-${categoryName}" class="categories-child category">${categoryName}</a></p>`
+		finalInner += `<p class="category-holder"><button onclick="switchCategory('${categoryName}')" id="category-${categoryName}" class="categories-child category">${categoryName}</button></p>`
 	})
 
 	document.getElementById('categories-container').innerHTML = finalInner;
 
-	let selectedCategory = `category-<%= category || 'all' %>`;
+	let selectedCategory = 'category-all';
 	document.getElementById(selectedCategory).className = "categories-child category category-selected";
+
+	const switchCategory = ((category) => {
+		let listOfPosts = document.getElementById('page_container').children;
+
+		let listOfCategoriesToInvis = listOfCategories.filter(function(e) { return e !== category })
+
+		let finalInner = '';
+
+		listOfCategoriesToInvis.splice(0, 1); //for the love of all that is good DONT MOVE THE ALL CATEGORY OUT OF THE FIRST POSITION. THIS WILL BREAK EVERYTHING
+
+		let display = 'none';
+
+		if (category == 'all') {
+			display = 'block'
+		}
+
+		for (let i = 0; i < listOfCategoriesToInvis.length; i++) {
+			finalInner += `.post-category-${listOfCategoriesToInvis[i]} {\n    display: ${display};\n}\n`
+		}
+
+		document.getElementsByClassName("category-selected")[0].classList.remove("category-selected");
+
+		document.getElementById(`category-all`).classList.remove("category-selected");
+
+		finalInner += `.post-category-all {\n    display: block;\n}\n.post-category-${category} {\n    display: block;\n}`
+
+		document.getElementById(`category-${category}`).classList.add("category-selected");
+
+		document.getElementById("cssHolderCategories").innerHTML = finalInner;
+
+		if (document.getElementsByClassName(`post-category-${category}`).length == 0) {
+			document.getElementById('noPostsNotifier').style["display"] = "block";
+		} else {
+			document.getElementById('noPostsNotifier').style["display"] = "none";
+		}
+
+	})
+
 </script>
