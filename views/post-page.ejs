@@ -66,8 +66,13 @@
 <a class="back" href="/"><span>← </span>Back to blog</a>
 <a class="repl-link" href="/__repl?fileName=posts/<%= post.url %>.md">Edit on Replit</a>
 
+<% if (beta == 1) {%>
 <%- include('theme-control'); %>
+<% } %>
+
 <section class="categories-container-holder">
+
+<% if (beta == 1) {%>
 <div id="categories-container" class="categories-container"></div>
 </section>
 <script>
@@ -76,12 +81,13 @@
 	let finalInner = "";
 
 	categories.forEach((categoryName) => {
-		finalInner += `<p class="category-holder"><a href="/?category=${categoryName}" id="category-${categoryName}" class="categories-child category">${categoryName}</a><p>`
+		finalInner += `<p class="category-holder"><a href="/?category=${categoryName}&beta=1" id="category-${categoryName}" class="categories-child category">${categoryName}</a><p>`
 	})
 
 	document.getElementById('categories-container').innerHTML = finalInner;
 </script>
-<%- include('post.ejs', { post }); %>
+<% } %>
+<%- include('post', { post, beta }); %>
 </section>
 
 <%- include('footer'); %>

@@ -1,6 +1,7 @@
 :root {
   /* Color variables */
   --text-color: black;
+  --text-color-diff: black;
   --bg-color: white;
     
   --primary-color: #0070E0;
@@ -56,9 +57,6 @@ body {
   justify-content: start;
 }
 
-
-
-
 /* Blog post */
 
 .back {
@@ -86,6 +84,7 @@ body {
 .post-item {
 	width: 720px;
 	margin: 0 auto;
+	transition: ease-in-out;
 }
 
 .post-title a {
@@ -96,6 +95,15 @@ body {
 	color:var(--text-color);
   text-decoration: none;
   transition: .2s color ease-in-out;
+}
+
+div.markdown > p > a {
+	transition: 150ms;
+}
+
+div.markdown > p > a:hover {
+	color: #2998ff;
+	transition: 150ms;
 }
 
 .post-title a:hover {
@@ -121,8 +129,13 @@ body {
 	margin-bottom: var(--spacing-3);
 }
 
-.read-more .arrow {
-  transition: .2s margin ease-in-out;
+.read-more {
+  transition: 250ms ease-in-out;
+}
+
+.read-more:hover {
+  transition: 250ms ease-in-out;
+  color: #2998ff;
 }
 
 .read-more:hover .arrow {
@@ -131,7 +144,7 @@ body {
 
 .post-seperator {
 	width: 720px;
-	margin: var(--spacing-8) auto var(--spacing-4) auto;
+	margin: var(--spacing-4) auto var(--spacing-4) auto;
 	border-top: 1px solid var(--spacer-color);
 }
 
@@ -231,8 +244,8 @@ body {
 
 .category-selected, .category:hover {
    color: #FFFFFF;
-   background-color: #2998FF;
-   border: solid #2998FF 1px;
+   background-color: #0070E0;
+   border: solid #0070E0 1px;
 }
 
 .category > p {
@@ -250,7 +263,7 @@ body {
 	padding: 12px var(--spacing-2);
   border-radius: 4px;
 	
-	background:var(--text-color);
+	background:var(--text-color-diff);
 	color: var(--bg-color);
   box-shadow: 0px 4px 8px 0px rgba(0,0,0,0.25);
 
@@ -274,7 +287,7 @@ body {
 	padding: 12px var(--spacing-2);
   border-radius: 6px;
 	
-	background:var(--text-color);
+	background:var(--text-color-diff);
 	color: var(--bg-color);
   box-shadow: 0px 4px 8px 0px rgba(0,0,0,0.25);
 
@@ -370,6 +383,12 @@ p>em {
 
 .markdown a {
 	color: var(--primary-color);
+	transition: 250ms ease-in-out;
+}
+
+.markdown a:hover {
+	color: #2998ff;
+	transition: 250ms ease-in-out;
 }
 
 /* UL and LI */

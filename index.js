@@ -149,6 +149,7 @@ app.get('/', (req, res) => {
       res.set('Cache-Control', 'public, max-age=600, stale-if-error=60, stale-while-revalidate=60')
 			res.locals.posts = p;
 			res.locals.moment = moment;
+			res.locals.beta = req.query.beta | 0;
 			res.render('index.ejs');
 		})
 		.catch(err => errPage(res, err));
@@ -184,7 +185,7 @@ app.get('/:slug', (req, res) => {
       res.set('Cache-Control', 'public, max-age=600, stale-if-error=60, stale-while-revalidate=60')
 			res.locals.post = post;
 			res.locals.moment = moment;
-			res.locals.betaEnabled = req.query.beta;
+			res.locals.beta = req.query.beta | 0;
 			res.render('post-page.ejs');
 		})
 		.catch(err => {

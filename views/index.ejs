@@ -61,27 +61,28 @@
   <%- include('header'); %>
     <a class="repl-link" href="/__repl">Edit on Replit</a>
 
-   <%- include('tags-header'); %>
+	<% if (beta == 1) {%>
+		<%- include('tags-header'); %>
+		<%- include('theme-control'); %>
+	<% } %>
 
-	<%- include('theme-control'); %>
-	
 	<div class="post-container" id="post_container">
 	
 	<% for (const post of posts) { %>
-		<%- include('post', { post }); %>
+		<%- include('post', { post, beta }); %>
     <% } %>
 
+	<% if (beta == 1) {%>
 	<div id="noPostsNotifier" style="display: none;"><br><br><br><br><p style="color: var(--text-color);">Aw, there aren't any posts in this category yet 😔</p></div>
 
 	<script>
 		const urlParams = new URLSearchParams(window.location.search);
-		console.log(urlParams)
+		switchCategory('all')
 		if (urlParams.get('category')) {
-			switchCategory('all')
-			console.log(urlParams.get('category'));
 			switchCategory(urlParams.get('category')) //dont ask
 		};
 	</script>
+	<% } %>
 
 	</div>
 

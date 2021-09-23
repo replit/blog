@@ -42,7 +42,7 @@
 
 		document.getElementById("cssHolderCategories").innerHTML = finalInner;
 
-		if (document.getElementsByClassName(`post-category-${category}`).length == 0) {
+		if (document.getElementsByClassName(`post-category-${category}`).length == 0 && category != 'all') {
 			document.getElementById('noPostsNotifier').style["display"] = "block";
 		} else {
 			document.getElementById('noPostsNotifier').style["display"] = "none";
