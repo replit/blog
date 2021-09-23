@@ -3,9 +3,8 @@ title: A New Code Editor for Mobile - CodeMirror 6
 author: Faris Masad
 date: 2021-09-21
 cover: https://blog.repl.it/images/mobile/codemirror.png
-categories: updates
+categories: news
 ---
-
 
 Today, we are thrilled to announce [CodeMirror](https://codemirror.net/6/) as the new code editor on Replit for mobile devices. CodeMirror is a versatile code editor that has been specifically designed with mobile in mind, providing an excellent touchscreen experience. This change is the beginning of a focused effort on mobile development here at Replit; the editor is just the first step! The editor supports all the features you expect from a code editor, and we're working on making it even more powerful.
 

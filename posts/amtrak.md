@@ -3,6 +3,7 @@ title: How I Created an NPM Package to Access Amtrak's Semi-Private API
 author: Piero Maddaleni
 date: 2021-09-15
 cover: 
+categories: eng
 ---
 
 Recently, I took it upon myself to both learn TypeScript and reverse engineer Amtrak's train tracking API. The result of this was the [Amtrak NPM Package](https://www.npmjs.com/package/amtrak) and my own [Amtrak Train Tracking API](https://api.amtrak.piemadd.com/). I wanted to make it easier for others to use the API, as the data received from [Amtrak's endpoint](https://maps.amtrak.com/services/MapDataService/trains/getTrainsData) isn't useable without the use of decryption, and even then the resulting data is all in one massive JSON object.

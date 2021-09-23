@@ -87,7 +87,7 @@ const readPost = async (slug, snip = false) => {
 		content = marked(contentMd.replace('[](preview end)', ''));
 	}
 
-	let validCategories = ["all", "eng", "edu", "news", "events", "ventures", "other"];
+	let validCategories = ["all", "eng", "product", "infra", "projects", "edu", "news", "events", "ventures", "other"];
 
 	let categories;
 	let categoriesNew = [];
@@ -102,6 +102,14 @@ const readPost = async (slug, snip = false) => {
 		})
 	} else {
 		categoriesNew = ['other'];
+	}
+
+	let catLengthTemp = categoriesNew.length; //this is for reasons
+	for (let i = 0; i < catLengthTemp; i++) {
+		if ((categoriesNew[i] == 'product' || categoriesNew[i] == 'infra' || categoriesNew[i] == 'projects') && categoriesNew.indexOf('eng') == -1) {
+			categoriesNew.push(categoriesNew[i])
+			categoriesNew[i] = 'eng';
+		}
 	}
 
 	let uniqueCategories = [];
