@@ -261,7 +261,7 @@ div.markdown > p > a:hover {
   font-weight: 500;
 
 	padding: 12px var(--spacing-2);
-  border-radius: 4px;
+  border-radius: 6px;
 	
 	background:var(--text-color-diff);
 	color: var(--bg-color);
