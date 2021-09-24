@@ -87,12 +87,15 @@ const readPost = async (slug, snip = false) => {
 		content = marked(contentMd.replace('[](preview end)', ''));
 	}
 
+	//moar categories
 	let validCategories = ["all", "eng", "product", "infra", "projects", "edu", "news", "events", "ventures", "other"];
 
 	let categories;
 	let categoriesNew = [];
 	if (data.categories != undefined) {
 		categories = data.categories.split(',');
+		//.every would only do the first element of a list, not the whole thing
+		//if a category doesn't exist, make it 'other'
 		categories.forEach((categoryTemp) => {
 			if (validCategories.indexOf(categoryTemp) == -1) {
 				categoriesNew.push('other');
@@ -104,14 +107,15 @@ const readPost = async (slug, snip = false) => {
 		categoriesNew = ['other'];
 	}
 
-	let catLengthTemp = categoriesNew.length; //this is for reasons
-	for (let i = 0; i < catLengthTemp; i++) {
+	//this adds the eng category to something if it doesn't have it, but has product, infra, or projects. why can't our writers do this on our own? idk. don't trust humans to follow your directions.
+	for (let i = 0; i < categoriesNew.length; i++) {
 		if ((categoriesNew[i] == 'product' || categoriesNew[i] == 'infra' || categoriesNew[i] == 'projects') && categoriesNew.indexOf('eng') == -1) {
 			categoriesNew.push(categoriesNew[i])
 			categoriesNew[i] = 'eng';
 		}
 	}
 
+	//replace duplicates (edge case if more than one category is other)
 	let uniqueCategories = [];
 	categoriesNew.forEach((c) => {
 		if (!uniqueCategories.includes(c)) {
