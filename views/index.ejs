@@ -25,14 +25,11 @@
     <meta name="twitter:description" content="The blog of the Replit team where we talk about new features, design, and engineering!">
     <meta name="twitter:image" content="https://repl.it/public/images/sm.png">
 
-	<!-- originally added an id here to change styling by changing the `href` but that didn't work lol. see below -->
-    <link rel="stylesheet" type="text/css" href="/style.css?v=20">
+    <link id="lightCSS" rel="stylesheet" type="text/css" href="/style.css?v=20">
 
     <link rel="stylesheet" type="text/css" href="/hljs.min.css">
 
-	<!-- when dark theme is enabled, js fills these style tags with some css variables to change the theming. i couldn't figure out a better way to do this, but feel free to let me know if you find a way (as in please try it first not just pitch to me (piero) since i spent 2 hours on this) -->
 	<style id="cssHolder"></style>
-	<style id="cssHolderCategories"></style>
 
     <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Sans:100,200,300,400,500,700&display=swap" rel="stylesheet">
 
@@ -59,42 +56,32 @@
   </head>
   <body>
 
-	<!-- iirc there was a reason for adding an id instead of just getting a list by class and then getting the first index. only thing i remember is that it wouldn't work /shrug -->
-  <section id="page_container" class="page_container">
+  <section class="page_container">
   <%- include('header'); %>
     <a class="repl-link" href="/__repl">Edit on Replit</a>
 
-	<% if (beta == 1) {%>
-		<%- include('tags-header'); %>
-		<%- include('theme-control'); %>
+    <% if (betaEnabled == 1) { %>
+      <%- include('tags-header'); %>
+	  <%- include('theme-control'); %>
 	<% } %>
-
-
-	<!-- the removed code here is actually from my initial tags implementation. so much cleaner now lol -->
-	<div class="post-container" id="post_container">
+	<div id="post_container">
 	
-	<% for (const post of posts) { %>
-		<%- include('post', { post, beta }); %>
+	<% var numOnPage = 0; %>
+	<% for (const [index, post] of posts.entries()) { %>
+	  <% if (post.categories.indexOf(category) > -1 || category == 'all') { %>
+      <% if (index != 0 && numOnPage != 0) { %>
+		<div class="post-seperator"></div>
+      <% } %>
+	  <% numOnPage += 1; %>
+	  <%- include('post.ejs', { post, betaEnabled }); %>
+	  <% } %>
     <% } %>
-
-	<!-- only show if on beta -->
-	<% if (beta == 1) {%>
-
-	<!-- only show if no posts are on screen (frontend js handles this since it handles showing and hiding posts) -->
-	<div id="noPostsNotifier" style="display: none;"><br><br><br><br><p style="color: var(--text-color);">Aw, there aren't any posts in this category yet 😔</p></div>
-
-	<!-- this handles when someone clicks on a category coming back from an article. the switchCategory('all') is just there to make sure all of the posts are visible before hiding some. if not, some weird layout bugs would show up. -->
-	<script>
-		const urlParams = new URLSearchParams(window.location.search);
-		switchCategory('all')
-		if (urlParams.get('category')) {
-			switchCategory(urlParams.get('category')) //dont ask
-		};
-	</script>
-	<% } %>
-
 	</div>
-
+	<script>
+		if (document.getElementById("post_container").children.length == 0) {
+			document.getElementById("post_container").innerHTML = "<br><br><br><br><p style=\"color: var(--text-color);\">Aw, there aren't any posts in this category yet 😔</p>";
+		}
+	</script>
 </section>
   <%- include('footer'); %>
   </body>
