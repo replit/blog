@@ -91,7 +91,7 @@ const readPost = async (slug, snip = false) => {
 	let validCategories = ["all", "eng", "product", "infra", "projects", "edu", "news", "events", "ventures", "other"];
 
 	//if a category doesn't exist, make it 'other'
-	let categoriesNew = await ( data.categories || 'other' ).split(',').map(c => {
+	let categoriesNew = ( data.categories || 'other' ).split(',').map(c => {
 		if (!validCategories.includes(c)) {
 			return 'other';
 		} else {
@@ -101,7 +101,7 @@ const readPost = async (slug, snip = false) => {
 
 	//this adds the eng category to something if it doesn't have it, but has product, infra, or projects. why can't our writers do this on our own? idk. don't trust humans to follow your directions.
 	let engSubCats = ['product', 'infra', 'projects']; //sorry, no cats here, just catgirls, catboys, and categories
-	await categoriesNew.every((c, i, a) => {
+	categoriesNew.every((c, i, a) => {
 		if (engSubCats.includes(c)) {
 			a[i] = 'eng';
 			a.push(c);
@@ -110,7 +110,7 @@ const readPost = async (slug, snip = false) => {
 
 	//replace duplicates (edge case if more than one category is other)
 	let uniqueCategories = [];
-	await categoriesNew.every((c) => {
+	categoriesNew.every((c) => {
 		if (!uniqueCategories.includes(c)) {
 			uniqueCategories.push(c);
 		}
