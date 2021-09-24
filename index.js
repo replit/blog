@@ -22,24 +22,24 @@ marked.setOptions({
 let previewCache = null;
 
 const buildPostCache = async () => {
-    try {
-        const ls = await fs.readdir('./posts');
+	try {
+		const ls = await fs.readdir('./posts');
 
-        let posts = [];
+		let posts = [];
 
-        for (const f of ls) {
-            posts.push(await readPost(f.slice(0, -3), true));
-        }
+		for (const f of ls) {
+			posts.push(await readPost(f.slice(0, -3), true));
+		}
 
-        posts = posts.filter(p => p.timestamp && p.timestamp < new Date());
+		posts = posts.filter(p => p.timestamp && p.timestamp < new Date());
 
-        posts.sort((l, r) => r.timestamp - l.timestamp)
+		posts.sort((l, r) => r.timestamp - l.timestamp)
 
-        previewCache = posts;
-    } catch (e) {
-        // Instead of dying, let's try to contain the damage.
-        console.error('Failed to build the post cache: ', e);
-    }
+		previewCache = posts;
+	} catch (e) {
+		// Instead of dying, let's try to contain the damage.
+		console.error('Failed to build the post cache: ', e);
+	}
 }
 
 setInterval(buildPostCache, 60000);
@@ -90,34 +90,27 @@ const readPost = async (slug, snip = false) => {
 	//moar categories
 	let validCategories = ["all", "eng", "product", "infra", "projects", "edu", "news", "events", "ventures", "other"];
 
-	let categories;
-	let categoriesNew = [];
-	if (data.categories != undefined) {
-		categories = data.categories.split(',');
-		//.every would only do the first element of a list, not the whole thing
-		//if a category doesn't exist, make it 'other'
-		categories.forEach((categoryTemp) => {
-			if (validCategories.indexOf(categoryTemp) == -1) {
-				categoriesNew.push('other');
-			} else {
-				categoriesNew.push(categoryTemp)
-			}
-		})
-	} else {
-		categoriesNew = ['other'];
-	}
+	//if a category doesn't exist, make it 'other'
+	let categoriesNew = await ( data.categories || 'other' ).split(',').map(c => {
+		if (!validCategories.includes(c)) {
+			return 'other';
+		} else {
+			return c;
+		}
+	});
 
 	//this adds the eng category to something if it doesn't have it, but has product, infra, or projects. why can't our writers do this on our own? idk. don't trust humans to follow your directions.
-	for (let i = 0; i < categoriesNew.length; i++) {
-		if ((categoriesNew[i] == 'product' || categoriesNew[i] == 'infra' || categoriesNew[i] == 'projects') && categoriesNew.indexOf('eng') == -1) {
-			categoriesNew.push(categoriesNew[i])
-			categoriesNew[i] = 'eng';
+	let engSubCats = ['product', 'infra', 'projects']; //sorry, no cats here, just catgirls, catboys, and categories
+	await categoriesNew.every((c, i, a) => {
+		if (engSubCats.includes(c)) {
+			a[i] = 'eng';
+			a.push(c);
 		}
-	}
+	})
 
 	//replace duplicates (edge case if more than one category is other)
 	let uniqueCategories = [];
-	categoriesNew.forEach((c) => {
+	await categoriesNew.every((c) => {
 		if (!uniqueCategories.includes(c)) {
 			uniqueCategories.push(c);
 		}
@@ -138,7 +131,7 @@ const readPost = async (slug, snip = false) => {
 
 const errPage = (res, err, status) => {
 	res.locals.err = err;
-  res.status(status || 500);
+	res.status(status || 500);
 	res.render('error.ejs')
 }
 
@@ -147,38 +140,34 @@ const app = express();
 app.use(express.static('static'))
 
 app.use(promMid({
-  metricsPath: '/metrics',
-  collectDefaultMetrics: true,
-  requestDurationBuckets: [0.1, 0.5, 1, 1.5],
-  requestLengthBuckets: [512, 1024, 5120, 10240, 51200, 102400],
-  responseLengthBuckets: [512, 1024, 5120, 10240, 51200, 102400],
+	metricsPath: '/metrics',
+	collectDefaultMetrics: true,
+	requestDurationBuckets: [0.1, 0.5, 1, 1.5],
+	requestLengthBuckets: [512, 1024, 5120, 10240, 51200, 102400],
+	responseLengthBuckets: [512, 1024, 5120, 10240, 51200, 102400],
 }));
 
 app.get('/', (req, res) => {
 	console.log('GET /')
-	postPreviews()
-		.then(p => {
-      res.set('Cache-Control', 'public, max-age=600, stale-if-error=60, stale-while-revalidate=60')
-			res.locals.posts = p;
-			res.locals.moment = moment;
-			res.locals.beta = req.query.beta | 0;
-			res.render('index.ejs');
-		})
-		.catch(err => errPage(res, err));
+	postPreviews().then(p => {
+		res.set('Cache-Control', 'public, max-age=600, stale-if-error=60, stale-while-revalidate=60')
+		res.locals.posts = p;
+		res.locals.moment = moment;
+		res.locals.beta = req.query.beta | 0;
+		res.render('index.ejs');
+	}).catch(err => errPage(res, err));
 });
 
 app.get('/feed.xml', (req, res) => {
 	console.log('GET /feed.xml')
-	postPreviews()
-		.then(p => {
-      res.set('Cache-Control', 'public, max-age=600, stale-if-error=60, stale-while-revalidate=60')
-      res.set('Content-Type', 'application/xml')
-			res.locals.posts = p;
-			res.locals.moment = moment;
-      		res.locals.striptags = striptags;
-			res.render('feed.ejs');
-		})
-		.catch(err => errPage(res, err));
+	postPreviews().then(p => {
+		res.set('Cache-Control', 'public, max-age=600, stale-if-error=60, stale-while-revalidate=60')
+		res.set('Content-Type', 'application/xml')
+		res.locals.posts = p;
+		res.locals.moment = moment;
+		res.locals.striptags = striptags;
+		res.render('feed.ejs');
+	}).catch(err => errPage(res, err));
 });
 
 const filter = new Filter();
@@ -192,21 +181,19 @@ app.get('/:slug', (req, res) => {
 		console.log("\033[0m" + `GET ${filter.clean(slug.slice(0, 500)).replace('\033[2J', '')}`);
 	}
 
-	readPost(slug)
-		.then(post => {
-      res.set('Cache-Control', 'public, max-age=600, stale-if-error=60, stale-while-revalidate=60')
-			res.locals.post = post;
-			res.locals.moment = moment;
-			res.locals.beta = req.query.beta | 0;
-			res.render('post-page.ejs');
-		})
-		.catch(err => {
-      if (err.code === 'ENOENT') {
-        errPage(res, err, 404);
-      } else {
-        errPage(res, err);
-      }
-    });
+	readPost(slug).then(post => {
+		res.set('Cache-Control', 'public, max-age=600, stale-if-error=60, stale-while-revalidate=60')
+		res.locals.post = post;
+		res.locals.moment = moment;
+		res.locals.beta = req.query.beta | 0;
+		res.render('post-page.ejs');
+	}).catch(err => {
+		if (err.code === 'ENOENT') {
+			errPage(res, err, 404);
+		} else {
+			errPage(res, err);
+		}
+	});
 });
 
 //moved this here because of an edge case Faris discovered and initially thought was from my code. turns out, this error has been here since probably the beggining of the blog
