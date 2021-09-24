@@ -70,6 +70,8 @@ body {
   color: var(--primary-color);
 }
 
+/* These two following rules fix the bug where the words move to the right instead of the arrow moving to the left when you hover over "Back to Blog" */
+
 .back span {
   transition: 150ms ease-in-out;
   margin: 0 0 0 0;
@@ -80,11 +82,12 @@ body {
   margin: 0 4px 0 0;
   padding: 0 0 0 0;
 }
+/* end of stupid fix to stupid bug bookie wouldn't stop talking about */
 
 .post-item {
 	width: 720px;
 	margin: 0 auto;
-	transition: ease-in-out;
+	transition: ease-in-out; /* gotta be a smooth criminal */
 }
 
 .post-title a {
@@ -97,6 +100,8 @@ body {
   transition: .2s color ease-in-out;
 }
 
+
+/* when you hover over a link on the main page you get some sort of feedback now */
 div.markdown > p > a {
 	transition: 150ms;
 }
@@ -105,6 +110,7 @@ div.markdown > p > a:hover {
 	color: #2998ff;
 	transition: 150ms;
 }
+/* end of hover stuff */
 
 .post-title a:hover {
 	color: var(--primary-color);
@@ -121,16 +127,14 @@ div.markdown > p > a:hover {
 	color:var(--dark-grey200);
 }
 
+/* moar feadback on link hover >:) */
 .read-more {
-  color: var(--primary-color);
-  text-decoration: none;
-  font-size: 18px;
-  font-weight: 500;
+	color: var(--primary-color);
+	text-decoration: none;
+	font-size: 18px;
+	font-weight: 500;
 	margin-bottom: var(--spacing-3);
-}
-
-.read-more {
-  transition: 250ms ease-in-out;
+	transition: 250ms ease-in-out;
 }
 
 .read-more:hover {
@@ -141,13 +145,16 @@ div.markdown > p > a:hover {
 .read-more:hover .arrow {
   margin: 0 0 0 4px;
 }
+/* something something hover something */
 
+/* why were the two spaces between the lines different? idk, but i changed it. no issue changing back if wanted */
 .post-seperator {
 	width: 720px;
 	margin: var(--spacing-4) auto var(--spacing-4) auto;
 	border-top: 1px solid var(--spacer-color);
 }
 
+/* removed the :last-child thing since it messed with some stuff, also in anticipation for reccomendations/call to action. if we think it's ugly, it'll take 5 seconds to add a "You're done reading, check out the rest of the blog!" button which just goes back to the blog. */
 
 .post-content pre {
 	overflow: auto;
@@ -195,6 +202,7 @@ div.markdown > p > a:hover {
 }
 
 /* Tags Selection */
+/* Does some stuff, like making some perty buttons */
 
 .categories-container-holder {
 	max-width: 720px;
@@ -386,6 +394,8 @@ p>em {
 	transition: 250ms ease-in-out;
 }
 
+
+/* link hovering feedback! */
 .markdown a:hover {
 	color: #2998ff;
 	transition: 250ms ease-in-out;

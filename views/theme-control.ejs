@@ -1,7 +1,10 @@
+<!-- yet-another-css-bug™ -->
 <button class="theme-button" onclick="toggleTheme()">☀️</button>
 
 <script>
 
+	//on initial load, uses user preference.
+	//on subsequent load, uses what user has selected with button
 	if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
 		if (window.localStorage.getItem('themeSwitch') != 'light') {
 			toggleTheme()
@@ -17,12 +20,17 @@
 
 		if (changingButton.innerHTML == "☀️") {
 			console.log("Changing to dark")
+			//we don't have to talk about this ok?
 			document.getElementById("cssHolder").innerHTML = ":root {/* Color variables */--text-color: white;--text-color-diff: #9C9C9C;--bg-color: #0E1525;--dark-grey200: rgb(228, 228, 228);--dark-grey300: rgb(228, 228, 228, 0.64);--light-grey600: #1C2333;--light-grey500: #1C2333;--code-snippet-highlight:var(--light-grey600);--code-snippet-text: #ce9a78;--hljs-markdown-background:#1c2333;--hljs-markdown-subst:var(--text-color);--hljs-markdown-comment:#608b4e;--hljs-markdown-deletion:#ce9a78;--hljs-markdown-selection:#ce9a78;--hljs-markdown-pseudo:#bc6060;--hljs-markdown-literal:#9cdcfe;--hljs-markdown-addition:#569cd6;--hljs-markdown-meta:#1f7199;--hljs-markdown-meta-string:#4d99bf;--spacer-color: #696969;}";
+			//ok but for real, this was the cleanest solution I could come up with to switch the theme to dark.
+
 			document.getElementById('logo-img').src = ".//images/logo-dark.png"
 			changingButton.innerHTML = "🌙";
 			localStorage.setItem('themeSwitch', 'dark');
 		} else {
+			//what happens when you switch back to light
 			console.log("Changing to light")
+			//just clears that <style> tag
 			document.getElementById("cssHolder").innerHTML = "";
 			document.getElementById('logo-img').src = ".//images/logo.png"
 			changingButton.innerHTML = "☀️";

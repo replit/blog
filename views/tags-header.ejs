@@ -1,10 +1,12 @@
 <section class="categories-container-holder"><div id="categories-container" class="categories-container"></div></section>
 <script>
+	//added some themes!
 	let listOfCategories = ["all", "eng", "product", "infra", "projects", "edu", "news", "events", "ventures", "other"];
 
 	let finalInner = "";
 
 	listOfCategories.forEach((categoryName) => {
+		//changed this to call a function 
 		finalInner += `<p class="category-holder"><button onclick="switchCategory('${categoryName}')" id="category-${categoryName}" class="categories-child category">${categoryName}</button></p>`
 	})
 
@@ -16,11 +18,11 @@
 	const switchCategory = ((category) => {
 		let listOfPosts = document.getElementById('page_container').children;
 
-		let listOfCategoriesToInvis = listOfCategories.filter(function(e) { return e !== category })
-
-		let finalInner = '';
+		let listOfCategoriesToInvis = listOfCategories.filter(function(e) { return e !== category }) //removed the category we don't want to hide
 
 		listOfCategoriesToInvis.splice(0, 1); //for the love of all that is good DONT MOVE THE ALL CATEGORY OUT OF THE FIRST POSITION. THIS WILL BREAK EVERYTHING
+
+		let finalInner = '';
 
 		let display = 'none';
 
@@ -28,20 +30,28 @@
 			display = 'block'
 		}
 
+		//hiding the categories we want to hide
 		for (let i = 0; i < listOfCategoriesToInvis.length; i++) {
 			finalInner += `.post-category-${listOfCategoriesToInvis[i]} {\n    display: ${display};\n}\n`
 		}
 
+		//changing the selected button at the top
 		document.getElementsByClassName("category-selected")[0].classList.remove("category-selected");
 
+		//weird bug where the all button would just stay selected lol
 		document.getElementById(`category-all`).classList.remove("category-selected");
 
+		//making the selected visible
+		//we do this last so if an item has a hiddent category and a visible category, it still shows up
 		finalInner += `.post-category-all {\n    display: block;\n}\n.post-category-${category} {\n    display: block;\n}`
 
+		//selecting this one
 		document.getElementById(`category-${category}`).classList.add("category-selected");
 
+		//adding css for the different posts
 		document.getElementById("cssHolderCategories").innerHTML = finalInner;
 
+		//if no posts are there, show the AWWWWWWWWWWWWW MANNNNNNNNNN thing at the bottom
 		if (document.getElementsByClassName(`post-category-${category}`).length == 0 && category != 'all') {
 			document.getElementById('noPostsNotifier').style["display"] = "block";
 		} else {
