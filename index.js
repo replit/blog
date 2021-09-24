@@ -109,9 +109,10 @@ const readPost = async (slug, snip = false) => {
 	})
 
 	//replace duplicates (edge case if more than one category is other)
+	//.every only does the first element in an array for some reason. replaced with a .map.
 	let uniqueCategories = [];
-	categoriesNew.every((c) => {
-		if (!uniqueCategories.includes(c)) {
+	categoriesNew.map((c) => {
+		if (uniqueCategories.indexOf(c) < 0) {
 			uniqueCategories.push(c);
 		}
 	});
