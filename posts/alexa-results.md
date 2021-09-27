@@ -12,7 +12,7 @@ The project that won first place was submitted by Vibhuv Sharma ([randomcodingbo
 
 The application was built on Replit using Node.js, the Alexa ask SDK, and OpenAI's GPT-3.
 
-Vibhub is a rising 8th grader who has been coding for a little over a year.
+Vibhuv is a rising 8th grader who has been coding for a little over a year.
 
 <img src="https://blog.repl.it/images/alexa-results/image_1.png" alt="image_1" width="70%" style="width:100%"/>
 
