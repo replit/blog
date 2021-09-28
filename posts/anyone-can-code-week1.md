@@ -1,7 +1,6 @@
 ---
 title: Anyone Can Code - A 2nd Grade Teacher’s Journey into the Coding World (Week 1)
 author: Brittany Pirkle
-date: 2020-10-26
 cover: https://blog.repl.it/images/anyone-can-code/week1.png
 ---
 

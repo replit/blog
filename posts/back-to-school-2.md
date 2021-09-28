@@ -15,10 +15,10 @@ If our slightly quieter [Office Hours](https://www.eventbrite.com/e/replit-teams
 This week, I'm talking about the [Replit Curriculum Hub](https://blog.replit.com/curriculum-hub) and other ways you can get inspiration and ideas for your projects and assignments.
 
 1. Our [Curriculum Hub](https://blog.replit.com/curriculum-hub) is where Teams for Education admins can access pre-built projects, lesson plans, instructions, and tests to import and utilize in their own teams. 
-![CURRICULUM HUB SCREENSHOT](/images/teams_edu/curriculum_hub.png)
+![CURRICULUM HUB SCREENSHOT](https://blog.replit.com/images/teams_edu/curriculum_hub.png)
 
 2. [Replit Apps](https://replit.com/apps) is a gallery to browse and discover new repls from the community. The best part? You and your students can look under the hood of projects you like and even fork them to remix your own versions!
-![APPS VIDEO](/images/apps/apps-scroll-demo.gif)
+![APPS VIDEO](https://blog.replit.com/images/apps/apps-scroll-demo.gif)
 
 3. The [Replit YouTube channel](https://www.youtube.com/c/replityt/) is a treasure-trove of tutorials on topics from [building a Kaboom game](https://youtu.be/hgReGsh5xVU) to [creating a custom Slackbot](https://youtu.be/offNSnE-F9k). 
 
@@ -33,7 +33,7 @@ Check out some of their tutorials using Replit:
   - [Javascript Discord bot](https://www.freecodecamp.org/news/create-a-discord-bot-with-javascript-nodejs/) 
   - [Game programming with Kaboom](https://www.freecodecamp.org/news/how-to-build-mario-zelda-and-space-invaders-with-kaboom-js/)
 7. Join in on our game jam, [Kajam](https://replit.com/site/kajam), this October 18-25. Not only will you make video games and friends (and maybe even a little money), you'll also get a head start on learning [Kaboom.js](https://kaboomjs.com/) so you can teach it with our upcoming curriculum!
-![KABOOM IMAGE](/images/kaboom2000/kajam.png)
+![KABOOM IMAGE](https://blog.replit.com/images/kaboom2000/kajam.png)
 
 Happy coding! 
 
