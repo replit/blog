@@ -3,7 +3,7 @@ title: "Data Loss: a sad tale with a happy ending"
 author: Luis Héctor Chávez
 date: 2021-09-10T22:00:00.000Z
 cover: https://images.unsplash.com/photo-1495427513693-3f40da04b3fd?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1351&q=80
-categories: eng
+categories: infra
 ---
 Earlier this year, we discovered that we were losing data for some of our users. This manifested as either repls being completely empty after reloading, or some of the changes to files not being present after reloading. Obviously losing data is the worst we can do, so we had to fix this immediately. This blog post narrates the adventure of how we discovered this, how we fixed it, and the lessons we learned during the way.
 

@@ -32,11 +32,13 @@
 
 	<title>Replit - <%= post.title %></title>
 
-	<link id="mainCSS" rel="stylesheet" type="text/css" href="/style.css?x=20">
+	<link rel="stylesheet" type="text/css" href="/style.css?x=20">
 
 	<link rel="stylesheet" type="text/css" href="/hljs.min.css">
 
+	<!-- list at index.ejs for why this is here. tldr: switching css themes can be a pain-->
 	<style id="cssHolder"></style>
+
   <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Sans:300,400,500,700&display=swap" rel="stylesheet">
   
   <script async="" src="https://www.google-analytics.com/analytics.js"></script>
@@ -63,16 +65,19 @@
 
 <section class ="page_container">
 <%- include('header'); %>
-<% if (betaEnabled == 1) { %>
-<a class="back" href="/?beta=1">← <span>Back to blog</span></a>
-<% } else { %>
-<a class="back" href="/">← <span>Back to blog</span></a>
-<% } %>
+<!-- hardlinks bad smh -->
+<a class="back" href="/?beta=<%= beta %>"><span>← </span>Back to blog</a>
 <a class="repl-link" href="/__repl?fileName=posts/<%= post.url %>.md">Edit on Replit</a>
 
-<% if (betaEnabled == 1) { %>
+<!-- dark theeme go brrr -->
+<% if (beta == 1) {%>
 <%- include('theme-control'); %>
+<% } %>
+
 <section class="categories-container-holder">
+
+<!-- all of this shows the categories bar at the top of a post -->
+<% if (beta == 1) {%>
 <div id="categories-container" class="categories-container"></div>
 </section>
 <script>
@@ -81,13 +86,16 @@
 	let finalInner = "";
 
 	categories.forEach((categoryName) => {
-		finalInner += `<p class="category-holder"><a href="/?beta=1&category=${categoryName}" id="category-${categoryName}" class="categories-child category">${categoryName}</a><p>`
+		finalInner += `<p class="category-holder"><a href="/?category=${categoryName}&beta=1" id="category-${categoryName}" class="categories-child category">${categoryName}</a><p>`
 	})
 
 	document.getElementById('categories-container').innerHTML = finalInner;
 </script>
 <% } %>
-<%- include('post.ejs', { post }); %>
+<!-- end of categories bar -->
+
+<!-- passing along if we're doing beta stuff -->
+<%- include('post', { post, beta }); %>
 </section>
 
 <%- include('footer'); %>
