@@ -11,7 +11,6 @@ Our awesome community has also been hard at work on some exiting projects this m
 We love hearing from you! Please leave any feedback you have [here](https://replit.canny.io/general-feedback).
 
 
-
 ## Features
 - We're up to 21% of all languages running via nix. https://arewenixyet.com.
 - We launched a bunch of new features for our educators and students. See our education update [here](https://blog.replit.com/teacher-update-8.21).

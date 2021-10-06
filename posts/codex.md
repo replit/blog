@@ -3,7 +3,7 @@ title: Replit + Codex - Beta Release
 author: Barron Webster
 date: 2021-09-28
 cover: https://blog.repl.it/images/codex/Codex_beta.png
-categories: updates,news
+categories: product,news
 ---
 
 ![codex example gif](https://blog.repl.it/images/codex/Codex_beta.png)
