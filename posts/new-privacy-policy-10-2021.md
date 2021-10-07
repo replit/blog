@@ -1,5 +1,5 @@
 ---
-title: Replit privacy & terms updates: commercial embeds + student privacy pledge!
+title: "Replit privacy & terms updates: commercial embeds + student privacy pledge!"
 author: Amjad Masad
 date: 2021-10-06
 cover: https://blog.repl.it/images/privacyterms20211006.png
