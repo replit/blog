@@ -3,6 +3,7 @@ title: A database for every repl
 author: Sidney Kochman
 date: 2020-09-14
 cover: https://blog.repl.it/images/database/still.jpg
+categories: product
 ---
 
 Repl.it is already the best place to build your apps. But there was a missing piece: where do you store your data?

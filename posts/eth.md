@@ -3,6 +3,7 @@ title: How to send $ETH in 19 lines of Python
 author: Soren Rood
 date: 2021-05-05
 cover: https://blog.replit.com/images/eth/replit-eth.png
+categories: projects
 ---
 
 With the emergence of blockchain technology, people can get paid from anywhere in the world. This type of transaction is revolutionary because we are able to send value from one person to another with no bank.

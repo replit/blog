@@ -3,6 +3,7 @@ title: "[RV0] How we used focus and prioritization to transform our student-run 
 author: Karan Dalal and Arnuv Tandon
 date: 2021-06-09
 cover: https://blog.repl.it/images/petcode/walking.jpg
+categories: ventures
 ---
 
 Running a successful startup is like driving a nail through a thick piece of wood. You can hammer as hard as you want, but without a sharp nail–extreme focus and a specific target–you’re not going anywhere.

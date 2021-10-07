@@ -3,6 +3,7 @@ title: Deeplinking
 author: Sergei Chestakov 
 date: 2020-05-22T00:00:00.000Z
 cover: https://blog.repl.it/images/replit-logo-and-name.jpg
+categories: product
 ---
 
 Oftentimes when we're sharing a repl with a friend we want to link them to exactly where we are in our project. Well now you can with deeplinking!

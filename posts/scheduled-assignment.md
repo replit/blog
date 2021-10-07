@@ -2,6 +2,7 @@
 title: Scheduled Assignments
 author: Amjad Masad
 date: 2016-09-28T07:00:00.000Z
+categories: edu
 ---
 
 Today, we're introducing scheduled assignments. Teachers using [Repl.it

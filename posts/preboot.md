@@ -2,6 +2,7 @@
 title: React Framework Preboot
 author: Amjad Masad
 date: 2018-06-13T07:00:00.000Z
+categories: product
 ---
 
 [Two days](react) ago we introduced our beta support for React frameworks, ranging from

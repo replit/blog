@@ -2,6 +2,7 @@
 title: "A Beginner's Guide to SQL"
 author: James Gallagher
 date: 2020-07-28T07:00:00.000Z
+categories: projects
 ---
 
 Data is absolutely everywhere. When you visited this web page, you generated data. When you took a note of your to-dos for the day in your reminders, you generated data.

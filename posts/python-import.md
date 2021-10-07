@@ -2,6 +2,7 @@
 title: from PyPi import *
 author: Amjad Masad
 date: 2016-10-25T07:00:00.000Z
+categories: product
 ---
 
 ## Import any Python Package

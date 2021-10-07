@@ -2,6 +2,7 @@
 title: A Python Framework With Built-in Database and Auth Support
 author: Spencer Pogorzelski
 date: 7/28/2021
+categories: product
 ---
 
 Replit enables coders to build apps quickly. With nothing but a browser, a developer can spin up a server, store data in Repl DB, and authenticate users using Repl Auth. However, until today, users had to string together all these components to build an app. This is why we're excited to announce `replit.web`, a Python framework focused on making apps quickly. Building an app with user auth and persistence has never been easier:

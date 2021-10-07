@@ -2,6 +2,7 @@
 title: Top 8 JavaScript Errors with Solutions 
 author: Kelly M.
 date: 2020-12-09
+categories: projects
 ---
 
 According to the JavaScript MDN web docs there are six types of JavaScript errors, seven if we count warnings. However, the most common JavaScript errors triggered while coding are reference, syntax, and type errors. This article dives into the top eight of these errors, with examples and descriptive solutions on how to fix them.

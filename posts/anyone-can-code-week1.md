@@ -2,6 +2,7 @@
 title: Anyone Can Code - A 2nd Grade Teacher’s Journey into the Coding World (Week 1)
 author: Brittany Pirkle
 cover: https://blog.repl.it/images/anyone-can-code/week1.png
+categories: projects
 ---
 
 What do you think of when you hear the word “code” or when someone says they are “coding”? No, I am not talking about speaking in code, morse code, or family code words. So, what is coding anyways? Coding is just giving computers and other machines instructions on actions to perform. Coding is how humans communicate with machines, and it allows for the creation of websites, computer programs, and apps. Today’s job market is full of tech careers that require this skill. But what about the novice like me without engineering experience or the skill set to create something out of essentially nothing but digits? Is it possible for me to create something out of nothing in just six weeks (and just a few hours each week)?

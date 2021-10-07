@@ -3,6 +3,7 @@ title: Replit Teacher Updates - August 2021
 author: Lena Vu Sawyer
 date: 2021-08-28
 cover:  https://replit.com/@util/replit-blog#static/images/teams_edu/replit_school.png
+categories: edu
 ---
 Hi Teachers,
 

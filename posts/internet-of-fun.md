@@ -3,6 +3,7 @@ title: The Internet of Fun
 author: Amjad Masad
 cover: https://blog.repl.it/images/chat/chatroom.png
 date: 2-2-2021
+categories: eng
 ---
 
 Yesterday, I accidentally built a chat app. Surprisingly, it wasn't the first time it happened.

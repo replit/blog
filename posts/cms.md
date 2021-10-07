@@ -3,6 +3,7 @@ title: "Using Repl.it as a CMS"
 author: Tyler Angert
 cover: https://blog.repl.it/images/cms/cms-preview.png
 date: 2020-03-23T00:00:00.000Z
+categories: projects
 ---
 
 At Repl.it, we try to dogfood (use our own product) as much as we can. Parts of Repl.it are already developed on / hosted entirely on itself-- our blog, our docs, and even our new UI library is being developed almost entirely on Repl.it. But one interesting use case we’re exploring now is using Repl.it as a CMS for all of our new marketing pages.

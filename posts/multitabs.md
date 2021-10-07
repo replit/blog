@@ -3,6 +3,7 @@ title: Multitabs
 author: Sergei Chestakov 
 date: 2020-07-02T00:00:00.000Z
 cover: https://blog.repl.it/images/replit-logo-and-name.jpg
+categories: product
 ---
 
 Repl.it is a great place for prototyping ideas and starting new projects. However as your projects get bigger, the editing experience starts feeling a little limited. That's why we're exciting to announce that we're adding support for tabs!

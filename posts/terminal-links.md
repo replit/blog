@@ -3,10 +3,8 @@ title: Terminal Links
 author: Arnav Bansal
 date: 2020-04-30T21:54:00.000Z
 cover: https://blog.repl.it/images/terminal-links/clicklinks.png
+categories: product
 ---
-
-
-
 Terminals make it hard to copy things: Selecting text works differently to what people are used to, and `^C` aborts the current program. Links are hard to use.
 
 Now you can click on links in the repl.it terminal.

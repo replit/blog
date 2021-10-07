@@ -2,6 +2,7 @@
 title: Image Previews with Live Reloading
 author: Tim Chen
 date: 2018-06-15T00:00:00.000Z
+categories: product
 ---
 
 We recently added some changes to how [eval mode/project mode](/site/docs/files) operates.  These changes allow you to interact with generated files through the console.

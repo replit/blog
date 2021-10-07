@@ -2,6 +2,7 @@
 title: A Swift REPL
 author: Amjad Masad
 date: 2016-06-14T07:00:00.000Z
+categories: product
 ---
 
 In this age of containers it's much easier to run arbitrary code

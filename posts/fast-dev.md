@@ -3,6 +3,7 @@ title: Replit Case Study - Creating a 700+ User Web App in a Month
 author: Rishabh Anand
 date: 2021-03-23T00:00:00.000Z
 cover: https://blog.replit.com/images/fast-dev.png
+categories: projects
 --- 
 
 Hey there 👋🏻

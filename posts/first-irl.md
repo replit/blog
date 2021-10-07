@@ -2,6 +2,7 @@
 title: Repl.it IRL
 author: Yev Barkalov
 date: 2018-06-13T03:19:49.000Z
+categories: events
 ---
 
 On Monday, June 11th, we had our first Repl.it Meetup and it was super awesome!

@@ -3,6 +3,7 @@ title: Replit Dotcom
 author: Amjad Masad
 date: 3-10-2021
 cover: https://blog.repl.it/images/dotcom.png
+categories: product
 ---
 
 _tl;dr_ __In the next few days, we'll be moving domains from "repl.it" to "replit.com." Nothing is required on your end -- all urls will automatically redirect and you'll remain logged-in (as if by magic)__. Nothing else changes. We prefer if people referred to us as "Replit" (pronounced rep-lit 🔥). To understand the origins of our name and how we got here, it's useful to tell you the Replit genesis story:

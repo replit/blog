@@ -2,6 +2,7 @@
 title: I Built This - Feb 2018 Competition Summary
 author: Tim Chen
 date: 2018-03-08T00:00:00.000Z
+categories: news
 ---
 
 As we released [I Built This](https://repl.it/ibuiltthis/), our community where users can post about their repl creations, we were exposed to many amazing projects created by our users.  To kick it off, we hosted a competition where users post their work and garner upvotes for prizes.  The projects shared in the competition spanned a wide range of skill levels, from beginner to advanced, from simple to complex.

@@ -2,6 +2,7 @@
 title: Making Replit Faster for Everyone
 author: Matt Iselin
 date: 2021-09-01T23:00:00.000Z
+categories: infra
 ---
 
 Replit's mission is to make programming accessible and provide computer superpowers. To achieve that goal, repls need to be _fast_. To that end we've been working on a number of improvements in our infrastructure and code to unlock faster repls.

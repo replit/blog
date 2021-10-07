@@ -88,7 +88,7 @@ const readPost = async (slug, snip = false) => {
 	}
 
 	//moar categories
-	let validCategories = ["all", "eng", "product", "infra", "projects", "edu", "news", "events", "ventures", "other"];
+	let validCategories = ["all", "eng", "product", "infra", "projects", "design", "edu", "news", "events", "ventures", "other"];
 
 	//if a category doesn't exist, make it 'other'
 	let categoriesNew = ( data.categories || 'other' ).split(',').map(c => {

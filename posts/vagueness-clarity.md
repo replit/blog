@@ -2,6 +2,7 @@
 title: Vagueness to Clarity
 author: Haya Odeh
 date: 2016-07-28T07:00:00.000Z
+categories: design
 ---
 
 ![clarity](/public/images/complex_clarity.jpg)

@@ -2,6 +2,7 @@
 title: Every Project Should Have Its Own REPL
 author: Amjad Masad
 date: 2016-07-21T07:00:00.000Z
+categories: product
 ---
 
 It's no secret we're big fans of REPLs. We believe that immediate access to the

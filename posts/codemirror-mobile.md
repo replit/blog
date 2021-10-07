@@ -3,7 +3,7 @@ title: A New Code Editor for Mobile - CodeMirror 6
 author: Faris Masad
 date: 2021-09-21
 cover: https://blog.repl.it/images/mobile/codemirror.png
-categories: updates
+categories: eng,product
 ---
 
 

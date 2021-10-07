@@ -3,6 +3,7 @@ title: Fall 2020 Education Update
 author: Patrick Coleman
 date: 2020-09-05
 cover: https://blog.repl.it/images/teams_edu/mention.png
+categories: edu
 ---
 
 Hey teachers! Back to school is here and we've got an update on our education products and pricing.

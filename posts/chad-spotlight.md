@@ -2,6 +2,7 @@
 title: "Dev Spotlight with Chad Fowler: Build something useless, become a better developer."
 author: Katya Delaney & Katherine Huang
 date: 2019-07-01T18:48:33.000Z
+categories: news
 ---
 
 Last week, Kat and I were lucky enough to sit down with [Chad Fowler](http://chadfowler.com), programmer, author of The Passionate Programmer, start-up investor, founder of both [The International Ruby Conference](http://rubyconf.org/) and [RailsConf](http://railsconf.com/), and [musician](https://vimeo.com/310799714). 

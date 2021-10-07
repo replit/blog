@@ -2,6 +2,7 @@
 title: Changelog (of imports and turtles)
 author: Amjad Masad
 date: 2017-05-30T07:00:00.000Z
+categories: news
 ---
 
 Some changes and fixes we make don't deserve their own blogpost. So we thought a

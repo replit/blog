@@ -2,6 +2,7 @@
 title: Free Hacker Plans for Eligible Students
 author: Bryan Byrne
 date: 2019-09-24T17:37:43.197Z
+categories: edu
 ---
 
 We believe everyone should have instant access to a complete coding environment in their browser. That’s why Repl.it has joined the <a href="https://education.github.com/pack">GitHub Student Developer Pack</a>, giving eligible students free access to private repls, unlimited multiplayer sessions, and additional processing power. Students can now focus on learning and collaborating with their classmates in new ways, without the hassle of setting up a new environment each time.

@@ -2,6 +2,7 @@
 title: "Guest Blog Post: Neural Networks and Primes"
 author: Ollie Parish
 date: 2018-05-03T00:00:00.000Z
+categories: eng
 ---
 
 Ollie Parish, also known as [@op](https://repl.it/@op) on Repl.it, is an avid Repler and constantly pushes our systems to its limits (in the best way).  In this guest blog post, he describes his journey in using neural networks to generate large primes.  You can also check out the repl described in his research: [https://repl.it/@op/DNN-3-1](https://repl.it/@op/DNN-3-1)

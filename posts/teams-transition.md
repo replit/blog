@@ -3,6 +3,7 @@ title: Classroom is Transitioning to Teams for Education
 author: Patrick Coleman
 date: 2020-09-29T07:00:00.000Z
 cover: https://blog.repl.it/images/teams_edu/replitroom.png
+categories: edu
 ---
 
 *Edit on Thursday, November 12:*

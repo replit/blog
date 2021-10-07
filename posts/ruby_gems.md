@@ -2,6 +2,7 @@
 title: Require Ruby Gems
 author: Amjad Masad
 date: 2018-03-08T08:00:00.000Z
+categories: product
 ---
 
 On the heels of our Node.js npm support [announcement](node_modules), we're pleased to announce that we now

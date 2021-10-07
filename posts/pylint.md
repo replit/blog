@@ -2,6 +2,7 @@
 title: Introducing Pylint Support
 author: Amjad Masad
 date: 2016-11-12T08:00:00.000Z
+categories: product
 ---
 
 Today, we're excited to introduce

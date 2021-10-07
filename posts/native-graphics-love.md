@@ -2,6 +2,7 @@
 title: Native Graphics Love ❤️
 author: Luis Héctor Chávez
 date: 2021-01-15T23:30:00.000Z
+categories: product
 ---
 
 We have reimagined the native graphics experience on Replit. Our community of educators and hackers have given us [immense feedback on graphics performance and reliability](https://blog.repl.it/fix-gfx).

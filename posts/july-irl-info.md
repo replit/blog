@@ -2,6 +2,7 @@
 title: July IRL Info
 author: Yev Barkalov
 date: 2018-06-27T01:09:16.000Z
+categories: events
 ---
 
 For the month of July, our Repl.it IRL will be taking place on July 11th from 4 to 7 PM at the [Bradfield School of Computer Science](https://goo.gl/maps/CQpvexqXKbn)!

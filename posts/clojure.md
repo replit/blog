@@ -2,6 +2,7 @@
 title: Introducing Clojure
 author: Amjad Masad
 date: 2017-03-03T00:00:00.000Z
+categories: product
 ---
 
 Earlier this week we introduced [Haskell support](haskell). And now, as promised,

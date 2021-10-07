@@ -2,6 +2,7 @@
 title: reCAPTCHA and the anonymous experience 
 author: Amjad Masad
 date: 2020-11-4
+categories: product
 ---
 
 When we started Repl.it, we set out to remove all friction from getting started with programming. That also meant getting out of the way and letting you code as quickly as possible. As part of that, and for a long time, you could start coding on Repl.it without a user account. 

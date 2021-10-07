@@ -2,6 +2,7 @@
 title: Firebase
 author: Yev Barkalov
 date: 2018-07-26T00:55:39.000Z
+categories: projects
 ---
 
 Today we're going to learn how to use Firebase as a database for a simple website using JavaScript!

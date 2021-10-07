@@ -2,6 +2,7 @@
 title: Assignment Reordering
 author: Haya Odeh
 date: 2017-01-19T08:00:00.000Z
+categories: edu
 ---
 
 At Repl.it our mission is to make programming more accessible, and the best way

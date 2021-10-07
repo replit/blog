@@ -3,6 +3,7 @@ title: New course - How to teach yourself coding with Quizlet Founder Andrew Sut
 author: Patrick Coleman
 date: 2020-07-29T07:00:00.000Z
 cover: https://repl.art/boothbot.png
+categories: edu
 ---
 
 Like many of you, we’ve been stuck at home, trying out new hobbies, attempting to learn new things, and anxiously waiting until life “gets back to normal.” Well, regardless of how you’ve been spending your time during COVID, if you (or a friend or family member) have been wanting to learn how to code, we want to help!

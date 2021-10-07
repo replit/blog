@@ -2,6 +2,7 @@
 title: "Prepare for a Python Interview with These 7 Questions"
 author: James Gallagher
 date: 2020-08-25T07:00:00.000Z
+categories: projects
 ---
 
 How you respond to questions in a technical interview has a massive impact on whether you’re offered a job with an organization. If you can answer technical questions well and explain your reasoning, your chances of being offered a job is greatly improved.

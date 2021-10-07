@@ -2,6 +2,7 @@
 title: Collaborate with Other Teachers in your Classrooms
 author: Alek Hurst
 date: 2017-02-15T08:00:00.000Z
+categories: edu
 ---
 
 Hey teachers, we've noticed that you have been teaching up a storm in your Replit classrooms, and with this feature we want to turn those storms into educational hurricanes! To do so, we implemented teacher collaboration, which allows you to add an additional teacher to your Replit classrooms. This additional teacher can do *almost* everything you can do, excluding a couple of small destructive things...

@@ -2,6 +2,7 @@
 title: "Rejected Then Recruited: Our Journey into Y Combinator"
 author: Amjad Masad
 date: 2018-09-25T07:00:00.000Z
+categories: news
 ---
 
 "The intoxicating delight of sudden understanding"<sup><a href="#fn1" id="ref1">1</a></sup> best describes what I felt the first time I derived the [Y Combinator](https://en.wikipedia.org/wiki/Fixed-point_combinator#Derivation_of_the_Y_combinator) (guided by the Little Schemer book). Learning Lisp (by way of Scheme) is how I first came about Paul Graham's [essays](http://paulgraham.com/articles.html). Which was, of course, a gateway drug to startups.

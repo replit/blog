@@ -3,6 +3,7 @@ title: Replit Case Study - Catalyst Coding Club
 author: Aaryan Jain
 date: 2021-03-11T08:15:20.856Z
 cover: https://blog.repl.it/images/case_studies/catalystreplit.png
+categories: news
 ---
 
 Realizing the lack of exposure to STEM skills for younger students, a group of high school students started [Catalyst](https://forcatalyst.weebly.com/), a club to introduce students all ages to CS and making sure it is accessible for everyone. Located in Redmond WA, Catalyst strives to produce an environment in which students can thrive and become passionate about the technological world. It is our goal to help ensure students in our community get the exposure they need to computer science and make an informed decision about their future careers.

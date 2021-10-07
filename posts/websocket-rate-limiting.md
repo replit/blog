@@ -2,6 +2,7 @@
 title: Distributed Websocket Rate Limiting
 author: Amjad Masad
 date: 2016-06-26T07:00:00.000Z
+categories: projects
 ---
 
 [Rate limiting](https://en.wikipedia.org/wiki/Rate_limiting) is standard

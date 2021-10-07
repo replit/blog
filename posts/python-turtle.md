@@ -2,6 +2,7 @@
 title: Introducing Turtle Graphics For Python
 author: Amjad Masad
 date: 2016-10-04T07:00:00.000Z
+categories: product
 ---
 
 Ever since the [LOGO programming

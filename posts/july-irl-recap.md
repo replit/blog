@@ -2,6 +2,7 @@
 title: July Repl.it IRL Recap
 author: Yev Barkalov
 date: 2018-07-16T21:51:26.000Z
+categories: events
 ---
 
 On July 11th, we had our second Repl.it IRL and it was an amazing event!

@@ -3,6 +3,7 @@ title: Bringing Repl.it's Marketing to the Modern Age
 author: Tyler Angert
 date: 2020-04-17T07:00:00.000Z
 cover: https://blog.repl.it/images/new_marketing/replit-landing-cover.jpg
+categories: design
 ---
 
 If you've been on the Repl.it landing page recently, you may have noticed a bit of a change!

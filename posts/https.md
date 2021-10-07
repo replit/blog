@@ -3,6 +3,7 @@ title: HTTPS by default
 author: Newman Hu and Sidney Kochman
 date: 2-26-2021
 cover: https://blog.repl.it/images/alwayson.jpg
+categories: product
 ---
 
 The easiest, fastest way to put a server on the internet should also come with secure defaults. That's why we're excited to announce that Replit is now HTTPS-first, which brings additional privacy, integrity, and security benefits to servers hosted on our platform. This applies to every [HTTP server repl](https://docs.repl.it/repls/http-servers) on Replit.

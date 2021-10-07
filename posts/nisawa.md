@@ -3,6 +3,7 @@ title: "[RVO] How Nisawa is Enabling Reliable Delivery in African Cities"
 author: Francois Birori & Anselme Mucunguzi
 date: 2021-06-10
 cover: https://blog.repl.it/images/nisawa/image-3.jpg
+categories: ventures
 ---
 
 Can you imagine how you’d get a package or meal delivered to you if your house did not have a physical address? Now imagine how that would work if your local food delivery, postal, or parcel services were also ineffective, lacked the technology, or didn't exist at all. 

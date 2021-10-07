@@ -3,6 +3,7 @@ title: How Far We've Come
 author: Dan Stowell
 date: 2020-12-01
 cover: https://blog.repl.it/images/how-far/ot-reconnect-prompt-rate.png
+categories: news
 ---
 
 In early September we set out [to simplify and stabilize Replit](https://blog.repl.it/quality). "There's no better time to cut back than when you're growing," said Amjad. We've been working on this project in earnest for 10 weeks now. When you're in the thick of improving things all you can see is what remains undone, so it's good to look at how far you've come!

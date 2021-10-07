@@ -3,6 +3,7 @@ title: "Improving Repl.it's Mobile UX"
 author: Moudy Elkammash
 cover: https://blog.repl.it/images/mobile/preview.png
 date: 2020-04-28T07:00:00.000Z
+categories: product
 ---
 
 I like the process of writing because of how simple and portable the tools are. Regardless of time or place, a way to write things down is never far away. There's very little friction between inspiration and experimentation. I wish writing code was more like this.

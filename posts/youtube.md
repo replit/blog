@@ -2,6 +2,7 @@
 title: YouTube tutorials using Repl.it
 author: Amjad Masad
 date: 2017-03-20T07:00:00.000Z
+categories: news
 ---
 
 **EDIT - This article is now outdated**

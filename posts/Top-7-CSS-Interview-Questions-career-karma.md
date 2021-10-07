@@ -2,6 +2,7 @@
 title: Top 7 CSS Interview Questions
 author: Christina Kopecky 
 date: 2020-10-09
+categories: projects
 ---
 In web developer job interviews, you may come across some Cascading Style Sheets (CSS) questions when a hiring team assesses your knowledge of the differences between the main languages used in [web development](https://careerkarma.com/blog/best-web-developer-bootcamps/). The cool thing is CSS and HTML are used by all web developers ranging from [Wordpress developers](careerkarma.com/careers/wordpress-developer/) to [Python developers](https://careerkarma.com/blog/how-to-learn-python/).
 

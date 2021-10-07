@@ -3,6 +3,7 @@ title: "CLUI: Building a Graphical Command Line"
 author: Tyler Angert and Moudy Elkammash
 date: 2020-03-05T00:00:00.000Z
 cover: https://blog.repl.it/images/clui/clui-cover.png
+categories: product
 ---
 
 > “Command line interfaces. Once that was all we had. Then they disappeared, replaced by what we thought was a great advance: GUIs. GUIs were - and still are - valuable, but they fail to scale to the demands of today's systems. So now command line interfaces are back again, hiding under the name of search. Now you see them, now you don't. Now you see them again. And they will get better and better with time: mark my words, that is my prediction for the future of interfaces.” [1]

@@ -2,6 +2,7 @@
 title: Programming Language Jam Results
 author: Amjad Masad
 date: 2020-10-11
+categories: events
 ---
 
 We're thrilled to announce the [PL Jam](https://repl.it/jam) results. Here are the criteria our judges used:

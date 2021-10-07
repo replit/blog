@@ -3,6 +3,7 @@ title: Group Projects on Teams for Education
 author: David Cako
 date: 2020-10-21T08:00:00.000Z
 cover: https://blog.repl.it/images/group-projects-teams-education/project-publish.png
+categories: edu
 --- 
 
 Today we are excited to introduce **Group Projects on Teams for Education**.  *Group Projects* enables students to collaborate as groups on teacher-created lessons in 50+ programing languages via our familiar and powerful online IDE.

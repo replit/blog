@@ -3,6 +3,7 @@ title: Replit Empowers Synctera to Find Hidden Talent
 author: Obaida Albaroudi & Patrick Coleman
 date: 2021-05-03
 cover: https://synctera.com/img/home-security-img.c8e2fae8.jpg
+categories: news
 ---
 Talent is one of the most important factors in the success of a new business, and [Synctera](https://www.synctera.com/) has been using Replit to run a technical interview process that effectively uncovers the best engineers, whether they have a stellar resume or a nontraditional background.
 

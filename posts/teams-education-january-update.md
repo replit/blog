@@ -3,6 +3,7 @@ title: Classroom & Teams for Education, January 2021 Update
 author: Patrick Coleman
 cover: https://blog.repl.it/images/teams_edu/replitroom.png
 date: 2021-01-14
+categories: edu
 ---
 
 Hello teachers, we hope your new year is off to a good start and your students have come back from the holidays engaged and excited to learn programming! If you've been teaching with Replit for awhile, you know how committed we are to helping teachers create aha moments and inspire their students. To that end we've been working hard to make Teams for Education the best CS education tool out there and want to share some updates.

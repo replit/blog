@@ -3,6 +3,7 @@ title: Boosts
 author: Sergei Chestakov
 date: 2021-04-12
 cover: https://blog.repl.it/images/boosts/cover.jpg
+categories: projects
 ---
 
 Our [Hacker plan](https://replit.com/site/pricing) has always been a great choice if you need more powerful repls. In addition to benefits like private repls, more storage, and [always on](https://blog.replit.com/alwayson), the Hacker plan gives all of your repls 4x the CPU and RAM compared to those in our free plan.

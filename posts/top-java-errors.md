@@ -3,6 +3,7 @@ title: Top 8 Common Java Errors for Beginners - and How to Solve Them
 author: Matthew Wallace
 date: 2021-06-08
 cover: https://blog.replit.com/images/books.jpg
+categories: projects
 ---
 
 Did you know that in Java's standard library, there are a total of more than 500 different exceptions! There lots of ways for programmers to make mistakes - each of them unique and complex. Luckily we've taken the time to unwrap the meaning behind many of these errors, so you can spend less time debugging and more time coding. To begin with, let's have a look at the syntax errors!

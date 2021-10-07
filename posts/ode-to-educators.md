@@ -3,6 +3,7 @@ title: Ode to Educators
 author: Derrick McMillen
 date: 2021-01-28
 cover: https://blog.repl.it/images/teams_edu/replitroom.png
+categories: edu
 ---
 
 "Why am I here? I don't even like computer science", Raul lingered by the door, his body language showing his discomfort. "This is a mistake. I'm not supposed to be here". Now fully within the classroom, Raul alternated between pacing in circles and eyeing the last few good seats left in our quickly filling classroom. Several minutes passed, and my students used the last remaining minutes of their passing period to trade stories from their summer and muse about the overwhelming sensation of the coming year. They were 11th graders now, after all; this was "the most important year to appeal to colleges." 

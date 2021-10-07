@@ -3,6 +3,7 @@ title: Audio - Play sound in any language on the web
 author: Wade Bourne
 date: 2020-7-31T08:15:20.856Z
 cover: https://repl.art/music-01.png
+categories: product
 ---
 
 Audio brings games and projects to life! Web developers have it easy, they can publish their apps on the web and play audio using the browser API no problem. However, what about those of us that are command-line and graphics apps in other languages? Repl.it is a special place on the web where you can publish any app in any language, but so far it’s been missing audio capabilities because code executes in a container on the backend. This summer, for my internship I set out to solve this problem and make it possible to play audio in any repl in any language. In this post I’ll show you how to play audio in your repl and then I will chronicle the journey that got us here. 

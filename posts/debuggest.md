@@ -2,6 +2,7 @@
 title: Debug, Debugger, Debuggest!—A new Collaborative Comprehension Experience
 author: Luis Héctor Chávez
 date: 2021-04-23T19:00:00.000Z
+categories: product
 ---
 Earlier this year, we decided to close the #1 most requested entry in our [Canny](https://replit.canny.io/) board, which requested to improve our previous [debugger](https://blog.replit.com/python-debugger) so that it could also work with multiple files in a project. This was done because it became very clear that there is a need to have better tools to aid with [program comprehension](https://en.wikipedia.org/wiki/Program_comprehension) built directly into Replit. _But_ we also realized that we could go even further. Even though most of our users could be happy with a traditional debugger experience, our mission is to give people [computer superpowers](https://blog.replit.com/seriesa)! So today we are announcing that we are working on a new, reimagined, collaborative debugging experience (or maybe we should call it a "program comprehension experience?").
 

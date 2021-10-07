@@ -3,6 +3,7 @@ title: A whiteboard for every repl
 author: Jeremy Press
 date: 4-23-2021
 cover: https://blog.replit.com/images/draw/botross.jpeg
+categories: product
 ---
 
 Replit is a place where beginners, educators, and professionals alike can code and share their ideas collaboratively. Something that goes hand and hand with your source code is how you communicate it. We built [threads](https://blog.replit.com/threads), which allow you to leave contextual messages around code, and added better [markdown support](https://blog.replit.com/markdown-preview) for READMEs and other guides. However, we were missing a visual way for people to explain and collaborate around code. Today we're excited to announce support for draw files, powered by [excalidraw](https://excalidraw.com/).

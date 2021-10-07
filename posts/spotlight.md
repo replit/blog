@@ -3,6 +3,7 @@ title: Introducing Spotlight pages
 author: Tyler Angert and Moudy Elkammash
 cover: "https://blog.repl.it/images/spotlight/cover.png"
 date: 2021-02-03T19:06:40.000Z
+categories: product
 ---
 
 Replit has never been *just* about code.

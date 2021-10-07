@@ -2,6 +2,7 @@
 title: "Top 8 Python TypeErrors (and How to Solve Them)"
 author: James Gallagher
 date: 2020-09-02T07:00:00.000Z
+categories: projects
 ---
 
 Encountering errors is a natural part of working in [computer science](https://computersciencehero.com/). Whether you are a seasoned coding expert or a newbie, seeing some red text in a console accompanied by an error message is an experience that you will have often.

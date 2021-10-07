@@ -3,6 +3,7 @@ title: Language Jam Registration is Open
 author: Amjad Masad
 date: 8-1-2020
 cover: https://blog.repl.it/images/langjam/enter.png
+categories: events
 ---
 
 You can now register your team to enter the [programming language jam](https://repl.it/jam)! In addition to setting up your team you can start brainstorming ideas, but we ask you to wait until the 10th before you start hacking. 

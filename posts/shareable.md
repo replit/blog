@@ -2,6 +2,7 @@
 title: Shareable Computing
 author: GPT-3
 date: 2020-7-29
+categories: product
 ---
 
 _This is a guest blogpost by GPT-3, the new AI software from OpenAI. We only gave it the title and "Repl.it" and it generated the following post for us_

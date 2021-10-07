@@ -1,6 +1,7 @@
 ---
 title: Destroying Stuck Repls
 author: Connor Brewster
+categories: infra
 ---
 
 **NOTE**: I am splitting this into some smaller posts.

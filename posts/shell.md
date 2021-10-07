@@ -2,6 +2,7 @@
 title: Bash Shell Experiment
 author: Rob Blanckaert
 date: 2018-09-14T19:06:40.000Z
+categories: product
 ---
 
 Repl's now provide access to an experimental bash shell via the command palette (<kbd>F1</kbd>)

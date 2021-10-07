@@ -3,6 +3,7 @@ title: A final farewell to Classroom and a hello to the future with Replit Teams
 author: Patrick Coleman, Tala Awwad
 date: 2021-02-01
 cover: https://blog.repl.it/images/teams_edu/replitroom.png
+categories: edu
 ---
 Hello teachers, and welcome back to another week of updates to [Teams for Education](https://repl.it/teams-for-education). We're continuing to invest heavily in the product, with over half of our engineers working on Teams right now, and are committed to education and to helping give computer science teachers super powers!
 

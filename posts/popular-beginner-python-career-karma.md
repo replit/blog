@@ -2,6 +2,7 @@
 title: "Popular Beginner Python Concepts"
 author: James Gallagher
 date: 2020-06-15T07:00:00.000Z
+categories: projects
 ---
 
 Python is a programming language that’s widely favored by beginners. It’s no wonder, really. Python has a simple syntax which many people say resembles English, so it’s easy to read and write. In addition, Python is used for a wide array of purposes, from data science to web development.

@@ -3,6 +3,7 @@ title: "[RV0] How we gameified exploratory CS with Tech Roulette"
 author: Mingjie Jiang, Megan Cui, Brian Xiang
 date: 2021-06-04
 cover: https://blog.repl.it/images/executebig/techroulette.png
+categories: ventures
 ---
 
 We're [Execute Big](https://executebig.org/?utm_source=Replit_blog), a CS education non-profit org, and as three-person strong team, our mission is to give every student the chance to explore and experience CS education. We've been bringing unique programs to students across the country, and the move to virtual programs sparked a little creativity in us — after all, virtualization has made education more accessible than ever.

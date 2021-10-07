@@ -2,6 +2,7 @@
 title: Introducing Kotlin REPL
 author: Amjad Masad
 date: 2017-05-18T00:00:00.000Z
+categories: product
 ---
 
 On the heels of Google

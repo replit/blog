@@ -2,6 +2,7 @@
 title: "Community Video Competition"
 author: Patrick Coleman
 date: 2020-06-23T07:00:00.000Z
+categories: events
 ---
 
 Over the past week, we ran a video competition for Replers. We got some great submissions from the community, and now it's time to announce the winners!

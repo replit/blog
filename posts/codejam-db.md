@@ -2,6 +2,7 @@
 title: Databases Built by Students
 author: Nathan Zilora
 date: 2018-09-24T11:11:40.000Z
+categories: events
 ---
 
 In case you weren't aware, the [repl.it discord server](https://discord.gg/XadDsju) recently had a code jam, with the objective being to **make a database**. Over 14 people finished and submitted a design for the jam. However this jam was a bit different compared to our first and second jams. First of all, we have groups of 2, instead of individual people. This could be viewed and a boon or a bane, but we'll go over that in more detail later. The second set differences were the bonus points. In the past, we've always graded on code quality, efficiency, and creativity.

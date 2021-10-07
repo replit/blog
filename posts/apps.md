@@ -3,6 +3,7 @@ title: "Replit Apps"
 author: Tyler Angert
 cover: https://static.replit.sh/images/apps/banner.png
 date: 2021-05-12T08:15:20.856Z
+categories: news
 ---
 
 ![Apps](https://static.replit.sh/images/apps/banner.png)

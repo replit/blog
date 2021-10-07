@@ -2,6 +2,7 @@
 title: SQLite, replified
 author: Sidney Kochman
 date: 2019-08-02T17:00:00.000Z
+categories: product
 ---
 
 SQLite is now a supported language [on Repl.it](https://repl.it/languages/sqlite)! Our SQLite support brings the entire SQLite command-line interface right into your workspace. Now you have a simple way to experiment, prototype, or refine your data model with SQL.

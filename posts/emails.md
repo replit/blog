@@ -3,6 +3,7 @@ title: The wild west of the internet
 author: Nathan Zilora
 date: 2021-07-29
 cover: https://blog.repl.it/images/emails/we_missed_you.png
+categories: projects
 ---
 
 Emails are the wild west of the internet. A lawless land filled with incompatibility and unexpected behaviors. At the same time, it’s still one of the best ways we can reach our customers and inform them about new features and events that they might be interested in. I’m going to talk about a recent experience I had with the emails, specifically Gmail iOS dark mode. My hope is that you can learn from this experience and it’ll save you the time and turmoil it cost me.

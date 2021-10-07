@@ -2,6 +2,7 @@
 title: "Repl.it: the IDE That Grows—from Playgrounds to Fullstack Apps"
 author: Amjad Masad
 date: 2018-03-13T07:00:00.000Z
+categories: product
 ---
 
 At Repl.it we come to work every day to explore a single idea—what if

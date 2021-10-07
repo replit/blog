@@ -2,6 +2,7 @@
 title: Teaching refugees how to code
 author: Haya Odeh
 date: 2018-01-26T08:00:00.000Z
+categories: news
 ---
 
 At Repl.it our mission is to make programming more accessible. We can’t do this

@@ -2,6 +2,7 @@
 title: Hello World
 author: Amjad Masad
 date: 2016-06-14T07:00:00.000Z
+categories: news
 ---
 
 We're excited to launch this new part of our site.[](preview end) First, we have a place to

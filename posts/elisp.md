@@ -2,6 +2,7 @@
 title: "Adding a language to Repl.it: Emacs Lisp"
 author: Radon Rosborough
 date: 2019-06-24T21:26:53.000Z
+categories: product
 ---
 
 At Repl.it, we want to provide a top-tier online programming

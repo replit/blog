@@ -2,6 +2,7 @@
 title: Previewing Markdown in Repls
 author: Tim Chen
 date: 2019-08-02T00:42:33.000Z
+categories: product
 ---
 
 When our community members want to provide instructions within a repl,

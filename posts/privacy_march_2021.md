@@ -2,6 +2,7 @@
 title: March 2021 Privacy Update - better protection for you and your data
 author: Patrick Coleman
 date: 2021-03-03
+categories: news
 ---
 
 At Replit our mission is to make programming more accessible to everyone, everywhere, and as we've been [going global](https://blog.repl.it/global), we know that we have to comply with various privacy laws and regulations around the world, so that you can focus on coding, not privacy compliance.

@@ -2,6 +2,7 @@
 title: Python Package Search
 author: Amjad Masad
 date: 2016-12-02T08:00:00.000Z
+categories: product
 ---
 
 We recently made it possible to [import](python-import) any package from

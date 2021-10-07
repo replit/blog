@@ -3,6 +3,7 @@ title: Alexa Summer Hackathon Results
 author: Søren Rood
 date: 2021-09-24
 cover: https://blog.repl.it/images/alexa-results/art.png
+categories: events
 ---
 
 During our [summer hackathon](https://blog.replit.com/Alexa-hackathon), we challenged our community to build [Amazon Alexa skills](https://www.amazon.com/fun-with-alexa/b?ie=UTF8&node=21444046011&tag=googhydr-20&hvadid=486988710148&hvpos=&hvexid=&hvnetw=g&hvrand=11685019327898580896&hvpone=&hvptwo=&hvqmt=e&hvdev=c&hvdvcmdl=&hvlocint=&hvlocphy=9033320&hvtargid=kwd-326574423794&ref=pd_sl_6tiwwfd9l2_e). As usual, we were blown away at the results. This blogpost will announce the winners and showcase some of our favorite submissions.

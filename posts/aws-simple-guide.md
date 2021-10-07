@@ -2,6 +2,7 @@
 title: "Learning Devops & AWS on the Job: Building and Scaling a Service"
 author: Amjad Masad
 date: 2016-11-14T08:00:00.000Z
+categories: eng
 ---
 
 # Or, what I wish you I knew before building Repl.it's code execution service

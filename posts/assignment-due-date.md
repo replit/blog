@@ -2,6 +2,7 @@
 title: Assignment Due Date
 author: Faris Masad
 date: 2016-09-30T07:00:00.000Z
+categories: edu
 ---
 
 On Wednesday we announced [assignment scheduling](https://repl.it/site/blog/scheduled-assignment), and today we're releasing another date related feature—due dates. It's no secret that students can procrastinate, so sometimes it's useful to have deadlines for the assignments as a reminder.[](preview end)

@@ -3,6 +3,7 @@ title: Anyone Can Code - Week 5
 author: Brittany Pirkle
 date: 2020-11-23
 cover: https://blog.repl.it/images/anyone-can-code/week5.png
+categories: projects
 ---
 
 How are we already into week 5 of this project? It’s amazing how much I have learned in such a short time. (If you need a recap of the last four weeks, you can go [here](https://blog.repl.it/)). When the basic foundational steps are broken down into small chunks, the world of code doesn’t seem as overwhelming as I thought it would be!

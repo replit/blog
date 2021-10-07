@@ -2,6 +2,7 @@
 title: "Improving Graphics"
 author: Dan Stowell
 date: 2021-01-09
+categories: product
 ---
 
 Since we introduced [native graphics in the browser](https://blog.repl.it/gfx) in 2019, our community has built awesome games and programs in [LÖVE](https://love2d.org/), [Pygame](https://www.pygame.org/news), and Java Swing. Being able to write some code and see the results right away is what Replit is all about. That and finding peace in a bouncing DVD logo:

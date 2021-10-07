@@ -3,6 +3,7 @@ title: How we went from supporting 50 languages to all of them
 author: Connor Brewster and Mason Clayton
 cover: https://blog.replit.com/images/upm_cover.png
 date: 2021-05-24T18:30:56.792Z
+categories: infra
 ---
 
 At Replit, we want to give our users the most powerful, flexible, and easy-to-get-started coding environment. However, it has been limiting because we only support a fixed set of languages and OS packages, some of which are outdated. Ideally, users should be able to use any language and install any package with minimal fuss. That's why today, we're announcing that we've incorporated [Nix](https://nixos.org) in our infrastructure to give users access to over 30,000 OS packages instantly.

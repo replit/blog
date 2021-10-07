@@ -3,6 +3,7 @@ title: Welcome to the Wonderful World of Clusters
 author: Luis Héctor Chávez
 date: 2021-03-26T17:30:00.000Z
 cover: https://blog.replit.com/images/welcome-to-the-wonderful-world-of-clusters/clusters-after.png
+categories: infra
 ---
 
 Having [a solid foundation](https://blog.replit.com/quality) is critical for us to be able to fulfill our mission of making programming more accessible, more creative, and more fun. We did a great job of making the platform more stable during last year, but every now and then we would still run into unforeseen problems that [cascaded](https://en.wikipedia.org/wiki/Cascading_failure) into other parts of the platform, producing a bad experience for everyone. So back in October (just a few weeks after I joined the team) when we had 2 load-related site-wide outages within a week, we knew it was time to do a major overhaul of how our infrastructure handles traffic. And now today, we're announcing that as a side effect of that infrastructure change, [Hacker](https://replit.com/site/pricing) repls now run in newer, more powerful machines, which means that we'll have more room to grow and experiment with more benefits for Hackers (and you might find that things feel a little bit snappier lately). This is the first of a three-part series of blogposts on how we rebuilt our infrastructure over the course of ~5 months.

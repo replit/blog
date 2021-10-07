@@ -2,6 +2,7 @@
 title: Your Repl.it Profile
 author: Amjad Masad, Haya Odeh, and Mason Clayton
 date: 2017-07-05T00:00:00.000Z
+categories: product
 ---
 
 We're constantly surprised and delighted by the creativity of people in our

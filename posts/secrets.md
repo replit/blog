@@ -3,6 +3,7 @@ title: Announcing Secrets Management
 author: Faris Masad
 date: 2021-04-19
 cover: https://blog.repl.it/images/secrets.gif
+categories: product
 ---
 
 

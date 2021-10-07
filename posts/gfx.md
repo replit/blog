@@ -2,6 +2,7 @@
 title: "Repl.it GFX: Native graphics development in the browser"
 author: Amjad Masad
 date: 2019-03-21T04:02:18.184Z
+categories: product
 ---
 
 At Repl.it we live and breathe making software creation easier. With our

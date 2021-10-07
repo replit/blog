@@ -2,6 +2,7 @@
 title: Repl.it Multiplayer
 author: Faris & Amjad Masad
 date: 2018-12-06T08:00:00.000Z
+categories: product
 ---
 
 Today we're announcing the most-significant evolution of our platform — something we've been building towards for a long time that we're thrilled to share with you.

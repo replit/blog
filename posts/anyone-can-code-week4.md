@@ -3,6 +3,7 @@ title: Anyone Can Code - Week 4
 author: Brittany Pirkle
 date: 2020-11-17
 cover: https://blog.repl.it/images/anyone-can-code/week4.png
+categories: projects
 ---
 
 I am over halfway done with this project and I have learned so much. Coding intimidated me at first, but with Replit it has been extremely user friendly, fun, and attainable! 

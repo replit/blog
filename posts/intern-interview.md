@@ -2,6 +2,7 @@
 title: Replit's Intern Interview Process
 author: Meghan Larson
 date: 3-10-2021
+categories: news
 ---
 
 Our team is blown away by the level of talent that applied to our 2021 internship programs. I read every official application (over 500!) and looked at countless projects. Our initial intention was to be open to community members that saw the post on our jobs page, applicants that I spoke with at college career fairs, and people that our teammates referred. However, our application link was quickly shared, and we had an avalanche of talented and passionate candidates applying.

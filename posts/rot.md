@@ -2,6 +2,7 @@
 title: Don't Let Your Development Environment Rot
 author: Amjad Masad
 date: 2018-06-04T07:00:00.000Z
+categories: eng
 ---
 
 Most systems -- both natural and artificial -- decay, rot, and eventually

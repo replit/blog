@@ -2,6 +2,7 @@
 title: Repl.it Q&A
 author: Katya Delaney
 date: 2019-05-14T19:51:23.398Z
+categories: edu
 ---
 
 ## Building tools for a helpful community

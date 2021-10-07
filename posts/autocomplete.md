@@ -2,6 +2,7 @@
 title: Autocomplete
 author: Faris Masad
 date: 2016-06-18T07:00:00.000Z
+categories: product
 ---
 
 Autocomplete plays a big role in how we use software, imagine a world where you have to type full search terms without predictions into google search, ugh, the savagery! Many developers employ this technology when writing code in order to increase their productivity. So we decided to implement this feature to help you become the power user you want to be.[](preview end)

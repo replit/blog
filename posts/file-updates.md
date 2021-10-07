@@ -2,6 +2,7 @@
 title: Live File Updates
 author: Mason Clayton
 date: 2016-12-23T08:00:00.000Z
+categories: product
 ---
 
 Today we're excited to release a feature which shows any files your program

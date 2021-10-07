@@ -2,6 +2,7 @@
 title: Focusing on a solid foundation
 author: Amjad Masad
 date: 9-21-2020
+categories: infra
 ---
 
 At Repl.it, our mission is to make programming more accessible, more creative, and more fun. A place away from the modern software development [grind](https://amasad.me/replit_ide). It’s an ambitious mission, and it's already resonated with millions of coders who followed their creative energy to build great apps, like [repl.email](https://repl.email), a free email service built and hosted entirely on Repl.it and available to anyone with a Repl.it account.

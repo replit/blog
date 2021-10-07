@@ -3,6 +3,7 @@ title: Meet the college students who used Replit to build a startup with $1,000 
 author: Soren Rood
 date: 2021-04-13
 cover: https://blog.repl.it/images/blubbr/whale.png
+categories: projects
 ---
 
 Hi 👋🏻, I'm [Soren](https://twitter.com/roodsoren). I'm a 20 year old Computer Science student based in Seattle, Washington. I've always been interested in the intersection of finance and computer science and I tend to find myself building things in the space. Before I was offered a position at Replit, I worked as a software engineer at a FinTech startup writing market-making systems for various crypto brokerages. While I was doing this, I was also working on a side-project with my close friends and co-founders [Justin](https://twitter.com/Justin_A_Shaw) and [Steven](https://twitter.com/stevenkotansky). This project is called [Blubbr](https://blubbr.io).

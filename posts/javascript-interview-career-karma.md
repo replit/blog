@@ -2,6 +2,7 @@
 title: "7 Questions to Help You Prepare for a JavaScript Interview"
 author: James Gallagher
 date: 2020-08-14T07:00:00.000Z
+categories: projects
 ---
 
 Job interviews are stressful enough. Technical interviews take the process a step further. In a technical interview, knowing the answer to a question does not necessarily mean you’ll be able to answer it. You need to know how to articulate the complex technical topics that you’ve mastered.

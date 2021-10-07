@@ -3,6 +3,7 @@ title: "Going Global"
 author: Amjad Masad & Zach Anderson
 date: 1-28-2021
 cover: https://blog.repl.it/images/global/multi.png
+categories: infra
 ---
 
 We had the idea for Replit in Jordan, launched as a startup in New York, and incorporated as a company in San Mateo. The US gave us the infrastructure, the capital, and network to launch our business, and for that we're forever grateful. However, to us, the internet is a [new country](https://www.eff.org/cyberspace-independence) and we want to make our citizenship official and our commitment real. We're joining our global community of hackers, students, teachers, and entrepreneurs and becoming a global company and service. Starting today:

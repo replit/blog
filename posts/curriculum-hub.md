@@ -3,6 +3,7 @@ title: Announcing the Replit Curriculum Hub!
 author: Derrick McMillen and Lena Vu Sawyer
 date: 2021-09-02
 cover: https://blog.replit.com/images/teams_edu/back-to-school-robot.jpg
+categories: edu
 ---
 
 *Say hello to the Replit Curriculum Hub, your one-stop-shop for quality CS learning materials!*

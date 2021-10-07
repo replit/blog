@@ -3,6 +3,7 @@ title: "[RV0] How a team of high schoolers built a tool to make machine learning
 author: "Pranav Teegavarapu, Benjamin Smith, Makuza Mugabo Verite"
 date: 2021-06-24
 cover: https://blog.repl.it/images/kobra/og.png
+categories: ventures
 ---
 
 Hello! Today, we're announcing the beta launch of Kobra, a visual programming language for machine learning.

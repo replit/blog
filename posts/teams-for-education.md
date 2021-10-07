@@ -3,6 +3,7 @@ title: Teams for Education
 author: Amjad Masad
 cover: https://blog.repl.it/images/teams_edu/mention.png
 date: 2020-6-30
+categories: edu
 ---
 
 We started Repl.it to break down what we thought of as needless barriers to start coding. Naturally, our first product was the repl -- a simple editor and console for evaluating code. Turns out that’s all our users needed to learn enough coding to make meaningful programs. From there, Repl.it started to grow incredibly fast among students, developers, and educators. As we watched what our most active users did with the platform, a pattern emerged around coding in the classroom: teachers would prepare a doc or a PDF with instructions and a base repl for their students to fork. Students then would open the PDF side-by-side with the repl and start coding. When finished, they would copy the link and email it back to their teachers. Finally, teachers would block off an afternoon to evaluate and give feedback on their students’ code. The process, while better than using a local IDE and passing around files, seemed tedious and we wanted to solve it -- that’s how [Repl.it Classroom](https://repl.it/classroom) emerged.

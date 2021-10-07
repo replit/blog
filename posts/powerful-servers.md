@@ -3,6 +3,7 @@ title: Servers just got 4x more powerful
 author: Sidney Kochman
 cover: https://blog.repl.it/images/powerful-servers/birdbot.png
 date: 2020-12-15T21:25:18Z
+categories: infra
 ---
 
 This week, we’ve rolled out a change for our Hacker plan subscribers: your servers have up to 4x the speed!

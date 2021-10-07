@@ -2,6 +2,7 @@
 title: File Switcher
 author: Faris Masad
 date: 2018-10-16T07:00:00.000Z
+categories: product
 ---
 
 A few days ago we shipped a simple feature that will save our users time in finding and opening files, especially for larger projects.  This can even be used without having the file tree visible.  Read on to see how to use it and to see a demonstration.

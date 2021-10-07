@@ -3,6 +3,7 @@ title: Building Alexa Skills On Replit
 author: Søren Rood
 date: 2021-08-02
 cover: https://blog.repl.it/images/replexa-tutorial/carbon.png
+categories: projects
 ---
 
 At Replit, we want to give everyone in the world **computer superpowers**.

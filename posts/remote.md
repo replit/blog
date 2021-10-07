@@ -3,6 +3,7 @@ title: Teach Coding Remotely - free for public schools and 80% discount for ever
 author: Amjad Masad
 date: 2020-03-13T08:00:00.000Z
 cover: https://repl.it/public/images/typing.gif
+categories: edu
 ---
 
 We've been hearing from our teacher community that despite school closings they want to continue teaching their students remotely. Luckily Repl.it was designed to be remote-first and will be a perfect tool for this.  We have two products that serve different remote modes:

@@ -2,6 +2,7 @@
 title: Not Hotdog
 author: Yev Barkalov
 date: 2018-07-19T17:00:36.000Z
+categories: projects
 ---
 
 Today we're going to write a program that tells you whether an image is a hotdog or not!

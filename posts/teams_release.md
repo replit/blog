@@ -3,6 +3,7 @@ title: Replit Teams for Education is Leaving Beta!
 author: Patrick Coleman
 cover: https://blog.repl.it/images/teams_edu/teamscover.png
 date: 2021-03-02
+categories: edu
 ---
 
 At Replit we believe that computers give people superpowers. With computers, anyone who's willing to learn can spend more of their time on creative invention rather than tedious drudgery. They help us automate repetitive tasks and build on the collective knowledge of all the great thinkers, inventors, artists, and teachers who came before us. 

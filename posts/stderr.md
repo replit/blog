@@ -2,6 +2,7 @@
 title: "Colorizing Stderr: racing pipes, and libc monkey-patching"
 author: Rob Blanckaert
 date: 2018-11-02T07:00:00.000Z
+categories: product
 ---
 
 _Errors are red,_<br/>

@@ -1,6 +1,7 @@
 ---
 title: This Blog Hosts Itself
 author: Mason Clayton
+categories: projects
 ---
 
 As Repl.it has become more powerful we've used it to build and host many of our internal tools and parts of the site itself. This gives us a great opportunity to [eat our own dog food](https://en.wikipedia.org/wiki/Eating_your_own_dog_food) and in the process make Repl.it better.

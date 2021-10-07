@@ -3,6 +3,7 @@ title: Why We Switched From Webpack To Vite
 author: Sergei Chestakov
 date: 2021-04-28
 cover: https://blog.replit.com/images/vite/cover.png
+categories: product
 ---
 
 At Replit, our mission is to make programming more accessible. We provide people with free compute in the cloud so that they can build apps on any device. Among the most popular ways to create apps on the web today is React. Historically, however, React tooling has been slow on Replit. While the JavaScript ecosystem has produced excellent tools for professional developers, many of the most popular ones, like Create React App and Webpack, have become increasingly complex and inefficient.

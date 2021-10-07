@@ -3,6 +3,7 @@ title: The Replit Summer Hackathon
 author: Søren Rood
 date: 2021-08-03
 cover: https://blog.repl.it/images/alexa-hackathon/card.png
+categories: events
 ---
 
 We're excited to announce the Replit summer hackathon! What you'll be building: [Amazon Alexa skills](https://www.amazon.com/alexa-skills/b?ie=UTF8&node=13727921011)!

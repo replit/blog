@@ -2,6 +2,7 @@
 title: "Modular, fast, small: how we built a server-rendered IDE"
 author: Mason Clayton
 date: 2018-02-14T08:00:00.000Z
+categories: product
 ---
 
 At Repl.it our mission is to make programming more accessible, which means our

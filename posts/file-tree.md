@@ -2,6 +2,7 @@
 title: File tree!
 author: Faris Masad
 date: 2018-03-09T08:00:00.000Z
+categories: product
 ---
 
 Sometime in 2016 we in introduced the concept of "files" to Repl.it, you would click add file and a tab would appear on your Repl. As simple repls grew into full fledged applications and websites tabs started getting ugly and hard to manage.

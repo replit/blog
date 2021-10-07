@@ -3,6 +3,7 @@ title: AmpleMarket gets their whole team coding with Replit
 author: Obaida Albaroudi & Patrick Coleman
 date: 2021-06-30
 cover: https://blog.repl.it/images/teams_pro/Blogpost-Image-Amplemarket.png
+categories: news
 ---
 Speed is the number one thing that lets startups compete against the big companies. Imagine how fast you could move if your whole team could do even just a little bit of coding. That tedious repetitive task? Automate it. Communicating product requirements? Code an MVP. Etc. Etc.
 

@@ -2,6 +2,7 @@
 title: Zero Setup VSCode Intelligence
 author: Faris Masad
 date: 2018-07-02T00:00:00.000Z
+categories: product
 ---
 
 At Repl.it our goal is to provide state of the art in developer tools to

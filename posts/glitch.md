@@ -3,6 +3,7 @@ title: "Dear users coming from Glitch"
 author: Amjad Masad
 date: 7-23-2020
 cover: https://blog.repl.it/images/glitch_cover.png
+categories: edu
 ---
 
 First, at Replit we're not motivated by competition. What we care about the most is making programming and computing more accessible. That means anyone who wants to code and build things should be able to do so without any hurdles.

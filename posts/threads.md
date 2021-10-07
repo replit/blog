@@ -3,6 +3,7 @@ title: "Introducing Threads: Have Conversations Around Code"
 author: Arnav Bansal
 date: 3/9/2021
 cover: https://blog.repl.it/images/threads/threads_cover_2.png
+categories: product
 ---
 
 A few months ago, we announced [Annotations](https://blog.repl.it/annotations-for-education) for our education users, a feature which lets Replit collaborators highlight code and discuss it in context.

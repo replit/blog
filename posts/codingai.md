@@ -3,6 +3,7 @@ title: The role of AI in coding
 author: Amjad Masad
 date: 8-8-2020
 cover: https://repl.art/multi2.png
+categories: news
 ---
 
 In the past decade, we've seen an explosion of innovation in AI and machine learning. However, coding itself was barely touched by AI. The most significant example of AI-powered coding tools is editor autocomplete extensions like Kite or Tabnine. 

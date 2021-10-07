@@ -2,6 +2,7 @@
 title: Introducing Kaboom
 author: Tiga Wu
 date: 2021-04-06
+categories: product
 ---
 
 > Games are awesome, making games is even more awesome. I love making games, making games makes me happy, being happy makes me make better games, i hope everyone can be happy and enjoy making games!

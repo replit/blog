@@ -2,6 +2,7 @@
 title: Universal Package Manager
 author: Amjad Masad
 date: 2018-07-19T07:00:00.000Z
+categories: product
 ---
 
 Open-source has revolutionized software development -- it wouldn't be an

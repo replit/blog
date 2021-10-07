@@ -2,6 +2,7 @@
 title: Hack Chicago
 author: Yev Barkalov
 date: 2018-08-10T19:22:40.000Z
+categories: events
 ---
 
 On the weekend of July 21st, we sponsored and attended the Midwest's largest high school hackathon, Hack Chicago!

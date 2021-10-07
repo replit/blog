@@ -2,6 +2,7 @@
 title: Your websites hosted on Repl.it
 author: Amjad Masad
 date: 2018-01-22T08:00:00.000Z
+categories: product
 ---
 
 People in our community build awesome games, apps, and websites on Repl.it's web

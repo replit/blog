@@ -2,6 +2,7 @@
 title: Introducing Haskell
 author: Mason Clayton
 date: 2017-02-27T08:00:00.000Z
+categories: product
 ---
 
 We heard your requests for Haskell and today we're excited to finally announce

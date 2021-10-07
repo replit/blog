@@ -3,6 +3,7 @@ title: The Programming Language Jam & Grant
 author: Amjad Masad
 date: 7-21-2020
 cover: https://blog.repl.it/images/jam.png
+categories: events
 ---
 
 __UPDATE__: The jam registration is now open. [Read the instructions](langjam_signup).

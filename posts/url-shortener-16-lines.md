@@ -3,6 +3,7 @@ title: A URL Shortener in 16 Lines of Code with Node.js and nanoexpress
 author: Piero Maddaleni
 date: 2021-05-11
 cover: https://blog.replit.com/images/url-shortener-tutorial/cover.png
+categories: product
 ---
 ## The Backstory
 ![The Slack message I received last October](https://blog.replit.com/images/url-shortener-tutorial/slack.png)

@@ -2,6 +2,7 @@
 title: Building Towards a Holistic Development Service
 author: Amjad Masad
 date: 2017-03-27T07:00:00.000Z
+categories: eng
 ---
 
 Software development is one of the first -- if not the first -- examples of what

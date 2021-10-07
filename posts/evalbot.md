@@ -2,6 +2,7 @@
 title: "Evalbot: a bot that speaks code"
 author: Faris Masad
 date: 2016-07-02T07:00:00.000Z
+categories: eng
 ---
 
 Arguments over programming language semantics, standard library behavior, or

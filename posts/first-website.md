@@ -2,6 +2,7 @@
 title: First Website Tutorial
 author: Yev Barkalov
 date: 2018-06-14T03:32:26.000Z
+categories: projects
 ---
 
 While you can write web applications and text-based ensembles in Repl.it, sometimes it's nice to be able to just put together a simple HTML/CSS website using the same awesome editor!

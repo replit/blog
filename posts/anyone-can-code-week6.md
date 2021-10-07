@@ -3,6 +3,7 @@ title: Anyone Can Code - Week 6
 author: Brittany Pirkle
 date: 2020-12-3
 cover: https://blog.repl.it/images/anyone-can-code/6.0.png
+categories: projects
 ---
 Here we are at week six and the web page is essentially done! That wasn’t so bad, was it? (Here is what I have done the last five weeks). The final step is to create a customized domain. This final step is optional because Repl.it does provide a domain name when a web page is created. However, for something more personalized, a customized domain name can be purchased. The cool part about this is when a domain name is purchased, you can call it whatever you want (as long as the name’s available), you own it, and no one else can use it.
 

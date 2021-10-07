@@ -3,6 +3,7 @@ title: No-setup Unit Testing
 author: Faris Masad & Jeremy Press
 date: 3-1-2021
 cover: https://docs.repl.it/images/unit-testing/unit-testing-results.png
+categories: product
 ---
 
 Unit testing is a powerful way to verify that code works as intended and creates a quick feedback loop for development & learning. However, setting up a reproducible unit-testing environment is a time-consuming and delicate affair. At Replit, our goal is to give people coding superpowers by demolishing barriers and democratizing access to expert tools. Today, we're launching our zero-setup unit testing environment.

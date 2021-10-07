@@ -2,6 +2,7 @@
 title: "Git: An Introduction for Beginners"
 author: James Gallagher
 date: 2020-06-29T07:00:00.000Z
+categories: projects
 ---
 
 When you’re working on a software project, it’s crucial to keep a log of all the changes made to the project. This will help you see how your work has evolved over time. It will also allow other collaborators on a project to keep track of what changes have been made and by who. That’s where Git comes in.

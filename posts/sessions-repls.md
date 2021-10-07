@@ -2,6 +2,7 @@
 title: Check out my Repl!
 author: Haya Odeh
 date: 2017-05-29T20:46:55.849Z
+categories: product
 ---
 
 The label "sessions" is very near and dear to my heart. I vividly remember how

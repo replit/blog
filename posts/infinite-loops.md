@@ -2,6 +2,7 @@
 title: Infinite Loops
 author: Amjad Masad
 date: 2017-01-23T08:00:00.000Z
+categories: product
 ---
 
 At Repl.it we aim to make the full power of programming easily accessible for

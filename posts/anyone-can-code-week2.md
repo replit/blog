@@ -3,6 +3,7 @@ title: Anyone Can Code - Week 2
 author: Brittany Pirkle
 date: 2020-11-02
 cover: https://blog.repl.it/images/anyone-can-code/week2.png
+categories: projects
 ---
 
 Now that I know WHAT I am going to do ([read last week’s blog post here](https://blog.repl.it/anyone-can-code-week1)), I need to learn HOW to do it. The world of coding can be overwhelming if you try to learn too much at once. Like school, you have to learn the basics before you can learn more advanced concepts. In this instance, I need to learn basic languages, skills, and concepts first and not get consumed by the many, many advanced concepts of coding. 

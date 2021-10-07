@@ -3,6 +3,7 @@ title: Repl.it and GitHub Classroom
 author: Tyler Angert & Jeremy Press
 date: 2020-05-28T04:02:18.184Z
 cover: https://blog.repl.it/images/github-classroom/cover.png
+categories: edu
 ---
 
 Repl.it has always tried to make coding fast, easy, and work seamlessly with your other tools. That’s why we’re excited to announce that Repl.it has teamed up with GitHub Classroom to make learning how to code even easier.

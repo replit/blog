@@ -3,6 +3,7 @@ title: How Fig Shipped an MVP in Two Weeks During YC
 author: Brendan Falk
 date: 10-6-2020
 cover: https://blog.repl.it/images/fig/fig.png
+categories: news
 ---
 
 My name is [Brendan Falk](https://twitter.com/brendanfalk). I am one of the co-founders of [Fig](http://withfig.com?ref=replit) (YC S20). Fig adds visual apps and shortcuts to your Terminal. We make it easy for developers to build visual apps that streamline terminal workflows. We then let developers share apps with their team and the community. Our website gives a good demo.

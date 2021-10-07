@@ -2,6 +2,7 @@
 title: Project Due Dates
 author: Alisa Chan
 date: 2021-03-04
+categories: edu
 ---
 
 On Tuesday, we announced that [Teams for Education left beta](https://blog.replit.com/teams_release)! We mentioned that we're continuing to roll out more features to help computer science educators empower the next generation of creators and builders. As promised, project due dates are here!

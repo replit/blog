@@ -3,6 +3,7 @@ title: Series A to Revolutionize Computing
 author: Amjad Masad & Haya Odeh
 date: 2-18-2021
 cover: https://blog.repl.it/images/logo.jpg
+categories: news
 ---
 
 Our mission is to give everyone in the world **computer superpowers**. We build powerful yet approachable tools & platforms for developers, students, and educators.

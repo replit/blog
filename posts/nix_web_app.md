@@ -2,6 +2,7 @@
 title: Building a web app with Nix (Because why not?)
 author: Guillaume St-Pierre
 date: 2021-07-16
+categories: projects
 ---
 
 Learning a new programming language can be a very difficult task. Where should you start? How do I improve my skills from "Hello, World!" to building complete applications? It helps to have a starter project. One of my favourites is building a web app. I have been learning the Nix package manager for a few weeks now - [starting with creating a dynamic version system](https://blog.replit.com/nix_dynamic_version) - and I think its the perfect time to write a web application with it (Even though I probably shouldn't).

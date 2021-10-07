@@ -2,6 +2,7 @@
 title: Community-Led Code Jams
 author: Tim Chen
 date: 2018-08-10T00:00:00.000Z
+categories: events
 ---
 
 A few months ago, we created a new Discord channel - a real time chat app - for Repl.it.  We've since expanded our user count to be well over 500.  Our Discord server is community-driven - we have a team of three users who help us moderate the server and facilitate a culture of friendly collaboration and sharing knowledge.  However, our favorite outcome of this community are the code jams.

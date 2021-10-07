@@ -2,6 +2,7 @@
 title: Changelog - September 2021
 author: Replit team
 date: 2021-10-01T10:00:00.000Z
+categories: news
 ---
 
 Welcome back to our monthly changelog! This month was full of bug fixes and small tweaks during one of our busiest times of the year. As always, we love hearing from you! Drop us a line on [twitter](https://twitter.com/replit) or on our [feedback board](https://replit.canny.io/feedback)!

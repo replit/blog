@@ -2,6 +2,7 @@
 title: Make coding your jam
 author: Katherine Huang
 date: 2019-06-20T19:52:41.000Z
+categories: events
 ---
 
 ## Code + music: In tune with each other

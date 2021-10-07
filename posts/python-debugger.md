@@ -2,6 +2,7 @@
 title: Introducing Step Debugging for Python
 author: Amjad Masad
 date: 2016-11-28T08:00:00.000Z
+categories: product
 ---
 
 ## Debug your Python3 programs from your browser

@@ -3,6 +3,7 @@ title: Hosting Apps with Always On
 author: Mason Clayton, Connor Brewster, Sidney Kochman
 date: 2-9-2021
 cover: https://blog.replit.com/images/upm_cover.png
+categories: product
 ---
 
 Today we're excited to announce that Always On repls are available to all hackers! Anyone with [Hacker plan](https://repl.it/pricing) can choose up to 5 repls and keep them running all the time. With Always On, you can for example spin up and host an app like a Discord bot in 30 seconds:

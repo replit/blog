@@ -3,6 +3,7 @@ title: Everyone will learn to program (or why the computer revolution *still* ha
 author: Patrick Coleman
 date: 2021-08-19
 cover: https://blog.repl.it/images/teams_edu/everyoneprograms.png
+categories: edu
 ---
 
 Last week [I spoke on behalf of Replit](https://www.youtube.com/watch?v=zZVUZuDfhFY) at the [ASU+GSV summit](https://www.asugsvsummit.com/), one of the largest education technology conferences in the world, on the topic ["Is coding an essential modern fluency?"](https://asugsv.app.swapcard.com/widget/event/asu-gsv-2021/planning/UGxhbm5pbmdfNjI4NTk0). For me and the rest of the panelists ([Mike Smith of Harvard](https://scholar.harvard.edu/mikesmith), [Taniya Mishra of SureStart](https://mysurestart.com/about), and [Krishna Vedati of Tynker](https://www.tynker.com/about/)) the answer is an easy and obvious YES. And I'm guessing if you've been coding along with Replit's journey, it's a yes too.

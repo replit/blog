@@ -2,6 +2,7 @@
 title: Check out Project Sharing, new to Teams, plus just 9 more days left in Classroom
 author: Patrick Coleman, Tala Awwad
 date: 01/22/2021
+categories: edu
 ---
 Hello teachers, we hope you're enjoying the new features we've been adding  to Teams for Education! At Repl.it we are dedicated to empowering teachers and want to be the first tool you turn to when you're inspiring the next generation of engineers and builders.
 

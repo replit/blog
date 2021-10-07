@@ -3,6 +3,7 @@ title: Team Nicknames
 author: Lena Vu Sawyer
 date: 2021-05-05
 cover: https://blog.repl.it/images/teams_edu/marknickname.png
+categories: edu
 ---
 
 You can now give your team members nicknames in Replit Teams! This will help admins better organize and view their teammates.

@@ -3,7 +3,7 @@ title: Enter the Shadows with Dark Mode
 author: Barron Webster
 date: 2021-10-5
 cover: https://blog.repl.it/images/dark_mode/dark_mode_cover.png
-categories: product,news
+categories: design
 ---
 
 It's spooky season, so we have a spooky feature for you: Dark Mode™ is now available for everyone on Replit! 

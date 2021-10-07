@@ -3,6 +3,7 @@ title: How I learned to code by creating a simple Slack bot
 author: Tala Awwad
 date: 2021-06-25
 cover: https://blog.repl.it/images/slackbot/cover.png
+categories: projects
 ---
 
 Hi, my name is Tala👋 , and I have always been so inspired by engineers and their ability to create something out of basically nothing. So one goal of mine was to be able to create something just like they do every day. Mind you, in no way am I experienced in programming; I actually find it quite intimidating (my background is business). However, I wanted to challenge myself and start off small by creating a Slack bot that can automatically send our “Weekly Wins” thread. 

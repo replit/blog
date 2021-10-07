@@ -2,6 +2,7 @@
 title: Require any npm package
 author: Amjad Masad
 date: 2017-03-28T07:00:00.000Z
+categories: product
 ---
 
 Last year we introduced support for importing [any Python package from

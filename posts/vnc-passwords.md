@@ -2,6 +2,7 @@
 title: Securing your graphic repls
 author: Luis Héctor Chávez
 date: 2021-04-07T17:00:00.000Z
+categories: product
 ---
 
 Have you ever wished to be able to protect your graphic repls against prying eyes? Starting today, all VNC connections are automatically protected by the same token that keep your connection to the repl secure. There is nothing you need to do, since this is completely transparent.

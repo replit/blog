@@ -3,6 +3,7 @@ title: How to Conduct Remote Interviews
 author: Amjad Masad
 date: 2020-03-20T00:00:00.000Z
 cover: https://repl.it/public/images/typing.gif
+categories: news
 ---
 
 Remote interviews can be hard, especially if you’ve never done them before. With the COVID-19 crisis, we’re seeing a lot of teams forced to transition to remote interviewing. Luckily, we’ve done hundreds of remote phone screens, and more recently we’ve been doing what we’re calling “remote onsites.” In this post, we'll describe how we and some of our customers leverage [Repl.it](https://repl.it) [Multiplayer](https://repl.it/site/multiplayer) -- our realtime collaborative development environment -- and other tools to interview candidates remotely.

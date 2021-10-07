@@ -2,6 +2,7 @@
 title: Two Stories from Our Community
 author: Haya Odeh
 date: 2017-08-23T00:00:00.000Z
+categories: news
 ---
 
 Like any other startup, we go through ups and downs. However, we try to

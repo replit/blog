@@ -2,6 +2,7 @@
 title: Cloning Assignments
 author: Tim Chen
 date: 2018-01-30T00:00:00.000Z
+categories: edu
 ---
 
 You can now copy and clone an assignment from one classroom to another!  Many teachers have requested this feature, and we are happy to announce that it has been released!

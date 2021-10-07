@@ -2,6 +2,7 @@
 title: Introducing system audio
 author: Luis Héctor Chávez
 date: 2021-04-08T19:00:00.000Z
+categories: product
 ---
 
 We know that [games](https://blog.replit.com/kaboom) are an important part of our commitment to making programming more accessible, more creative, and more fun. Back in February when we announced a significant revamp to our [graphics stack](https://blog.replit.com/native-graphics-love#connect-with-us), we also promised that we would also provide system audio integration. That support is finally available today, as an opt-in feature.

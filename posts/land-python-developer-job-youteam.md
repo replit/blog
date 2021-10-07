@@ -3,6 +3,7 @@ title: "How to Land Your First Job as a Python Developer"
 author: Galina Divakova
 date: 2020-09-10T07:00:00.000Z
 cover: http://repl.art/laptop.png
+categories: projects
 ---
 
 Python’s status as one of the world’s most widely used programming languages is well known. Some experts rank it to be[ at par with JavaScript](https://redmonk.com/sogrady/2020/02/28/language-rankings-1-20/) in terms of simplicity, flexibility, and popularity. Its syntax is so straightforward and easy to read, custom-built software packages written in Python are the[ most shared](https://www.economist.com/graphic-detail/2018/07/26/python-is-becoming-the-worlds-most-popular-coding-language) in top online repositories. From app development to Google using the language for crawling webpages — Python is everywhere and it’s an exciting time to be a Python Developer.

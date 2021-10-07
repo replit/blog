@@ -2,6 +2,7 @@
 title: Open-Sourcing the Universal Package Manager
 author: Radon Rosborough
 date: 2019-10-30T00:00:00.000Z
+categories: product
 ---
 
 <img src="/images/upm_cover.png"/>

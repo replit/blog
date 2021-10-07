@@ -3,6 +3,7 @@ title: Building the future of collaborative coding
 author: Sergei Chestakov
 date: 2021-07-09
 cover: https://blog.replit.com/images/collaborative-coding/observe-cover.png
+categories: product
 ---
 
 One of the most powerful aspects of Replit is the

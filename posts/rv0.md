@@ -3,6 +3,7 @@ title: Our First Replit Ventures
 author: Søren Rood
 date: 2021-07-06
 cover: https://blog.repl.it/images/rv0/cover.png
+categories: ventures
 ---
 
 Our first [Replit Ventures](https://blog.replit.com/ventures) was a tremendous success. 

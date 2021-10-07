@@ -2,6 +2,7 @@
 title: "HTML Concepts to Start Your Web Development Journey"
 author: Christina Kopecky, Career Karma
 date: 2020-07-17T07:00:00.000Z
+categories: projects
 ---
 
 Taking that first step in learning how to code can be overwhelming if you don’t know where to start. Know that’s a common feeling and you’re not alone! There are several different approaches to take to get into the tech industry: [Mobile App Development](https://careerkarma.com/careers/mobile-development/), [Data Science](https://careerkarma.com/careers/data-science/), and [Software Engineering](https://careerkarma.com/careers/software-engineer/) to name a few. Today, we are going to focus on that first step to take in [Web Development](https://careerkarma.com/careers/web-development/):  learning HTML -- **H**yper**T**ext **M**arkup **L**anguage.

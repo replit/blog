@@ -3,6 +3,7 @@ title: Education Privacy Update
 author: Patrick Coleman
 date: 2020-09-21
 cover: https://blog.repl.it/images/teams_edu/replitroom.png
+categories: edu
 ---
 
 Teachers, educators, and administrators, we've heard your concerns about privacy. We're excited to announce a new feature for [Teams for Education](https://repl.it/site/teams), Private Invites, designed specifically to keep students' (including those under the age of 13) information private. Click here to [create a team](https://repl.it/teams).

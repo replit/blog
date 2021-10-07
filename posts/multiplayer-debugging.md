@@ -3,6 +3,7 @@ title: Multiplayer Debugging Experience for Python, Node.js, Java, and C/C++
 author: Luis Héctor Chávez, Alex Kotliarskyi, Tyler Angert
 date: 2021-07-02T15:55:00.000Z
 cover: https://blog.replit.com/images/debuggest/debugger-workspace.jpg
+categories: product
 ---
 
 A couple of months ago, we announced our intention to create a new [collaborative program comprehension experience](https://blog.replit.com/debuggest) for your repls. This project isn't *just* about figuring out what's wrong with your code, but really understanding what's going on, together with the people you work with. Today, we are happy to announce that we're releasing the first phase of this experience: a Replit-native, zero-configuration, multiplayer-friendly, interactive debugger for C, C++, Node.js, Python, and Java repls!

@@ -2,6 +2,7 @@
 title: Model solutions
 author: Vitaly Pavlenko
 date: 2017-04-21T00:00:00.000Z
+categories: edu
 ---
 
 There is a special moment in learning: when a student runs their code against

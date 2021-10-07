@@ -2,6 +2,7 @@
 title: Introducing the Python package cache
 author: Luis Héctor Chávez
 date: 2021-03-19T19:45:00.000Z
+categories: infra
 ---
 
 Figuring out how to install third-party libraries can derail people from learning to code or starting a new side project. We built the [Universal Package Manager](https://blog.replit.com/upm) (UPM for short) to save people from having to think about package installation at all. Just import the library, press run, and UPM will install it into your repl!

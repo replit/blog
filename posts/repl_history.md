@@ -2,6 +2,7 @@
 title: Repl History
 author: Amjad & Faris Masad
 date: 2017-12-11T08:00:00.000Z
+categories: product
 ---
 
 At Repl.it we focus on simplicity, speed, and, most importantly,

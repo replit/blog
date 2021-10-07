@@ -3,6 +3,7 @@ title: Why We Built Our Own DNS Infrastructure
 author: Connor Brewster
 date: 2021-04-29T00:00:00.000Z
 cover: https://blog.replit.com/images/welcome-to-the-wonderful-world-of-clusters/clusters-after.png
+categories: infra
 ---
 
 This post is part of a series about the [wonderful world of clusters](https://blog.replit.com/welcome-to-the-wonderful-world-of-clusters). Check out the first post for an overview of what clusters are all about. In this post we will take a peek under the hood of our hosting infrastructure and walk through how we made hosting work in a multi-cluster world.

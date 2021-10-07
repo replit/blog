@@ -3,6 +3,7 @@ title: Input/Outputing Testing & Autograding
 author: Wade Bourne & Derrick McMillen
 date: 2020-12-16
 cover: https://repl.art/multi2.png
+categories: edu
 ---
 
 Today, a highly requested feature has been released: **Input/Output testing & autograding**.  The Input/Output Tests pane is embeded within all new and existing Teams for Education projects.

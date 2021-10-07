@@ -2,6 +2,7 @@
 title: Making Repl.it Collaborative at Heart
 author: Amjad Masad
 date: 2019-09-18T18:18:49.181Z
+categories: product
 ---
 
 Coding, people believed, was an activity hackers did alone. While that might

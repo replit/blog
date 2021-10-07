@@ -2,6 +2,7 @@
 title: In-Demand Technologies to Learn to Get Into Tech Industry in 2020
 author: Christina Kopecky 
 date: 2020-11-16
+categories: news
 ---
 
 It is no surprise that the information technology and software industries will continue to grow as an in-demand profession with many pathways that can be pursued. For software development alone, according to the [U.S. Bureau of Labor Statistics](https://www.bls.gov/ooh/computer-and-information-technology/software-developers.htm) projects that the job outlook will increase by 22% by 2030.

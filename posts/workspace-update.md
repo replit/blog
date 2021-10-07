@@ -2,6 +2,7 @@
 title: A Few Updates in the Workspace
 author: Mason Clayton
 date: 2017-09-08T01:41:58.000Z
+categories: product
 ---
 
 We strive to make the workspace as useful as possible while keeping it intuitive

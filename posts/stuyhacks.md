@@ -2,6 +2,7 @@
 title: Repl.it @ StuyHacks
 author: Yev Barkalov
 date: 2018-06-27T18:32:06.000Z
+categories: events
 ---
 
 I’m still in high school but I just flew from San Francisco to New York City to be a sponsor at a high school hackathon so, yeah, you already know that the whole experience was pretty awesome.

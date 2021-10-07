@@ -3,6 +3,7 @@ title: Killing Containers at Scale
 author: Connor Brewster
 date: 2021-02-01
 cover: https://blog.repl.it/images/destroying-stuck-repls/simplified_arch.png
+categories: infra
 ---
 
 To make it so that anyone with a web browser can code on Replit, our backend infrastructures runs on preemptible VMs. That means the computer running your code can shutdown at any time! We've made it really fast for repls to reconnect when that happens. Despite our best efforts, though, people had been seeing repls stuck connecting for a long time. After some profiling and digging into the Docker source code, we found and fixed the problem. Our session connection error rate dropped from 3% to under 0.5% and our 99th percentile session boot time dropped from 2 minutes to 15 seconds.

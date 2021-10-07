@@ -2,6 +2,7 @@
 title: "Responsible Disclosure"
 author: Dan Stowell
 date: 2021-02-12
+categories: infra
 ---
 
 On Sunday, January 31st, a vulnerability was disclosed to us by Replit users. People had been allowed to transfer repls they did not own to teams they did own. Within minutes of finding out, we disabled the affected endpoint. **We have found no evidence that this vulnerability was exploited to transfer repls from any of our users. If we had found evidence, we would have contacted the affected community members immediately.**

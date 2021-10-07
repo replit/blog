@@ -2,6 +2,7 @@
 title: Classroom Overview 
 author: Haya Odeh
 date: 2016-06-29T07:00:00.000Z
+categories: edu
 ---
 
 Before we decided to build [repl.it classroom](https://repl.it/classrooms), we paid a visit to one of the schools using us in the classroom. I felt excited and anxious at the same time; I was introduced to the teacher and students in the class, and then my job started as designer observing and paying attention to every single detail.[](preview end)

@@ -3,6 +3,7 @@ title: Announcing $100,000 Grant to freeCodeCamp
 author: Patrick Coleman
 date: 2021-08-23T00:00:00.000Z
 cover: https://blog.replit.com/images/fcc_grant.jpg
+categories: news
 --- 
 
 Today, we're excited to announce that we're [granting $100,000](http://freecodecamp.org/news/announcing-rust-course-replit-web) to [freeCodeCamp](https://www.freecodecamp.org/) to fund new interactive programming courses in Rust and Python web development (with Flask + [replit.web](https://blog.replit.com/replit-web)) and to partially fund their upcoming [Data Science curriculum](https://www.freecodecamp.org/news/building-a-data-science-curriculum-with-advanced-math-and-machine-learning/). 

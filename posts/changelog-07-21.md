@@ -2,6 +2,7 @@
 title: Changelog - July 2021
 author: Replit team
 date: 2021-08-01T18:00:00.000Z
+categories: news
 ---
 We're back for the July edition of our monthly changelog where we highlight some of our big and small feature releases, user experience changes, and bug fixes!
 

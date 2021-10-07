@@ -2,6 +2,7 @@
 title: Dynamic version for Nix derivations
 author: Guillaume St-Pierre
 date: 2021-06-25
+categories: infra
 ---
 
 **UPDATE - 05/07/2021** Thanks to [Travis Cardwell](https://www.extrema.is/) for letting us know that Nix _requires_ the [version part of the derivation name to start with a digit](https://nixos.org/manual/nixpkgs/stable/#sec-package-naming). The post has been upated from its original version to include this requirement. 

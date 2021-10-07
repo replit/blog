@@ -2,6 +2,7 @@
 title: Changelog - August 2021
 author: Replit team
 date: 2021-09-01T10:00:00.000Z
+categories: news
 ---
 
 Fall is right around the corner, and its time for the August edition of our monthly changelog!

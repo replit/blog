@@ -2,6 +2,7 @@
 title: Replit²
 author: Guillaume St-Pierre
 date: 2021-08-06
+categories: infra
 ---
 
 Replit has _many_ use cases and features, but one that's less talked about is its ability to serve as a secure compute environment for specialized apps. What if you want to build some tool that will generate code, then execute it for your users? Or maybe you are building a specialized online IDE that injects code for users, then executes the bundle? With Replit, you can start building those kinds of applications quickly without having to focus on building a fast and secure backend. Build the frontend, we'll provide the compute power.

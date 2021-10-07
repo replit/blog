@@ -2,6 +2,7 @@
 title: "Java Concepts I Wish I Knew Years Ago"
 author: James Gallagher
 date: 2020-07-10T07:00:00.000Z
+categories: projects
 ---
 
 When I think about the [best programming languages to learn](https://careerkarma.com/blog/easiest-programming-languages-to-learn/), Java is near the top of the list. The language has a wide range of use cases and a beginner-friendly syntax that makes it a great language to learn. While Java may be older than some languages like Ruby or Python, it’s a valuable skill to have if you’re willing to devote the time to learning Java.

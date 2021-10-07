@@ -3,6 +3,7 @@ title: Emmet support
 author: Amjad Masad
 date: 2020-07-27
 cover: https://blog.repl.it/images/emmet.gif
+categories: product
 ---
 
 Emmet is a plugin for many popular text editors which greatly improves HTML & CSS workflow, it's also one that's been [requested](https://repl.it/feedback/p/add-emmet-support) by many of our users.

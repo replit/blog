@@ -3,6 +3,7 @@ title: CLUI Command bar and Search
 author: Moudy Elkammash and Sergei Chestakov
 date: 2020-08-27T00:00:00.000Z
 cover: https://blog.repl.it/images/replit-logo-and-name.jpg
+categories: product
 ---
 
 One of the challenges of adding new functionality to any interface is balancing discoverability with visual clutter. We've written before about how a [universal command bar](https://blog.repl.it/clui) can be a great way to expose features without overloading the UI with buttons. This pattern already works well for us in our mobile interface, so now we're bringing it to desktop! Here's a demo of what it looks like:

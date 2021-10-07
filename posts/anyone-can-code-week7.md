@@ -3,6 +3,7 @@ title: Anyone Can Code - Week 7
 author: Brittany Pirkle
 date: 2020-12-14
 cover: https://blog.repl.it/images/anyone-can-code/6.0.png
+categories: projects
 ---
 
 I have come to the end of my journey and have to say I am pleased with the outcome. My knowledge level before this experiment was literally zero. My husband even told me that code was hard and it would be difficult to produce an entire website in a short period of time. I will admit there were several times of head scratching and google searches galore. I also had several experts I could go to when CSS was confusing me. However, overall, I feel I gained knowledge on a subject that was, formerly, completely foreign to me. Ironically, an associate of mine reached out looking for someone who could assist her in solving an HTML code issue on her website. I was able to successfully help her fix the problem and explain to her some of the basics of code. I wouldn’t go so far as saying the former teacher turned student has become the teacher again, but this new skill set is already coming in handy. 

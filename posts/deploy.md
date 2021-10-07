@@ -2,6 +2,7 @@
 title: Live Server Development and Deployment (Beta)
 author: Amjad Masad
 date: 2018-03-12T07:00:00.000Z
+categories: product
 ---
 
 Repl.it is becoming the platform where developers come to learn and

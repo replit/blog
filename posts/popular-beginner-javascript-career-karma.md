@@ -2,6 +2,7 @@
 title: "Popular Beginner JavaScript Concepts"
 author: James Gallagher
 date: 2020-06-22T07:00:00.000Z
+categories: projects
 ---
 
 JavaScript is behind nearly every modern website on the web. JavaScript powers most of the dynamic features you see on the web, such as buttons which change when they’re clicked or images with zoom capabilities.

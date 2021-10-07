@@ -2,6 +2,7 @@
 title: Pricing update
 author: Amjad Masad
 date: 2018-02-05T00:00:00.000Z
+categories: news
 ---
 
 At Repl.it our mission is to make programming more accessible. We want to build

@@ -2,6 +2,7 @@
 title: "CSS Concepts I Wish I Had Known Years Ago"
 author: Christina Kopecky
 date: 2020-07-06T07:00:00.000Z
+categories: projects
 ---
 
 When I think of web development, I like to think of it in terms of building a house. When we [learn HTML](https://careerkarma.com/blog/learn-html/), we are learning how to build the web page from the ground up, framing it with the lumber that will eventually become our end product.

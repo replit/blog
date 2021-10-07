@@ -3,6 +3,7 @@ title: Teams for Education, Fall 2020 Updates
 author: Arnav Bansal and Derrick McMillen
 cover: https://blog.repl.it/images/teams_edu/replitroom.png
 date: 2020-11-19
+categories: edu
 ---
 
 This Fall we will be shipping a series of small and large improvements to the Teams for Education product. We are laser-focused on making Repl.it the best solution for learning how to code; especially during extended periods of distance learning.

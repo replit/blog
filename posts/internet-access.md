@@ -2,6 +2,7 @@
 title: Internet access for all
 author: Tim Chen
 date: 2018-02-05T00:00:00.000Z
+categories: product
 ---
 
 Repl.it is quickly becoming a tool that's used in everyday programming, and our

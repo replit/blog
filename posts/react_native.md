@@ -2,6 +2,7 @@
 title: React Native
 author: Alek Hurst
 date: 2017-04-25T07:00:00.000Z
+categories: product
 ---
 
 _We have discontinued support for react native_

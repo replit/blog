@@ -3,6 +3,7 @@ title: Replit Joins Google for Education Integrated Solutions Initiative
 author: Lena Vu Sawyer 
 date: 2021-08-24T00:00:00.000Z
 cover: https://repl.art/laptop.png
+categories: edu
 ---
 
 *New Replit features, powered by Google Cloud, make it easier than ever for students to code.*

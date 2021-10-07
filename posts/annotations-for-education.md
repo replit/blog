@@ -3,6 +3,7 @@ title: Code Annotations (available now for Teams for Education!)
 author: Arnav Bansal
 date: 2020-09-29T06:00:00.000Z
 cover: https://blog.repl.it/images/annotations/annotations-education-convo.png
+categories: edu
 ---
 
 The future of programming is collaborative. To this end, we've just added a new feature that unlocks a lot of potential for educators: the ability to annotate code.

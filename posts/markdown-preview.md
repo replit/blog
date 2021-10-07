@@ -3,6 +3,7 @@ title: Markdown Preview
 author: Sergei Chestakov
 date: 3-11-2021
 cover: https://blog.repl.it/images/markdown/preview-cover.png
+categories: product
 ---
 
 It's always been super fast to start writing markdown in a repl. However, the more we used it, the more we realized there were some key features we were missing that would make our lives easier. Which is why we're excited to announce all of the new improvements we've made to the markdown editing experience on Replit!

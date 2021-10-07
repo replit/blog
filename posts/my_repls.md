@@ -2,6 +2,7 @@
 title: New and improved repls page
 author: Amjad Masad
 date: 2018-02-26T08:00:00.000Z
+categories: product
 ---
 
 People use Repl.it in a variety of ways; some use it for building and shipping

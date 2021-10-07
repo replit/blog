@@ -3,6 +3,7 @@ title: Packaging Support for Java - Try Maven Packages in Your Browser
 date: 2020-03-25T00:00:00.000Z
 author: Amjad Masad
 cover: https://repl.it/public/images/typing.gif
+categories: product
 ---
 
 Java is one of the most popular languages on Repl.it, and the JVM powers many of our other languages (Java Swing, Clojure, Kotlin). We want to make it as easy as possible to code with other people and build new programs out of programs that already exist. So we've added packaging support for Java!

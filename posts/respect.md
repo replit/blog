@@ -3,6 +3,7 @@ title: Lessons on CS Equity from the RESPECT Conference
 author: Lena Vu Sawyer
 date: 2021-06-11
 cover: https://repl.art/office_art.png 
+categories: edu
 ---
 I had the pleasure of attending the [RESPECT conference](http://respect2021.stcbp.org/) last month, convening with and hearing from a number of CS educators and researchers throughout the week. The focus of the conference was on equity in CS education.
 

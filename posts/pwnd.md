@@ -3,6 +3,7 @@ title: We've Been Pwned
 author: Mason Clayton
 date: 12/3/2020
 cover: http://repl.art/replit.png
+categories: eng
 ---
 
 As long as I can remember Replit has been receiving a large number of vulnerability reports. We're very grateful for these and take them extremely seriously. However, 99% of them stem from a misunderstanding of what we do. Our main product is RCE (remote code execution) and naturally this leads to a whole lot of RCE vulnerability reports.

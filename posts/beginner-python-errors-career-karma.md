@@ -2,6 +2,7 @@
 title: "Common Errors Python Beginners Encounter (with Solutions)"
 author: James Gallagher
 date: 2020-08-04T07:00:00.000Z
+categories: projects
 ---
 
 Like English, Python has its own set of rules. Lines of code have to be written in a certain way, just like how sentences must follow a specific structure. Punctuation must be used within a set of guidelines when you’re writing in both English and [Python code](https://careerkarma.com/blog/types-of-coding-languages/).
