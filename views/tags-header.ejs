@@ -24,15 +24,15 @@
 
 		let finalInner = '';
 
-		let sea_ess_ess = 'none';
+		let display = 'none';
 
 		if (category == 'all') {
-			sea_ess_ess = 'block'
+			display = 'block'
 		}
 
 		//hiding the categories we want to hide
 		for (let i = 0; i < listOfCategoriesToInvis.length; i++) {
-			finalInner += `.post-category-${listOfCategoriesToInvis[i]} {\n    display: ${sea_ess_ess};\n}\n`
+			finalInner += `.post-category-${listOfCategoriesToInvis[i]} {\n    display: ${display};\n}\n`
 		}
 
 		//changing the selected button at the top
