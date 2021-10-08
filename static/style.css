@@ -70,9 +70,19 @@ body {
   color: var(--primary-color);
 }
 
+a.back:hover span {
+  color: var(--accent-color);
+}
+
+a.back span {
+  transition: 100ms
+
+}
+
 /* These two following rules fix the bug where the words move to the right instead of the arrow moving to the left when you hover over "Back to Blog" */
 
 .back span {
+  position: relative;
   transition: 150ms ease-in-out;
   margin: 0 0 0 0;
   padding: 0 0 0 4px;
@@ -129,12 +139,16 @@ div.markdown > p > a:hover {
 
 /* moar feadback on link hover >:) */
 .read-more {
+	transition: 250ms ease-in-out;
 	color: var(--primary-color);
 	text-decoration: none;
 	font-size: 18px;
 	font-weight: 500;
 	margin-bottom: var(--spacing-3);
-	transition: 250ms ease-in-out;
+}
+
+.read-more span {
+	position: relative;
 }
 
 .read-more:hover {
@@ -142,7 +156,8 @@ div.markdown > p > a:hover {
   color: #2998ff;
 }
 
-.read-more:hover .arrow {
+.read-more:hover span {
+  transition: 250ms ease-in-out;
   margin: 0 0 0 4px;
 }
 /* something something hover something */
@@ -287,27 +302,28 @@ div.markdown > p > a:hover {
 /* Change Theme Button */
  
 .theme-button {
-	position: fixed;
+  position: fixed;
   bottom: 5.75em;
-	right: 1.22em;
+  right: 1.22em;
   font-weight: 500;
 
-	padding: 12px var(--spacing-2);
+  padding: 12px var(--spacing-2);
   border-radius: 6px;
 	
-	background:var(--text-color-diff);
-	color: var(--bg-color);
+  background:var(--text-color-diff);
+  color: var(--bg-color);
   box-shadow: 0px 4px 8px 0px rgba(0,0,0,0.25);
 
-	text-decoration: none;
+  text-decoration: none;
   transition: .2s background ease-in-out;
 
   border: transparent;
 }
 
 .theme-button:hover {
-	background:var(--dark-grey200);
+  background:var(--dark-grey200);
   text-decoration: none;
+  cursor: pointer;
 }
 
 /* Markdown blog */
