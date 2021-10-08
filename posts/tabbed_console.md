@@ -2,7 +2,7 @@
 title: One more console
 author: Amjad Masad
 date: 2017-06-01T07:00:00.000Z
-categories: product
+categories: design,product
 ---
 
 Debugging [web projects](https://repl.it/languages/html) on Repl.it can

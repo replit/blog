@@ -3,7 +3,7 @@ title: Tabbed Shell
 author: Sergei Chestakov 
 date: 2020-12-29
 cover: https://blog.repl.it/images/replit-logo-and-name.jpg
-categories: product
+categories: design,product
 ---
 
 Among the many things that makes Repl.it special is our ability to provide free
