@@ -1,0 +1,11 @@
+<script>
+	if ('serviceWorker' in navigator) {
+		window.addEventListener('load', function() {
+			navigator.serviceWorker.register('water_css_yeeting_service.js').then(function(registration) {
+			console.log('Service worker registered with scope: ', registration.scope);
+			}, function(err) {
+			console.log('ServiceWorker registration failed: ', err);
+			});
+		});
+		}
+</script>
