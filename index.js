@@ -138,6 +138,7 @@ const errPage = (res, err, status) => {
 
 const app = express();
 
+
 app.use(express.static('static'))
 
 app.use(promMid({
