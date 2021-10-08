@@ -65,10 +65,7 @@
     <a class="repl-link" href="/__repl">Edit on Replit</a>
 
 	<%- include('theme-control'); %>
-
-	<% if (beta == 1) {%>
-		<%- include('tags-header'); %>
-	<% } %>
+	<%- include('tags-header'); %>
 
 
 	<!-- the removed code here is actually from my initial tags implementation. so much cleaner now lol -->
@@ -77,9 +74,6 @@
 	<% for (const post of posts) { %>
 		<%- include('post', { post, beta }); %>
     <% } %>
-
-	<!-- only show if on beta -->
-	<% if (beta == 1) {%>
 
 	<!-- only show if no posts are on screen (frontend js handles this since it handles showing and hiding posts) -->
 	<div id="noPostsNotifier" style="display: none;"><br><br><br><br><p style="color: var(--text-color);">Aw, there aren't any posts in this category yet 😔</p></div>
@@ -92,7 +86,6 @@
 			switchCategory(urlParams.get('category')) //dont ask
 		};
 	</script>
-	<% } %>
 
 	</div>
 >
