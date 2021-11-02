@@ -21,6 +21,7 @@ This is where Repl.it comes into play. Repl.it allows anyone to code for free in
 
 Motivation is key to any project, especially something brand new. I will have help from a few experts to guide me to what types of tutorials and resources I should use (I will be sharing these with you too). A task like this is not something that will magically appear overnight. It will be a step-by-step process that involves a lot of learning, creating, fixing, re-creating, and testing and hopefully an end product that is functional and aesthetically appealing. 
 
-I’m excited to share my journey with you over these next six weeks! 
+I’m excited to share my journey with you over these next six weeks! (Find week two's post [here](https://blog.repl.it/anyone-can-code-week2)).
 
 P.S. If you’ve got any friends or family members who you think would like to follow along (or who have been talking about making a website or trying to understand what is this “coding” thing), please share!
+

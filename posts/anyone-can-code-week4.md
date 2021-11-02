@@ -65,4 +65,4 @@ For the paragraph, I simply made sure my background color was set and tweaked th
 
 ![paragraph](https://blog.repl.it/images/anyone-can-code/4.13.png)
 
-This project is really coming along! Next week I am going to talk about very basic responsive design.  And remember, [Repl.it](https://repl.it/) is FREE and super easy to use. Keep sharing with friends and family who are just getting started with coding too. Thanks for following along!
+This project is really coming along! [Next week] (https://blog.repl.it/anyone-can-code-week5) I am going to talk about very basic responsive design.  And remember, [Repl.it](https://repl.it/) is FREE and super easy to use. Keep sharing with friends and family who are just getting started with coding too. Thanks for following along!

@@ -47,6 +47,6 @@ I used the tutorial to just play around and get a hang of how things work. Repl.
 
 ![repl ide](https://blog.repl.it/images/anyone-can-code/2.1.png)
 
-Now that I have a better understanding of these two languages (more on CSS to come later) and have poked around with repls, next week I will start on my actual project, a holiday e-card. 
+Now that I have a better understanding of these two languages (more on CSS to come later) and have poked around with repls, [next week](https://blog.repl.it/anyone-can-code-week3) I will start on my actual project, a holiday e-card. 
 
-I hope you’re as excited as I am to see this all come together. Thanks for following my journey and please share with anyone you know who’s just getting started coding! It’s easy, I promise!
+I hope you’re as excited as I am to see this all come together. Thanks for following my journey and please share with anyone you know who’s just getting started coding! It’s easy, I promise! 

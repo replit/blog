@@ -36,4 +36,4 @@ Here’s my repl if you want to check it out: https://repl.it/@BrittanyPirkle/Ho
 
 <iframe frameborder="0" width="100%" height="500px" src="https://repl.it/@BrittanyPirkle/Holidaycard2020?lite=true"></iframe>
 
-Stay tuned for next week as I talk all about website domains (the link where you can find your site) and what NOT to do when setting up your own website domain. Remember, [Repl.it](https://repl.it/) is free and seriously so easy to use!
+Stay tuned for [next week] (https://blog.repl.it/anyone-can-code-week6) as I talk all about website domains (the link where you can find your site) and what NOT to do when setting up your own website domain. Remember, [Repl.it](https://repl.it/) is free and seriously so easy to use!

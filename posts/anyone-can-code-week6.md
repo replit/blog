@@ -72,4 +72,4 @@ and created a new one with “www” as the name and the new CNAME that was crea
 
 Now my holiday card is available at both https://www.pirklefamilyholiday20202.com and https://pirklefamilyholiday2020.com.
 
-Next week is the final week of this project. I plan to share my pitfalls and wins and just reflect on the whole experience. Remember, Repl.it is FREE to use and easy to sign up. See you next week for the conclusion to my journey!
+[Next week] (https://blog.repl.it/anyone-can-code-week7) is the final week of this project. I plan to share my pitfalls and wins and just reflect on the whole experience. Remember, Repl.it is FREE to use and easy to sign up. See you next week for the conclusion to my journey!

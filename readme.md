@@ -12,6 +12,4 @@ categories: trains,api
 ---
 ```
 
-If you want to have more category buttons appear, modify the following lines:
-index.js line 92
-views/tags-header.ejs line 3
+FOR A FULL GUIDE ON MAKING A BLOGPOST, SEE THE HANDBOOK [HERE](https://replit.com/@util/handbook#marketing/blog.md)

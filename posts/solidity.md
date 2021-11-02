@@ -80,7 +80,7 @@ With decentralization, we can build more equitable organizations and services th
 
 **`Web3`** refers to the *general direction* the internet is headed in where services are decentralized and people own their digital lives without the oversight of huge companies-- from their social followings, to game items, art, access to communities, and more. You could imagine a decentralized Instagram that connects to *your* database of photos that *you* own. If they ever shut down, you still have access to everything.
 
-The internet we are used to-- referred to as `Web2`, relies heavily on centralized servers (like Twitter hosting your tweets and Instagram hosting your pictures). People can post stuff to the internet but . Your digital identity is effectively managed by huge corporations.
+The internet we are used to-- referred to as `Web2`, relies heavily on centralized servers (like Twitter hosting your tweets and Instagram hosting your pictures). People can post stuff to the internet but don't have real authority over it. Your digital identity is effectively managed by huge corporations.
 
 `Web1` largely refers to the internet before social networks were popular, when you could read content but not post. Having a voice on the internet was reserved for the technical clergy who could figure out how to even get something online in the first place.
 
@@ -97,7 +97,7 @@ Other popular blockchains include [Solana](https://solana.com/), [Polygon](https
 
 From a practical perspective, there are a few key benefits of web3 apps, both from the users' and the developers' side:
 
-- **No usernames and passwords**: you use a *wallet* which has an address (or multiple) in it (like `0x5413eEBC80e4FC51Ec21e30E32F42Ab27A6C40ad`) that is essentially your ID that you use to login (or "connect") to dApps. This means you don't have to worry about password managers, creating different logins with everything you use. This also means developers don't have to worry about tricky authentication code and storing PII.
+- **No usernames and passwords**: you use a *wallet* which has an address (or multiple) in it (like `0x5413eEBC80e4FC51Ec21e30E32F42Ab27A6C40ad`) that is essentially your ID that you use to login (or "connect") to dApps. This means you don't have to worry about password managers and creating different logins with everything you use. This also means developers don't have to worry about tricky authentication code and storing PII.
 
 - **Your data travels with you**: Your wallet is essentially your inventory of digital assets that you own and that exist outside of the games and apps you are using. This implies things like cross-game items, cross-music service playlists, and total ownership over your data.
 

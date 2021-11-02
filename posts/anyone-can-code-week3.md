@@ -54,4 +54,4 @@ So, drum roll please….here is my finished (for this week) product using HTML. 
 
 ![webpage](https://blog.repl.it/images/anyone-can-code/3.10.png)
 
-Join me next week as I add some holiday cheer to this e-card with CSS! Let’s be honest; right now it is a tad boring… And remember, [Repl.it](https://repl.it/~) is FREE and super easy to use. Keep sharing with friends and family who are just getting started with coding too. Thanks for following along!
+Join me [next week] (https://blog.repl.it/anyone-can-code-week4) as I add some holiday cheer to this e-card with CSS! Let’s be honest; right now it is a tad boring… And remember, [Repl.it](https://repl.it/~) is FREE and super easy to use. Keep sharing with friends and family who are just getting started with coding too. Thanks for following along!
