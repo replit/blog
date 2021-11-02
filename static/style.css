@@ -279,19 +279,19 @@ div.markdown > p > a:hover {
  
 .repl-link { 
 	position: fixed;
-  bottom: 1.25em;
+	bottom: 1.25em;
 	right: 1em;
-  font-weight: 500;
+	font-weight: 500;
 
 	padding: 12px var(--spacing-2);
-  border-radius: 6px;
+	border-radius: 6px;
 	
 	background:var(--text-color-diff);
 	color: var(--bg-color);
-  box-shadow: 0px 4px 8px 0px rgba(0,0,0,0.25);
+	box-shadow: 0px 4px 8px 0px rgba(0,0,0,0.25);
 
 	text-decoration: none;
-  transition: .2s background ease-in-out;
+	transition: .2s background ease-in-out;
 }
 
 .repl-link:hover {
@@ -301,7 +301,7 @@ div.markdown > p > a:hover {
 
 /* Change Theme Button */
  
-.theme-button {
+.theme-button-bottom {
   position: fixed;
   bottom: 5.75em;
   right: 1.22em;
@@ -320,10 +320,43 @@ div.markdown > p > a:hover {
   border: transparent;
 }
 
-.theme-button:hover {
+.theme-button-bottom:hover {
   background:var(--dark-grey200);
   text-decoration: none;
   cursor: pointer;
+}
+
+.theme-button-top {
+	display: none;
+	padding: 12.2px 16px; 
+	background-color: #0070E0;
+	border-radius: 4px;
+	border-width: 0px;
+	margin: 0;
+	margin-right: 5px;
+	font-weight: 500;
+	text-decoration: none;
+	color: white;
+	transition: .2s opacity ease-in-outl;
+}
+
+.theme-button-top:hover {
+	opacity: .9;
+}
+
+@media all and (max-width:700px) {
+	.repl-link {
+		display: none;
+	}
+
+	.theme-button-bottom {
+		display: none;
+	}
+
+	.theme-button-top {
+		display: inline;
+	}
+
 }
 
 /* Markdown blog */
@@ -645,7 +678,7 @@ white-space: pre-wrap;
 }
 .footer a {
  cursor:pointer;
-=======
+}
 
 
 @media all and (max-width:500px) {
@@ -659,5 +692,4 @@ white-space: pre-wrap;
     max-width: none;
     width: 100%;
   }
->>>>>>> origin/master
 }
