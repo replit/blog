@@ -18,6 +18,11 @@
   align-items: center;
  }
 
+ .navigation div {
+  display: flex;
+  align-items: center;
+ }
+
  .navigation-links {
   text-decoration: none;
   padding: 4px 8px 8px 8px;
@@ -31,7 +36,7 @@
  }
 
 .navigation .sign-up {
- margin: 0 0 4px 12px;
+ margin: 0px;
  padding: 8px 16px; 
 background-color: #0070E0;
  border-radius: 4px;
@@ -65,10 +70,6 @@ margin: 0;
 display: none;
 }
 
-.navigation .sign-up{
-margin: 0;
-}
-
 
 }
 
@@ -88,6 +89,8 @@ margin: 0;
   <a class ="navigation-links" href ="//replit.com/site/pricing">Pricing</a>
   <a class ="navigation-links" href ="//replit.com/jam?from=static">Jam</a>
 </div>
-
- <a class ="sign-up" href ="//replit.com/signup">Sign up</a>
+  <div>
+	<button class="theme-button-top" onclick="toggleTheme()">☀️</button>
+	<a class ="sign-up" href ="//replit.com/signup">Sign up</a>
+  </div>
 </nav>
