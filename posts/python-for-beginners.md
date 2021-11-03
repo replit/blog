@@ -5,7 +5,7 @@
     cover: https://blog.repl.it/images/Python_For_Beginners/python_cover_photo.jpg
 	categories: edu
     ---
-About a year ago, I created a blog series on a novice learner’s journey into the world of code through a look at the basics (read the whole series [here](https://blog.repl.it/anyone-can-code-week1)). Now, with a much larger knowledge base and understanding of both code and Replit, I am taking it a step further into a new language and project. My goal is to create a practical beginner project and justify why using Replit is the best medium, even for beginners.
+About a year ago, I created a blog series on a novice learner’s journey into the world of code through a look at the basics (read the whole series [here](https://blog.repl.it/anyone-can-code-week1)). Now, with a much larger knowledge base and understanding of both code and Replit, I am taking it a step further into a new language and project. My goal is to create a practical beginner project and justify why using Replit is the best option, even for beginners.
 
 Think of coding as cooking, but with a computer! In the kitchen, the recipe is the instructions (program) for the chef (computer) to execute. Just as different recipes create different meals, different programming languages produce different output. Therefore, it is important that the language chosen matches the desired outcome. I wouldn’t use a recipe for lasagna and expect a cake, would I? 
 
