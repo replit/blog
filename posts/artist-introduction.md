@@ -5,7 +5,7 @@ date: 2021-10-27T08:00:00.000Z
 cover: https://blog.replit.com/images/blogarthand-01.png
 categories: news,art
 ---
-## Who makes Replit art?
+# Who makes Replit art?
 
 Hi! Thats me! My name is Joe and I’m Replit’s illustrator.
 
@@ -17,7 +17,7 @@ My major influences come from surrealist art, psychedelic comics from the 70’s
 
 My work is a fusion of these influences and I’m so lucky that I now get to create art for Replit on a full time basis.
 
-## How did you hear about Replit?
+# How did you hear about Replit?
 
 This all started in 2018 when I was freelancing. Amjad hit me up after seeing an album cover I made and asked me to create some promo for a “bot building competition”. 
 
@@ -29,7 +29,7 @@ I think what I took from this brief is that Amjad trusted my abilities and let m
 
 I’m always blown away by their vision and I’m happy that I get to help create an identifiable style and look for Replit’s brand.
 
-## Where can people see all the Replit art?
+# Where can people see all the Replit art?
 
 You can see everything that I have made for Replit via the offical Replit Art Page -
 https://art.replit.com/
