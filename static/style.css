@@ -567,6 +567,58 @@ white-space: pre-wrap;
 	margin-bottom: 20px;
 }
 
+.twitter-cta {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	max-width: 90%;
+}
+
+.twitter-cta > div {
+	display: flex;
+	flex-direction: row;
+	align-content: center;
+	align-items: center;
+	color: var(--text-color);
+	margin: 0;
+	font-size: 1.5em;
+}
+
+.twitter-cta > div > p {
+	padding-bottom: 1px;
+	margin: 0;
+}
+
+.twitter-cta > div > a {
+	display: flex;
+	flex-direction: row;
+	align-content: center;
+	align-items: center;
+	color: var(--text-color);
+	margin: 0px 10px 0px 10px;
+	background-color: #1da1f2;
+	padding: 8px 16px 8px 16px;
+	border-radius: 100px;
+	justify-content: center;
+	transition-duration: 0.1s;
+	text-decoration: none;
+	font-size: 0.75em;
+}
+
+.twitter-cta > div > a > img {
+	margin-right: 5px;
+}
+
+@media all and (max-width:725px) {
+	.twitter-cta > div {
+		flex-direction: column;
+	}
+
+	.twitter-cta > div > a {
+		margin-top: 10px;
+	}
+}
+
 .footer {
  display:-webkit-box;
  display:-webkit-flex;
