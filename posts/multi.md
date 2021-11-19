@@ -13,7 +13,7 @@ IDE, edit files and share the same system resources, and ship applications from
 the same interface! We've redesigned every part of our infrastructure to work in
 multiplayer mode -- from the filesystem to the interpreter.
 
-<video controls webkit-playsinline="true" playsinline="" src="/public/images/blog/multi.mp4"></video>
+<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/kO0EJJcuW1k" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 This works with all the [languages](/languages) that work on Repl.it. All free
 and ready for you to use right now. All you have to do is login, create a repl,
