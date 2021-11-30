@@ -1,15 +1,5 @@
-## Adding tags/categories:
+# Replit Blog
 
-Simply add a comma separated list to the 'categories' attribute of your repl, like this:
+Welcome to the source code for the Replit blog! 
 
-```yaml
----
-title: "How I Created an NPM Package to Access Amtrak's Semi-Private API"
-author: Piero Maddaleni
-date: 2021-09-15
-cover: 
-categories: trains,api
----
-```
-
-FOR A FULL GUIDE ON MAKING A BLOGPOST, SEE THE HANDBOOK [HERE](https://replit.com/@util/handbook#marketing/blog.md)
+If you are an employee and are wondering how to write a blogpost, you know where to look and who to ask.
