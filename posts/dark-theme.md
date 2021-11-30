@@ -5,6 +5,8 @@ date: 2018-09-13T21:26:40.000Z
 categories: design,infra
 ---
 
+***Looking for how to change your Replit theme? Click [here](https://blog.replit.com/themehowto).***
+
 Dark Theme has long been one of the most highly request features on Repl.it.  We introduced a dark theme editor some time back, but as the rest of the workspace was still in "Repl.it Light Mode", we knew our work wasn't done.  We are proud to announce the release of "Repl.it Dark" - a dark theme for the entire workspace!
 
 ![gif of darkmode in action](/public/images/blog/darkmode-gif.gif)

@@ -1,7 +1,7 @@
 ---
-title: Back to School 101: Mastery-Based Programming Tasks
+title: "Back to School 101: Mastery-Based Programming Tasks"
 author: Sarah Strong
-date: 2021-11-19T21:30:00.000Z
+date: 2021-11-19T00:00:00.000Z
 cover:  https://blog.replit.com/images/teams_edu/back-to-school-robot.jpg
 categories: edu
 ---

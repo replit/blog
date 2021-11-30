@@ -745,3 +745,8 @@ white-space: pre-wrap;
     width: 100%;
   }
 }
+
+.super {
+  vertical-align: super;
+  font-size: 0.8rem;
+}

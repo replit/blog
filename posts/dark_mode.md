@@ -6,6 +6,8 @@ cover: https://blog.repl.it/images/dark_mode/dark_mode_cover.png
 categories: design
 ---
 
+***Looking for how to change your Replit theme? Click [here](https://blog.replit.com/themehowto).***
+
 It's spooky season, so we have a spooky feature for you: Dark Mode™ is now available for everyone on Replit! 
 
 Just open your sidebar and click the moon to enter the shadow realm. Click the sun to switch back.
