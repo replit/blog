@@ -13,7 +13,6 @@
             <description><%= striptags(post.content) %></description>
             <pubDate><%= moment.utc(post.timestamp).format("ddd, DD MMM YYYY HH:mm:ss ZZ") %></pubDate>
             <category><%= post.categories[0] %></category>
-			<link>https://blog.replit.com/<%= post.url %></link>
         </item>
         <% } %>
     </channel>
