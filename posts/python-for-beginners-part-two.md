@@ -1,7 +1,7 @@
 ---
 title: "Python for Beginners: Interpreting My Amazon Spending with a Repl, Part Two"
 author: Brittany Pirkle
-date: 2021-12-14
+date: 2021-12-13
 cover: https://blog.repl.it/images/Python_For_Beginners/python_cover_photo.jpg
 categories: edu
 ---
@@ -12,7 +12,7 @@ categories: edu
 
 ![](images/Python_For_Beginners/pythonforbeginners_2.png)
 
-Now that the package manager, [pandas](https://pandas.pydata.org/pandas-docs/stable/getting_started/overview.html), and assets are imported, I create the DataFrame (df). A [DataFrame] (https://databricks.com/glossary/what-are-dataframes) allows pandas to store data in a table format, similar to a spreadsheet. In this case, the DataFrame is the Amazon csv file. Now I can write the first three lines of code:
+Now that the package manager, [pandas](https://pandas.pydata.org/pandas-docs/stable/getting_started/overview.html), and assets are imported, I create the DataFrame (df). A [DataFrame](https://databricks.com/glossary/what-are-dataframes) allows pandas to store data in a table format, similar to a spreadsheet. In this case, the DataFrame is the Amazon csv file. Now I can write the first three lines of code:
 
 ![](images/Python_For_Beginners/pythonforbeginners_2.1.png)
 
@@ -22,7 +22,7 @@ With just three lines of code, I can import and preview data. However, as with a
 
 ![](images/Python_For_Beginners/pythonforbeginners_2.2.png)
 
-The last piece of data clean up is related to the ‘Item Total’ column in the DataFrame. The first problem is the data in this csv file is stored as strings. [Strings] (https://vsc.instructure.com/courses/6476/pages/the-integer-floating-point-and-string-data-types) are any text-formatted data, such as “7 dogs” or “aaa.” Since Python needs all the data to be numeric-based in order to perform computations, I use the function ‘.astype(float)’ to change the string data to a numeric data type, floats. The second issue is ‘$’ because it is not a number (the $ is prohibiting the data from being a floats data type). I draft ‘.str.replace('$',' ')’ to replace the dollar sign with nothing. I also found it helpful to use the same function to replace any comma with nothing as well. There was some trial and error involved in deciphering the column heading name ("Item Total") in the original csv file matched the heading listed in the DataFrame. Without an exact match, Python did not know where to apply these changes. Just as before, I want to ‘print’ to ensure my changes occur.
+The last piece of data clean up is related to the ‘Item Total’ column in the DataFrame. The first problem is the data in this csv file is stored as strings. [Strings](https://vsc.instructure.com/courses/6476/pages/the-integer-floating-point-and-string-data-types) are any text-formatted data, such as “7 dogs” or “aaa.” Since Python needs all the data to be numeric-based in order to perform computations, I use the function ‘.astype(float)’ to change the string data to a numeric data type, floats. The second issue is ‘$’ because it is not a number (the $ is prohibiting the data from being a floats data type). I draft ‘.str.replace('$',' ')’ to replace the dollar sign with nothing. I also found it helpful to use the same function to replace any comma with nothing as well. There was some trial and error involved in deciphering the column heading name ("Item Total") in the original csv file matched the heading listed in the DataFrame. Without an exact match, Python did not know where to apply these changes. Just as before, I want to ‘print’ to ensure my changes occur.
 
 ![](images/Python_For_Beginners/pythonforbeginners_2.3.png)
 

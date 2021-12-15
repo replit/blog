@@ -389,20 +389,25 @@ div.markdown > p > a:hover {
 }
 
 .markdown h3 {
-	font-size: 24px;
+	font-size: 1.35em;
 	line-height: 26px;
     margin: var(--spacing-6) 0 var(--spacing-2) 0;
 }
 
 .markdown h4 {
-	font-size: 22px;
+	font-size: 1.2em;
 	line-height: 24px;
   margin: var(--spacing-6) 0 var(--spacing-2) 0;
 
 }
 
 .markdown h5 {
-	font-size: 20px;
+	font-size: 1.1em;
+	line-height: 22px;
+}
+
+.markdown h6 {
+	font-size: 1em;
 	line-height: 22px;
 }
 
