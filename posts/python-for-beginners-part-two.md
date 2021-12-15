@@ -1,11 +1,12 @@
- ---
+---
 title: "Python for Beginners: Interpreting My Amazon Spending with a Repl, Part Two"
 author: Brittany Pirkle
 date: 2021-12-14
 cover: https://blog.repl.it/images/Python_For_Beginners/python_cover_photo.jpg
 categories: edu
 ---
-‘Tis the season to...calculate my spending? Amazon has become an easy way to have something delivered almost instantly (thank you overnight shipping), but it is almost *too easy* to spend money that I need a way to keep track of my spending (and maybe delete the app off my phone!). A Python repl is the perfect solution! In my [last post,] (https://blog.replit.com/python-for-beginners) I discussed the perks of using Python for this project and the importance of the right [package manager.](https://docs.replit.com/programming-ide/installing-packages)
+
+‘Tis the season to...calculate my spending? Amazon has become an easy way to have something delivered almost instantly (thank you overnight shipping), but it is almost *too easy* to spend money that I need a way to keep track of my spending (and maybe delete the app off my phone!). A Python repl is the perfect solution! In my [last post,](https://blog.replit.com/python-for-beginners) I discussed the perks of using Python for this project and the importance of the right [package manager.](https://docs.replit.com/programming-ide/installing-packages)
 
 [Importing assets](https://docs.replit.com/getting-started/creating-files#uploading-files-and-assets) is the next step. Assets are any type of file, image, video, or even GIF that can be added to a repl. Replit makes it easy to add any of these file types by going to the file tree and adding a new file. Additionally, as data changes, it is easy to update assets as well.
 
