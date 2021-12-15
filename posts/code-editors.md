@@ -123,7 +123,7 @@ Ace has many configuration options that work great and has good extension points
 
 Monaco sport many configuration options and has APIs to modify the editor behavior and the underlying features. That said, the extension points are somewhat limited and specific. I often struggled with the editor and needed to monkey-patch, but it was scary as the codebase is far from straight forward and the internals constantly changed. Eventually, we stopped upgrading because it was nearly impossible to support some of our added features.
 
-### CodeMirror
+#### CodeMirror 6
 **Score: 3**
 
 CodeMirror is built with extensibility in mind and is one of the primary design principles; this extensibility allows CodeMirror to be modular. In fact, the core itself (`@codemirror/view` and `@codemirror/state`) is essentially an extensible text area. All the "code" features are implemented as extensions. Basic things like syntax highlighting and line numbers are implemented as extensions and packages. These packages act as a great resource when authoring your own extensions.
@@ -146,7 +146,7 @@ Monaco had gathered momentum around 2018, but it felt like that community energy
 
 Monaco's API documentation is good enough but could be better. Monaco has no official guides as far as I know, which makes it hard to get started. You probably have a tough time using the codebase as a supplementary resource due to how the project is structured.
 
-### CodeMirror 
+#### CodeMirror 6
 **Score: 3**
 
 I see a lot of energy around CodeMirror 6 from the community. We're trying to help seed the community with some packages we see as essential. Stay tuned!
