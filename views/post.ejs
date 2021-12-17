@@ -1,6 +1,6 @@
 <% let listOfCategories = post.categories; %> <% let finalCategoriesClass = ""; %> <% for (category of post.categories) { %> <% finalCategoriesClass += ` post-category-${category}`; %> <% } %>
 
-<article class="post-item<%= finalCategoriesClass %>">
+<article class="post-item<%= finalCategoriesClass %> post-url-<%= post.url %>" id="<%= post.url %>">
     <h1 class="post-title">
         <a href="/<%= post.url%>"><%= post.title %></a>
     </h1>
@@ -16,4 +16,4 @@
 </article>
 
 <!-- moved to the bottom since it looks awkward at the top, also in prep for adding call to action/reccomendations to bottom. still better to have at bottom with nothing below it than it at the top with nothing above -->
-<div class="post-seperator<%= finalCategoriesClass %>"></div>
+<div class="post-item post-seperator<%= finalCategoriesClass %> post-url-<%= post.url %>"></div>

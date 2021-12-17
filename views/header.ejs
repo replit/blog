@@ -1,10 +1,12 @@
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6"></script>
+
 <!-- bruh why aren't these in the main css file -->
 <style>
     .navigation {
         display: flex;
         justify-content: space-between;
         align-items: center;
-        margin: 0 auto 40px auto;
+        margin: 0 auto auto auto;
         max-width: 1800px;
         flex: 1;
         width: 100%;
@@ -69,8 +71,55 @@
         <a class="navigation-links" href="//replit.com/site/pricing">Pricing</a>
         <a class="navigation-links" href="//replit.com/jam?from=static">Jam</a>
     </div>
-    <div>
+    <div class="searchBoxHolder">
+        <a class="sign-up" href="//replit.com/signup">Signup</a>
         <button class="theme-button-top" onclick="toggleTheme()">☀️</button>
-        <a class="sign-up" href="//replit.com/signup">Sign up</a>
+        <input type="text" id="searchBox" name="searchBox" class="searchBox">
     </div>
 </nav>
+
+<script>
+    (async () => {
+        let response = await fetch('./api/v1/meta')
+        let data = await response.json()
+        let list = data;
+        
+        const options = {
+            includeScore: true,
+            findAllMatches: false,
+            threshold: 0.4,
+            //distance: 30,
+            keys: ['title', 'author', 'text']
+        }
+        
+        const fuse = new Fuse(list, options)
+        
+        let box = document.getElementById('searchBox');
+        let postElements = document.getElementsByClassName('post-item')
+    
+        box.addEventListener("keyup",(e) => {
+            let result = []
+            
+            if (box.value.length > 0) {
+                result = fuse.search(box.value)
+                for (let element of postElements) {
+                    element.style.display = "none"; 
+                }
+
+                for (let item of result) {
+                    for (let element of document.getElementsByClassName(`post-url-${item.item.url}`)) {
+                        element.style.display = "";
+                    }
+                }
+            } else {
+                for (let element of postElements) {
+                    element.style.display = ""; 
+                }
+            }
+        });
+    })();
+
+    //list = ["Piero", "Dark Mode", "testing", "Testing", "piero", "Amjad", "repl.it"]
+
+
+</script>
