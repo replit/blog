@@ -3,8 +3,8 @@
   --text-color: black;
   --text-color-diff: black;
   --bg-color: white;
-    
-  --primary-color: #0070E0;
+	
+  --primary-color: #2998ff;
 
   --code-snippet-text: #C10000;
   --code-snippet-highlight: #FFEDED;
@@ -58,6 +58,12 @@ body {
 }
 
 /* Blog post */
+
+.arrow {
+  font-size: 15px;
+  font-weight: 500;
+  font-family: 'Inter', sans-serif;
+}
 
 .back {
   text-decoration: none;
@@ -389,25 +395,20 @@ div.markdown > p > a:hover {
 }
 
 .markdown h3 {
-	font-size: 1.35em;
+	font-size: 24px;
 	line-height: 26px;
     margin: var(--spacing-6) 0 var(--spacing-2) 0;
 }
 
 .markdown h4 {
-	font-size: 1.2em;
+	font-size: 22px;
 	line-height: 24px;
   margin: var(--spacing-6) 0 var(--spacing-2) 0;
 
 }
 
 .markdown h5 {
-	font-size: 1.1em;
-	line-height: 22px;
-}
-
-.markdown h6 {
-	font-size: 1em;
+	font-size: 20px;
 	line-height: 22px;
 }
 
