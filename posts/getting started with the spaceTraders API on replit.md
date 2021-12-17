@@ -1,9 +1,9 @@
 ---
     title: Getting Started with the SpaceTraders API on Replit
     author: Veronica Stork
-    date: 
+    date: 2021-12-17
     cover: https://blog.replit.com/images/game_spacetraders.jpeg
-	categories: projects, eng
+  	categories: projects, eng
 ---
 
 
@@ -15,11 +15,6 @@ But where should you build it?
 
 This tutorial walks you through how to use Replit to play SpaceTraders. Let’s take your first steps toward the complete and total domination of galactic trade, as the [documentation](https://spacetraders.io/docs/guide) says.
 
-## What Is Replit?
-
-Replit can be used to build almost anything, like games, portfolio sites, web3d apps, calculators and more. 
-
-When you create a repl, it’s automatically hosted on the Replit servers without any deployment or configuration. This makes it easy to create apps quickly, without having to set up environments or deal with other hosting services.
 
 ## Okay—What’s SpaceTraders?
 
