@@ -128,27 +128,6 @@ div.markdown > p > a:hover {
 }
 /* end of hover stuff */
 
-.searchBoxHolder {
-    display: flex;
-    flex-direction: row-reverse;
-    align-items: flex-end;
-    flex: 2;
-}
-
-.searchBox {
-    background-color: var(--bg-color);
-    color: var(--text-color);
-    width: 90%;
-    /*max-width: 720px;*/
-    margin: 0px 20px 0px 20px;
-    border: solid #9C9C9C 1px;
-    border-radius: 4px;
-    padding: 8px 12px;
-    font-family: "IBM Plex Sans", sans-serif;
-    font-size: 16px;
-    font-weight: 500;
-}
-
 .post-title a:hover {
 	color: var(--primary-color);
 }
@@ -359,7 +338,7 @@ div.markdown > p > a:hover {
 
 .theme-button-top {
 	display: none;
-	padding: 12.2px 16px; 
+	padding: 8px 16px; 
 	background-color: #0070E0;
 	border-radius: 4px;
 	border-width: 0px;
@@ -555,7 +534,7 @@ white-space: pre-wrap;
 /* Responsive breakpoints */
 
 
-@media all and (max-width: 800px) {
+@media all and (max-width: 900px) {
 .page_container {
   padding: 0 var(--spacing-4);
 }

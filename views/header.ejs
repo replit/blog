@@ -1,4 +1,4 @@
-<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6"></script>
+    <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6"></script>
 
 <!-- bruh why aren't these in the main css file -->
 <style>
@@ -8,13 +8,41 @@
         align-items: center;
         margin: 0 auto auto auto;
         max-width: 1800px;
-        flex: 1;
         width: 100%;
         padding: 16px 0;
     }
-    .navigation-container {
+    .navigation-container, .search-container {
+        flex: 4;
         display: flex;
         align-items: center;
+    }
+    .search-container {
+        flex: 5;
+    }
+    .signupHolder {
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: flex-end;
+    flex: 4;
+    }
+    .signupHolder * {
+        line-height: 25.6px;
+    }
+    .searchBox {
+        display: flex; /* none */
+        align-self: center;
+        flex-direction: column;
+        background-color: var(--bg-color);
+        color: var(--text-color);
+        max-width: 800px;
+        width: 100%;
+        margin: 0px 40px;
+        border: solid #9C9C9C 1px;
+        border-radius: 4px;
+        padding: 8px 12px;
+        font-family: "IBM Plex Sans", sans-serif;
+        font-size: 16px;
+        font-weight: 500;
     }
     .navigation div {
         display: flex;
@@ -47,7 +75,7 @@
         margin: 0 12px;
         width: 110px;
     }
-    @media all and (max-width: 800px) {
+    @media all and (max-width: 900px) {
         .navigation {
             padding: 16px 0;
             margin: 24px auto 32px auto;
@@ -59,6 +87,28 @@
             display: none;
         }
     }
+
+    @media all and (max-width: 900px) {
+        .navigation-container, .signupHolder {
+            flex: 1;
+        }
+
+        .searchBox {
+            margin-left: 10px;
+            margin-right: 10px;
+        }
+    }
+
+    @media all and (max-width: 500px) {
+        .navigation-container img {
+            width: 80px;
+        }
+
+        .signupHolder a, .signupHolder button {
+            transform: scale(0.9);
+            margin: -2px;
+        }
+    }
 </style>
 <!-- trying to understand some of this code made my mental state slowly deteriorate, as you can see through my comments. -p -->
 <nav class="navigation">
@@ -67,45 +117,59 @@
         <a class="logo" href="//replit.com"><img id="logo-img" src=".//images/logo.png" alt="repl.it" /></a>
         <a class="navigation-links" href="//replit.com/site/ide">Features</a>
         <a class="navigation-links" href="//replit.com/site/jobs">Jobs</a>
-        <a class="navigation-links" href="//blog.replit.com">Blog</a>
+        <a class="navigation-links" href="/">Blog</a>
         <a class="navigation-links" href="//replit.com/site/pricing">Pricing</a>
         <a class="navigation-links" href="//replit.com/jam?from=static">Jam</a>
     </div>
-    <div class="searchBoxHolder">
+    <div class="search-container">
+        <input type="text" id="searchBox" name="searchBox" class="searchBox" placeholder="Search">
+    </div>
+    <div class="signupHolder">
         <a class="sign-up" href="//replit.com/signup">Signup</a>
         <button class="theme-button-top" onclick="toggleTheme()">☀️</button>
-        <input type="text" id="searchBox" name="searchBox" class="searchBox" placeholder="Search">
     </div>
 </nav>
 
 <script>
+
+    function debounce(func, timeout = 200) {
+        let timer;
+        return (...args) => {
+            clearTimeout(timer);
+            timer = setTimeout(() => {
+                func.apply(this, args);
+            }, timeout);
+        };
+    }
+    
+    let lastQuery = "";
+    let box = document.getElementById('searchBox');
+    let postElements = document.getElementsByClassName('post-item');
+    let list = [];
+    
     (async () => {
         let response = await fetch('./api/v1/meta')
-        let data = await response.json()
-        let list = data;
+        list = await response.json()
         
         const options = {
             includeScore: true,
-            findAllMatches: false,
             threshold: 0.4,
-            //distance: 30,
             keys: ['title', 'author', 'text']
         }
         
         const fuse = new Fuse(list, options)
         
-        let box = document.getElementById('searchBox');
-        let postElements = document.getElementsByClassName('post-item')
-    
-        box.addEventListener("keyup",(e) => {
-            let result = []
+        const runSearch = (() => {
+            let result = [];
             
+            console.log("new")
+            lastQuery = box.value;
             if (box.value.length > 0) {
                 result = fuse.search(box.value)
                 for (let element of postElements) {
                     element.style.display = "none"; 
                 }
-
+    
                 for (let item of result) {
                     for (let element of document.getElementsByClassName(`post-url-${item.item.url}`)) {
                         element.style.display = "";
@@ -116,6 +180,16 @@
                     element.style.display = ""; 
                 }
             }
+        })
+
+        const trySearch = debounce(() => runSearch());
+        
+        box.addEventListener("keyup",(e) => {
+            trySearch();
         });
     })();
+
+    
+    
+
 </script>
