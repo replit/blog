@@ -1,13 +1,12 @@
 ---
-    title: Getting Started with the SpaceTraders API on Replit
-    author: Veronica Stork
-    date: 2021-12-17
-    cover: https://blog.replit.com/images/game_spacetraders.jpeg
-  	categories: projects, eng
+title: Getting Started with the SpaceTraders API on Replit
+author: Veronica Stork
+date: 2021-12-17
+cover: https://blog.replit.com/images/game_spacetraders.jpeg
+categories: projects
 ---
 
-
-[SpaceTraders](https://spacetraders.io) is an online multiplayer game where you buy a spaceship, explore space, and set up trade. But it’s not just any other space exploration game—this one you play by manipulating a [REST API](https://www.redhat.com/en/topics/api/what-is-a-rest-api). It’s a fun, interactive way for new programmers to learn and stretch their skills. 
+[SpaceTraders](https://spacetraders.io) is an online multiplayer game where you buy a spaceship, explore space, and set up trades. But it’s not just any other space exploration game—this one you play by manipulating a [REST API](https://www.redhat.com/en/topics/api/what-is-a-rest-api). It’s a fun, interactive way for new programmers to learn and stretch their skills. 
 
 But where should you build it?
 

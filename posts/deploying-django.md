@@ -3,7 +3,7 @@ title: Deploying Django to Replit
 author: Samuel Torimiro
 date: 2021-12-03
 cover: https://blog.replit.com/images/django_cover_image.jpeg
-categories: projects,eng
+categories: projects
 ---
 
 [Django](https://www.djangoproject.com/) is a Python framework for building out full-fledged web applications. It’s loved by developers due to its [battery-included philosophy](https://docs.djangoproject.com/en/3.2/ref/contrib/) and comes preloaded with features you can use to rapidly develop your web application. 
