@@ -28,10 +28,10 @@
     .signupHolder * {
         line-height: 25.6px;
     }
-    .searchBox {
+    .searchBoxContainer {
         display: flex; /* none */
         align-self: center;
-        flex-direction: column;
+        padding-left: 12px;
         background-color: var(--bg-color);
         color: var(--text-color);
         max-width: 800px;
@@ -39,10 +39,21 @@
         margin: 0px 40px;
         border: solid #9C9C9C 1px;
         border-radius: 4px;
+    }
+    .searchBox {
+        display: flex; /* none */
+        align-self: center;
+        flex-direction: column;
+        background-color: var(--bg-color);
+        color: var(--text-color);
+        width: 100%;
+        margin: 0px;
+        border: none;
         padding: 8px 12px;
         font-family: "IBM Plex Sans", sans-serif;
         font-size: 16px;
         font-weight: 500;
+        border-radius: 4px;
     }
     .navigation div {
         display: flex;
@@ -122,7 +133,12 @@
         <a class="navigation-links" href="//replit.com/jam?from=static">Jam</a>
     </div>
     <div class="search-container">
-        <input type="text" id="searchBox" name="searchBox" class="searchBox" placeholder="Search">
+        <div class="searchBoxContainer">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+            <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+            </svg>
+            <input type="text" id="searchBox" name="searchBox" placeholder="Search" class="searchBox">
+        </div>
     </div>
     <div class="signupHolder">
         <a class="sign-up" href="//replit.com/signup">Signup</a>
