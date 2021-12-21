@@ -1,4 +1,4 @@
-    <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6"></script>
 
 <!-- bruh why aren't these in the main css file -->
 <style>
@@ -26,7 +26,7 @@
     display: flex;
     flex-direction: row-reverse;
     align-items: flex-end;
-    flex: 4;
+    flex: 4
     }
     .signupHolder * {
         line-height: 25.6px;
@@ -42,6 +42,19 @@
         margin: 0px 40px;
         border: solid #9C9C9C 1px;
         border-radius: 4px;
+    }
+    .searchBoxContainerUpper {
+        display: flex;
+        align-items: center;
+    }
+    .searchBoxContainerLower {
+        display: flex;
+        align-items: center;
+        margin: 0;
+        margin-bottom: 20px;
+        width: 100%;
+        max-width: 720px;
+        display: none;
     }
     .searchBox {
         display: flex; /* none */
@@ -92,7 +105,7 @@
     @media all and (max-width: 900px) {
         .navigation {
             padding: 16px 0;
-            margin: 24px auto 32px auto;
+            margin: 24px auto 8px auto;
         }
         .navigation img {
             margin: 0;
@@ -104,23 +117,21 @@
 
     @media all and (max-width: 900px) {
         .navigation-container, .signupHolder {
-            flex: 1;
+            flex: 4;
         }
 
-        .searchBox {
-            margin-left: 10px;
-            margin-right: 10px;
+        .searchBoxContainerUpper {
+            display: none;
+        }
+
+        .searchBoxContainerLower {
+            display: flex;
         }
     }
 
-    @media all and (max-width: 500px) {
-        .navigation-container img {
-            width: 80px;
-        }
-
-        .signupHolder a, .signupHolder button {
-            transform: scale(0.9);
-            margin: -2px;
+    @media all and (max-width: 1400px) {
+        .signupHolder {
+            flex: 2;
         }
     }
 </style>
@@ -136,79 +147,15 @@
         <a class="navigation-links" href="//replit.com/jam?from=static">Jam</a>
     </div>
     <div class="search-container">
-        <div class="searchBoxContainer">
+        <section class="searchBoxContainer searchBoxContainerUpper">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
             <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
             </svg>
-            <input type="text" id="searchBox" name="searchBox" placeholder="Search" class="searchBox">
-        </div>
+            <input type="text" id="searchBoxUpper" name="searchBox" placeholder="Search" class="searchBox">
+        </section>
     </div>
     <div class="signupHolder">
         <a class="sign-up" href="//replit.com/signup">Signup</a>
         <button class="theme-button-top" onclick="toggleTheme()">☀️</button>
     </div>
 </nav>
-
-<script>
-
-    function debounce(func, timeout = 200) {
-        let timer;
-        return (...args) => {
-            clearTimeout(timer);
-            timer = setTimeout(() => {
-                func.apply(this, args);
-            }, timeout);
-        };
-    }
-    
-    let lastQuery = "";
-    let box = document.getElementById('searchBox');
-    let postElements = document.getElementsByClassName('post-item');
-    let list = [];
-    
-    (async () => {
-        let response = await fetch('./api/v1/meta')
-        list = await response.json()
-        
-        const options = {
-            includeScore: true,
-            threshold: 0.4,
-            keys: ['title', 'author', 'text']
-        }
-        
-        const fuse = new Fuse(list, options)
-        
-        const runSearch = (() => {
-            let result = [];
-            
-            console.log("new")
-            lastQuery = box.value;
-            if (box.value.length > 0) {
-                result = fuse.search(box.value)
-                for (let element of postElements) {
-                    element.style.display = "none"; 
-                }
-    
-                for (let item of result) {
-                    for (let element of document.getElementsByClassName(`post-url-${item.item.url}`)) {
-                        element.style.display = "";
-                    }
-                }
-            } else {
-                for (let element of postElements) {
-                    element.style.display = ""; 
-                }
-            }
-        })
-
-        const trySearch = debounce(() => runSearch());
-        
-        box.addEventListener("keyup",(e) => {
-            trySearch();
-        });
-    })();
-
-    
-    
-
-</script>

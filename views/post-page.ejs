@@ -111,6 +111,12 @@
                 });
 
                 document.getElementById("categories-container").innerHTML = finalInner;
+
+                let searchBoxes = document.getElementsByClassName("searchBoxContainer");
+
+                for (let i = 0; i < searchBoxes.length; i++) {
+                    searchBoxes[0].remove();
+                }
             </script>
             <!-- end of categories bar -->
 
