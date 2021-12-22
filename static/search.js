@@ -30,6 +30,7 @@ let list = [];
         const searchValue = searchBox.value;
         if (searchValue.length > 0) {
             result = fuse.search(searchValue)
+            console.log(result)
             for (let element of postElements) {
                 element.style.display = "none"; 
             }

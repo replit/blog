@@ -42,7 +42,7 @@ const buildPostCache = async () => {
             postsAlt.push({
                 title: p.title,
                 author: p.author,
-                text: p.descriptionText,
+                text: p.fullText,
                 url: p.url
             })
         }
@@ -94,6 +94,14 @@ const readPost = async (slug, snip = false) => {
     const previewParts = previewText.split(/\s+/).slice(0, 24);
     const description = `${previewParts.join(" ")}…`;
 
+    const fullMd = marked(contentMd);
+    const fullText = htmlToText
+        .fromString(fullMd, {
+            ignoreHref: true,
+            ignoreImage: true,
+        })
+        .replace(/\n/g, " ");
+
     let content;
     if (snip) {
         content = previewHtml;
@@ -134,7 +142,7 @@ const readPost = async (slug, snip = false) => {
     return {
         content,
         description,
-        descriptionText: previewText,
+        fullText,
         snipped: snip,
         title: data.title,
         author: data.author,
