@@ -8,8 +8,7 @@ function debounce(func, timeout = 200) {
     };
 }
 
-let boxUpper = document.getElementById('searchBoxUpper');
-let boxLower = document.getElementById('searchBoxLower');
+const searchBox = document.getElementById('searchBoxUpper') || document.getElementById('searchBoxLower');
 let postElements = document.getElementsByClassName('post-item');
 let list = [];
 
