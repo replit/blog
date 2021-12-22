@@ -45,8 +45,10 @@ let list = [];
             }
         }
     })
+
+    const debouncedSearch = debounce(() => runSearch());
     
     searchBox.addEventListener("keyup",(e) => {
-        debounce(() => runSearch());
+        debouncedSearch();
     });
 })();
