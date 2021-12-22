@@ -8,7 +8,14 @@ function debounce(func, timeout = 200) {
     };
 }
 
-const searchBox = document.getElementById('searchBoxLower') || document.getElementById('searchBoxUpper');
+const width = window.innerWidth;
+
+let searchBox = document.getElementById('searchBoxUpper');
+
+if (width <= 900) {
+    searchBox = document.getElementById('searchBoxLower');
+}
+
 let postElements = document.getElementsByClassName('post-item');
 let list = [];
 
@@ -30,7 +37,6 @@ let list = [];
         const searchValue = searchBox.value;
         if (searchValue.length > 0) {
             result = fuse.search(searchValue)
-            console.log(result)
             for (let element of postElements) {
                 element.style.display = "none"; 
             }
