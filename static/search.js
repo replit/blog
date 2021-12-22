@@ -8,7 +8,7 @@ function debounce(func, timeout = 200) {
     };
 }
 
-const searchBox = document.getElementById('searchBoxUpper') || document.getElementById('searchBoxLower');
+const searchBox = document.getElementById('searchBoxLower') || document.getElementById('searchBoxUpper');
 let postElements = document.getElementsByClassName('post-item');
 let list = [];
 
@@ -26,10 +26,10 @@ let list = [];
     
     const runSearch = (() => {
         let result = [];
-        
-        console.log("new")
-        if (boxUpper.value.length > 0) {
-            result = fuse.search(boxUpper.value)
+
+        const searchValue = searchBox.value;
+        if (searchValue.length > 0) {
+            result = fuse.search(searchValue)
             for (let element of postElements) {
                 element.style.display = "none"; 
             }
@@ -39,18 +39,7 @@ let list = [];
                     element.style.display = "";
                 }
             }
-        } else if (boxLower != null && boxLower.value.length > 0) {
-            result = fuse.search(boxLower.value)
-            for (let element of postElements) {
-                element.style.display = "none"; 
-            }
-
-            for (let item of result) {
-                for (let element of document.getElementsByClassName(`post-url-${item.item.url}`)) {
-                    element.style.display = "";
-                }
-            }
-        } else {
+        } else { //makes sure all elements are shown
             for (let element of postElements) {
                 element.style.display = ""; 
             }
@@ -59,13 +48,7 @@ let list = [];
 
     const trySearch = debounce(() => runSearch());
     
-    boxUpper.addEventListener("keyup",(e) => {
+    searchBox.addEventListener("keyup",(e) => {
         trySearch();
     });
-
-    if (boxLower != null) {
-        boxLower.addEventListener("keyup",(e) => {
-            trySearch();
-        });   
-    }
 })();
