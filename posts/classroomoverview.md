@@ -1,11 +1,11 @@
 ---
-title: Classroom Overview 
+title: View Student Performance with Classroom Overview 
 author: Haya Odeh
 date: 2016-06-29T07:00:00.000Z
 categories: edu
 ---
 
-Before we decided to build [repl.it classroom](https://repl.it/classrooms), we paid a visit to one of the schools using us in the classroom. I felt excited and anxious at the same time; I was introduced to the teacher and students in the class, and then my job started as designer observing and paying attention to every single detail.[](preview end)
+Before we decided to build [repl.it classroom](https://replit.com/site/teams-for-education), we paid a visit to one of the schools using us in the classroom. I felt excited and anxious at the same time; I was introduced to the teacher and students in the class, and then my job started as designer observing and paying attention to every single detail.[](preview end)
 
 The teacher explained the workflow and had two students assisting her to check on the students. Seeing the teacher and student’s frustration made me see a problem, I noticed that most of the students were trying to communicate their frustrations, but they were either embarrassed or too shy. Others gave up too soon, without even trying. The two assistants solution might have been a good idea, but for students knowing the fact that they’re being watched or might be judged made them hesitant to ask for help. Towards the end of the class I was handed a piece of paper and was asked to list the student names who completed the assignment successfully.
 

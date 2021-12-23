@@ -1,5 +1,5 @@
 ---
-title: Assignment Reordering
+title: Reorder Assignments with Teams for Education
 author: Haya Odeh
 date: 2017-01-19T08:00:00.000Z
 categories: edu

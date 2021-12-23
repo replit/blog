@@ -1,5 +1,5 @@
 ---
-title: Assignment Due Date
+title: Set Assignment Due Dates with Teams for Education
 author: Faris Masad
 date: 2016-09-30T07:00:00.000Z
 categories: edu
