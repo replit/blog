@@ -58,7 +58,7 @@ To build any package, you need to:
 
 2. Execute a build script to run all the build steps.
 
-This process is repeated for every package and Nix goes to great lengths to ensure each each environment that packages are built in are reproducible. Nix will limit network access, filesystem access, and sometimes even run in a sandboxed container during building to prevent any sort of external influence during package building.
+This process is repeated for every package and Nix goes to great lengths to ensure each environment that packages are built in are reproducible. Nix will limit network access, filesystem access, and sometimes even run in a sandboxed container during building to prevent any sort of external influence during package building.
 
 Packages can depend on other packages which creates a large dependency graph that Nix will traverse and build packages on the way.
 
