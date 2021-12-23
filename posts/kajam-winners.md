@@ -5,7 +5,7 @@ categories: news,events
 date: 2021-12-23T15:17:38.686Z
 ---
 
-<a href="https://youtu.be/KWNlEK5QSWk" title="Interview with Zeke Hernandez"><img src="https://blog.replit.com/images/kajam-winners/huge_edited.png" alt="video cover image for interview with Zeke Hernandez" /></a>
+<a href="https://youtu.be/KWNlEK5QSWk" title="Interview with Zeke Hernandez"><img src="https://blog.replit.com/images/kajam-winners/huge_edited.png" alt="video cover image for interview with Zeke Hernandez"/></a>
 
 
 # Kajam Winners

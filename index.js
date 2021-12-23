@@ -178,6 +178,19 @@ app.get("/feed.xml", (req, res) => {
         .catch((err) => errPage(res, err));
 });
 
+app.get("/:slug/", (req, res) => {
+  const slug = req.params.slug
+        .split("\n")
+        .filter((v) => v.match(/[^\s]/))
+        .join("\n")
+        .replace(/[\x01\x02\x03\x04]/, "");
+
+  console.log('yeeting /')
+  console.log(slug)
+  
+  res.redirect(301, `/${slug}`)
+})
+
 const filter = new Filter();
 app.get("/:slug", (req, res) => {
     const slug = req.params.slug
@@ -185,6 +198,9 @@ app.get("/:slug", (req, res) => {
         .filter((v) => v.match(/[^\s]/))
         .join("\n")
         .replace(/[\x01\x02\x03\x04]/, "");
+
+  console.log('no /')
+  console.log(slug)
     if (typeof slug === "string" && slug.length > 0) {
         console.log("\033[0m" + `GET ${filter.clean(slug.slice(0, 500)).replace("\033[2J", "")}`);
     }
