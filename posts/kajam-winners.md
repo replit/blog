@@ -107,6 +107,6 @@ You can [play here](https://heliumphant.havana24.repl.co/) or view the [Spotligh
 
 # The end
 
-If you'd like to watch our stream where we announced the winners, you can find the video on [our YouTube](https://www.youtube.com/watch?v=gOecj6Zktik). 
+Prefer to catch up on our winners with a video? Catch our announcement stream [on YouTube](https://www.youtube.com/watch?v=gOecj6Zktik). 
 
 ### Thanks to everyone for participating in the 2021 Kajam game jam. We had so many great submissions, and we can't wait to see you next year!
