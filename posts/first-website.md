@@ -1,5 +1,5 @@
 ---
-title: First Website Tutorial
+title: How To Build a Website with Replit
 author: Yev Barkalov
 date: 2018-06-14T03:32:26.000Z
 categories: projects

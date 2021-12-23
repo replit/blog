@@ -1,5 +1,5 @@
 ---
-title: Deeplinking 
+title: Share where you are in a Repl with Deeplinking
 author: Sergei Chestakov 
 date: 2020-05-22T00:00:00.000Z
 cover: https://blog.repl.it/images/replit-logo-and-name.jpg

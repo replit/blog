@@ -1,5 +1,5 @@
 ---
-title: Cloning Assignments
+title: Clone Assignments with Replit's Teams for Education
 author: Tim Chen
 date: 2018-01-30T00:00:00.000Z
 categories: edu

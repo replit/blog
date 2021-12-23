@@ -1,5 +1,5 @@
 ---
-title: Firebase
+title: How to use Firebase for a website with Replit
 author: Yev Barkalov
 date: 2018-07-26T00:55:39.000Z
 categories: projects
@@ -15,7 +15,7 @@ What I want to do is include a guestbook, a way for people who visit the site to
 
 > ![](/public/images/blog/firebase/fantastic_final.png)
 
-I don't have any CSS in my website but that's only so the implemented feature is blatantly obvious
+I don't have any CSS in my website but that's only so the implemented feature is blatantly obvious.
 
 The first thing you'll need for this is a website and a url you can access it with. I'll be using my fantastic website which you can fork [here](https://repl.it/@yevbar/My-Fantastic-Website). Once you have those two things, continue along to the following steps!
 

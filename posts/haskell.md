@@ -1,5 +1,5 @@
 ---
-title: Introducing Haskell
+title: Start Coding with Haskell on Replit
 author: Mason Clayton
 date: 2017-02-27T08:00:00.000Z
 categories: product
