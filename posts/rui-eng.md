@@ -247,7 +247,7 @@ The IDE support means that the APIs are discoverable and type-safe, so we have m
 
 Alongside the design system we've also built an internal page that has component examples and documentation (generated from source code).
 
-![RUI component library: components and documentation in one place](images/rui/eng/ui-page.png)
+![RUI component library: components and documentation in one place](./images/rui/eng/ui-page.png)
 
 All our new code is written using RUI, and we opportunistically upgrade the old `<styled jsx>`, which results in much less code.
 
