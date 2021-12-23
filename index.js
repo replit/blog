@@ -178,19 +178,6 @@ app.get("/feed.xml", (req, res) => {
         .catch((err) => errPage(res, err));
 });
 
-app.get("/:slug/", (req, res) => {
-  const slug = req.params.slug
-        .split("\n")
-        .filter((v) => v.match(/[^\s]/))
-        .join("\n")
-        .replace(/[\x01\x02\x03\x04]/, "");
-
-  console.log('yeeting /')
-  console.log(slug)
-  
-  res.redirect(301, `/${slug}`)
-})
-
 const filter = new Filter();
 app.get("/:slug", (req, res) => {
     const slug = req.params.slug
