@@ -178,6 +178,12 @@ app.get("/feed.xml", (req, res) => {
         .catch((err) => errPage(res, err));
 });
 
+app.get("/:slug/images/*", (req, res) => {
+  let actualPath = req.path.replace(req.params.slug, '').substring(1, req.path.length);
+  console.log(`ruh roh raggy! bad image path! redirecting to ${actualPath}`)
+  res.redirect(actualPath);
+})
+
 const filter = new Filter();
 app.get("/:slug", (req, res) => {
     const slug = req.params.slug
@@ -186,8 +192,6 @@ app.get("/:slug", (req, res) => {
         .join("\n")
         .replace(/[\x01\x02\x03\x04]/, "");
 
-  console.log('no /')
-  console.log(slug)
     if (typeof slug === "string" && slug.length > 0) {
         console.log("\033[0m" + `GET ${filter.clean(slug.slice(0, 500)).replace("\033[2J", "")}`);
     }

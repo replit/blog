@@ -5,7 +5,7 @@ categories: news,events
 date: 2021-12-23T15:17:38.686Z
 ---
 
-<a href="https://youtu.be/KWNlEK5QSWk" title="Interview with Zeke Hernandez"><img src="https://blog.replit.com/images/kajam-winners/huge_edited.png" alt="video cover image for interview with Zeke Hernandez"/></a>
+<a href="https://youtu.be/gOecj6Zktik" title="7 Coolest Games from Replit's Game Jam - Kajam 2021!"><img src="https://blog.replit.com/images/kajam-winners/huge_edited.png" alt="video cover image for interview with Zeke Hernandez"/></a>
 
 
 # Kajam Winners
@@ -20,7 +20,8 @@ Starting October 18th, the Kajam game jam began. On October 25th, Kajam ended. D
 
 ### Most Creative - Curse of the Ego King by vishal1999tk
 
-![Curse of the Ego King Screenshot](static/images/kajam-winners/ego_king.png)
+![Curse of the Ego King Screenshot](https://blog.replit.com/images/kajam-winners/ego_king.png)
+
 
 In the underworld, your detached HUGE head is your weapon, kick it around to deal with your enemies! Those who have played *The Binding of Isaac* will find the art and top-down style familiar, but the gameplay is truly unique. 
 
@@ -30,7 +31,7 @@ You can [play here](https://curse-of-the-ego-king.vishal1999tk.repl.co/) or view
 
 ### Best Story - Disasternaut by LehuyH
 
-![Disasternaut cover image](static/images/kajam-winners/disasternaut.jpeg)
+![Disasternaut cover image](https://blog.replit.com/images/kajam-winners/disasternaut.jpeg)
 
 HUGE (Humans United on Galactic Exploration) is offering ANYONE the chance to own their very own planet. Do you have what it takes to turn the planet into a self-sustaining and profitable society? Or will the planet's harsh environment end up being YOUR demise? This story turned heads with its humorous dystopian world-building and intriguing narrative. 
 
@@ -40,7 +41,7 @@ You can [play here](https://disasternaut.lehuyh.repl.co/) or view the [Spotlight
 
 ### Most Polished - Putty Putter by sidfish
 
-![Putty Putter title](static/images/kajam-winners/putty_putter.png)
+![Putty Putter title](https://blog.replit.com/images/kajam-winners/putty_putter.png)
 
 
 A Sokoban puzzle game with the unique twist of needing to grow bigger and forming different shapes to solve the levels. It brings back memories of flash games like Bloxors and other activities you might find on CoolMathGames.
@@ -52,7 +53,7 @@ You can [play here](https://putty-putter.sidfish.repl.co/) or view the [Spotligh
 
 ### Most Hilarious - MEETING WOOM by tessa
 
-![Meeting Woom screenshot](static/kajam-winners/meeting_woom.png)
+![Meeting Woom screenshot](https://blog.replit.com/images/kajam-winners/meeting_woom.png)
 
 It's your first day on the job as genius CEO Eliot L. Zad's administrative assistant and he needs you to get the company meetings under control right away! At first, this may seem like an easy task, but watch out; the company is growing fast, and you may have a HUGE number of colleagues to keep a totally-not-tattling eye on before you know it! This game is absurd, and that's what makes it so funny!
 
@@ -62,7 +63,7 @@ You can [play here](https://meeting-woom.tessa.repl.co/) or view the [Spotlight 
 
 ### Most Theme-fitting - Solar Taxicab by theohalpern
 
-![Solar Taxi Cab screenshot](static/kajam-winners/solar_taxi_cab.png)
+![Solar Taxi Cab screenshot](https://blog.replit.com/images/kajam-winners/solar_taxi_cab.png)
 
 Welcome to Solar Taxicab, the game where you fairy passengers from planet to planet, avoid and shoot aliens, and try and make a huge amount of money. Try to unlock all 4 bonus planets! Make sure you're utilizing the shop and unlock the bonus planets because passengers seeking those planets as their destination will pay far more than normal passengers. In this game you are truly a giant, traveling to planets at light speed in a massive ship. 
 
@@ -72,7 +73,7 @@ You can [play here](https://solar-taxicab.theohalpern.repl.co/) or view the [Spo
 
 ### Best Kaboom Game - Goliath by zekehernandez
 
-![Goliath cover image](static/images/kajam-winners/goliath.png)
+![Goliath cover image](https://blog.replit.com/images/kajam-winners/goliath.png)
 
 Clear rooftops of monsters with your scientifically enhanced body. It's that easy. Right? Become a cyborg ninja in this fun visual masterpiece.
 
@@ -80,14 +81,13 @@ Our judge TechWithTim said “Fun game! Love the 3D and all the obstacles and le
 
 Watch our interview with zekehernandez [here](https://youtu.be/KWNlEK5QSWk)! 
 
-<a href="https://youtu.be/KWNlEK5QSWk" title="Interview with Zeke Hernandez"><img src="static/kajam-winners/zeke_hernandez_cover.JPG" alt="video cover image for interview with Zeke Hernandez" /></a>
-
+<a href="https://youtu.be/KWNlEK5QSWk" title="Interview with Zeke Hernandez"><img src="https://blog.replit.com/images/kajam-winners/zeke_hernandez_cover.JPG" alt="video cover image for interview with Zeke Hernandez" /></a>
 
 You can [play here](https://goliath.zekehernandez.repl.co/) or view the [Spotlight page](https://replit.com/@zekehernandez/Goliath).
 
 ## **Grand Prize for Most Fun - Heliumphant! by havana24**
 
-![Heliumphant start screen](static/images/kajam-winners/disasternaut.jpeg)
+![Heliumphant start screen](https://blog.replit.com/images/kajam-winners/heliumphant.png)
 
 Heliumphant is a puzzle game where you control a tiny elephant that can become HUGE thanks to its helium bubble and the ability to catch anything with its trunk! Catch apples along the way and become huge enough to catch other elephants, then spit 'em out and use them as a slingshot and clear the way. This game is a blast to play and the concept is just amazing.
 
