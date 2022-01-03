@@ -1,7 +1,7 @@
 {
-  "name": "replit-docs",
+  "name": "replit-blog",
   "version": "1.0.0",
-  "description": "This is the repo for the [documentation](https://repl.it/site/docs) for [Repl.it](https://repl.it), a powerful online IDE.",
+  "description": "This is the repo for the [blog](https://blog.replit.com) for [Replit](https://replit.com), a powerful online IDE.",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -14,9 +14,9 @@
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/replit/replit.github.io/issues"
+    "url": "https://github.com/replit/blog/issues"
   },
-  "homepage": "https://github.com/replit/replit.github.io#readme",
+  "homepage": "https://github.com/replit/blog#readme.md",
   "dependencies": {
     "bad-words": "^3.0.4",
     "ejs": "^2.7.1",
