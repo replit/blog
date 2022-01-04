@@ -20,12 +20,14 @@ marked.setOptions({
 });
 
 let previewCache = null;
+let previewCacheAlt = null;
 
 const buildPostCache = async () => {
     try {
         const ls = await fs.readdir("./posts");
 
         let posts = [];
+        let postsAlt = [];
 
         for (const f of ls) {
             posts.push(await readPost(f.slice(0, -3), true));
@@ -35,7 +37,18 @@ const buildPostCache = async () => {
 
         posts.sort((l, r) => r.timestamp - l.timestamp);
 
+        
+        for (const p of posts) {
+            postsAlt.push({
+                title: p.title,
+                author: p.author,
+                text: p.fullText,
+                url: p.url
+            })
+        }
+        
         previewCache = posts;
+        previewCacheAlt = postsAlt;
     } catch (e) {
         // Instead of dying, let's try to contain the damage.
         console.error("Failed to build the post cache: ", e);
@@ -81,6 +94,14 @@ const readPost = async (slug, snip = false) => {
     const previewParts = previewText.split(/\s+/).slice(0, 24);
     const description = `${previewParts.join(" ")}…`;
 
+    const fullMd = marked(contentMd);
+    const fullText = htmlToText
+        .fromString(fullMd, {
+            ignoreHref: true,
+            ignoreImage: true,
+        })
+        .replace(/\n/g, " ");
+
     let content;
     if (snip) {
         content = previewHtml;
@@ -121,6 +142,7 @@ const readPost = async (slug, snip = false) => {
     return {
         content,
         description,
+        fullText,
         snipped: snip,
         title: data.title,
         author: data.author,
@@ -212,6 +234,10 @@ app.get("/:slug", (req, res) => {
             }
         });
 });
+
+app.get("/api/v1/meta", (req, res) => {
+    res.send(previewCacheAlt);
+})
 
 //moved this here because of an edge case Faris discovered and initially thought was from my code. turns out, this error has been here since probably the beggining of the blog
 buildPostCache().then(() => {
