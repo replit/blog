@@ -228,13 +228,17 @@ div.markdown > p > a:hover {
 .categories-container-holder {
 	max-width: 720px;
 	width: 100%;
-	margin-top: 10px;
+}
+
+.categories-container-glove {
+    display: flex;
+    align-content: center;
 }
 
 .categories-container {
+    width: auto;
     display: flex;
-	align-self: left;
-	justify-content: flex-start;
+    justify-content: flex-start;
 	flex-wrap: wrap;
 	margin-bottom: 0px;
 }
@@ -334,7 +338,7 @@ div.markdown > p > a:hover {
 
 .theme-button-top {
 	display: none;
-	padding: 12.2px 16px; 
+	padding: 8px 16px; 
 	background-color: #0070E0;
 	border-radius: 4px;
 	border-width: 0px;
@@ -530,7 +534,7 @@ white-space: pre-wrap;
 /* Responsive breakpoints */
 
 
-@media all and (max-width: 800px) {
+@media all and (max-width: 900px) {
 .page_container {
   padding: 0 var(--spacing-4);
 }

@@ -12,7 +12,7 @@ Replit is one of the leading cloud, in-browser IDEs with support for fifty-plus 
 
 However, Replit is more than just an IDE in a cloud. With additional features like real-time collaboration, GitHub integration, and detailed edit history, Replit is a full-blown workspace for teams, educators, and interviewers.
 
-This guide will show you how to install [Mastodon](https://mastodon.social/about) in the Replit environment, showing its versatility and potential.
+This guide will show you how to install [Mastodon](https://mastodon.social/about) in the Replit environment, showing its versatility and potential.You can follow along with [this Repl](https://replit.com/@areknawo/Mastodon).
 
 ## What Is Mastodon?
 
@@ -113,6 +113,7 @@ To run Redis, put the following command in your `start.sh` script:
 
 ```bash
 # start Redis
+redis-cli shutdown
 redis-server --bind 127.0.0.1 &
 ```
 
@@ -129,6 +130,7 @@ The `postgresql.conf.tpl` should look as follows:
 ```text
 listen_addresses = '127.0.0.1'
 port = 5432
+unix_socket_directories = 'replace_unix_dir'
 ```
 
 In `.replit`, define two additional env variables to point Postgres to created directories. `PGDATA` sets Postgres data location, while `DB\_HOST` informs Mastodon where to look for the Postgres instance, as it’s not the default location.
