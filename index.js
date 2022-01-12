@@ -239,7 +239,7 @@ app.get("/api/v1/meta", (req, res) => {
     res.send(previewCacheAlt);
 })
 
-//moved this here because of an edge case Faris discovered and initially thought was from my code. turns out, this error has been here since probably the beggining of the blog
+//moved this here because of an edge case Faris discovered and initially thought was from my code. turns out, this error has been here since probably the beginning of the blog
 buildPostCache().then(() => {
     app.listen(3000, () => {
         console.log("blog is running");
