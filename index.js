@@ -123,6 +123,7 @@ const readPost = async (slug, snip = false) => {
 
     //this adds the eng category to something if it doesn't have it, but has product, infra, or projects. why can't our writers do this on our own? idk. don't trust humans to follow your directions.
     let engSubCats = ["product", "infra", "projects"]; //sorry, no cats here, just catgirls, catboys, and categories
+    //fanks to kognise to finding and fixing bug with this
     if (engSubCats.some(i => categoriesNew.includes(i)))
       categoriesNew.unshift('eng')
 
