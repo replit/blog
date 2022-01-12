@@ -123,12 +123,8 @@ const readPost = async (slug, snip = false) => {
 
     //this adds the eng category to something if it doesn't have it, but has product, infra, or projects. why can't our writers do this on our own? idk. don't trust humans to follow your directions.
     let engSubCats = ["product", "infra", "projects"]; //sorry, no cats here, just catgirls, catboys, and categories
-    categoriesNew.every((c, i, a) => {
-        if (engSubCats.includes(c)) {
-            a[i] = "eng";
-            a.push(c);
-        }
-    });
+    if (engSubCats.some(i => categoriesNew.includes(i)))
+      categoriesNew.unshift('eng')
 
     //replace duplicates (edge case if more than one category is other)
     //.every only does the first element in an array for some reason. replaced with a .map.
