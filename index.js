@@ -123,12 +123,9 @@ const readPost = async (slug, snip = false) => {
 
     //this adds the eng category to something if it doesn't have it, but has product, infra, or projects. why can't our writers do this on our own? idk. don't trust humans to follow your directions.
     let engSubCats = ["product", "infra", "projects"]; //sorry, no cats here, just catgirls, catboys, and categories
-    categoriesNew.every((c, i, a) => {
-        if (engSubCats.includes(c)) {
-            a[i] = "eng";
-            a.push(c);
-        }
-    });
+    //fanks to kognise to finding and fixing bug with this
+    if (engSubCats.some(i => categoriesNew.includes(i)))
+      categoriesNew.unshift('eng')
 
     //replace duplicates (edge case if more than one category is other)
     //.every only does the first element in an array for some reason. replaced with a .map.
@@ -239,7 +236,7 @@ app.get("/api/v1/meta", (req, res) => {
     res.send(previewCacheAlt);
 })
 
-//moved this here because of an edge case Faris discovered and initially thought was from my code. turns out, this error has been here since probably the beggining of the blog
+//moved this here because of an edge case Faris discovered and initially thought was from my code. turns out, this error has been here since probably the beginning of the blog
 buildPostCache().then(() => {
     app.listen(3000, () => {
         console.log("blog is running");
