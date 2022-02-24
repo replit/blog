@@ -1,12 +1,12 @@
 ---
 title: "Replit Apps"
 author: Tyler Angert
-cover: https://static.replit.sh/images/apps/banner.png
+cover: https://blog.replit.com/images/apps/banner.png
 date: 2021-05-12T08:15:20.856Z
 categories: news
 ---
 
-![Apps](https://static.replit.sh/images/apps/banner.png)
+![Apps](https://blog.replit.com/images/apps/banner.png)
 
 In a few years, you’ll be able to build your own operating system. You’ll have a place to browse the web, find people to hang out with, play games, learn, and do deep work. You’ll be able to discover apps from all over the world, modify them, and build your own with your friends– a true multiplayer computing experience that you can customize and call home. Today, the launch of Replit Apps marks the first step towards that future.
 

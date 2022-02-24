@@ -428,7 +428,10 @@ p>em {
   margin:  20px 0 40px 0 !important;
 }
 
-
+.max-width-75 img {
+  max-width: 75%;
+  width: auto !important;
+}
 
 .markdown blockquote {
 	font-style: italic;

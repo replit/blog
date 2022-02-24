@@ -50,7 +50,7 @@ Another thing worth noticing is that Docker only allows for composing images by 
 
 ## Reproducible Environment with Nix
 
-Nix takes a [first-priniciples](https://en.wikipedia.org/wiki/First_principle) approach to reproducible builds and package management. Nix provides a whole build system that allows for building packages in an isolated way.
+Nix takes a [first-principles](https://en.wikipedia.org/wiki/First_principle) approach to reproducible builds and package management. Nix provides a whole build system that allows for building packages in an isolated way.
 
 To build any package, you need to:
 
