@@ -45,6 +45,7 @@ body {
   font-size: 16px;
   line-height: 160%;
   background-color: var(--bg-color);
+  color: var(--text-color);
 }
 
 .page_container {
