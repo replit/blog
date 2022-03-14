@@ -8,7 +8,7 @@ categories: product
 
 Today we're excited to announce that Always On repls are available to all hackers! Anyone with [Hacker plan](https://repl.it/pricing) can choose up to 5 repls and keep them running all the time. With Always On, you can for example spin up and host an app like a Discord bot in 30 seconds:
 
-<video controls webkit-playsinline="true" playsinline="" src="/images/alwayson.mp4"></video>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/isYRG5uC5W8" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 As a reminder, Replit gives you most of what you need to rapidly build and ship apps in the cloud -- at lightning speed:
 

@@ -203,8 +203,18 @@ app.get("/:slug/images/*", (req, res) => {
   res.redirect(actualPath);
 })
 
+// Added some redirects for paths that had a space in them.
+app.get('/Using%20Replit%20and%20Google%20Sheets%20to%20Make%20a%20Simple%20Google%20Forms%20Alternative', (req, res) => {
+  res.redirect('/google-forms-alternative');
+});
+
+app.get('/setting%20up%20a%20mastodon', (req, res) => {
+  res.redirect('/setting-up-a-mastodon');
+});
+
 const filter = new Filter();
 app.get("/:slug", (req, res) => {
+    console.log(req.params.slug);
     const slug = req.params.slug
         .split("\n")
         .filter((v) => v.match(/[^\s]/))

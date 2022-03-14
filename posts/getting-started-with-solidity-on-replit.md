@@ -21,7 +21,7 @@ In this section, you’ll learn how to get started with Solidity on Replit and d
 
 ### Setting Up Your Account
 
-To get started, you need to [create a Solidity account](https://replit.com/signup) or [login to your existing one](https://replit.com/login). You need an account so you can create new repls and collaborate with peers.
+To get started, you need to [create a Replit account](https://replit.com/signup) or [login to your existing one](https://replit.com/login). You need an account so you can create new repls and collaborate with peers.
 
 ### Creating a Solidity Repl
 

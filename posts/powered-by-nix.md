@@ -11,8 +11,7 @@ For the past year we have been working hard to integrate [Nix](https://nixos.org
 
 With Nix you can easily create templates for languages Replit didn't support before, pull in more development tools than ever, and access any cli application in the shell without installing anything:
 
-<video controls webkit-playsinline="true" playsinline="" src="/images/powered-by-nix/powered-by-nix.mp4" poster="/images/powered-by-nix/powered-by-nix.jpg"></video>
-
+<iframe width="560" height="315" src="https://www.youtube.com/embed/HC_2YEWZrAc" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 Every new repl being powered by Nix means that we've be able to make vast improvements to our existing languages:
 
