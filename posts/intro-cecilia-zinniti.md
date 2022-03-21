@@ -9,7 +9,7 @@ We're so excited to announce that Cecilia Zinniti will be joining the Replit exe
 
 What does that mean? Who is she? Take a minute to get to know Cecilia in her own words!
 
-![Cecilia-01](/static/images/intros/cecilia.jpg)
+![Cecilia-01](https://blog.repl.it/images/intros/cecilia.jpg)
 
 ### So...who are you? 
 Hello! I’m a tech and startup business gal and general counsel. My passions include technology that changes the world and working with great founders like Amjad and Haya. Tech has been my professional home since my first job as an Internet chat moderator for the Manchester United soccer team from my dorm room in London in the early 2000s. Today I live in the San Francisco area with my family and am a major foodie who loves a good internet meme. 
