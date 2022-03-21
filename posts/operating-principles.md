@@ -1,9 +1,10 @@
 ---
 title: Operating Principles
-author: 
-date: 
+author: Replit Team
+date: 2022-03-22T00:00:00.000Z 
 cover: https://art.replit.com/images/Random-artworkbots.png
-categories: 
+categories: other
+
 ---
 
 

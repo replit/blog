@@ -18,7 +18,7 @@ Replit is for simplicity. Replit is based on the idea that coding can be done an
 
 An environment for learning and creating is the cornerstone of Replit. We will continue to support, advocate, and nurture our Replit [teacher community.](https://community.replit.com/c/edu/10)
 
-Be a part of bringing the next billion software creators online. Share the power of Replit.
+Be a part of bringing the next billion software creators online. Teach the power of Replit.
 
 
 

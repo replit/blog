@@ -1,10 +1,10 @@
 ---
 title: Reasons Not to Join Replit
-author: 
-date: 
-categories:
+author: Replit Team
+cover: https://art.replit.com/images/Random-artworkYT-7reasonsHR-01.jpg
+date: 2022-03-17T00:00:00.000Z
+categories: other
 ---
-
 
 We want the people at Replit to really love working here (we do!).
 
@@ -25,9 +25,9 @@ We see our work at Replit as paving a path to individual economic access, empowe
 <br/>
 
 ##### Gut Checks
-- Are you optimistic about the benefits of technology and capitalism on society
-- Does open-sourcing something make you nervous
-- Do you expect your company to take social or political stances that don’t directly relate to the mission
+- Are you optimistic about the benefits of technology and capitalism on society?
+- Does open-sourcing something make you nervous?
+- Do you expect your company to take social or political stances that don’t directly relate to the mission?
 - Do you think that the internet needs a gatekeeper?
 
 
@@ -47,15 +47,17 @@ We’ve found this way of working is better for everyone involved, because it he
 - Do you shut down or get heated when faced with a difference of opinion? What about when you really, really disagree with that opinion?
 - Are you willing to turn over some rocks in some uncharted place to find great new team members?
 
+
 ### 3. You find weird things cringey
 It wouldn’t take much time on our website, or blog, or Twitter to notice that we’re an odd bunch. We like it that way! We like memes, zany colors, and making people laugh. When we make decisions, we often choose the weird or wacky thing. It’s not everyone’s cup of tea, but ours are overflowing with it.
 
 ##### Gut Checks
 - When something suggests something absolutely bonkers to you, do you get more excited or more nervous?
 - If you see a freak flag at half mast, would you help hoist it up where it can really fly?
-- Does this video that ends in a burp sound offend you? (because, gulp, we do have one of those…)
+- Does this [video](https://www.youtube.com/watch?v=yodlVoBo278) that ends in a burp sound offend you? (because, gulp, we do have one of those…)
 - Do you gravitate towards things that others might describe as “a little quirky”?
 
+![catbot](images/catbot.png)
 
 
 ### 4. You prefer predictability at work 
@@ -109,7 +111,6 @@ Building is always harder than criticizing what others have built. We are builde
 - Is debate on your list of favorite sports?
 - Is your idea usually the best one?
 - Do you like poking holes more than you like filling them?
-- Note: can incorporate some of the alt headline language here as questions
 
 
 ### 7. Seeking pain sounds awful
@@ -129,3 +130,5 @@ Of all of Replit’s operating principles, “seek pain” is probably the one y
 - Do you go looking for tough feedback?
 - Do you take “no” personally?
 - If a disgruntled user asked if we could get on the phone, would I rather someone else take the call?
+
+Have you read to this point and can't find a reason to not work with our team? Excellent! [Apply today](https://replit.com/site/careers)!
