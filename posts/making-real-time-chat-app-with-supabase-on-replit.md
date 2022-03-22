@@ -1,7 +1,7 @@
 ---
 title: Making a Real-Time Chat App with Supabase on Replit
 author: Arek Nawo
-date: 2021-03-22
+date: 2022-03-23
 cover: https://blog.replit.com/images/replit-supabase.png
 categories: projects
 ---
