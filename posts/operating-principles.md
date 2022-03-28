@@ -6,7 +6,7 @@ cover: https://art.replit.com/images/Random-artworkbots.png
 categories: other
 
 ---
-
+![img](https://art.replit.com/images/Random-artworkbots.png)
 
 ## Mission first
 Computers are the most powerful tools to exist in the history of humanity. Sadly most people are mere consumers of these machines. Only a relative few–the professional software developer–can use this superpower to its fullest extent. It’s creating an unbalanced world where there are programmers, and then there are those who are programmed. The situation is analogous to literacy before the printing press, where only the powerful had access to books and written communication. The invention of the printing press led to democratic, scientific, and industrial revolutions, but it took about a century from creation to revolution, which meant that an entire generation of people had to grow up with new skills, outlooks, and ways of learning and communicating.
@@ -58,7 +58,7 @@ Going where others are scared to go is our competitive advantage.
 ## Replit is for people 
 Millions of people are already using Replit to explore their own curiosities, realize their own goals, make things that matter, and have fun. We hope that’ll be true for millions, tens of millions, maybe even billions more. That’s a whole lot of people! 
 
-Replit will always be a place that anyone who wants to build can, so long as they are operating within the laws of their jurisdiction and productive members of our community. It’s true for our user base and it’s true for our company. We shouldn’t expect to agree with the values or objectives of every customer. We shouldn’t make alignment with our beliefs a requirement to use our product. Our company was started by Palestineans. Many of our first customers were Israeli. We’re proud of that.
+Replit will always be a place that anyone who wants to build can, so long as they are operating within the laws of their jurisdiction and productive members of our community. It’s true for our user base and it’s true for our company. We shouldn’t expect to agree with the values or objectives of every customer. We shouldn’t make alignment with our beliefs a requirement to use our product. Our company was started by Palestinians. Many of our first customers were Israeli. We’re proud of that.
 
 If we’re going to realize our mission, we need to be a place where all kinds of people, with all kinds of backgrounds, experiences, ideologies, and values are warmly welcomed. We are inclusive because we work hard to see and understand the talent in each other. We focus on what brings us together, never on what divides us. 
 
@@ -68,3 +68,4 @@ We are diverse, and that's because we focus on talent and hard work. We are not 
 
 We must always be kind, caring, and thoughtful with each other, our users, and our broader community. We must be open-minded listeners, empathetic collaborators, and excellent communicators. We should all be people other people love to work with. We should all be building a product people love using, no matter who they are.
 
+![img](https://art.replit.com/images/Random-artworkbots.png)
