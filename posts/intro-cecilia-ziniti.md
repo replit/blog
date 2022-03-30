@@ -1,6 +1,6 @@
 ---
 title: Introducing Cecilia Ziniti as Replit's General Counsel and Head of Business Development 
-author: Lena Vu Sawyer
+author: Replit Team
 date: 2022-03-21
 cover: https://blog.repl.it/images/intros/cecilia.jpg
 categories: news

@@ -49,7 +49,7 @@ let list = [];
         }
       }
     } else {
-      //makes sure all elements are shown
+      // makes sure all elements are shown
       for (let element of postElements) {
         element.style.display = "";
       }
@@ -58,7 +58,9 @@ let list = [];
 
   const debouncedSearch = debounce(() => runSearch());
 
-  searchBox.addEventListener("keyup", e => {
-    debouncedSearch();
-  });
+  if (searchBox != null) {
+    searchBox.addEventListener("keyup", e => {
+      debouncedSearch();
+    });
+  }
 })();

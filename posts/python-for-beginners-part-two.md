@@ -1,35 +1,49 @@
 ---
-title: "Python for Beginners: Interpreting My Amazon Spending with a Repl, Part Two"
+title: "Python for Beginners: Interpreting My Amazon Spending with a Repl, Part Three"
 author: Brittany Pirkle
-date: 2021-12-13
-cover: https://blog.repl.it/images/Python_For_Beginners/python_cover_photo.jpg
+date: 2022-
+cover: https:
 categories: edu
 ---
 
-‘Tis the season to...calculate my spending? Amazon has become an easy way to have something delivered almost instantly (thank you overnight shipping), but it is almost *too easy* to spend money that I need a way to keep track of my spending (and maybe delete the app off my phone!). A Python repl is the perfect solution! In my [last post,](https://blog.replit.com/python-for-beginners) I discussed the perks of using Python for this project and the importance of the right [package manager.](https://docs.replit.com/programming-ide/installing-packages)
+I know you have been on the edge of your seats wondering why in the world a repl is better than a spreadsheet to calculate so much data?! In case you need a refresher, I analyzed my Amazon spending for 2021 using a [Python repl](https://blog.replit.com/python-for-beginners) and with just a few lines of code I could discern a variety of answers about my spending. Not only did I find out that I am spending *way* too much money on Amazon, but I also came to the conclusion of *why* a repl is better than a spreadsheet (read to the bottom to find out).
 
-[Importing assets](https://docs.replit.com/getting-started/creating-files#uploading-files-and-assets) is the next step. Assets are any type of file, image, video, or even GIF that can be added to a repl. Replit makes it easy to add any of these file types by going to the file tree and adding a new file. Additionally, as data changes, it is easy to update assets as well.
+Just to recap, I used Pandas as the [package manager](https://docs.replit.com/programming-ide/installing-packages) to easily import a csv file and analyze the data on a myriad of data points. The last component to evaluate is spending over time by analyzing how much money was spent on a given day through a bar graph. The bar graph will show the amount spent and the corresponding order date. First, the order dates need to be converted (from my csv) into a format that Python can recognize. Once again, Pandas makes this easy.
 
-![](images/Python_For_Beginners/pythonforbeginners_2.png)
+First, `.pd.to_datetime()` and then add the column to be modified. In this case, 'order date.'
 
-Now that the package manager, [pandas](https://pandas.pydata.org/pandas-docs/stable/getting_started/overview.html), and assets are imported, I create the DataFrame (df). A [DataFrame](https://databricks.com/glossary/what-are-dataframes) allows pandas to store data in a table format, similar to a spreadsheet. In this case, the DataFrame is the Amazon csv file. Now I can write the first three lines of code:
+'Order Date' is now in a format compatible with Python. However, I noticed that the time stamp was also included. For this purpose, I do not want the timestamp. I need to convert ‘datetime’ to ‘date' using `.dt.date`.
 
-![](images/Python_For_Beginners/pythonforbeginners_2.1.png)
+Next is writing the code that creates the bar graph with a simple `df.plot.bar` and setting the x (horizontal) and y (vertical) coordinates. The ‘x’ is the date the order was placed and ‘y’ is the amount spent. I also want to ensure I have the rotation set to 90.
 
-To tell Python I want to define a DataFrame, I write 'df.' Adding ‘pd’ tells Python to use pandas to complete this operation (which can be done because pandas was already imported as the package manager). Next, ‘.read_csv’ tells Python for a csv file to be read and stored as the DataFrame. Then, I write ‘amazon_orders.csv’ as this is the file name for pandas to read. Make sure the file name in the file tree is synonymous with the file name in the code (details matter!). Using Replit makes this part easy because code and assets are stored in the same place! The ‘head’ function is a panda function that shows a preview of the first five lines of the table and confirms if changes processed. Finally, every time I want Python to show results, I include ‘print(df)’ for computations to appear. I learned the hard way that ‘read(df)' without ‘print(df)’ gives no results. You can find a forked version of my repl [here.](https://replit.com/@BrittanyatReplit/AmazonAddictionSample-1#main.py)
+`df.plot.bar(x='Order Date', y='Item Total', rot=90,)`
 
-With just three lines of code, I can import and preview data. However, as with almost any data set, there is some clean up that needs to be done before calculations can begin. I need to replace the ‘NaN’ in the table. Since ‘NaN’ stands for the absence of data, I use the panda function ‘df.fillna()’ to automatically fill 'NaN' with something else; in this case, 0. Again, I include ‘print(df)’ to ensure this change emerges.
+However, the graph is very small and essentially illegible. This can be fixed by adding a figure size that will adjust the width and height of the graph with `figsize()`.  I started with 10 as the width and 20 as the height and then did some trial and error to determine `figsize=(14,30)` was the best size for this data set.
 
-![](images/Python_For_Beginners/pythonforbeginners_2.2.png)
 
-The last piece of data clean up is related to the ‘Item Total’ column in the DataFrame. The first problem is the data in this csv file is stored as strings. [Strings](https://vsc.instructure.com/courses/6476/pages/the-integer-floating-point-and-string-data-types) are any text-formatted data, such as “7 dogs” or “aaa.” Since Python needs all the data to be numeric-based in order to perform computations, I use the function ‘.astype(float)’ to change the string data to a numeric data type, floats. The second issue is ‘$’ because it is not a number (the $ is prohibiting the data from being a floats data type). I draft ‘.str.replace('$',' ')’ to replace the dollar sign with nothing. I also found it helpful to use the same function to replace any comma with nothing as well. There was some trial and error involved in deciphering the column heading name ("Item Total") in the original csv file matched the heading listed in the DataFrame. Without an exact match, Python did not know where to apply these changes. Just as before, I want to ‘print’ to ensure my changes occur.
+The final step to add more organization is to group the orders that were purchased on the same day into one data point. Remember, the goal is to map how much money was spent each *day*. Once again, Pandas is perfect for this with the built-in function: `df.groupby()`. I want to group all data from the ‘Order Date’ into a single column on the bar graph. To do this, I find the sum of the ‘Item Total’ for each ‘Order Date.’For example, if I purchased three items on August 23, I can group all three item totals into a single value to display on the graph. I am grouping the data by ‘Order Date’ so I will write `df.groupby('Order Date')`. Next, find the sum of the ‘Item Total’ by writing `.sum()["Item Total"]`. Of course, add a variable. ‘Daily_Orders.df’ works fine.
 
-![](images/Python_For_Beginners/pythonforbeginners_2.3.png)
+With the dates correctly reflected without the timestamp and the orders grouped by day, the graph can be re-created by changing `df.plot.bar` to `daily_orders.plot.bar` to depict a much cleaner graph that can be used for data interpretation.
 
-Finally, the fun part (or, perhaps, scary part when I see my results): deciphering how much money I spent on Amazon this year. If everything thus far is correct, the next few lines of code are fairly easy to write. Using ‘df[‘Item Total’].sum(),' the sum of money spent appears in the markdown pane. Additionally, I can replace ‘.sum()’ with ‘mean,’ ‘median,’ ‘max,’ or ‘min’ to find these data points as well.
+At the beginning of this project, I posed the question that most people are probably thinking. **“That seems like too much work. Why not just use a spreadsheet?”** 
 
-![](images/Python_For_Beginners/pythonforbeginners_2.4.png)
+Here is why I think a repl is a better option for data analysis:
 
-Next up is tracking spending over time. Fingers crossed, I will learn how to depict a few graphs as well. 
+
+- **Coding is more powerful**: Excel formulas can easily become overwhelming and convoluted. Most of the time, I am not sure what the formulas mean and am mindlessly typing numbers and symbols. With coding, I can see the patterns and easily decipher the data as “if/then” statements, instead of random formulas. I actually know what I am looking at and what the code is expected to do to the data set.
+
+- **Coding is transferable**: Now that I have created this project, I can use the code as a template for other data sets. And of course, the beauty of Replit allows me to fork this repl. I can easily upload a different .csv file and now this code can be transferred to the new data set. I could analyze my grocery spending or water bill with little changes to the code.
+
+- **Coding is better for multiple data sets**: There is no need to copy/paste and merge various spreadsheets into one or have multiple tabs and data sheets. Information can easily get misconstrued, omitted, or duplicated. Imagine the headache that comes with trying to merge multiple data sets into one graph?!
+
+- **Coding is quicker**. Obviously, the first time around takes longer, but now I can easily use this same process with other data.
+
+- **Coding is more intuitive**: There is way less opportunity for human error with a repl. If there is a syntax error (caused by my human error), I am alerted. If my code is written incorrectly, my repl will not run. Yes, you can also get error messages with formulas within a spreadsheet, but it is much more difficult to pinpoint where the error is and what is wrong. 
+
+- **Coding is way more fun**: Have you had flashbacks to computer class in school where you had to merge data, use formulas, create graphs, etc. and it all seemed so confusing, dull, and pointless?! Replit takes away the confusion and with each new line of code you can easily track your progress. And isn't it much more fun to brag about lines of code you wrote instead of a boring spreadsheet. 
+
+
+What other projects would you like to see to help you develop coding superpowers?
+
 
 

@@ -94,12 +94,12 @@ You will have to use your API key when creating the client instance. The client 
 
 ```javascript
 async function addThumbnail(liveStreamID, filePath) {
- const client = new ApiVideoClient({ apiKey: API_KEY });
- const result = await client.liveStreams.uploadThumbnail(
- liveStreamID,
- filePath
+  const client = new ApiVideoClient({ apiKey: API_KEY });
+  const result = await client.liveStreams.uploadThumbnail(
+    liveStreamID,
+    filePath,
   );
- return result;
+  return result;
 }
 ```
 
@@ -115,26 +115,20 @@ Next, call the function that creates the livestream service and its ID, which wi
 
 ```javascript
 createLiveStream()
- .then((res) => {
- console.log(
- "Created a live stream resource successfully. Below is the Livestream resource"
-    );
- console.log(res);
- const liveStreamID = res["liveStreamId"];
- const filePath = "thumbnailImage.jpg";
- addThumbnail(liveStreamID, filePath)
- .then((res) => console.log("Added Thumbnail"))
- .catch((err) =>
- console.log(
- `Encountered following error ${err} while adding thumbnail to live stream`
-        )
-      );
- })
- .catch((err) =>
-    console.log(
- `Encountered following error ${err} while creating live stream resource`
-    )
-  );
+  .then((res) => {
+    console.log("Created a live stream resource successfully. Below is the Livestream resource");
+    console.log(res);
+    const liveStreamID = res["liveStreamId"];
+    const filePath = "thumbnailImage.jpg";
+    addThumbnail(liveStreamID, filePath)
+      .then((res) => console.log("Added Thumbnail"))
+      .catch((err) => {
+        console.log(`Encountered following error ${err} while adding thumbnail to live stream`);
+      });
+  })
+  .catch((err) => {
+    console.log(`Encountered following error ${err} while creating live stream resource`);
+  });
 ```
 
 If you stored your thumbnail image in the same level as your `index.js` file, the path is simply the name of the project. 

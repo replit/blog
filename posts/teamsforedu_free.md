@@ -1,6 +1,6 @@
 title: Replit is Now Free for Educators!
 author: Amjad Masad
-date: 2022-03-31
+date: 2022-04-05
 cover: https://blog.replit.com/images/teams_edu/EDU_blogimage.jpg
 categories: edu
 
