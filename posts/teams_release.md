@@ -6,13 +6,15 @@ date: 2021-03-02
 categories: edu
 ---
 
+**Edit: As of March 2022, Teams for Education is free for all educators. You can gain access [here](https://replit.com/teams-for-education).*
+
 At Replit we believe that computers give people superpowers. With computers, anyone who's willing to learn can spend more of their time on creative invention rather than tedious drudgery. They help us automate repetitive tasks and build on the collective knowledge of all the great thinkers, inventors, artists, and teachers who came before us. 
 
 Computer science teachers around the world are bestowing these superpowers upon the next generation of creators and builders. We built [Replit Teams for Education](https://repl.it/teams-for-education) for them, and today we're officially taking Teams for Education out of beta. 
 
 <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/wgl_ERg23O4" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
-[Sign up for a free trial](https://repl.it/teams-for-education) if you haven't already!
+[Sign up for a free trial](https://repl.it/teams-for-education) if you haven't already!*
 
 Thank you teachers for beta testing Teams, for giving us invaluable product feedback, for helping one another out as part of a vibrant and diverse community of Replers, and for being a part of the history of computers.
 
@@ -62,3 +64,4 @@ With so much collective brainpower and experience across our community, we're wo
 Finally, the Replit team is doing a book club, and we'd love to have you join. We're reading ["The Friendly Orange Glow"](http://friendlyorangeglow.com/), which tells the story of programming education and early cyberculture from the 1960s through the early 90s. If you'd like to read the book and join our next conversation, just email patrick@repl.it and I'll send you the details!
 
 It's been an exciting journey building Teams for Education, and there's so much more to come. You can [learn more and sign up for a free trial here](https://repl.it/teams-for-education). Happy coding!
+

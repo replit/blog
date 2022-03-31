@@ -6,6 +6,8 @@ date: 2020-11-19
 categories: edu
 ---
 
+**Edit: As of March 2022, Teams for Education is free for all educators. You can gain access [here](https://replit.com/teams-for-education).*
+
 This Fall we will be shipping a series of small and large improvements to the Teams for Education product. We are laser-focused on making Repl.it the best solution for learning how to code; especially during extended periods of distance learning.
 
 ## Easy Grading and Feeback Using Project Switcher
@@ -48,3 +50,4 @@ Are you dreaming of Repl.it features to make you a superhero in your classroom? 
 ![dreaming](https://media.giphy.com/media/fgopKB1UvEA/giphy.gif)
 
 Learn more about *Teams for Education* in our [documentation](https://docs.repl.it/Teams/Projects).
+

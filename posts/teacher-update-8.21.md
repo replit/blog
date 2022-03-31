@@ -5,6 +5,8 @@ date: 2021-08-28
 cover:  https://replit.com/@util/replit-blog#static/images/teams_edu/replit_school.png
 categories: edu
 ---
+**Edit: As of March 2022, Teams for Education is now free to all educators. You can gain access [here](https://replit.com/teams-for-education).*
+
 Hi Teachers,
 
 Sending an enormous THANK YOU to all who joined us for our Summer Professional Development! Here are some highlights:
@@ -16,7 +18,7 @@ Sending an enormous THANK YOU to all who joined us for our Summer Professional D
 
 ---
 
-Get ready for the new school year by upgrading to [Teams for Education](https://replit.com/teams-for-education)! [Get a free, 4-month trial today!](https://replit.com/teams/free-trial)
+Get ready for the new school year by upgrading to [Teams for Education](https://replit.com/teams-for-education)! [Get a free, 4-month trial today!](https://replit.com/teams/free-trial)*
 ____
 ### Love Replit? Become a Replit Ambassador! 
 Replit Ambassadors are educators who are avid Teams for Education users and active members of our teacher community. They are influential in their schools and districts, and active in CS learning networks. 
@@ -63,3 +65,4 @@ ____
 Happy coding!
 
 Lena 
+

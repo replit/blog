@@ -6,6 +6,8 @@ date: 2020-6-30
 categories: edu
 ---
 
+**Edit: As of March 2022, Teams for Education is free for all educators. You can gain access [here](https://replit.com/teams-for-education).*
+
 We started Repl.it to break down what we thought of as needless barriers to start coding. Naturally, our first product was the repl -- a simple editor and console for evaluating code. Turns out that’s all our users needed to learn enough coding to make meaningful programs. From there, Repl.it started to grow incredibly fast among students, developers, and educators. As we watched what our most active users did with the platform, a pattern emerged around coding in the classroom: teachers would prepare a doc or a PDF with instructions and a base repl for their students to fork. Students then would open the PDF side-by-side with the repl and start coding. When finished, they would copy the link and email it back to their teachers. Finally, teachers would block off an afternoon to evaluate and give feedback on their students’ code. The process, while better than using a local IDE and passing around files, seemed tedious and we wanted to solve it -- that’s how [Repl.it Classroom](https://repl.it/classroom) emerged.
 
 Repl.it Classroom digitized and streamlined the workflow teachers already had in the classroom. However, although teachers loved the experience and Classroom began to grow a slight tension emerged: Classroom used a custom environment which was hard to evolve in tandem with the repl environment. Right now repls are so far ahead in terms of IDE and runtime features that it makes more sense to consolidate and build our education platform on top of repls. Especially with the introduction of Multiplayer, we’ve seen teachers use both -- Classroom for small assignments and repls for projects. This works okay but the experience feels disjointed and hard to manage. That’s why today we’re excited to introduce Repl.it Teams, specifically Repl.it Teams for education which is jam-packed with features that will make teaching and collaborating on Repl.it nothing short of a seamless and amazing experience. 
@@ -104,7 +106,7 @@ First, if you currently depend on the Classroom, don’t worry, we’ll never ta
 
 So that all said, in order to make it easy and so you don’t have to worry about how many students will be in your class from semester to semester, we’ve simplified our pricing for educational institutions with an affordable flat rate. And it's cheaper!
 
-**Pricing tiers**
+**Pricing tiers***
 
 [Update as of September 29, 2020] We're excited to announce that we've simplified and reduced our Teams pricing to to $35/team/month or $350/team/year (2 months free) with an unlimited number of students. And there are more billing improvements on the roadmap.
 

@@ -2,7 +2,6 @@
 title: "Python for Beginners: Interpreting My Amazon Spending with a Repl, Part Three"
 author: Brittany Pirkle
 date: 2022-
-cover: https:
 categories: edu
 ---
 

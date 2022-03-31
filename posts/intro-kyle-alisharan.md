@@ -10,7 +10,7 @@ We've got a new star on our executive team, Kyle Alisharan, who is joining us as
 
 Want to learn more about Kyle and what he'll be doing at Replit? Read on!
 
-![kyle](kyle.jpg)
+![kyle](https://blog.replit.com/images/intros/kyle.jpg)
 
 **In your own words, who are you?**
  

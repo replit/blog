@@ -6,6 +6,8 @@ date: 2021-01-14
 categories: edu
 ---
 
+**Edit: As of March 2022, Teams for Education is free for all educators. You can gain access [here](https://replit.com/teams-for-education).*
+
 Hello teachers, we hope your new year is off to a good start and your students have come back from the holidays engaged and excited to learn programming! If you've been teaching with Replit for awhile, you know how committed we are to helping teachers create aha moments and inspire their students. To that end we've been working hard to make Teams for Education the best CS education tool out there and want to share some updates.
 
 After January 31st, we will end access to our legacy Classroom product. If you haven't tried [Teams for Education](https://repl.it/teams) yet, now's the time! Teams for education is [FERPA/COPPA and privacy compliant](https://docs.repl.it/Teams/privacyFAQs) and has [assignments](https://docs.repl.it/Teams/Projects), [autograding](https://docs.repl.it/Teams/InputOutput) and other Classroom features you love, plus [real-time multiplayer collaboration](https://repl.it/site/multiplayer), [code conversations/annotations](https://docs.repl.it/Teams/Annotations), and more. [Migrate your Classroom now for free.](https://repl.it/classroom-migration) (Note: you'll still be able to migrate/export your data after January 31st.)
@@ -43,7 +45,7 @@ And here's what we're working on right now:
 
 If you want to try teams before committing to buy, please [fill out this form](https://forms.gle/wNGNXcrkzXDKbXTQ6) and we'll set you up with a one month free trial.
 
-If you do feel like Teams for Education is the right product for you and your students, there are several options to buy.
+If you do feel like Teams for Education is the right product for you and your students, there are several options to buy.*
 - Single class: 
   - $35/month ($350/year)
   - 25% off for K12 (coupon code: `k12Discount`)
@@ -54,6 +56,7 @@ If you do feel like Teams for Education is the right product for you and your st
   - [Contact sales@repl.it](mailto:sales@repl.it)
   - Volume discounts available
 
-You can [purchase with a credit card on our site](https://repl.it/teams) (click Create a team) or [contact sales@repl.it to pay via check or bank transfer with a purchase order](mailto:sales@repl.it).
+You can [purchase with a credit card on our site](https://repl.it/teams) (click Create a team) or [contact sales@repl.it to pay via check or bank transfer with a purchase order](mailto:sales@repl.it).*
 
 Over half of our engineers are focused on Teams for Education right now. Stay tuned for even more updates in the coming weeks!
+
