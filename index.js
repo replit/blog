@@ -30,7 +30,12 @@ const buildPostCache = async () => {
     let postsAlt = [];
 
     for (const f of ls) {
-      posts.push(await readPost(f.slice(0, -3), true));
+      try {
+        posts.push(await readPost(f.slice(0, -3), true));
+      } catch (e) {
+        // Instead of dying, let's try to contain the damage.
+        console.error("Failed to read a post: ", e);
+      }
     }
 
     posts = posts.filter(p => p.timestamp && p.timestamp < new Date());

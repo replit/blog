@@ -11,7 +11,9 @@ Just to recap, I used Pandas as the [package manager](https://docs.replit.com/pr
 
 First, `.pd.to_datetime()` and then add the column to be modified. In this case, 'order date.'
 
+
 'Order Date' is now in a format compatible with Python. However, I noticed that the time stamp was also included. For this purpose, I do not want the timestamp. I need to convert ‘datetime’ to ‘date' using `.dt.date`.
+
 
 Next is writing the code that creates the bar graph with a simple `df.plot.bar` and setting the x (horizontal) and y (vertical) coordinates. The ‘x’ is the date the order was placed and ‘y’ is the amount spent. I also want to ensure I have the rotation set to 90.
 
@@ -20,9 +22,19 @@ Next is writing the code that creates the bar graph with a simple `df.plot.bar` 
 However, the graph is very small and essentially illegible. This can be fixed by adding a figure size that will adjust the width and height of the graph with `figsize()`.  I started with 10 as the width and 20 as the height and then did some trial and error to determine `figsize=(14,30)` was the best size for this data set.
 
 
+without figure size
+
+
+with figure size
+
+
 The final step to add more organization is to group the orders that were purchased on the same day into one data point. Remember, the goal is to map how much money was spent each *day*. Once again, Pandas is perfect for this with the built-in function: `df.groupby()`. I want to group all data from the ‘Order Date’ into a single column on the bar graph. To do this, I find the sum of the ‘Item Total’ for each ‘Order Date.’For example, if I purchased three items on August 23, I can group all three item totals into a single value to display on the graph. I am grouping the data by ‘Order Date’ so I will write `df.groupby('Order Date')`. Next, find the sum of the ‘Item Total’ by writing `.sum()["Item Total"]`. Of course, add a variable. ‘Daily_Orders.df’ works fine.
 
+
+
 With the dates correctly reflected without the timestamp and the orders grouped by day, the graph can be re-created by changing `df.plot.bar` to `daily_orders.plot.bar` to depict a much cleaner graph that can be used for data interpretation.
+
+
 
 At the beginning of this project, I posed the question that most people are probably thinking. **“That seems like too much work. Why not just use a spreadsheet?”** 
 
