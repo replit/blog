@@ -6,6 +6,8 @@ cover: https://blog.replit.com/images/EDU_blogimage.jpg
 categories: edu
 ---
 
+<img src="https://blog.replit.com/images/EDU_blogimage.jpg" alt="search" width="100%" style="width:100%"/>
+
 I'm very excited to announce we are now making Replit's Teams for Education product free for all educators!
 
 Replit’s goal is to bring the next [billion software creators](https://blog.replit.com/b) online. One avenue to advance this mission is giving all educators free access to Replit.
