@@ -29,6 +29,5 @@ And how will we continue to support our teacher community?
 - David Morgan is joining Replit this week as Teacher Success Manager. David's a computer science teacher from the UK, and he will support all the teachers in our community with curriculum, resources, professional development, and more.
 - [Cecilia Ziniti](https://blog.replit.com/intro-cecilia-ziniti) recently joined Replit as General Counsel and Head of Business Development and is spearheading Replit's Trust & Safety and educational compliance programs.
 
-[Join us at ReplCon](https://hopin.com/events/repl-con-22/registration), Replit's first virtual conference, on April 2 (it's free of charge!) and join David's session for teachers. This is your chance to help us bring the next billion software creators online. Share the power of Replit!
 
 You can read more about this change and the refund process [here](https://docs.google.com/document/d/1hrmPJW-dq4j1A7S94HLt3A-zR90qY1zvqxGvgT2b11A/edit?usp=sharing). 
