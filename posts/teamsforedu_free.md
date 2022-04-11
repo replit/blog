@@ -1,9 +1,12 @@
+---
 title: Replit is Now Free for Educators!
 author: Amjad Masad
 date: 2022-04-11
-cover: ![EDU_blogimage](EDU_blogimage.jpg)
+cover: https://blog.replit.com/images/EDU_blogimage.jpg
+categories: edu
+---
 
-I'm very excited to announce we are now making Replit's Teams for Education product free for all teachers and students!
+I'm very excited to announce we are now making Replit's Teams for Education product free for all educators!
 
 Replit’s goal is to bring the next [billion software creators](https://blog.replit.com/b) online. One avenue to advance this mission is giving all educators free access to Replit.
 
