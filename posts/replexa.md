@@ -14,7 +14,7 @@ This blogpost is a start-to-finish tutorial on making Alexa skills on Replit. So
 
 ### Overview
 1. Configure the Alexa skill in the Amazon Developer console
-2. Clone the ["Replexa"](https://replit.com/@SorenAtReplit/replexa) template
+2. Clone the ["Replexa"](https://replit.com/@soren/replexa) template
 3. Define your own intent
 4. Test your skill
 
@@ -64,7 +64,7 @@ Make sure to click "save model" and "build model" after you've added the intent.
 ### Hosting in Replit
 Traditionally, if you want to create an Alexa skill, you have to host the code in an AWS Lambda. While this is an amazing service, Amazon also gives you the option to host your skill using your own webserver. We've found that it's incredibly easy to host Alexa Skills in Replit. You also get the benefits as Replit, such as ReplDB, always-on, and multiplayer. 
 
-First, clone the [Replexa](https://replit.com/@SorenAtReplit/replexa) template in Replit.
+First, clone the [Replexa](https://replit.com/@soren/replexa) template in Replit.
 
 Once you have the code open, you're going to want to grab your skill id from your list of Alexa skills. (Get to this menu by clicking "your skills" at the top right of the developer console.)
 

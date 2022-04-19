@@ -6,7 +6,7 @@ cover: https://blog.replit.com/images/EDU_blogimage.jpg
 categories: edu
 ---
 
-<img src="https://blog.replit.com/images/EDU_blogimage.jpg" alt="search" width="100%" style="width:100%"/>
+<img src="https://blog.replit.com/images/EDU_blogimage.jpg" alt="Robot hands with various education objects passing through them" width="100%" style="width:100%"/>
 
 I'm very excited to announce we are now making Replit's Teams for Education product free for all educators!
 
