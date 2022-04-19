@@ -29,6 +29,6 @@
     "moment": "^2.29.2",
     "prom-client": "^13.1.0",
     "request": "^2.88.0",
-    "striptags": "^3.1.1"
+    "striptags": "^3.2.0"
   }
 }
