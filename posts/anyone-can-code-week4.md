@@ -8,7 +8,7 @@ categories: projects
 
 I am over halfway done with this project and I have learned so much. Coding intimidated me at first, but with Replit it has been extremely user friendly, fun, and attainable! 
 
-![week4](https://blog.repl.it/images/anyone-can-code/week4.png)
+![week 4: learning basics of css](https://blog.repl.it/images/anyone-can-code/week4.png)
 
 Last week ([see last week’s blog here](https://blog.repl.it/anyone-can-code-week3)), I added the HTML elements to my web page which was the foundation. Essentially, this was all the text that I wanted to add to my holiday e-card. This week, my focus was on CSS, basically the aesthetics of my e-card: font style, colors, background colors, spacing, and overall appearance. CSS is written in a way to assign a certain element to the text and elements that are already in HTML. For example, CSS looks for the `h1` tag and assigns it whatever CSS code I add.  I can’t lie. This language was a little trickier at first, but I learned three things right from the start: 
 1. Replit makes everything so much easier 

@@ -8,7 +8,7 @@ categories: projects
 
 Remember how I said three weeks ago (see the first week of my journey [here](https://blog.repl.it/anyone-can-code-week1)) that anyone can code? Well, it really is true. In fact, I am kind of impressed with myself in how quickly I have been able to figure out the basics of coding ;). Using [Replit,](https://repl.it/~) [online tutorials](https://www.w3schools.com/tags/tag_img.asp), [videos](https://scrimba.com/learn/html/html-figure-image-elements-c42D8uv), and the guidance of a [few experts](https://repl.it/talk/learn/Getting-Started-with-HTML-in-10-minutes/16821) (at Repl.it) has made the learning curve way less intimidating. But if you follow along with me, it can be easy for you too!
 
-![week3](https://blog.repl.it/images/anyone-can-code/week3.png)
+![week 3: learning basics of html](https://blog.repl.it/images/anyone-can-code/week3.png)
 
 Last week (read about it [here](https://blog.repl.it/anyone-can-code-week2)), I broke down the two languages I would be using - HTML and CSS -  and how to get started with Repl.it. After some self-training and trial and error with the mock Repl I made last week, I decided to jump in this week to create my actual project, a holiday e-card on a custom domain (remember domain is just the place the information is housed and is the name of the website). 
 

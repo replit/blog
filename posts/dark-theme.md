@@ -13,7 +13,7 @@ Dark Theme has long been one of the most highly request features on Repl.it.  We
 
 To enable Dark Mode, just go to any workspace, open up the Options/Settings pane on the sidebar, and select "dark" as your theme.
 
-<img src="/public/images/blog/darkmode-options.png" width="30%"  />
+<img src="/public/images/blog/darkmode-options.png" width="30%" alt="replit darkmode options"  />
 
 And voila!  Your entire workspace should then change to darkmode!
 

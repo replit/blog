@@ -11,19 +11,19 @@ While you can write web applications and text-based ensembles in Repl.it, someti
 
 This is a guide for making your very first website using HTML and CSS and, if you follow the tutorial, you should end up with something that looks like this:
 
-![](/public/images/blog/website_workshop/final.png)
+![first website tutorial](/public/images/blog/website_workshop/final.png)
 
 Though, to succeed with this tutorial, your final website should *not* look like that. To succeed at this tutorial, you should branch off and get creative with the code you write because you won't be just making just _a_ website but _your_ website!
 
 The first thing we're going to do is go to [https://repl.it](https://repl.it) and, where it says "Search for a Language", start typing "HTML" then select the `HTML, CSS, JS` option that comes up.
 
-![](/public/images/blog/website_workshop/html_repl.gif)
+![html repl selection](/public/images/blog/website_workshop/html_repl.gif)
 
 If you have another screen come up (where your url ends with `/repls`, `/teacher`, or `/student`), you can head over to https://repl.it/languages and select the `HTML, CSS, JS` option that way.
 
 Now that the environment's loaded, it should look something like this:
 
-![](/public/images/blog/website_workshop/editor.png)
+![html repl](/public/images/blog/website_workshop/editor.png)
 
 If you press the run button right now with the code inside the editor, you won't see much because, well, there isn't much to display. However we can change that!
 
@@ -46,7 +46,7 @@ Now when you press "Run", you should see the following come out.
 
 Or, if you want to view the website in a separate tab, just click on the preview button!
 
-![](/public/images/blog/website_workshop/preview.gif)
+![website workshop preview](/public/images/blog/website_workshop/preview.gif)
 
 You've successfully put together a "Hello World!" program in HTML! (Out of tradition, people start learning a new language by first learning how to say "Hello World!")
 
@@ -66,7 +66,7 @@ The following lines consist of words inside angle brackets that are called "tags
 
 The set up we have with indents and opening and closing tags is not something I came up with randomly, if you inspect the element of the page (or right click and "View page source"), you should see a similar structure to this
 
-![](/public/images/blog/website_workshop/inspect.png)
+![inspecting code](/public/images/blog/website_workshop/inspect.png)
 
 Getting back the code we have, at the top, we have a `<head>` tag, which you can think of as being the head of the website but we don't usually see things in here but, instead, in the `<body>` tag, which has all the juicy stuff.
 

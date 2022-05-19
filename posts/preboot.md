@@ -32,7 +32,7 @@ running -- your repl IDE will simply attach to it.
 
 Take a look:
 
-![](/public/images/blog/react-preboot.gif)
+![react preboot](/public/images/blog/react-preboot.gif)
 
 As mentioned in the announcement post, we're moving fast on getting this
 out of beta into something we're proud of and can, with confidence, offer

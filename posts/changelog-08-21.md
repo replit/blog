@@ -16,7 +16,7 @@ We love hearing from you! Please leave any feedback you have [here](https://repl
 - We're up to 21% of all languages running via nix. https://arewenixyet.com.
 - We launched a bunch of new features for our educators and students. See our education update [here](https://blog.replit.com/teacher-update-8.21).
 - You can now watch featured coding videos when working on Python repls! 
-![](images/youtube.png)
+![replit dashboard with video](images/youtube.png)
 - Replit is now available on Android devices via the [Google Play store](https://play.google.com/store/apps/details?id=com.replit.twa)! Expect more mobile updates coming soon.
 
 

@@ -37,7 +37,7 @@ Be sure to check out the announcement [here](internet-access).
 Those with the hacker plan will also have a new look for their profile.  Here's
 a preview - coming soon!
 
-![](/public/images/blog/hacker-profile.png)
+![hacker profile](/public/images/blog/hacker-profile.png)
 
 # Classroom pricing
 

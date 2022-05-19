@@ -93,7 +93,7 @@ application. The 13-year-old [@pylieas](https://repl.it/@pyelias) built a repl t
 interface to the backend that he made separately (which is becoming the
 unofficial chat applications for some of the young Repl.it programmers):
 
-<a target="_blank" href="https://repl.it/@pyelias/Chatroom"><img src="/public/images/blog/chat.png"/></a>
+<a target="_blank" href="https://repl.it/@pyelias/Chatroom"><img alt="replit chat client" src="/public/images/blog/chat.png"/></a>
 
 After getting [user-interest](https://repl.it/ibuiltthis/p/working-chatroom) @pyelias is starting to explore building a full
 stack application using Django.

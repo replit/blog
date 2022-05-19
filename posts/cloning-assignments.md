@@ -13,14 +13,14 @@ Cloned assignments will carry over the code, files, instructions, automatic test
 
 You can find the option for cloning an assignment by clicking on the three dots next to an assignment:
 
-![](/public/images/blog/clone-assignment-option.png)
+![cloning assignments on replit](/public/images/blog/clone-assignment-option.png)
 
 A list of valid destination classrooms (including the one you are currently in) will appear.  This means that you can use this functionality to duplicate an assignment within a classroom.  You can only clone assignments into a classroom of the same programming language.
 
-![](/public/images/blog/clone-assignment-choose.png)
+![cloning assignments into classroom](/public/images/blog/clone-assignment-choose.png)
 
 You should now be able to see the assignment under "Drafts" in the chosen classroom!
 
-![](/public/images/blog/clone-assignment-result.png)
+![assignments under draft](/public/images/blog/clone-assignment-result.png)
 
 We hope you enjoy this feature!  As always, we welcome feedback over at our [feedback boards](https://repl.it/feedback)

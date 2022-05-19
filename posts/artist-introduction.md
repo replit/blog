@@ -23,7 +23,7 @@ This all started in 2018 when I was freelancing. Amjad hit me up after seeing an
 
 I was instantly interested in the project. I had never created a detailed robot artwork before so this commission was particularly exciting and challenging.
 
-![bot](https://blog.replit.com/images/bot.jpg)
+![replit bot competition](https://blog.replit.com/images/bot.jpg)
 
 I think what I took from this brief is that Amjad trusted my abilities and let me do my thing. In fact, every project has been like this. Whenever Amjad or Haya hit me up for artwork the projects never seemed stuffy or repetitive. The project outline is always clear and understandable and everything just seems to go smoothly. 
 
@@ -41,7 +41,7 @@ https://www.instagram.com/replitart/
 
 Thank you!
 
-![blink](https://blog.replit.com/images/blink_gif.gif)
+![robot blink](https://blog.replit.com/images/blink_gif.gif)
 
 
 

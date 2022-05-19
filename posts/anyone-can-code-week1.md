@@ -7,7 +7,7 @@ categories: projects
 
 What do you think of when you hear the word “code” or when someone says they are “coding”? No, I am not talking about speaking in code, morse code, or family code words. So, what is coding anyways? Coding is just giving computers and other machines instructions on actions to perform. Coding is how humans communicate with machines, and it allows for the creation of websites, computer programs, and apps. Today’s job market is full of tech careers that require this skill. But what about the novice like me without engineering experience or the skill set to create something out of essentially nothing but digits? Is it possible for me to create something out of nothing in just six weeks (and just a few hours each week)?
 
-![week 1](https://blog.repl.it/images/anyone-can-code/week1.png)
+![week 1: anyone can code](https://blog.repl.it/images/anyone-can-code/week1.png)
 
 My background is in elementary education. Before I had a family, I taught 2nd grade. My biggest exposure to coding was one day a year during Computer Science Education Week when my students would be introduced to the “Hour of Code” through simple coding websites on their own. When I told my husband I was going to learn coding from the ground up, he looked at me like I was crazy and said how hard that was going to be in such a short period of time. 
 

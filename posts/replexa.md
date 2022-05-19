@@ -29,22 +29,22 @@ As an example, what happens when we say: "Alexa, ask Replit about the most recen
 ### Creating the skill
 The first thing to do is create a new Alexa skill in the Amazon Developer Console. You can do this by navigating to https://developer.amazon.com and pressing "developer console" near the top right.
 
-<img src="https://blog.repl.it/images/replexa-tutorial/image_1.png" alt="image_1" width="100%" style="width:100%"/>
+<img src="https://blog.repl.it/images/replexa-tutorial/image_1.png" alt="amazon developer console" width="100%" style="width:100%"/>
 
 From here, you're going to click "Alexa Skills Kit" to bring you to the Alexa dashboard. Click "Create Skill" to start the process of creating a new skill.
 
-<img src="https://blog.repl.it/images/replexa-tutorial/image_2.png" alt="image_2" width="100%" style="width:100%"/>
+<img src="https://blog.repl.it/images/replexa-tutorial/image_2.png" alt="alex skills" width="100%" style="width:100%"/>
 
 Once you name your skill and select your language, click "Custom model" and then select "Provision your own" for the backend. Finally press "Create skill" at the top right of the page.
 
 After this it's going to ask about templates, just click "Start from scratch" then go onto the next page. Eventually you'll see the following page - this means your skill has been created!
 
-<img src="https://blog.repl.it/images/replexa-tutorial/image_3.png" alt="image_3" width="100%" style="width:100%"/>
+<img src="https://blog.repl.it/images/replexa-tutorial/image_3.png" alt="alexa developer console" width="100%" style="width:100%"/>
 
 ### Invocation
 Next, we will set our invocation. On the left of the screen, click the invocation tab. Invocation is how you'll start your skill from your Alexa. For example, if your skill invocation name is "Replit blog reader", to open your skill you would say something like "Alexa, open the Replit blog reader skill". Once you have entered your skill's invocation name, click "save model" and "build model" at the top. This can take up to 30 seconds.
 
-<img src="https://blog.repl.it/images/replexa-tutorial/image_4.png" alt="image_4" width="100%" style="width:100%"/>
+<img src="https://blog.repl.it/images/replexa-tutorial/image_4.png" alt="alexa interaction model" width="100%" style="width:100%"/>
 
 ### Interaction Model
 Click "interaction model" and click "intents" from the left bar. According to the [official Alexa documentation](https://developer.amazon.com/en-US/docs/alexa/custom-skills/create-intents-utterances-and-slots.html), "An intent represents an action that fulfills a user's spoken request". In this case, we want to build a skill that gets a summary of the most recent blogpost on the [Replit blog](https://blog.replit.com).
@@ -57,7 +57,7 @@ Create a new intent called `GetBlogIntent` and add the following utterances:
 - Get the Replit blog
 - Replit blog
 
-<img src="https://blog.repl.it/images/replexa-tutorial/image_5.png" alt="image_5" width="100%" style="width:100%"/>
+<img src="https://blog.repl.it/images/replexa-tutorial/image_5.png" alt="alexa GetBlogIntent" width="100%" style="width:100%"/>
 
 Make sure to click "save model" and "build model" after you've added the intent.
 
@@ -68,20 +68,20 @@ First, clone the [Replexa](https://replit.com/@soren/replexa) template in Replit
 
 Once you have the code open, you're going to want to grab your skill id from your list of Alexa skills. (Get to this menu by clicking "your skills" at the top right of the developer console.)
 
-<img src="https://blog.repl.it/images/replexa-tutorial/image_6.png" alt="image_6" width="100%" style="width:100%"/>
+<img src="https://blog.repl.it/images/replexa-tutorial/image_6.png" alt="Alexa custom skill" width="100%" style="width:100%"/>
 
 Copy that and paste it into the template where it says `YOUR_SKILL_ID`.
 
 The last step in connecting your repl to your skill is getting the domain. You can copy it by running the repl and copying the domain.
 
-<img src="https://blog.repl.it/images/replexa-tutorial/image_7.png" alt="image_7" width="100%" style="width:100%"/>
+<img src="https://blog.repl.it/images/replexa-tutorial/image_7.png" alt="repl.co domain" width="100%" style="width:100%"/>
 
 Now that you have your repl's domain, go to the "endpoint" tab in the amazon developer console. Change the service endpoint type from "AWS Lambda ARN" to "HTTPS". Paste your repl's domain into the default region.
 
 In the drop-down menu, select "My development endpoint is a sub-domain of a domain that has a wildcard certificate from a certificate authority".
 (This is important)
 
-<img src="https://blog.repl.it/images/replexa-tutorial/image_8.png" alt="image_8" width="100%" style="width:100%"/>
+<img src="https://blog.repl.it/images/replexa-tutorial/image_8.png" alt="service endpoint type" width="100%" style="width:100%"/>
 
 ### Add GetBlogIntent
 Since we added the `GetBlogIntent` in the developer console, we have to add an intent handler in our code. Navigate to the `intents.py` file. Each intent inherits from the `AbstractRequestHandler`. You must define both the `can_handle()` and `handle()` methods for every intent. Our new class will look something like this:
@@ -166,7 +166,7 @@ class GetBlogIntentHandler(AbstractRequestHandler):
 ### Testing
 Testing Alexa skills is easy! Once you have navigated to your Skill in the Amazon Developer Console, click the "testing" tab. What you see now is an Alexa simulator pre-loaded with your skill. You can type into the console on the left, and it will respond exactly as an Alexa unit would.
 
-<img src="https://blog.repl.it/images/replexa-tutorial/demo.gif" alt="demo gif" width="100%" style="width:100%"/>
+<img src="https://blog.repl.it/images/replexa-tutorial/demo.gif" alt="alexa demo gif" width="100%" style="width:100%"/>
 
 You can also check out [this](https://youtu.be/rN5e9Po4gHc) youtube video for a quick demo!
 

@@ -40,7 +40,7 @@ off our very first [game jam](/jam) on March 18th. It closes on April 18th, so t
 still plenty of time to show us what you can do. As for the winner? The grand
 prize is 1BTC ($4,031 at the time of writing).
 
-<img width="50%" src="https://repl.it/public/images/jam/bling-robot.png"/>
+<img width="50%" src="https://repl.it/public/images/jam/bling-robot.png" alt="game jame bling robot"/>
 
 ## Technology
 

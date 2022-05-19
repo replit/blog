@@ -10,7 +10,7 @@ syntax can now be simply and immediately settled within the chatroom by talking
 to Evalbot. It is a bot that can speak over 10 programming languages and is
 ever-present on Messenger and can be added to your team chat on Slack.[](preview end)
 
-![](https://repl.it/public/images/bot.png)
+![Evalbot: a bot that speaks code](https://repl.it/public/images/bot.png)
 *Evalbot: a bot that speaks code*
 
 Beyond settling arguments we envision Evalbot to be useful for teaching and
@@ -21,11 +21,11 @@ Evalbot can be interacted with in a couple of ways:
 
 - Named code fences are parsed and executed
 
-![](https://i.imgur.com/IxyrumB.gif)
+![Evalbot Parsing](https://i.imgur.com/IxyrumB.gif)
 
 - Conversational
 
-![](https://i.imgur.com/CGfWq55.gif)
+![]conversational Evalbot(https://i.imgur.com/CGfWq55.gif)
 
 To get started, [add evalbot to your slack team](https://evalbot-slack.now.sh/login)
 or [message it on facebook](https://m.me/repl.it). You can visit the

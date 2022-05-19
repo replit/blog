@@ -28,4 +28,4 @@ As mentioned above, we are going to give out 20~ Alexa units (Echo dot, Echo fra
 Judging will take place during the first week of September, and winners will be announced during the second week.
 
 ### Who to reach out to for questions
-If you have any questions about this hackathon, you can reach out to [Søren ](https://twitter.com/roodsoren) on Twitter!
+If you have any questions about this hackathon, you can reach out to [Søren](https://twitter.com/roodsoren) on Twitter!

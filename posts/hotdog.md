@@ -17,19 +17,19 @@ There are plenty of image recognition APIs and services such as Google Cloud's C
 
 To begin, let's start up a repl on [Repl.it](https://repl.it)
 
-![](/public/images/blog/hotdog/python.gif)
+![replit python](/public/images/blog/hotdog/python.gif)
 
 Then, in a new tab, [create a Clarifai account](https://clarifai.com/developer/account/signup).
 
-![](/public/images/blog/hotdog/signup.png)
+![clarifai signup](/public/images/blog/hotdog/signup.png)
 
 Once you've done so, go to the [application dashboard](https://clarifai.com/developer/account/applcations) and select "Create New Application"
 
-![](/public/images/blog/hotdog/application.png)
+![clarifai applications](/public/images/blog/hotdog/application.png)
 
 Put in a name for your application and get the API key for that application
 
-![](/public/images/blog/hotdog/apikey.png)
+![clarifai apikey](/public/images/blog/hotdog/apikey.png)
 
 That's it for stuff outside the editor, now it's time to get working!
 
@@ -96,7 +96,7 @@ result = model.predict([image])
 
 The returned `result` is a dictionary that should look similar to this
 
-![](/public/images/blog/hotdog/response.png)
+![returned result](/public/images/blog/hotdog/response.png)
 
 Feel free to poke around and see what specific structures are in the object but the loop that will give us the tags Clarifai returns is
 
@@ -127,7 +127,7 @@ Of course, we can do a lot better than just a script that prints "Hot dog" or "N
 
 To do that with Python, we'll use the Python Imaging Library (PIL). I'll be using [this](https://www.1001freefonts.com/hours.font) custom font but feel free to use your own. If you use this one, you'll download a zip file with the ttf as its contents. Once you extract the ttf file or get your own, upload it to your repl
 
-![](/public/images/blog/hotdog/upload.png)
+![replit upload files](/public/images/blog/hotdog/upload.png)
 
 In order to use PIL, we'll need to add `pillow` to our requirements.txt
 
@@ -176,7 +176,7 @@ Since we used RGBA for coloring, we're going to have to save the file as a png
 pattern.save("result.png")
 ```
 
-![](/public/images/blog/hotdog/hotdog.png)
+![hotdog](/public/images/blog/hotdog/hotdog.png)
 
 With that, we've put the characters from Silicon Valley to shame. However, we now need to resize the images because, if you provide a smaller image, the text will go out of view. So, proceeding the line assigning `size`, let's put the following
 
@@ -215,7 +215,7 @@ Now we should always be able to read the text. As one final thing, let's make th
 draw.rectange((x, y, x + w, y + h), fill="green" if hotdog else "red")
 ```
 
-![](/public/images/blog/hotdog/not_hotdog.png)
+![not hotdog](/public/images/blog/hotdog/not_hotdog.png)
 
 As you can see, a hamster is not a hot dog and you made "Not hotdog" using Python!
 

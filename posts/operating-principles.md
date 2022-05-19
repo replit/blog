@@ -6,7 +6,7 @@ cover: https://art.replit.com/images/Random-artworkbots.png
 categories: other
 
 ---
-![img](https://art.replit.com/images/Random-artworkbots.png)
+![replit robot artwork](https://art.replit.com/images/Random-artworkbots.png)
 
 ## Mission first
 Computers are the most powerful tools to exist in the history of humanity. Sadly most people are mere consumers of these machines. Only a relative few–the professional software developer–can use this superpower to its fullest extent. It’s creating an unbalanced world where there are programmers, and then there are those who are programmed. The situation is analogous to literacy before the printing press, where only the powerful had access to books and written communication. The invention of the printing press led to democratic, scientific, and industrial revolutions, but it took about a century from creation to revolution, which meant that an entire generation of people had to grow up with new skills, outlooks, and ways of learning and communicating.
@@ -68,4 +68,4 @@ We are diverse, and that's because we focus on talent and hard work. We are not 
 
 We must always be kind, caring, and thoughtful with each other, our users, and our broader community. We must be open-minded listeners, empathetic collaborators, and excellent communicators. We should all be people other people love to work with. We should all be building a product people love using, no matter who they are.
 
-![img](https://art.replit.com/images/Random-artworkbots.png)
+![replit robot artwork](https://art.replit.com/images/Random-artworkbots.png)

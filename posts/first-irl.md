@@ -7,11 +7,11 @@ categories: events
 
 On Monday, June 11th, we had our first Repl.it Meetup and it was super awesome!
 
-![](/public/images/blog/replit-irl-6-11-18/talking.jpg?p=np)
+![replit meetup](/public/images/blog/replit-irl-6-11-18/talking.jpg?p=np)
 
 A bunch of Replers from teachers to students came to the Repl.it office to enjoy pizza, meet the team, chat with other Replers, and also spend some time coding in a mini hackathon where the prompt was to make the most overcomplicated "Hello World" program possible.
 
-![](/public/images/blog/replit-irl-6-11-18/laptops.jpg?p=np)
+![coding at replit meetup](/public/images/blog/replit-irl-6-11-18/laptops.jpg?p=np)
 
 One of the coolest projects made at the meetup was a program that would take a font, generate a separate Python+Turtle program that would draw the text "Hello World" in that specified font, and then he presented the resulting Python program as being the elaborate "Hello World" program.
 
@@ -21,6 +21,6 @@ The code for generating the "Hello World" program itself is [here](https://repl.
 
 We certainly enjoyed meeting some of our users as well as seeing everyone have a fun time hacking and we're planning for the next Repl.it IRL to be on July 11th!
 
-![](/public/images/blog/replit-irl-6-11-18/laughing.jpg?p=np)
+![replit meetup laughing](/public/images/blog/replit-irl-6-11-18/laughing.jpg?p=np)
 
 If you're interested in putting together your own Repl.it IRL, shoot us an email at [contact@repl.it](mailto:contact@repl.it) and that's all for now!

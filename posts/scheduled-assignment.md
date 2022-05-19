@@ -14,7 +14,7 @@ students receive their assignments at the right time.[](preview end)
 When the assignment is finally published your students will receive a
 notification informing them of it.
 
-![](/public/images/blog/scheduled_assignment.png)
+![Teams for Education scheduled assignments](/public/images/blog/scheduled_assignment.png)
 
 You can get to this menu from the second page in the assignment creation flow. As
 always, feel free to reach out at <a href="mailto:contact@repl.it">contact@repl.it</a>

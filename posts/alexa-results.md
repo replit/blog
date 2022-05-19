@@ -15,7 +15,7 @@ The application was built on Replit using Node.js, the Alexa ask SDK, and OpenAI
 
 Vibhuv is a rising 8th grader who has been coding for a little over a year.
 
-<img src="https://blog.repl.it/images/alexa-results/image_1.png" alt="image_1" width="70%" style="width:100%"/>
+<img src="https://blog.repl.it/images/alexa-results/image_1.png" alt="messages_with_alexa" width="70%" style="width:100%"/>
 
 [Video Demo](https://www.youtube.com/watch?v=J30B3oCeY14)
 
@@ -26,7 +26,7 @@ The project that won second place was submitted by a Replit user named [Coding C
 
 In addition to their skill, they built an [accompanying website](https://cactus-carer.codingcactus.repl.co/) that explains the skill and even lets you view some information about your Cacti.
 
-<img src="https://blog.repl.it/images/alexa-results/image_2.png" alt="image_2" width="70%" style="width:100%"/>
+<img src="https://blog.repl.it/images/alexa-results/image_2.png" alt="alexa_cactus_carer" width="70%" style="width:100%"/>
 
 [Video Demo](https://cactus-carer-vid.codingcactus.repl.co/cactus-carer.mp4)
 
@@ -39,7 +39,7 @@ The project was built using the Beautiful Soup Python library. He was able to we
 
 Mohammad is 16 years old and has been programming for around 5 years.
 
-<img src="https://blog.repl.it/images/alexa-results/image_3.png" alt="image_3" width="70%" style="width:100%"/>
+<img src="https://blog.repl.it/images/alexa-results/image_3.png" alt="Minelexa" width="70%" style="width:100%"/>
 
 [Video Demo](https://www.youtube.com/watch?v=wH6XelT9Bcc)
 

@@ -15,7 +15,7 @@ find useful and, if not, you won't even notice they're there.
 Javascript is the first language where we've introduced an automatic formatter.
 If you click the
 <img
-  src="/public/images/prettier.png"
+  src="/public/images/prettier.png" alt="running code through prettier"
   style="height: 24px; vertical-align:text-bottom; width: 21px; margin: 0 3px; display: inline-block;"
 />
 icon we'll run your code through [prettier](https://github.com/prettier/prettier)
@@ -30,12 +30,12 @@ We now support upload any file off your computer and into the workspace. This
 includes images which will be displayed as you'd expect. For example, you could
 write a program which takes an image and turns it into a rotating gif. Then
 upload an image of your choice, click run, and out pops the result:
-<img src="https://storage.googleapis.com/replit/images/1504762567310_b42b1b4c795e3471177deacd5f935d44.gif" />
+<img src="https://storage.googleapis.com/replit/images/1504762567310_b42b1b4c795e3471177deacd5f935d44.gif" alt="uploading files" />
 (you can try it out for yourself [here](https://repl.it/Klxc/12))
 
 # Downloading Files
 If you've ever wanted to work on your repl outside of Replit, or take what
 you've built and deploy it. Well now you can. Any file in your repl can be
 downloaded on to your computer.
-<img src="https://storage.googleapis.com/replit/images/1504828844025_eaee45fd56e44e35d0651303b67c74d6.png" />
+<img src="https://storage.googleapis.com/replit/images/1504828844025_eaee45fd56e44e35d0651303b67c74d6.png" alt="downloading files" />
 Uploading really wouldn't be complete without it.

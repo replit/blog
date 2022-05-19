@@ -19,7 +19,7 @@ Additionally, for this project, I needed to [install a package](https://docs.rep
 
 Now that the language (and package) and project are decided, I can start my repl. As always, I “create a repl” and select my language, “Python.” In this case, since I am working with sensitive personal information, it may be a good idea to make my repl private with [Replit's Hacker plan](https://replit.com/site/pricing). Next, I need to import my package, Pandas. There are [several ways to do this,](https://docs.replit.com/programming-ide/installing-packages) but the easiest one is to type ‘import pandas as pd’ as my first line of code and watch the magic happen. In mere seconds, I have gone from nothing to a functioning code skeleton that is ready to interpret my data.
 
-![](images/Python_For_Beginners/pythonforbeginners.png)
+![main.py repl](images/Python_For_Beginners/pythonforbeginners.png)
 
 The beauty of Replit is nothing has to be downloaded and everything lives in one place. It can’t get any easier than writing one line of code to import an entire package. The mission of Replit is to give everyone coding superpowers! Replit, more than ever, makes it so easy for anyone to go from illiterate to empowered.
 

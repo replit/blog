@@ -78,7 +78,7 @@ To pass this task, students must demonstrate mastery by following the instructio
 
 Here's the result:
 
-![](https://raw.githubusercontent.com/MissStrong/ICS3U_Semester_1_2021-2022/main/Images/Even_Product_Example.png)
+![replit unit test](https://raw.githubusercontent.com/MissStrong/ICS3U_Semester_1_2021-2022/main/Images/Even_Product_Example.png)
 
 ## Giving feedback on mastery-based programming tasks
 

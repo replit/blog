@@ -15,19 +15,19 @@ A teacher should be able to see where her students are at—to have bird’s-eye
 
 The *Student Overview* is a feature of the teacher dashboard that we’re introducing. Where previously you had to go into each assignment to see the progress for each student individually (which ironically mirrors the physical classroom experience described above). The teacher classroom dashboard is now divided into assignment and student sections. The assignments section lists out the assignments published or in draft and allows you to create a new assignment. The student section is all about the students, their names, completion percentages for all their assignments and the current submission status.
 
-![](https://i.imgur.com/5N4gMNj.jpg)
+![classroom overview](https://i.imgur.com/5N4gMNj.jpg)
 
 Browsing the student submission status for assignments is as easy as going left and right.
 
-![](https://i.imgur.com/qAbJit8.jpg)
+![submission status](https://i.imgur.com/qAbJit8.jpg)
 *Teacher browsing assignments.*
 
 Assignments are listed as numbers but by hovering on the number the assignment name pops up as a reminder of that particular assignment.
-![](http://i.imgur.com/qAbJit8.jpg)
+![assignmnet popup](http://i.imgur.com/qAbJit8.jpg)
 *Teacher is hovering to check the name of the assignment*
 
 We did our best to make this as visually comprehensible as possible. Colorful icons, and a vertical and horizontal line highlighting to give you contextual awareness while browsing your student overview.
-![](http://i.imgur.com/j4hwQPp.jpg)
+![assignmnet popup](http://i.imgur.com/j4hwQPp.jpg)
 *Teacher hovering on a complete state*
 
 Teachers that we showed this too were really excited about it. We’re

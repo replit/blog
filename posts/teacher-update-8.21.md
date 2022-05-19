@@ -53,7 +53,7 @@ ____
 *Let us know all the creative ways you've applied these updates in your classrooms by tagging us on Twitter [@Replit](https://twitter.com/Replit) with #ReplitSchool!*
 
 ### What's coming up? 
-📗 Curriculum Hub will be launching on August 30! It will include curriculum and projects built by teachers for teachers to import directly into their own Teams, plus new features like an instructions pane and admin-only lesson plans. ![](images/teams_edu/instructions_md.png)
+📗 Curriculum Hub will be launching on August 30! It will include curriculum and projects built by teachers for teachers to import directly into their own Teams, plus new features like an instructions pane and admin-only lesson plans. ![instructions](images/teams_edu/instructions_md.png)
 🏅 To kick off the school year, we'll be announcing coding challenges just for our teacher community. Stay tuned to our [Twitter](https://twitter.com/Replit) to learn more. 
 
 

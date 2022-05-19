@@ -5,7 +5,7 @@ date: 2019-10-30T00:00:00.000Z
 categories: product
 ---
 
-<img src="/images/upm_cover.png"/>
+<img src="/images/upm_cover_small.png" alt="universal package manager"/>
 
 On Repl.it, working with packages is made easy. You can simply type `import flask` in your Python code, and [Flask](https://palletsprojects.com/p/flask/) will automatically be installed for you. Or, if you’re more the browsing type, you can search for packages and install them through a graphical interface.
 

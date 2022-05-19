@@ -27,23 +27,23 @@ To grow our community and facilitate members helping (and learning!) more effect
 
 __1: Community  can now mark a comment on their own post as “the answer.”__
 
-![](/public/images/blog/repl-talk-ask/1.png)
+![mark a comment](/public/images/blog/repl-talk-ask/1.png)
 
 __2: To reward helpful behavior, community members  who post answers are awarded 5 **“cycles.”**__
 
 Cycles function similar to the way karma does on Reddit and are displayed next to a user's username. They are a symbol of reputation within the community, and will be used to unlock some upcoming platform-specific features.
 
-![](/public/images/blog/repl-talk-ask/2.png)
+![awarding cycles](/public/images/blog/repl-talk-ask/2.png)
 
 __3: Answers will get pinned to the top of the thread, to make it easier for community members to find. Posts will also get “answered” tags.__
 
-![](/public/images/blog/repl-talk-ask/3.png)
+![answered tags](/public/images/blog/repl-talk-ask/3.png)
 
 __4: Questions with running code are here!__
 
 You can now include running code in your questions. Struggling to describe your bug? No problem—you can walk the community through what you’re experiencing with embedded repls.
 
-![](/public/images/blog/repl-talk-ask/4.png)
+![write random in python](/public/images/blog/repl-talk-ask/4.png)
 
 We want people to feel comfortable asking questions on Repl.it—not just the tough questions, but any question. Even if you need help creating your first ‘Hello World’ program, we’re here for you.
 

@@ -9,11 +9,11 @@ Today we're going to learn how to use Firebase as a database for a simple websit
 
 Right now, this is what my fantastic website looks like
 
-> ![](/public/images/blog/firebase/fantastic_website.png)
+> ![This is my fantastic website!](/public/images/blog/firebase/fantastic_website.png)
 
 What I want to do is include a guestbook, a way for people who visit the site to leave a wonderful message for those who follow in their steps. So, in the end, I should have a website that looks something like this.
 
-> ![](/public/images/blog/firebase/fantastic_final.png)
+> ![website with textbox](/public/images/blog/firebase/fantastic_final.png)
 
 I don't have any CSS in my website but that's only so the implemented feature is blatantly obvious.
 
@@ -25,35 +25,35 @@ Once you're ready, go over to [console.firebase.google.com](https://console.fire
 
 As soon as you're logged in, you'll be greeted with your Firebase Console
 
-![](/public/images/blog/firebase/console.png)
+![Firebase website](/public/images/blog/firebase/console.png)
 
 Go ahead and "Add Project" then put whatever you like for the name of your application
 
-![](/public/images/blog/firebase/i_love_replit.png)
+![project on firebase](/public/images/blog/firebase/i_love_replit.png)
 
 Select "Create Project" and after a few seconds you'll see the dashboard for the app you just created
 
-![](/public/images/blog/firebase/dashboard.png)
+![firebase dashboard](/public/images/blog/firebase/dashboard.png)
 
 At this point, we have an application but it's not fully configured yet so let's change that. Under **Develop**, select **Authentication**
 
-![](/public/images/blog/firebase/authentication.png)
+![firebase authentication](/public/images/blog/firebase/authentication.png)
 
 Next, go to the **Sign-In method** tab
 
-![](/public/images/blog/firebase/signin_method.png)
+![firebase signin](/public/images/blog/firebase/signin_method.png)
 
 Scroll down to the section with **Authorized domains** and add the url for the hosted repl
 
-![](/public/images/blog/firebase/domain.png)
+![firebase domain](/public/images/blog/firebase/domain.png)
 
 The last thing we need to do to configure our database is actually set the permissions for an app to access/write our database. To do that, go over to **Database**
 
-![](/public/images/blog/firebase/database.png)
+![firebase database](/public/images/blog/firebase/database.png)
 
 Scroll down to **Realtime Database** and "Create database"
 
-![](/public/images/blog/firebase/realtime.png)
+![firebase realtime](/public/images/blog/firebase/realtime.png)
 
 It doesn't really matter what rules you initialize with since we'll be setting those next. As soon as you create your database, you'll see a dashboard for that database. Click on "Rules" and, if needed, modify the JSON so that it's the following
 
@@ -99,7 +99,7 @@ $(document).ready(function() {
 
 We've already configured the database but we need to actually initialize a database connection in our JavaScript so go back to the dashboard for your application and select **Add Firebase to your web app** so that you're prompted with a code snippet
 
-![](/public/images/blog/firebase/add.png)
+![firebase code snippet](/public/images/blog/firebase/add.png)
 
 Copy the JavaScript that's between the `script` tags and paste it into your `ready` function so it looks something like this
 

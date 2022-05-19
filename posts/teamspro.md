@@ -1,12 +1,12 @@
 ---
 title: "Use Replit At Work With Teams Pro"
 author: Søren Rood, Obaida Albaroudi, Brittany Pirkle
-cover: https://blog.repl.it/images/teamspro/card.png
+cover: https://blog.repl.it/images/teamspro/card_small.png
 categories: product,news
 date: 2022-01-19
 ---
 
-![Teams Pro Graphic](images/teamspro/card.png)
+![Teams Pro Graphic](images/teamspro/card_small.png)
 
 For the past 6 months, we have been testing Teams Pro while in private beta. Today, we are excited to release it to the world.
 

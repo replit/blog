@@ -21,7 +21,7 @@ the top right corner of the editor.
 Feel free to edit your markdown file, and toggle back and forth between
 preview mode and edit mode as much as you like!
 
-![](https://blog-images.amasad.repl.co/markdown-preview.gif)
+![markdown preview](https://blog-images.amasad.repl.co/markdown-preview.gif)
 
 Opening a markdown file will show the preview by default, so you can use
 this as a README for your repl, or to provide special instructions.

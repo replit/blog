@@ -12,7 +12,7 @@ To help you make an informed decision about whether that would be the case for y
 
 We hope it’ll help you learn more about the way we work together and whether that’s the way you’d be excited to work, too.
 
-![image](https://art.replit.com/images/Random-artworkYT-7reasonsHR-01.jpg)
+![replit artwork](https://art.replit.com/images/Random-artworkYT-7reasonsHR-01.jpg)
 
 ###  1. You don’t think the internet should be an open platform
    

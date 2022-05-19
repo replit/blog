@@ -43,34 +43,34 @@ Let's run through some of the features:
 
 ### Autocomplete and signatures
 
-<img style="width:75%" src="https://repl.it/public/images/blog/lsp/autocomplete.gif">
+<img style="width:75%" alt="autocomplete and signatures" src="https://repl.it/public/images/blog/lsp/autocomplete.gif">
 
 ### Jump to definition
 
-<img style="width:75%" src="https://repl.it/public/images/blog/lsp/def.gif">
+<img style="width:75%" alt="jump to definition"  src="https://repl.it/public/images/blog/lsp/def.gif">
 
 ### Find references
 
-<img style="width:75%" src="https://repl.it/public/images/blog/lsp/refs.gif">
+<img style="width:75%" alt="find references" src="https://repl.it/public/images/blog/lsp/refs.gif">
 
 ### Refactor
 
-<img style="width:75%" src="https://repl.it/public/images/blog/lsp/refactor.gif">
+<img style="width:75%" alt="refractor" src="https://repl.it/public/images/blog/lsp/refactor.gif">
 
 
 ### Linting
 
-<img style="width:75%" src="https://repl.it/public/images/blog/lsp/linting.gif">
+<img style="width:75%" alt="linting" src="https://repl.it/public/images/blog/lsp/linting.gif">
 
 
 ### Hover
 
-<img style="width:75%" src="https://repl.it/public/images/blog/lsp/hover.gif">
+<img style="width:75%" alt="hover" src="https://repl.it/public/images/blog/lsp/hover.gif">
 
 
 ### Formatting
 
-<img style="width:75%" src="https://repl.it/public/images/blog/lsp/formatting.gif">
+<img style="width:75%" alt="formatting" src="https://repl.it/public/images/blog/lsp/formatting.gif">
 
 ## Conclusion
 

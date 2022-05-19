@@ -21,19 +21,19 @@ Here are some awesome new features we've recently released:
 
 **Input/Output Autograding**
 
-<img src='https://i.imgur.com/nHT5Zk0.gif' alt="image">
+<img src='https://i.imgur.com/nHT5Zk0.gif' alt="input/output autograding">
 
 **Inline Code Conversations**
 
-<img src='https://i.imgur.com/w3vJ185.gif' alt="image">
+<img src='https://i.imgur.com/w3vJ185.gif' alt="inline code conversations">
 
 **Feedback/Review Enhancements**
 
-<img src='https://i.imgur.com/9k5ZUe0.gif' alt="image">
+<img src='https://i.imgur.com/9k5ZUe0.gif' alt="feedback/review enhancements">
 
 **Improved Organization**
 
-<img src='https://i.imgur.com/BFI9dH2.gif' alt="image">
+<img src='https://i.imgur.com/BFI9dH2.gif' alt="improved organization">
 
 
 And here's what we're working on right now:

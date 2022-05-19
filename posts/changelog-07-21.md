@@ -24,7 +24,7 @@ We love hearing from you! Please leave any feedback you have [here](https://repl
 - Repl descrptions can now contain links and have a longer limit (1000 chars).
 - All thread notifications in a repl can be marked as read with one click.
 - You can now double-click the filename in a tab to edit it.
-![](images/changelog/double-click-to-rename.gif)
+![replit draw files](images/changelog/double-click-to-rename.gif)
 - Linux and Windows users can now use `CTRL+SHIFT+C` in the console or shell to copy from the terminal and `CTRL+SHIFT+V` to paste in the terminal.
 - Our terminal now uses the same typeface as rest the of our interface, IBM Plex Mono.
 - Code highlighting in the editor is now up to 20x faster!

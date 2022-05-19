@@ -8,7 +8,7 @@ categories: edu
 
 Today, a highly requested feature has been released: **Input/Output testing & autograding**.  The Input/Output Tests pane is embeded within all new and existing Teams for Education projects.
 
-<img src="https://cms.repl.it/assets/input-output-tests.png" style="width: 400px">
+<img src="https://cms.repl.it/assets/input-output-tests.png" style="width: 400px" alt="input/output tests">
 
 This pane contains tools designed to simplify testing code. Instead of manually entering typing input and checking output for every submission, the autograder allows you to define and automate testing. 
 
@@ -16,11 +16,11 @@ This pane contains tools designed to simplify testing code. Instead of manually 
 
 Input/Output tests is only available for projects created within the [Teams for Education](https://repl.it/teams) product. This feature is available on all projects - new and existing. 
 
-Click on the <img src="https://cms.repl.it/assets/input-output-tests-checkmark.png" style="width: 30px; margin: 0; display: inline-block; vertical-align: middle;"> icon within the workspace sidebar nav to reveal the Input/Output tests pane.
+Click on the <img src="https://cms.repl.it/assets/input-output-tests-checkmark.png" alt="checkmark" style="width: 30px; margin: 0; display: inline-block; vertical-align: middle;"> icon within the workspace sidebar nav to reveal the Input/Output tests pane.
 
-Click on the <img src="https://cms.repl.it/assets/input-output-tests-create-test.png" style="width: 100px; margin: 0; display: inline-block; vertical-align: middle;"> button to reveal a form with the following fields:
+Click on the <img src="https://cms.repl.it/assets/input-output-tests-create-test.png" alt="create test button" style="width: 100px; margin: 0; display: inline-block; vertical-align: middle;"> button to reveal a form with the following fields:
 
-<img src="https://cms.repl.it/assets/input-output-tests-create.png" style="width:400px">
+<img src="https://cms.repl.it/assets/input-output-tests-create.png" alt="create test form" style="width:400px">
 
 + `Test name` - This is the name of the test, which is for you and your students to identify it. 
 + `Input` (optional) - This is where you put in the input for your test. 
@@ -34,9 +34,10 @@ If you don't want to be lenient of an extra newline and have a truly exact match
 
 Tests cases can be added, edited, and deleted at any time - even after the project has been published. This added flexibility allows you to get started with testing right away. 
 
-If a test fails, you can view the results by clicking <img src="https://cms.repl.it/assets/input-output-tests-results-btn.png" style="width: 70px; margin: 0; display: inline-block; vertical-align: middle;"> that appear on each test case:
+If a test fails, you can view the results by clicking <img src="https://cms.repl.it/assets/input-output-tests-results-btn.png" alt="results button" style="width: 70px; margin: 0; display: inline-block; vertical-align: middle;"> that appear on each test case:
 
-<img src="https://cms.repl.it/assets/input-output-tests-failed.png" style="width:400px">
+<img src="https://cms.repl.it/assets/input-output-tests-failed.png" 
+alt="input output test failed" style="width:400px">
 
 
 ## What if I want to add tests to a pre-existing project?

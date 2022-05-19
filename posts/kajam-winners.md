@@ -5,7 +5,7 @@ categories: news,events
 date: 2021-12-23T15:17:38.686Z
 ---
 
-<a href="https://youtu.be/gOecj6Zktik" title="7 Coolest Games from Replit's Game Jam - Kajam 2021!"><img src="https://blog.replit.com/images/kajam-winners/huge_edited.png" alt="video cover image for interview with Zeke Hernandez"/></a>
+<a href="https://youtu.be/gOecj6Zktik" title="7 Coolest Games from Replit's Game Jam - Kajam 2021!"><img src="https://blog.replit.com/images/kajam-winners/huge_edited_small.png" alt="video cover image for interview with Zeke Hernandez"/></a>
 
 
 # Kajam Winners

@@ -9,6 +9,6 @@ As you use Repl.it more and more, you often find yourself frequently creating re
 
 Do you have a game, project, or demo that you particularly proud of?  You can now pin up to five repls to the top of your profile, where they will be displayed first, before your other more recent repls.  You can pin and unpin repls from both your profile and your [repls dashboard](/repls).  Here's an example of how it might look:
 
-![](/public/images/blog/amasad-pins.png)
+![example pinned repls](/public/images/blog/amasad-pins.png)
 
 Head on over to your profile to start customizing your pinned repls!

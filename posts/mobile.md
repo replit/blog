@@ -12,13 +12,13 @@ In fact, Repl.it is great for quickly experimenting with coding ideas. I can ope
 
 Here's a quick look at running a Go http server using one of our templates:
 
-![](https://blog.repl.it/images/mobile/preview.png)
+![mobile preview](https://blog.repl.it/images/mobile/preview.png)
 
 Rather than trying to adapt our desktop layout to a smaller screen we’re building this with native mobile design patterns in mind. We added a tab bar to the bottom of the screen. It acts as the primary navigation for the IDE similar to how native mobile apps do.
 
 One of the challenges of mobile is the small screen size. Making the editor, console, and additions output tabs made sense. But what about other actions like managing multiplayer, version control, or settings? That's where the "commands" tab can help. The idea is that it's like a command-line interface for your repl where you can do various actions. This is still a work in progress but here's a preview of what that looks like:
 
-![](https://blog.repl.it/images/mobile/commands.png)
+![mobile commands](https://blog.repl.it/images/mobile/commands.png)
 
 If you follow our blog, you might have read about our [IDE's plugin framework](https://blog.repl.it/ide), the mobile interface is using the same framework we built for our desktop UI. We reused all the same plugins but only had to lay them out differently using the layout engine. The framework's core is still under active development and we are making progress towards stabilizing it and eventually open sourcing it.
 

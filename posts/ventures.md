@@ -2,11 +2,11 @@
 title: Announcing Replit Ventures
 author: Søren Rood
 date: 2021-04-13
-cover: https://blog.repl.it/images/ventures/ventures.jpg
+cover: https://blog.repl.it/images/ventures/ventures_small.jpg
 categories: ventures
 ---
 
-<img src="https://blog.repl.it/images/ventures/ventures.jpg" alt="ventures" width="100%" style="width:100%"/>
+<img src="https://blog.repl.it/images/ventures/ventures_small.jpg" alt="ventures" width="100%" style="width:100%"/>
 
 ### TL;DR
 
