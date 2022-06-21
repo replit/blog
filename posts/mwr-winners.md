@@ -5,7 +5,7 @@ date: 2022-04-22T19:52:41.000Z
 categories: other
 ---
 
-# Whats #MadeWithReplit? 
+## Whats #MadeWithReplit? 
 MadeWithReplit was our first ever ReplCon hackathon! Participants had the chance to win amazing cash prizes, share their work with the world, and hone their coding skills.
 
 We wanted this hackathon to celebrate and inspire our community members. As such, the prizes were $10k total, but making friends along the way and the pride of sharing inspired projects were priceless bonuses as well. Even more, there was no theme, so replers could code with unbounded creativity! 

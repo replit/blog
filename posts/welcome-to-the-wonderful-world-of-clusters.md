@@ -8,7 +8,7 @@ categories: infra
 
 Having [a solid foundation](https://blog.replit.com/quality) is critical for us to be able to fulfill our mission of making programming more accessible, more creative, and more fun. We did a great job of making the platform more stable during last year, but every now and then we would still run into unforeseen problems that [cascaded](https://en.wikipedia.org/wiki/Cascading_failure) into other parts of the platform, producing a bad experience for everyone. So back in October (just a few weeks after I joined the team) when we had 2 load-related site-wide outages within a week, we knew it was time to do a major overhaul of how our infrastructure handles traffic. And now today, we're announcing that as a side effect of that infrastructure change, [Hacker](https://replit.com/site/pricing) repls now run in newer, more powerful machines, which means that we'll have more room to grow and experiment with more benefits for Hackers (and you might find that things feel a little bit snappier lately). This is the first of a three-part series of blogposts on how we rebuilt our infrastructure over the course of ~5 months.
 
-# Introducing a new failure domain
+## Introducing a new failure domain
 
 The original goal of this endeavor was simple, in theory: split the Replit infrastructure into multiple [failure domains](https://en.wikipedia.org/wiki/Failure_domain), so that when (not if) the next incident occurs, it only affects a subset of the users instead of all of them. There are multiple strategies to do so, and we chose to move Hackers to their own failure domain. But what does this split entail? Prior to this change, our backend infrastructure was relatively simple: a Google Compute [Managed Instance Group](https://cloud.google.com/compute/docs/instance-groups) of VMs that [run containers](https://blog.replit.com/killing-containers-at-scale#replit-architecture), and another one that serves HTTP traffic on `.repl.co` domains.
 
@@ -26,11 +26,11 @@ One of Replit's internal mantras is to [ship things incrementally](https://freak
 
 You might also remember that we blogged about our new [global deployments](https://blog.replit.com/global): this was also one intermediate step of this project that we were able to launch early.
 
-# What this means for Hackers
+## What this means for Hackers
 
 Now that we are able to provision separate infrastructure for each cluster, the first thing that came to mind was to experiment with provisioning slightly different hardware in each cluster. To start, we are trying out how responsive repls are if they are running on machines that have a bit more headspace in terms of CPU and memory, since our theory is that there will be less contention over scheduling. We have a few more experiments planned to make the Hacker experience better, and we're going to make an announcement about this very soon.
 
-# What's next?
+## What's next?
 
 As I mentioned in the beginning of the article, this is part of a series of blogposts. In the next installment, Connor Brewster will go into more detail about our brand new DNS server. To wrap things up, Zach Anderson will describe some of the big deployment changes that we needed to do to achieve all this.
 

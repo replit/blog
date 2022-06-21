@@ -2,7 +2,7 @@
 title: Hosting Apps with Always On
 author: Mason Clayton, Connor Brewster, Sidney Kochman
 date: 2-9-2021
-cover: https://blog.replit.com/images/upm_cover.png
+cover: https://blog-images.util.repl.co/upm_cover_small.png
 categories: product
 ---
 

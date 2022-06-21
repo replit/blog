@@ -64,11 +64,10 @@ interface PaneNode {
 }
 
 interface HorizontalGroupNode extends BaseGroupNode {
-  // Horizontal groups cannot nest other horiztonal groups
+  // Horizontal groups cannot nest other horizontal groups
   children: Array<PaneNode | VerticalGroupNode>,
   isHorizontal: true
 }
-
 
 interface VerticalGroupNode extends BaseGroupNode {
   // Vertical groups cannot nest other vertical groups

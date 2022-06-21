@@ -12,7 +12,7 @@ The easiest, fastest way to put a server on the internet should also come with s
 
 
 
-# HTTPS-first
+## HTTPS-first
 
 Our hosting infrastructure makes it easy for anyone to instantly have a secure, HTTPS-secured server by default without having to lift a finger.
 
@@ -20,7 +20,7 @@ Any repl can open up a port and we'll automatically give it a publicly-accessibl
 
 On Replit, HTTPS-first means that the proxy will redirect any HTTP request to a server repl to HTTPS before it even reaches your app. Additionally, we serve [HTTP Strict Transport Security headers](https://en.wikipedia.org/wiki/HTTP_Strict_Transport_Security) to clients to ensure that they know to make future requests over HTTPS instead of HTTP. This makes the easy path and the secure path one and the same.
 
-# How we issue certificates
+## How we issue certificates
 
 Replit is responsible for around half a million HTTPS certificates. The proxy is responsible for requesting, storing, serving, and renewing these certificates using the Automatic Certificate Management Environment protocol. 
 
@@ -57,7 +57,7 @@ To account for our ACME provider's rate limits and renewal hot spots when many c
 
 ![example](https://blog.repl.it/images/secure_hosting/curl_example.png)
 
-# Get to building!
+## Get to building!
 
 HTTPS-first is a milestone for our vision of how easy, simple, and fast web hosting should be. [We've been iterating on hosting for almost three years](https://blog.repl.it/deploy) and we think you'll be thrilled at [what's in store](https://twitter.com/amasad/status/1359553366590779399).
 

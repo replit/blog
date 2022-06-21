@@ -2,7 +2,7 @@
 title: The Replit Summer Hackathon
 author: Søren Rood
 date: 2021-08-03
-cover: https://blog.repl.it/images/alexa-hackathon/card.png
+cover: https://blog-images.util.repl.co/alexa-hackathon/card.png
 categories: events
 ---
 

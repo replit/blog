@@ -30,7 +30,6 @@ It's up to you! Our community has some ideas on what templates they'd like to se
 - A [Flutter](https://flutter.dev/) starter
 - The [Rustlings](https://github.com/rust-lang/rustlings) exercises
 - A [React Native](https://reactnative.dev/docs/getting-started) starter
-- Node.js email [SMPT server](https://simonjcarr.medium.com/create-an-smtp-server-with-nodejs-5688d8fd882e)
 - A [Chrome extension](https://developer.chrome.com/docs/extensions/mv3/getstarted/)
 
 And our team has some ideas on things we'd like to see as well:

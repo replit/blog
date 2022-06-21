@@ -8,7 +8,46 @@ Hello! I’m Brittany Choi. A little bit about me: I was an English teacher, but
 
 *My first lines of code:*
 
+![first lines of code](.
+---
+title: "10 Resources for Beginners: Learn to Code on Replit"
+author: Brittany Choi
+date: 2022-03-05T00:00:00.000Z
+categories: edu
+---
+Hello! I’m Brittany Choi. A little bit about me: I was an English teacher, but I recently transitioned to Technical and Content Writing. I started learning how to code on Replit to gain technical skills and to learn something new.
+
+*My first lines of code:*
+
 ![first lines of code](../images/10-resources-for-beginners/goal-setting-python-practice.png)
+
+I’ve compiled a list of the top 10 helpful resources for beginner coders or new Replit users. I’ve selected a variety of different types of resources for learners of all different styles because everyone learns and processes differently!
+
+## Resource List
+1. Video: [Getting Started with Replit](https://www.youtube.com/watch?v=Oqix86COhc4&feature=emb_logo)
+
+![Image of Getting Started with Replit Video](../images/10-resources-for-beginners/Screen-Shot-2022-02-23-at-3.46.39-PM.png)
+
+*Check this out if: You’ve never used Replit before and want to become familiar with how to use it.*
+
+First off, visit the Learn page on Replit. Click on the Replit Tutorial for a quick 3-minute video on how to navigate and get started with Replit. The video also shows you how to make your first repl and how to invite collaborators.  
+
+2. Video: [Python Code Along by Maya Bello](https://www.youtube.com/watch?v=bF_xdxYN-zw&t=147s)
+
+*Check this out if: You’ve never coded in Python before and want to learn the basics.*
+
+I used this video for my first day of learning how to code Python because I wanted to start with a programming language that is more friendly for beginners. Maya explains concepts in a way that is easy to understand. You can follow along by practicing on Replit to apply the concepts in the video.     
+
+3. Replit [Teaching Curriculum](../images/10-resources-for-beginners/https://docs.replit.com/teaching-curriculum/intro-teaching-curriculum)
+
+*Check this out if: You want to follow along lessons on your own.* 
+
+The Teaching Curriculum on Replit’s site is a helpful tool. You can access complete lessons in the form of Google slides, and explanations in lesson plans and videos, all created by a Computer Science educator. It makes you feel like you are enrolled in class learning through examples and exercises you can try for yourself. 
+
+
+
+
+./images/10-resources-for-beginners/goal-setting-python-practice.png)
 
 I’ve compiled a list of the top 10 helpful resources for beginner coders or new Replit users. I’ve selected a variety of different types of resources for learners of all different styles because everyone learns and processes differently!
 

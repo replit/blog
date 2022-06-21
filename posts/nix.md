@@ -1,7 +1,7 @@
 ---
 title: How we went from supporting 50 languages to all of them
 author: Connor Brewster and Mason Clayton
-cover: https://blog.replit.com/images/upm_cover.png
+cover: https://blog-images.util.repl.co/upm_cover_small.png
 date: 2021-05-24T18:30:56.792Z
 categories: infra
 ---

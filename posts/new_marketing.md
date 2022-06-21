@@ -10,7 +10,7 @@ If you've been on the Repl.it landing page recently, you may have noticed a bit 
  
 We spent a few weeks revamping our marketing pages and wanted to share a few words about how it went. A lot of design and engineering iteration went into not only making our new pages look great, but also creating a scalable and maintainable system.
  
-# Our process
+## Our process
 ### Motivation & setup
 Naturally there were a lot of questions about where to start this redesign: the tone and voice of our copy? The visual style? The product we were advertising? Where the product was going to be in a few months?
  
@@ -87,7 +87,7 @@ Needless to say, we're huge fans of Figma and it's a core part of our entire des
  
 I've already [written about using our own headless CMS on Repl.it here](https://blog.repl.it/cms). Here's the tl;dr: we write all of our content as JSON files in our CMS repl. Then, each marketing page template requests the JSON, renders the appropriate component based on the "type" of the content block from the JSON, and voila! You've got instantly updatable marketing pages, all self-hosted and easily scalable.
  
-# The results
+## The results
 All in all, the redesign can be summarized well by this before/after shot, and we couldn't be prouder to release it to the public. You can check out the rest of the marketing pages more in depth here:
  
 - [IDE](https://repl.it/site/ide)

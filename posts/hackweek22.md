@@ -22,7 +22,7 @@ While we want to create a platform that’s truly extensible, we also want to ex
 
 ![Hack Week '22](https://blog.replit.com/images/hackweek22/G3IQU.png)
 
-# Judges
+## Judges
 
 Without further ado, let’s introduce our judges and projects for Hack Week!
 
@@ -32,7 +32,7 @@ Christina is the founder of [Vantam](https://www.vanta.com/landing/yc), a startu
 
 James is an early-seed stage investor at [Bloomberg Beta](https://www.bloomberg.com/company/values/innovation/bloomberg-beta) and computer theorist that is truly passionate about the future of programming.
 
-# Projects
+## Projects
 
 This year, we joined together in San Francisco to create over 10+ running demos and presentations. From customizable skins and themes to an interactive Replit World, [our team](https://replit.com/site/about) produced projects that will be shipped throughout the year!
 
@@ -180,7 +180,7 @@ The winner of Hack Week '22 People's Choice Award went to... *drumroll please…
 
 Honorary mention: Tie - **Site Wide Search** and **Raspberry Pi + IOT**!
 
-# Conclusion
+## Conclusion
 
 If you made it this far, you truly must be as excited for the [future of Replit](https://blog.replit.com/mobile-v2) as we are. While remaining innovative along the way, we are committed to putting our community first as we onboard the next billion software creators to programming.
 

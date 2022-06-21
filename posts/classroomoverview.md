@@ -11,7 +11,7 @@ The teacher explained the workflow and had two students assisting her to check o
 
 A teacher should be able to see where her students are at—to have bird’s-eye view for the classroom so attention can be paid for the ones who need it the most, plus it would be good way to track progress. Hovering around each student individually can be time and energy consuming.
 
-# Introducing Classroom Overview
+## Introducing Classroom Overview
 
 The *Student Overview* is a feature of the teacher dashboard that we’re introducing. Where previously you had to go into each assignment to see the progress for each student individually (which ironically mirrors the physical classroom experience described above). The teacher classroom dashboard is now divided into assignment and student sections. The assignments section lists out the assignments published or in draft and allows you to create a new assignment. The student section is all about the students, their names, completion percentages for all their assignments and the current submission status.
 

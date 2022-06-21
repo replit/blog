@@ -92,13 +92,13 @@ GitHub being the world’s largest code repository hosting, we made it so that y
 
 In addition to code-hosting, [GitHub Classroom](https://classroom.github.com/) provides auto-grading functionality (similar to Repl.it Classroom) and makes it easy to manage your classroom and assignments.
 
-# The future of Classroom
+## The future of Classroom
 
 So now that we’ve walked you through some of the benefits of Teams, let’s talk about what this means for the Classroom product. **First, if you currently depend on the Classroom, don’t worry, we’d never take it away or deprecate before a) giving you ample time to move off, and b) making it easy to upgrade to Teams**. We are, though, building Teams to be a superior experience and a superset of what Classroom currently provides.
 
 If you’re new to Repl.it, or about to introduce it for the first time to your classroom then we suggest you start out with the Teams product, and where it’s lacking -- the biggest thing would be auto-grading and learning management -- supplement it with a combination of [GitHub Classroom](https://classroom.github.com/), or your own LMS like Google Classroom. 
 
-# Teams pricing
+## Teams pricing
 
 It’s our goal to get Repl.it into the hands of every code learner in the world. We really believe there’s not a better tool for teaching or learning to code. 
 
@@ -110,7 +110,7 @@ So that all said, in order to make it easy and so you don’t have to worry abou
 
 [Update as of September 29, 2020] We're excited to announce that we've simplified and reduced our Teams pricing to to $35/team/month or $350/team/year (2 months free) with an unlimited number of students. And there are more billing improvements on the roadmap.
 
-# Release timeline
+## Release timeline
 
 We have a waiting list that we'll slowly start inviting users from starting sometime in July. If you want in then sign-up [here](https://forms.gle/hezg5B8sqWXTEYwc9). If you want priority access then simply tweet this article with the #ReplitTeams hashtag and you'll be one of the first to get invited. 
 

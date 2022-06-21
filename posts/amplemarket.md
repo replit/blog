@@ -1,5 +1,5 @@
 ---
-title: AmpleMarket gets their whole team coding with Replit
+title: "AmpleMarket gets their whole team coding with Replit"
 author: Obaida Albaroudi & Patrick Coleman
 date: 2021-06-30
 cover: https://blog.repl.it/images/teams_pro/Blogpost-Image-Amplemarket.png
