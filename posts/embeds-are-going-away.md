@@ -4,11 +4,10 @@ author: David Morgan
 date: 2022-06-21
 categories: edu, news
 ---
-# Embedding an Editable Repl is Going Away
 
 We've started the process of deprecating editable embedded Repls, these will become read-only from August 1st. You might be wondering why?
 
-![](/static/images/spongebob-bye-bye.gif)
+![](images/spongebob-bye-bye.gif)
 
 ## Abuse of Repls is Problematic
 [This blog post](https://blog.replit.com/anon) from 2020 explains the situation well, when you run a Repl from within an embed it is essentially being used anonymously and can therefore have a massive burden on your experience by swamping our servers with abuse. Not having the option to have editable embeds means that we avoid this problem altogether.
