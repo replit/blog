@@ -1,3 +1,66 @@
+<style>
+    .search-container {
+        width: 100%;
+        max-width: 800px;
+        display: flex;
+        align-items: center;
+        padding: 16px 0;
+    }
+.searchBoxContainer {
+        display: flex; /* none */
+        align-self: center;
+        padding-left: 12px;
+        background-color: var(--bg-color);
+        color: var(--text-color);
+        width: 100%;
+        width: 100%;
+        margin: 0px 40px;
+        border: solid #9C9C9C 1px;
+        border-radius: 4px;
+    }
+    .searchBoxContainerUpper {
+        display: flex;
+        align-items: center;
+    }
+    .searchBoxContainerLower {
+        display: flex;
+        align-items: center;
+        margin: 0;
+        margin-bottom: 20px;
+        width: 100%;
+        max-width: 720px;
+        display: none;
+    }
+    .searchBox {
+        display: flex; /* none */
+        align-self: center;
+        flex-direction: column;
+        background-color: var(--bg-color);
+        color: var(--text-color);
+        width: 100%;
+        margin: 0px;
+        border: none;
+        padding: 8px 12px;
+        font-family: "IBM Plex Sans", sans-serif;
+        font-size: 16px;
+        font-weight: 500;
+        border-radius: 4px;
+    }
+    @media all and (max-width: 900px) {
+        .navigation-container, .signupHolder {
+            flex: 4;
+        }
+
+        .searchBoxContainerUpper {
+            display: none;
+        }
+
+        .searchBoxContainerLower {
+            display: flex;
+        }
+    }
+</style>
+
 <div class="searchBoxContainer searchBoxContainerLower">
     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
     <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
@@ -7,6 +70,14 @@
 <section class="categories-container-holder">
     <div id="categories-container" class="categories-container"></div>
 </section>
+<div class="search-container">
+    <section class="searchBoxContainer searchBoxContainerUpper">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+        <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+        </svg>
+        <input type="text" id="searchBoxUpper" name="searchBox" placeholder="Search" class="searchBox">
+    </section>
+</div>
 
 <script>
     

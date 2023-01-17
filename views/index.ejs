@@ -39,8 +39,10 @@
         <style id="cssHolder"></style>
         <style id="cssHolderCategories"></style>
 
+        <link rel="preconnect" href="https://fonts.gstatic.com/" />
+        <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin />
         <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Sans:100,200,300,400,500,700&display=swap" rel="stylesheet" />
-        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@500&display=swap" rel="stylesheet"> 
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@500&display=swap" rel="stylesheet" />
 
         <meta charset="utf-8" />
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
@@ -69,14 +71,15 @@
         <!-- iirc there was a reason for adding an id instead of just getting a list by class and then getting the first index. only thing i remember is that it wouldn't work /shrug -->
         <section id="page_container" class="page_container">
             <%- include('header'); %>
+            
             <a class="repl-link" href="/__repl">Edit on Replit</a>
 
             <%- include('theme-control'); %> <%- include('tags-header'); %>
             <div style="margin-top: 10px;">Sign up for <a href="https://kajam.replit.com/" style="color: var(--primary-color);">Kajam 2022</a> and compete for $35,000!</div>
 
             <!-- the removed code here is actually from my initial tags implementation. so much cleaner now lol -->
-            <div class="post-container" id="post_container">
-                <% for (const post of posts) { %> <%- include('post', { post, beta }); %> <% } %>
+            <div class="post-container post-container--list" id="post_container">
+                <% for (const post of posts) { %> <%- include('post-summary', { post, beta }); %> <% } %>
 
                 <!-- only show if no posts are on screen (frontend js handles this since it handles showing and hiding posts) -->
                 <div id="noPostsNotifier" style="display: none;">

@@ -101,17 +101,52 @@ a.back span {
 .post-item {
   width: 720px;
   margin: 0 auto;
-  transition: ease-in-out; /* gotta be a smooth criminal */
 }
 
-.post-title a {
+.post-item > a {
+  text-decoration: none;
+}
+
+.post-container--list .post-item {
+  transition-property: background-color, box-shadow;
+  transition-duration: 120ms;
+  transition-timing-function: ease-out;
+  background-color: #1C2333;
+  border-radius: 8px;
+  padding: var(--spacing-3) var(--spacing-2);
+  border: 1px solid #2B3245;
+  cursor: pointer;
+  margin-bottom: var(--spacing-3);
+}
+
+.post-container--list .post-item:hover {
+  background-color: #2B3245;
+}
+
+.post-container--list .post-item h1,
+.post-container--list .post-item h2,
+.post-container--list .post-item h3 {
+  margin: 0;
+}
+
+.post-container--list .post-item .markdown, .post-container--list .post-item .markdown * {
+  margin: 0;
+}
+
+.post-title {
+  padding-bottom: var(--spacing-1);
   font-family: "IBM Plex Sans", sans-serif;
-  font-weight: 500;
-  line-height: 1.25;
-  font-size: 1.75em;
   color: var(--text-color);
   text-decoration: none;
   transition: 0.2s color ease-in-out;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 32px;
+  line-height: 36px;
+}
+
+.post-author {
+  padding-bottom: var(--spacing-2);
 }
 
 /* when you hover over a link on the main page you get some sort of feedback now */
@@ -141,28 +176,35 @@ div.markdown > p > a:hover {
 }
 
 /* moar feadback on link hover >:) */
-.read-more {
+.read-more a {
+  padding-top: var(--spacing-2);
   transition: 250ms ease-in-out;
   color: var(--primary-color);
-  text-decoration: none;
-  font-size: 18px;
   font-weight: 500;
+  font-size: 14px;
+  line-height: 14px;
+  letter-spacing: 0.4px;
+  text-transform: uppercase;
   margin-bottom: var(--spacing-3);
+  text-decoration: none;
 }
 
-.read-more span {
+.read-more a span {
   position: relative;
+  transition: 150ms ease-in-out;
+  letter-spacing: 0;
 }
 
-.read-more:hover {
-  transition: 250ms ease-in-out;
+.read-more a:hover {
+  transition: 150ms ease-in-out;
   color: #2998ff;
 }
 
 .read-more:hover span {
-  transition: 250ms ease-in-out;
+  transition: 150ms ease-in-out;
   margin: 0 0 0 4px;
 }
+
 /* something something hover something */
 
 /* why were the two spaces between the lines different? idk, but i changed it. no issue changing back if wanted */
@@ -253,28 +295,38 @@ div.markdown > p > a:hover {
 }
 
 .category {
-  transition-duration: 0.25s;
-  border-radius: 100px;
-  color: var(--text-color);
   font-family: "IBM Plex Sans", sans-serif;
-  font-weight: 300;
-  font-size: 20px;
-  padding: 3px;
-  padding-left: 12px;
-  padding-right: 12px;
-  background-color: var(--bg-color);
-  border: solid #9c9c9c 1px;
-  text-decoration: none;
-  display: inline-block;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 16px;
+  font-size: 14px;
+  transition-property: background-color, box-shadow;
+  padding: 8px 12px;
+  transition-duration: 120ms;
+  transition-timing-function: ease-out;
+  background-color: #0000;
+  border-width: 1px;
+  border-style: solid;
+  border-color: #2b3245;
+  border-radius: 16px;
+  color: #c2c8cc;
+  text-transform: capitalize;
+  box-sizing: border-box;
   cursor: pointer;
-  text-align: center;
 }
 
 .category-selected,
-.category:hover {
+.category.category-selected:hover {
   color: #ffffff;
   background-color: #0070e0;
-  border: solid #0070e0 1px;
+  border: 1px solid #0070e0;
+}
+
+.category:hover {
+  color: #ffffff;
+  background-color: #2b3244;
+  border: 1px solid #0070e0;
 }
 
 .category > p {
@@ -369,7 +421,6 @@ div.markdown > p > a:hover {
 .markdown {
   color: var(--text-color);
   line-height: 180%;
-  background: var(--bg-color);
   max-width: 800px;
   font-size: 16px;
   margin: var(--spacing-3) auto;

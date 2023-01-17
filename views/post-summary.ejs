@@ -1,6 +1,7 @@
 <% let listOfCategories = post.categories; %> <% let finalCategoriesClass = ""; %> <% for (category of post.categories) { %> <% finalCategoriesClass += ` post-category-${category}`; %> <% } %>
 
 <article class="post-item<%= finalCategoriesClass %> post-url-<%= post.url %>" id="<%= post.url %>">
+    <a href="/<%= post.url%>">
     <h1 class="post-title">
         <%= post.title %>
     </h1>
@@ -10,4 +11,5 @@
     <div class="post-content markdown">
         <%- post.content %>
     </div>
+</a>
 </article>
