@@ -379,7 +379,8 @@ div.markdown > p > a:hover {
 .markdown h2,
 .markdown h3,
 .markdown h4,
-.markdown h5 {
+.markdown h5,
+.markdown h6 {
   font-weight: 500;
 }
 
@@ -388,29 +389,35 @@ div.markdown > p > a:hover {
 }
 
 .markdown h2 {
-  font-size: 1.5em;
+  font-size: 1.6em;
   margin: var(--spacing-8) 0 var(--spacing-2) 0;
   line-height: 140%;
 }
 
 .markdown h3 {
-  font-size: 24px;
+  font-size: 1.4em;
   line-height: 26px;
   margin: var(--spacing-6) 0 var(--spacing-2) 0;
 }
 
 .markdown h4 {
-  font-size: 22px;
+  font-size: 1.25em;
   line-height: 24px;
   margin: var(--spacing-6) 0 var(--spacing-2) 0;
 }
 
 .markdown h5 {
-  font-size: 20px;
+  font-size: 1.1em;
+  line-height: 22px;
+}
+
+.markdown h6 {
+  font-size: 1em;
   line-height: 22px;
 }
 
 .markdown p {
+  font-size: 1em;
   margin: var(--spacing-2) 0;
 }
 
