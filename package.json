@@ -25,7 +25,7 @@
     "gray-matter": "^4.0.2",
     "highlight.js": "^9.15.10",
     "html-to-text": "^5.1.1",
-    "marked": "^0.7.0",
+    "marked": "^4.0.10",
     "moment": "^2.29.2",
     "prom-client": "^13.1.0",
     "request": "^2.88.0",
