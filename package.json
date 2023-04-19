@@ -20,7 +20,7 @@
   "dependencies": {
     "bad-words": "^3.0.4",
     "ejs": "^2.7.1",
-    "express": "^4.17.1",
+    "express": "^4.17.3",
     "express-prometheus-middleware": "^1.2.0",
     "gray-matter": "^4.0.2",
     "highlight.js": "^9.15.10",
