@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+
+    <link rel="icon" type="image/png" sizes="192x192" href="/images/favicon-2.png">
+
+    <meta property="og:title" content="<%= post.title %>" />
+    <meta property="og:description" content="<%= post.description %>" />
+    <meta property="og:type" content="article" />
+    <meta property="og:image" content="<%= post.cover %>" />
+    <meta property="og:site_name" content="Replit Blog" />
+    <meta property="fb:app_id" content="1775481339348651" />
+    <meta property="og:url" content="https://blog.replit.com/<%= post.url%>" />
+
+    <meta itemprop="name" content="Replit Blog" />
+    <meta itemprop="description" content="<%= post.description %>" />
+    <meta itemprop="image" content="<%= post.cover %>" />
+
+    <meta name="description" content="<%= post.description %>" />
+    <meta name="keywords" content="IDE,Interpreter,Compiler,Teach,Host,Learn,Code,REPL,Compiler,Clojure,Haskell,Kotlin (beta),QBasic,Forth,LOLCODE,BrainF,Emoticon,Bloop,Unlambda,JavaScript,CoffeeScript,Scheme,APL,Lua,Python 2.7,Ruby,Roy,Python,Nodejs,Go,C++,C,C#,F#,HTML, CSS, JS,Rust,Swift,Python (with Turtle),R,Bash,Quil,Crystal,Julia,Elixir,Nim,Dart,Reason NodeJs,Erlang,TypeScript,Pygame,Love2D,Tkinter,Java Swing,Emacs Lisp (Elisp),PHP Web Server,SQLite,Java,PHP CLI,Pyxel"
+      />
+    <meta name="author" property="og:author" content="repl.it" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@replit" />
+    <meta name="twitter:title" content="<%= post.title %>" />
+    <meta name="twitter:description" content="<%= post.description %>" />
+    <meta name="twitter:image" content="<%= post.cover %>" />
+    <title>Replit - <%= post.title %></title>
+    <link rel="stylesheet" type="text/css" href="/style.css?x=20" />
+    <link rel="stylesheet" type="text/css" href="/hljs.min.css?x=1" />
+    <!-- list at index.ejs for why this is here. tldr: switching css themes can be a pain-->
+    <style id="cssHolder"></style>
+    <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Sans:300,400,500,700&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200&display=swap" rel="stylesheet"> 
+    <script>
+      !function() {var analytics = window.analytics = window.analytics || [];if (!analytics.initialize)if (analytics.invoked) window.console && console.error && console.error("Segment snippet included twice.");else {analytics.invoked = !0;analytics.methods = ["trackSubmit", "trackClick", "trackLink", "trackForm", "pageview", "identify", "reset", "group", "track", "ready", "alias", "debug", "page", "once", "off", "on"];analytics.factory = function(e) {return function() {var t = Array.prototype.slice.call(arguments);t.unshift(e);analytics.push(t);return analytics}};for (var e = 0; e < analytics.methods.length; e++) {var key = analytics.methods[e];analytics[key] = analytics.factory(key)}analytics.load = function(key, e) {var t = document.createElement("script");t.type = "text/javascript";t.async = !0;t.src = "https://sp.replit.com/analytics.js/v1/" + key + "/analytics.min.js";var n = document.getElementsByTagName("script")[0];n.parentNode.insertBefore(t, n);analytics._loadOptions = e};analytics.SNIPPET_VERSION = "4.15.3";
+        analytics.load('dMePKGC4BqfBivpe0Hvl8IoPpzSHgjdX', {integrations: {'Segment.io': { apiHost: 'sp.replit.com/v1' }}});
+        analytics.page("blog");
+      }}();
+    </script>
+    <script>
+        (function (isTouchDevice) {
+            if (!isTouchDevice) return;
+            var isTouchClass = "is-touch-device";
+            var docElement = document.documentElement;
+            docElement.className = docElement.className ? [docElement.className, isTouchClass].join(" ") : isTouchClass;
+        })("ontouchstart" in window || (window.DocumentTouch && document instanceof DocumentTouch));
+    </script>
+  </head>
+  <body>
+    <section class="page_container">
+      <%- include('header'); %>
+      <!-- hardlinks bad smh -->
+      <a class="back" href="/"><span class="arrow"><-- </span>Back to blog</a>
+      <a class="repl-link" href="/__repl?fileName=posts/<%= post.url %>.md">Edit on Replit</a>
+
+      <!-- dark theeme go brrr -->
+      <%- include('theme-control'); %>
+
+      <section class="categories-container-holder">
+        <!-- all of this shows the categories bar at the top of a post -->
+        <div id="categories-container" class="categories-container"></div>
+      </section>
+      <script>
+        let categories = "<%= post.categories %>".split(",");
+
+        let finalInner = "";
+
+        categories.forEach((categoryName) => {
+          finalInner += `<p class="category-holder"><a href="/?category=${categoryName}" id="category-${categoryName}" class="categories-child category">${categoryName}</a><p>`;
+        });
+
+        document.getElementById("categories-container").innerHTML = finalInner;
+
+        let searchBoxes = document.getElementsByClassName("searchBoxContainer");
+
+        for (let i = 0; i < searchBoxes.length; i++) {
+          searchBoxes[0].remove();
+        }
+      </script>
+      <!-- end of categories bar -->
+<!--       <div style="margin-top: 10px;">Educators, join us at <a href="join.replit.com/edfest" style="color: var(--primary-color);">EdFest</a> July 20-22.</div>
+ -->
+      <%- include('post', { post }); %>
+    </section>
+
+    <center>
+      <section id="follow-cta" class="follow-cta">
+          <div>
+          <% if(post.profiles){ %>
+            <% for (profile of post.profiles.split(',')) { %>
+              <a href="https://replit.com/@<%= profile %>">
+              <img alt="Replit Logo" src="../images/logo.svg" width="24" height="24" />
+              Follow @<%= profile %>
+              </a>
+            <% }} %>
+            <a href="https://replit.com/@replit">
+              <img alt="Replit Logo" src="../images/logo.svg" width="24" height="24" />
+              Follow @Replit
+            </a>
+       </div>
+      </section>
+    </center>
+
+    <%- include('footer'); %>
+  </body>
+</html>

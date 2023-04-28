@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            Replit - Blog
+        </title>
+       <link rel="icon" type="image/ico" sizes="48x48" href="/icons/favicon.ico">
+
+        <meta property="og:title" content="Replit Blog" />
+        <meta property="og:description" content="The blog of the Repl.it team where we talk about new features, design, and engineering!" />
+        <meta property="og:type" content="article" />
+        <meta property="og:image" content="https://replit.com/public/images/sm.png" />
+        <meta property="og:site_name" content="Replit Blog" />
+        <meta property="fb:app_id" content="1775481339348651" />
+
+        <meta itemprop="name" content="Replit Blog" />
+        <meta itemprop="description" content="The blog of the Repl.it team where we talk about new features, design, and engineering!" />
+        <meta itemprop="image" content="https://replit.com/public/images/sm.png" />
+
+        <meta name="description" content="The blog of the Repl.it team where we talk about new features, design, and engineering!" />
+        <meta
+            name="keywords"
+            content="IDE,Interpreter,Compiler,Teach,Host,Learn,Code,REPL,Compiler,Clojure,Haskell,Kotlin (beta),QBasic,Forth,LOLCODE,BrainF,Emoticon,Bloop,Unlambda,JavaScript,CoffeeScript,Scheme,APL,Lua,Python 2.7,Ruby,Roy,Python,Nodejs,Go,C++,C,C#,F#,HTML, CSS, JS,Rust,Swift,Python (with Turtle),R,Bash,Quil,Crystal,Julia,Elixir,Nim,Dart,Reason NodeJs,Erlang,TypeScript,Pygame,Love2D,Tkinter,Java Swing,Emacs Lisp (Elisp),PHP Web Server,SQLite,Java,PHP CLI,Pyxel"
+        />
+        <meta name="author" property="og:author" content="Replit Blog" />
+
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Replit Blog" />
+        <meta name="twitter:site" content="@replit" />
+        <meta name="twitter:description" content="The blog of the Replit team where we talk about new features, design, and engineering!" />
+        <meta name="twitter:image" content="https://replit.com/public/images/sm.png" />
+
+        <!-- originally added an id here to change styling by changing the `href` but that didn't work lol. see below -->
+        <link rel="stylesheet" type="text/css" href="/style.css?v=20" />
+
+        <link rel="stylesheet" type="text/css" href="/hljs.min.css?x=1" />
+
+        <!-- when dark theme is enabled, js fills these style tags with some css variables to change the theming. i couldn't figure out a better way to do this, but feel free to let me know if you find a way (as in please try it first not just pitch to me (piero) since i spent 2 hours on this) -->
+        <style id="cssHolder"></style>
+        <style id="cssHolderCategories"></style>
+
+        <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Sans:100,200,300,400,500,700&display=swap" rel="stylesheet" />
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@500&display=swap" rel="stylesheet"> 
+
+        <meta charset="utf-8" />
+        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+
+        <link rel="apple-touch-icon" href="https://replit.com/public/images/sm.png" />
+        <meta name="apple-mobile-web-app-title" content="Replit Blog" />
+
+        <link rel="alternate" type="application/rss+xml" title="Replit Blog" href="/feed.xml" />
+
+        <script>
+            !function() {var analytics = window.analytics = window.analytics || [];if (!analytics.initialize)if (analytics.invoked) window.console && console.error && console.error("Segment snippet included twice.");else {analytics.invoked = !0;analytics.methods = ["trackSubmit", "trackClick", "trackLink", "trackForm", "pageview", "identify", "reset", "group", "track", "ready", "alias", "debug", "page", "once", "off", "on"];analytics.factory = function(e) {return function() {var t = Array.prototype.slice.call(arguments);t.unshift(e);analytics.push(t);return analytics}};for (var e = 0; e < analytics.methods.length; e++) {var key = analytics.methods[e];analytics[key] = analytics.factory(key)}analytics.load = function(key, e) {var t = document.createElement("script");t.type = "text/javascript";t.async = !0;t.src = "https://sp.replit.com/analytics.js/v1/" + key + "/analytics.min.js";var n = document.getElementsByTagName("script")[0];n.parentNode.insertBefore(t, n);analytics._loadOptions = e};analytics.SNIPPET_VERSION = "4.15.3";
+                analytics.load('dMePKGC4BqfBivpe0Hvl8IoPpzSHgjdX', {integrations: {'Segment.io': { apiHost: 'sp.replit.com/v1' }}});
+                analytics.page("blog");
+            }}();
+        </script>
+        <script>
+            (function (isTouchDevice) {
+                if (!isTouchDevice) return;
+                var isTouchClass = "is-touch-device";
+                var docElement = document.documentElement;
+                docElement.className = docElement.className ? [docElement.className, isTouchClass].join(" ") : isTouchClass;
+            })("ontouchstart" in window || (window.DocumentTouch && document instanceof DocumentTouch));
+        </script>
+    </head>
+    <body>
+        <!-- iirc there was a reason for adding an id instead of just getting a list by class and then getting the first index. only thing i remember is that it wouldn't work /shrug -->
+        <section id="page_container" class="page_container">
+            <%- include('header'); %>
+            <a class="repl-link" href="/__repl">Edit on Replit</a>
+
+            <%- include('theme-control'); %> <%- include('tags-header'); %>
+<!--             <div style="margin-top: 10px;">Educators, join us at <a href="join.replit.com/edfest" style="color: var(--primary-color);">EdFest</a> July 20-22.</div> -->
+
+            <!-- the removed code here is actually from my initial tags implementation. so much cleaner now lol -->
+            <div class="post-container" id="post_container">
+                <% for (const post of posts) { %> <%- include('post', { post, beta }); %> <% } %>
+
+                <!-- only show if no posts are on screen (frontend js handles this since it handles showing and hiding posts) -->
+                <div id="noPostsNotifier" style="display: none;">
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                    <p style="color: var(--text-color);">Aw, there aren't any posts in this category yet 😔</p>
+                </div>
+
+                <!-- this handles when someone clicks on a category coming back from an article. the switchCategory('all') is just there to make sure all of the posts are visible before hiding some. if not, some weird layout bugs would show up. -->
+                <script>
+                    const urlParams = new URLSearchParams(window.location.search);
+                    switchCategory("all");
+                    if (urlParams.get("category")) {
+                        switchCategory(urlParams.get("category")); //dont ask
+                    }
+                </script>
+            </div>
+        </section>
+        <%- include('footer'); %>
+    </body>
+</html>

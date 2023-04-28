@@ -1,0 +1,13 @@
+language = "nodejs"
+run = "node index.js"
+
+[auth]
+pageEnabled = false
+buttonEnabled = false
+
+[deployment]
+run = ["sh", "-c", "node index.js"]
+ignorePorts = false
+
+[nix]
+channel = "stable-21_11"

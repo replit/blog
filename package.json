@@ -1,0 +1,34 @@
+{
+  "name": "replit-docs",
+  "version": "1.0.0",
+  "description": "This is the repo for the [documentation](https://repl.it/site/docs) for [Repl.it](https://repl.it), a powerful online IDE.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/replit/replit.github.io.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/replit/replit.github.io/issues"
+  },
+  "homepage": "https://github.com/replit/replit.github.io#readme",
+  "dependencies": {
+    "bad-words": "^3.0.4",
+    "ejs": "^2.7.1",
+    "express": "^4.17.1",
+    "express-prometheus-middleware": "^1.2.0",
+    "gray-matter": "^4.0.2",
+    "highlight.js": "^9.15.10",
+    "html-to-text": "^5.1.1",
+    "marked": "^0.7.0",
+    "moment": "^2.29.2",
+    "prom-client": "^13.1.0",
+    "request": "^2.88.0",
+    "striptags": "^3.1.1"
+  }
+}

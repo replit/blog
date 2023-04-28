@@ -1,0 +1,870 @@
+:root {
+  /* Color variables */
+  --text-color: black;
+  --text-color-diff: black;
+  --bg-color: white;
+
+  --primary-color: #0F87FF;
+
+  --code-snippet-text: #c10000;
+  --code-snippet-highlight: #ffeded;
+
+  --dark-grey200: #21242c;
+  --dark-grey300: rgb(33, 36, 44, 0.64);
+
+  --light-grey400: #e4e4e4;
+  --light-grey500: #f1f1f1;
+  --light-grey600: #f8f8f8;
+
+  --spacer-color: #e4e4e4;
+
+  /* Spacing variables */
+  --spacing-half: 4px;
+  --spacing-1: 8px;.;
+  --spacing-2: 16px;
+  --spacing-3: 24px;
+  --spacing-4: 32px;
+  --spacing-5: 40px;
+  --spacing-6: 48px;
+  --spacing-7: 52px;
+  --spacing-8: 60px;
+}
+
+/* Global styling */
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  width: 100%;
+  margin: 0;
+  font-family: "IBM Plex Sans", sans-serif;
+  font-size: 16px;
+  line-height: 160%;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+}
+
+.page_container {
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 var(--spacing-2);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: start;
+}
+
+
+.follow-cta {
+  display: flex;
+  width: 720px;
+  flex-direction: column;
+  gap: 10px;
+  margin: var(--spacing-4) auto var(--spacing-4) auto;
+  padding: var(--spacing-2);
+}
+
+
+.follow-cta > div {
+  display: flex;
+  flex-direction: column;
+  color: var(--text-color);
+  margin: 0;
+  font-size: 1.3em;
+}
+
+.follow-cta > div > p {
+  padding-bottom: 10px;
+  margin: 0;
+}
+
+.follow-cta > div > a {
+  display: flex;
+  flex-direction: row;
+  color: #fff;
+  background-color: #1C2333;
+  padding: 8px 16px 8px 16px;
+  width: fit-content;
+  border-radius: 8px;
+  justify-content: center;
+  transition-duration: 0.1s;
+  text-decoration: none;
+  font-size: 0.75em;
+  margin-bottom: 10px;
+}
+
+.follow-cta > div > a > img {
+  margin-right: 5px;
+}
+
+/* Blog post */
+
+.arrow {
+  font-size: 15px;
+  font-weight: 500;
+  font-family: "Inter", sans-serif;
+}
+
+.back {
+  text-decoration: none;
+  color: var(--text-color);
+  transition: 150ms color ease-in-out;
+  max-width: 720px;
+  width: 100%;
+}
+
+.back:hover {
+  color: var(--primary-color);
+}
+
+a.back:hover span {
+  color: var(--accent-color);
+}
+
+a.back span {
+  transition: 100ms;
+}
+
+/* These two following rules fix the bug where the words move to the right instead of the arrow moving to the left when you hover over "Back to Blog" */
+
+.back span {
+  position: relative;
+  transition: 150ms ease-in-out;
+  margin: 0 0 0 0;
+  padding: 0 0 0 4px;
+}
+
+.back:hover span {
+  margin: 0 4px 0 0;
+  padding: 0 0 0 0;
+}
+/* end of stupid fix to stupid bug bookie wouldn't stop talking about */
+
+.post-item {
+  width: 720px;
+  margin: 0 auto;
+  transition: ease-in-out; /* gotta be a smooth criminal */
+}
+
+.post-title a {
+  font-family: "IBM Plex Sans", sans-serif;
+  font-weight: 500;
+  line-height: 1.25;
+  font-size: 1.75em;
+  color: var(--text-color);
+  text-decoration: none;
+  transition: 0.2s color ease-in-out;
+}
+
+/* when you hover over a link on the main page you get some sort of feedback now */
+div.markdown > p > a {
+  transition: 150ms;
+}
+
+div.markdown > p > a:hover {
+  color: #2998ff;
+  transition: 150ms;
+}
+/* end of hover stuff */
+
+.post-title a:hover {
+  color: var(--primary-color);
+}
+
+.post-author {
+  font-weight: 400;
+  font-size: 1em;
+  color: var(--dark-grey300);
+}
+
+.post-content {
+  font-size: 18px;
+  color: var(--dark-grey200);
+}
+
+/* moar feadback on link hover >:) */
+.read-more {
+  transition: 250ms ease-in-out;
+  color: var(--primary-color);
+  text-decoration: none;
+  font-size: 18px;
+  font-weight: 500;
+  margin-bottom: var(--spacing-3);
+}
+
+.read-more span {
+  position: relative;
+}
+
+.read-more:hover {
+  transition: 250ms ease-in-out;
+  color: #2998ff;
+}
+
+.read-more:hover span {
+  transition: 250ms ease-in-out;
+  margin: 0 0 0 4px;
+}
+/* something something hover something */
+
+/* why were the two spaces between the lines different? idk, but i changed it. no issue changing back if wanted */
+.post-seperator {
+  width: 720px;
+  margin: var(--spacing-4) auto var(--spacing-4) auto;
+  border-top: 1px solid var(--spacer-color);
+}
+
+.post-container img {
+  border-radius: 8px;
+}
+
+/* removed the :last-child thing since it messed with some stuff, also in anticipation for reccomendations/call to action. if we think it's ugly, it'll take 5 seconds to add a "You're done reading, check out the rest of the blog!" button which just goes back to the blog. */
+
+.post-content pre {
+  overflow: auto;
+  border: 1px solid var(--light-grey500);
+  padding: 12px;
+  margin-top: 20px;
+}
+
+.post-content code {
+  padding: 2px 4px;
+}
+
+.post-content pre code {
+  display: block;
+  overflow-x: auto;
+  color: #000;
+  border: none;
+  white-space: pre;
+}
+
+.post-content code,
+.post-content pre {
+  font-size: 14px;
+  line-height: 18px;
+}
+
+.post-content blockquote {
+  font-style: italic;
+  border-left: 3px solid var(--text-color);
+  padding-left: 20px;
+}
+
+.post-item video {
+  margin: 50px auto;
+  max-width: 90%;
+  display: block;
+}
+.post-item figure video {
+  margin: inherit;
+}
+.post-item figure figcaption {
+  text-align: center;
+}
+
+/* Tags Selection */
+/* Does some stuff, like making some perty buttons */
+
+.categories-container-holder {
+  max-width: 720px;
+  width: 100%;
+}
+
+.categories-container-glove {
+  display: flex;
+  align-content: center;
+}
+
+.categories-container {
+  width: auto;
+  display: flex;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  margin-bottom: 0px;
+}
+
+.categories-child {
+  flex: 1;
+}
+
+.category-holder {
+  margin-right: 5px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.categories-holder:last-child {
+  margin-right: 0px;
+}
+
+.category {
+  transition-duration: 0.25s;
+  border-radius: 100px;
+  color: var(--text-color);
+  font-family: "IBM Plex Sans", sans-serif;
+  font-weight: 300;
+  font-size: 20px;
+  padding: 3px;
+  padding-left: 12px;
+  padding-right: 12px;
+  background-color: var(--bg-color);
+  border: solid #9c9c9c 1px;
+  text-decoration: none;
+  display: inline-block;
+  cursor: pointer;
+  text-align: center;
+}
+
+@media all and (max-width: 900px) { 
+  .category {
+    padding: 0;
+    padding-left: 8px;
+    padding-right: 8px;
+    font-size: 16px;
+  }
+
+  .category-holder {
+    margin-right: 4px;
+    margin-top: 4px;
+    margin-bottom: 4px;
+  }
+}
+
+.category-selected,
+.category:hover {
+  color: #ffffff;
+  background-color: #0070e0;
+  border: solid #0070e0 1px;
+}
+
+.category > p {
+  margin: 0;
+}
+
+/* Edit on Repl.it button */
+
+.repl-link {
+  position: fixed;
+  bottom: 1.25em;
+  right: 1em;
+  font-weight: 500;
+
+  padding: 12px var(--spacing-2);
+  border-radius: 6px;
+
+  background: var(--text-color-diff);
+  color: var(--bg-color);
+  box-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.25);
+
+  text-decoration: none;
+  transition: 0.2s background ease-in-out;
+}
+
+.repl-link:hover {
+  background: var(--dark-grey200);
+  text-decoration: none;
+}
+
+/* Change Theme Button */
+
+.theme-button-bottom {
+  position: fixed;
+  bottom: 5.75em;
+  right: 1.22em;
+  font-weight: 500;
+
+  padding: 12px var(--spacing-2);
+  border-radius: 6px;
+
+  background: var(--text-color-diff);
+  color: var(--bg-color);
+  box-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.25);
+
+  text-decoration: none;
+  transition: 0.2s background ease-in-out;
+
+  border: transparent;
+}
+
+.theme-button-bottom:hover {
+  background: var(--dark-grey200);
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.theme-button-top {
+  display: none;
+  padding: 4px 8px;
+  background-color: #0070e0;
+  border-radius: 4px;
+  border-width: 0px;
+  margin: 0;
+  margin-right: 5px;
+  font-weight: 500;
+  text-decoration: none;
+  color: white;
+  transition: 0.2s opacity ease-in-outl;
+}
+
+.theme-button-top:hover {
+  opacity: 0.9;
+}
+
+@media all and (max-width: 700px) {
+  .repl-link {
+    display: none;
+  }
+
+  .theme-button-bottom {
+    display: none;
+  }
+
+  .theme-button-top {
+    display: inline;
+  }
+}
+
+/* Markdown blog */
+
+.markdown {
+  color: var(--text-color);
+  line-height: 180%;
+  background: var(--bg-color);
+  max-width: 800px;
+  font-size: 16px;
+  margin: var(--spacing-3) auto;
+}
+
+.markdown h1,
+.markdown h2,
+.markdown h3,
+.markdown h4,
+.markdown h5,
+.markdown h6 {
+  font-weight: 500;
+}
+
+.markdown h1 {
+  font-size: 1.75em;
+}
+
+.markdown h2 {
+  font-size: 1.6em;
+  margin: var(--spacing-8) 0 var(--spacing-2) 0;
+  line-height: 140%;
+}
+
+.markdown h3 {
+  font-size: 1.4em;
+  line-height: 26px;
+  margin: var(--spacing-6) 0 var(--spacing-2) 0;
+}
+
+.markdown h4 {
+  font-size: 1.25em;
+  line-height: 24px;
+  margin: var(--spacing-6) 0 var(--spacing-2) 0;
+}
+
+.markdown h5 {
+  font-size: 1.1em;
+  line-height: 22px;
+}
+
+.markdown h6 {
+  font-size: 1em;
+  line-height: 22px;
+}
+
+.markdown p {
+  font-size: 1em;
+  margin: var(--spacing-2) 0;
+}
+
+p > strong {
+  margin: var(--spacing-6) 0 var(--spacing-2) 0 !important;
+}
+
+p > em {
+  margin: 20px 0 40px 0 !important;
+}
+
+.max-width-75 img {
+  max-width: 75%;
+  width: auto !important;
+}
+
+.markdown blockquote {
+  font-style: italic;
+  border-left: 3px solid var(--dark-grey200);
+  padding-left: var(--spacing-3);
+}
+
+.markdown img {
+  width: 100%;
+  margin: var(--spacing-5) auto;
+  display: block;
+  border-radius: 8px;
+}
+
+.markdown a img {
+  max-width: 75%;
+  display: block;
+  margin: var(--spacing-5) auto;
+}
+
+.markdown a {
+  color: var(--primary-color);
+  transition: 250ms ease-in-out;
+}
+
+/* link hovering feedback! */
+.markdown a:hover {
+  color: #2998ff;
+  transition: 250ms ease-in-out;
+}
+
+/* UL and LI */
+
+.markdown ul {
+  padding-left: var(--spacing-half);
+  list-style-type: circle;
+}
+
+.markdown ol {
+  padding-left: var(--spacing-3);
+  margin: var(--spacing-3) 0 var(--spacing-3) var(--spacing-3);
+}
+
+.markdown ul {
+  list-style: none;
+  margin: 0 0 var(--spacing-3) var(--spacing-3);
+}
+
+.markdown li {
+  margin: 0 0 0 var(--spacing-3);
+  list-style-type: disc;
+}
+
+.markdown ol li {
+  list-style-type: decimal;
+}
+
+.markdown ul,
+.markdown ol {
+  line-height: 180%;
+  word-break: break-word;
+}
+
+/* Code snippets */
+
+.markdown pre code {
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 14px;
+  overflow-x: auto;
+  color: var(--text-color);
+  border: none;
+  background-color: var(--light-grey600);
+}
+
+.markdown pre {
+  overflow-x: scroll;
+  padding: 15px;
+  white-space: pre-wrap;
+  margin: 24px 0px;
+  background-color: var(--light-grey600);
+  border-radius: 4px;
+  word-break: break-all;
+  word-wrap: break-word;
+  color: var(--text-color);
+}
+
+.markdown code {
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.9em;
+  color: var(--code-snippet-text);
+  background-color: var(--code-snippet-highlight);
+}
+
+/* Responsive breakpoints */
+
+@media all and (max-width: 900px) {
+  
+  .post-seperator {
+    width: 100%;
+    margin-left: auto;
+    margin: 4px;
+  }
+
+  .post-item {
+    width: 100%;
+  }
+
+  .post-title {
+    margin: 0;
+    padding-top: 8px;
+    padding-bottom: 8px;
+  }
+
+  .post-author {
+    font-weight: 400;
+    font-size: 0.8em;
+    color: var(--dark-grey300);
+    margin: 0;
+    line-height: 1.4;
+  }
+  
+  .post-content {
+    margin: 0;
+  }
+
+  .post-content p {
+    margin-top: 8px;
+    margin-bottom: 8px;
+  }
+
+  .back {
+    max-width: 720px;
+    width: 100%;
+  }
+}
+
+@media all and (max-width: 720px) {
+  .markdown h1 {
+    font-size: 28px;
+  }
+  .markdown h2 {
+    font-size: 24px;
+  }
+  .markdown h3 {
+    font-size: 22px;
+  }
+  .markdown h4 {
+    font-size: 20px;
+  }
+  .markdown h5 {
+    font-size: 18px;
+  }
+}
+
+.readMore {
+  margin-bottom: 20px;
+}
+
+.twitter-cta {
+  display: flex;
+  width: 720px;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.twitter-cta > div {
+  display: flex;
+  flex-direction: row;
+  align-content: center;
+  align-items: center;
+  color: var(--text-color);
+  margin: 0;
+  font-size: 1.3em;
+}
+
+.twitter-cta > div > p {
+  padding-bottom: 1px;
+  margin: 0;
+}
+
+.twitter-cta > div > a {
+  display: flex;
+  flex-direction: row;
+  align-content: center;
+  align-items: center;
+  color: var(--text-color);
+  margin: 0px 10px 0px 10px;
+  background-color: #1da1f2;
+  padding: 8px 16px 8px 16px;
+  border-radius: 100px;
+  justify-content: center;
+  transition-duration: 0.1s;
+  text-decoration: none;
+  font-size: 0.75em;
+}
+
+.twitter-cta > div > a > img {
+  margin-right: 5px;
+}
+
+@media all and (max-width: 900px) {
+  .follow-cta {
+    margin-left: auto;
+  }
+}
+
+@media all and (max-width: 725px) {
+  .twitter-cta > div {
+    flex-direction: column;
+  }
+
+  .twitter-cta > div > a {
+    margin-top: 10px;
+  }
+
+  .follow-cta {
+    width: 100%;
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+  .follow-cta > div {
+    flex-direction: column;
+  }
+
+  .follow-cta > div > a {
+    margin-top: 10px;
+  }
+}
+
+.footer {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  font-family: "Raleway", sans-serif;
+  background: #f2f2f3;
+  padding: 50px 5% 15px;
+}
+.footerLinksWrapper {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto 35px;
+}
+.languagesWrapper {
+  width: 70%;
+  margin: 0 auto 35px;
+  text-align: center;
+}
+.footerLinksWrapper,
+.footerLinksWrapper a,
+.languagesWrapper,
+.languagesWrapper a {
+  color: #807f7f;
+}
+.footerLinksWrapper h4,
+.languagesWrapper h4 {
+  margin-bottom: 20px;
+}
+.footerLinksWrapper .footerLinks > div > a,
+.languagesWrapper .langLinks a {
+  margin-bottom: 5px;
+  font-size: 14px;
+  display: block;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+}
+.footerLinksWrapper .footerLinks {
+  margin: 0 10px;
+}
+.footerLinksWrapper a:hover,
+.languagesWrapper a:hover {
+  color: rgb(81, 146, 179);
+  -webkit-text-decoration: none;
+  text-decoration: none;
+}
+.languagesWrapper .langLinks {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-flex-wrap: wrap;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  height: 210px;
+  -webkit-align-items: flex-start;
+  -webkit-box-align: flex-start;
+  -ms-flex-align: flex-start;
+  align-items: flex-start;
+}
+#copyright {
+  color: rgba(128, 127, 127, 0.7);
+  font-size: 14px;
+  font-family: Questrial;
+}
+
+@media all and (max-width: 900px) {
+  .footer {
+    position: relative;
+  }
+  .footerLinksWrapper {
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+  }
+  .languagesWrapper {
+    margin: 0;
+    width: 100%;
+    text-align: left;
+  }
+  .languagesWrapper .langLinks {
+    height: auto;
+    width: auto;
+  }
+  .footerLinksWrapper h4 {
+    margin-top: 22px;
+    margin-bottom: 16;
+  }
+}
+.footer a {
+  cursor: pointer;
+}
+
+@media all and (max-width: 500px) {
+  .post-item img {
+    margin: var(--spacing-3) 0;
+    width: 100%;
+  }
+
+  .post-item a img {
+    margin: var(--spacing-3) 0;
+    max-width: none;
+    width: 100%;
+  }
+}
+
+.super {
+  vertical-align: super;
+  font-size: 0.8rem;
+}
+
+a.doc-cta:hover {
+  color: #FFF !important;
+  background: #57ABFF !important;
+}
+
+a.cta-button:hover {
+  color: #FFF !important;
+  background: #57ABFF !important;
+}
+
+table {
+  width: 100%;
+}
