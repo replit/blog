@@ -25,7 +25,7 @@ Evalbot can be interacted with in a couple of ways:
 
 - Conversational
 
-![]conversational Evalbot(https://i.imgur.com/CGfWq55.gif)
+![conversational Evalbot](https://i.imgur.com/CGfWq55.gif)
 
 To get started, [add evalbot to your slack team](https://evalbot-slack.now.sh/login)
 or [message it on facebook](https://m.me/repl.it). You can visit the

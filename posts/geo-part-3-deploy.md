@@ -81,7 +81,7 @@ We went ahead and migrated over 300,000 users to the new Asia clusters by lazy t
 
 ## Conclusion
 
-The graph below shows some measurements of interaction latency from the perspective of a user in India. The `NA` line shows the latency with the Repl running on our US servers. The `Asia` line, on the other hand, shows the latency when hitting our new Asia clusters. The difference is significant: India-US round trips took about 300ms on average. When using the `Asia` servers, by contrast, the average round trip time between the user and our servers was just *19ms*.
+The graph below shows some measurements of interaction latency from the perspective of a user in India. The `NA` line shows the latency with the Repl running on our US servers. The `Asia` line, on the other hand, shows the latency when hitting our new Asia clusters. The difference is significant: India-US latency was about 300ms on average. When using the `Asia` servers, by contrast, the average latency between the user and our servers was just *19ms*.
 
 ![Interaction latency as perceived by user](../static/images/geo-part-3/latency.png)
 
