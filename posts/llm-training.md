@@ -1,6 +1,6 @@
 ---
 title: "How to train your own Large Language Models"
-author: "Reza Shabani"
+author: "The AI Team @ Replit"
 date: 2023-04-19
 cover: https://blog.replit.com/images/llm/llm-training-replit.jpg
 categories: ai,eng,infra

@@ -8,6 +8,7 @@ buttonEnabled = false
 [deployment]
 run = ["sh", "-c", "node index.js"]
 ignorePorts = false
+deploymentTarget = "gce"
 
 [nix]
 channel = "stable-21_11"

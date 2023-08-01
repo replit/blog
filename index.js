@@ -77,9 +77,11 @@ const buildPostCache = async () => {
       }
     }
 
+
     posts = posts.filter(p => {
       return p.timestamp && p.timestamp < new Date();
     });
+    
 
     posts.sort((l, r) => r.timestamp - l.timestamp);
 
@@ -114,6 +116,7 @@ const readPost = async (slug, snip = false) => {
   // let em read anything ¯\_(ツ)_/¯
   const p = path.join(__dirname, 'posts', slug) + '.md';
   const stat = await fs.stat(p);
+
 
   let raw = await fs.readFile(p, 'utf8');
 
@@ -222,6 +225,7 @@ const readPost = async (slug, snip = false) => {
       uniqueCategories.push(c);
     }
   });
+
 
   return {
     content,
@@ -419,12 +423,13 @@ app.get('/healthcheck', (req, res) => {
 
 const filter = new Filter();
 app.get('/:slug', async (req, res) => {
-  console.log(req.params.slug);
   const slug = req.params.slug
     .split('\n')
     .filter(v => v.match(/[^\s]/))
     .join('\n')
     .replace(/[\x01\x02\x03\x04]/, '');
+
+  console.log(slug)
 
   if (typeof slug === 'string' && slug.length > 0) {
     console.log(
