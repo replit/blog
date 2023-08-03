@@ -504,7 +504,7 @@ p > em {
 }
 
 .markdown img {
-  width: 100%;
+  max-width: 100%;
   margin: var(--spacing-5) auto;
   display: block;
   border-radius: 8px;

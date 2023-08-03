@@ -1,19 +1,16 @@
 ---
 title: "Rebuilding the Replit Filetree for Superior Performance and Accessibility"
 author: "Moudy Elkammash"
-cover: https://blog.replit.com/images/filetree-updates/filetree-workspace.png
+cover: https://blog.replit.com/images/filetree-updates/filetree.png
 categories: eng
 date: 2023-08-01
 ---
 
-![](/images/filetree-updates/filetree-workspace.png)
-
+![](/images/filetree-updates/filetree.png)
 
 *We recently rebuilt the Replit filetree with a focus on performance and accessibility. The result? Quicker interactions when exploring large projects and a more accessible experience with improvements like keyboard navigation. Here’s a summary of how the new filetree works.*
 
 In the early days of Replit, it served as a simple but powerful editor and console. As our user base grew and their projects became more complex, we understood the need for a filesystem and, consequently, a filetree.
-
-![Filetree in the editor](/images/filetree-updates/filetree.png)
 
 This filetree worked for small projects but started to have some performance issues as projects grew in size. This was particularly noticeable once we started using [Replit to build Replit](https://www.youtube.com/watch?v=7TCqGslll-4&t=1835) – our web repo had around 8000 files. We decided to revamp the filetree, and today, we’re excited to share the improvements we’ve made, focusing on performance and accessibility.
 
