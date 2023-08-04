@@ -64,8 +64,17 @@
                 docElement.className = docElement.className ? [docElement.className, isTouchClass].join(" ") : isTouchClass;
             })("ontouchstart" in window || (window.DocumentTouch && document instanceof DocumentTouch));
         </script>
+       <script>
+      if (localStorage.getItem("themeSwitch") === "dark") {
+        applyDarkTheme();
+      }
+
+      else {
+        applyLightTheme();
+      }
+    </script>
     </head>
-    <body class="dark"> 
+     <body id="body" style="display:none">
         <!-- iirc there was a reason for adding an id instead of just getting a list by class and then getting the first index. only thing i remember is that it wouldn't work /shrug -->
         <section id="page_container" class="page_container">
             <%- include('header'); %>
@@ -100,3 +109,12 @@
         <%- include('footer'); %>
     </body>
 </html>
+
+          
+<script type="text/javascript">
+window.onload = function () {
+    setTimeout(function() {
+        document.getElementById("body").style.display = "";        
+    }, 100);
+}
+</script>

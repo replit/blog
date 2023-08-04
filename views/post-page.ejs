@@ -49,8 +49,19 @@
             docElement.className = docElement.className ? [docElement.className, isTouchClass].join(" ") : isTouchClass;
         })("ontouchstart" in window || (window.DocumentTouch && document instanceof DocumentTouch));
     </script>
+     <script>
+      if (localStorage.getItem("themeSwitch") === "dark") {
+        applyDarkTheme();
+      }
+
+      else {
+        applyLightTheme();
+      }
+    </script>
   </head>
-  <body>
+  <body id="body" style="display:none">
+   
+    
     <section class="page_container">
       <%- include('header'); %>
       <!-- hardlinks bad smh -->
@@ -147,15 +158,12 @@ function applyLightTheme() {
     }
     localStorage.setItem("themeSwitch", "light");
 }
+</script>
 
-document.addEventListener("DOMContentLoaded", function() {
-    if (localStorage.getItem("themeSwitch") === "dark") {
-        applyDarkTheme();
-    }
-
-    else {
-        applyLightTheme();
-    }
-});
-
+<script type="text/javascript">
+window.onload = function () {
+    setTimeout(function() {
+        document.getElementById("body").style.display = "";        
+    }, 100);
+}
 </script>
