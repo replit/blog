@@ -13,19 +13,7 @@ categories: news
 <br>
 
 <div style="display: flex; justify-content: center;">
-  <a class="cta-btn" href="https://replit.typeform.com/deploy" target="_blank"
-    style="display: flex;
-    flex-direction: row;
-    color: #fff;
-    background-color: #E7713D;
-    padding: 12px 18px;
-    width: fit-content;
-    border-radius: 8px;
-    justify-content: center;
-    align-items: center;
-    transition-duration: 0.1s;
-    text-decoration: none;
-    font-size: 1.1em;">Launch with Replit</a>
+  <a class="cta-btn" href="https://replit.typeform.com/deploy" target="_blank">Launch with Replit</a>
 </div>
 
 <br>

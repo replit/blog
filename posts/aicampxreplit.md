@@ -16,19 +16,7 @@ Replit and [AI Camp](https://www.ai-camp.org/) are launching a brand new, 4-hour
 — all from within a Repl! Gitless and instant, from start to running LLM App in the first 15 minutes.
 
  <div style="display: flex; justify-content: center;">
-      <a class="cta-btn" href="https://replit.com/learn/ai-camp-unlock-llms" target="_blank"
-        style="display: flex;
-        flex-direction: row;
-        color: #fff;
-        background-color: #0079F2;
-        padding: 12px 18px;
-        width: fit-content;
-        border-radius: 8px;
-        justify-content: center;
-        align-items: center;
-        transition-duration: 0.1s;
-        text-decoration: none;
-        font-size: 1.1em;">Get the Course</a>
+      <a class="cta-btn" href="https://replit.com/learn/ai-camp-unlock-llms" target="_blank">Get the Course</a>
     </div>
 
 Combine this with our new Templates to unlock the potential of AI: [OpenAI Python GPT 3.5 Turbo](https://replit.com/@replit/OpenAI-Python-GPT-35-Turbo?v=1) will allow you to build a chat-bot straight out of the box, whilst [OpenAI Whisper Speech-to-Text Python](https://replit.com/@replit/OpenAI-Whisper-Speech-to-Text-Python?v=1) lets you tap into an exceptional audio transcription service with minimal fuss.

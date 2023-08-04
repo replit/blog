@@ -12,19 +12,7 @@ profiles: ornella
 In case you missed it, last week we hosted legendary AI Researcher [Jim Fan](https://jimfan.me/) from NVIDIA AI for an incredible discussion on all things Generative AI. During a one-hour conversation with Amjad Masad, CEO and co-founder of Replit, and Michele Catasta, Replit's ML Advisor, the group discussed the recent advancements in AI and the potential impact of multi-modality on the field. 
 
 <div style="display: flex; justify-content: center;">
-      <a class="cta-btn" href="https://youtu.be/IAbhei16pL8" target="_blank"
-        style="display: flex;
-        flex-direction: row;
-        color: #fff;
-        background-color: #0079F2;
-        padding: 12px 18px;
-        width: fit-content;
-        border-radius: 8px;
-        justify-content: center;
-        align-items: center;
-        transition-duration: 0.1s;
-        text-decoration: none;
-        font-size: 1.1em;">Watch the replay on-demand</a>
+      <a class="cta-btn" href="https://youtu.be/IAbhei16pL8" target="_blank">Watch the replay on-demand</a>
     </div>
 
 ## Event Recap
@@ -50,17 +38,5 @@ The future of AI is more exciting than ever. Multi-modal language models will co
 Today, the easiest way to harness the power of AI is on Replit. To take you from idea to product faster, we have our own coding AI, [Ghostwriter](https://replit.com/ai), that you can try for free today. Ghostwriter is like a more powerful ChatGPT that lives in your editor. It has chat, contextual assists, smart code completion, and a proactive debugger. Sign up for Hacker Pro today, and start living in the future. 
 
 <div style="display: flex; justify-content: center;">
-      <a class="cta-btn" href="https://replit.com/pricing" target="_blank"
-        style="display: flex;
-        flex-direction: row;
-        color: #fff;
-        background-color: #0079F2;
-        padding: 12px 18px;
-        width: fit-content;
-        border-radius: 8px;
-        justify-content: center;
-        align-items: center;
-        transition-duration: 0.1s;
-        text-decoration: none;
-        font-size: 1.1em;">Get Ghostwriter today</a>
+      <a class="cta-btn" href="https://replit.com/pricing" target="_blank">Get Ghostwriter today</a>
     </div>

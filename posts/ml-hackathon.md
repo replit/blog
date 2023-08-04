@@ -13,19 +13,7 @@ profiles: ornella
 We’re extremely excited to announce Replit’s very first Machine Learning Hackathon, in partnership with [Weights and Biases](https://wandb.ai/site)! If you’re interested in joining the waitlist, head over to the [official site](https://machine-learning-hackathon.replit-community.repl.co/). 
 
 <div style="display: flex; justify-content: center;">
-      <a class="cta-btn" href="https://machine-learning-hackathon.replit-community.repl.co/" target="_blank"
-        style="display: flex;
-        flex-direction: row;
-        color: #fff;
-        background-color: #0079F2;
-        padding: 12px 18px;
-        width: fit-content;
-        border-radius: 8px;
-        justify-content: center;
-        align-items: center;
-        transition-duration: 0.1s;
-        text-decoration: none;
-        font-size: 1.1em;">Sign up for the Waitlist</a>
+      <a class="cta-btn" href="https://machine-learning-hackathon.replit-community.repl.co/" target="_blank">Sign up for the Waitlist</a>
 </div>
 
 Weights and Biases is a machine learning platform that tracks everything you need to make your models reproducible – from hyperparameters and code to model weights and dataset versions. If you’ve never worked with W&B, check out this [example Repl](https://replit.com/@wandb) for an introduction!

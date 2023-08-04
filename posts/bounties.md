@@ -32,19 +32,7 @@ Today we're introducing Bounties, a marketplace where you get to work with the t
 <div class="video-container"><iframe src="https://www.youtube.com/embed/yVtmP1LeyDw" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
 
 <div style="display: flex; justify-content: center;">
-  <a class="cta-btn" href="https://join.replit.com/bounties" target="_blank"
-    style="display: flex;
-    flex-direction: row;
-    color: #fff;
-    background-color: #0070e0;
-    padding: 12px 18px;
-    width: fit-content;
-    border-radius: 8px;
-    justify-content: center;
-    align-items: center;
-    transition-duration: 0.1s;
-    text-decoration: none;
-    font-size: 1.1em;">Post a Bounty!</a>
+  <a class="cta-btn" href="https://join.replit.com/bounties" target="_blank">Post a Bounty!</a>
 </div>
 
 ## Why Bounties on Replit?

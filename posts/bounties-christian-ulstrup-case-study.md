@@ -76,17 +76,5 @@ Bounties is a marketplace where anyone can work with software creators from the 
 ### Post on Replit Bounties and see what creativity you can unleash!
 
 <div style="display: flex; justify-content: center;">
-      <a class="cta-btn" href="https://join.replit.com/bounties?utm_source=blog" target="_blank"
-        style="display: flex;
-        flex-direction: row;
-        color: #fff;
-        background-color: #0079F2;
-        padding: 12px 18px;
-        width: fit-content;
-        border-radius: 8px;
-        justify-content: center;
-        align-items: center;
-        transition-duration: 0.1s;
-        text-decoration: none;
-        font-size: 1.1em;">Learn More         </a>
+      <a class="cta-btn" href="https://join.replit.com/bounties?utm_source=blog" target="_blank">Learn More         </a>
 </div>

@@ -13,19 +13,7 @@ A Ghost ... that codes. Today we unleash Ghostwriter, Replit's Coding AI, to the
 Ghostwriter makes coding fast, easier, and more fun. Tasks that used to be annoying or slow, just aren't anymore. Your coding, but better. Code with your AI pair programmer, on any device, anywhere. Try Ghostwriter, and you will never go back. 
 
 <div style="display: flex; justify-content: center;">
-  <a class="cta-btn" href="https://replit.com/ai" target="_blank"
-    style="display: flex;
-    flex-direction: row;
-    color: #fff;
-    background-color: #E7713D;
-    padding: 12px 18px;
-    width: fit-content;
-    border-radius: 8px;
-    justify-content: center;
-    align-items: center;
-    transition-duration: 0.1s;
-    text-decoration: none;
-    font-size: 1.1em;">Activate Ghostwriter</a>
+  <a class="cta-btn" href="https://replit.com/ai" target="_blank">Activate Ghostwriter</a>
 </div>
 
 Celebrate Halloween by getting your spooky software creating companion today. Want instant access? You can buy it. Want to try it out? We're offering a limited trial on a first come, first serve basis. Apply [here](https://replit.typeform.com/to/eLbMoCpe). 
@@ -173,19 +161,7 @@ Or simply just ask Ghostwriter to help you get started with Generate Code.
 Never go back to coding by yourself. Bring Ghostwriter wherever you go. On desktop. On your phone. At home. On the road. Wherever. Whenever. 
 
 <div style="display: flex; justify-content: center;">
-  <a class="cta-btn" href="https://replit.com/ai" target="_blank"
-    style="display: flex;
-    flex-direction: row;
-    color: #fff;
-    background-color: #E7713D;
-    padding: 12px 18px;
-    width: fit-content;
-    border-radius: 8px;
-    justify-content: center;
-    align-items: center;
-    transition-duration: 0.1s;
-    text-decoration: none;
-    font-size: 1.1em;">Activate Ghostwriter</a>
+  <a class="cta-btn" href="https://replit.com/ai" target="_blank">Activate Ghostwriter</a>
 </div>
 
 ## Resources

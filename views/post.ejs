@@ -1,19 +1,46 @@
-<% let listOfCategories = post.categories; %> <% let finalCategoriesClass = ""; %> <% for (category of post.categories) { %> <% finalCategoriesClass += ` post-category-${category}`; %> <% } %>
+<% let listOfCategories = post.categories; %>
+<% let finalCategoriesClass = ""; %>
+<% for (category of post.categories) { %>
+  <% finalCategoriesClass += ` post-category-${category}`; %>
+<% } %>
 
-<article class="post-item<%= finalCategoriesClass %> post-url-<%= post.url %>" id="<%= post.url %>">
-    <h1 class="post-title">
-        <a href="/<%= post.url%>"><%= post.title %></a>
-    </h1>
-    <h3 class="post-author">
+<!-- this basically shows the same thing but with some slight differences depending on whether this post is being displayed as a card on the main blog page, or as the main article on the blog page 
+  Yes i know this is a horrible way, but im just trying to fix what was already cursed lol
+  
+~ Bookie0
+  -->
+<div>
+<% if (post.snipped) { %>
+  <article class="card post-item<%= finalCategoriesClass %> post-url-<%= post.url %>" id="<%= post.url %>">
+    <a href="/<%= post.url %>">
+      <h1 class="post-title">
+        <%= post.title %>
+      </h1>
+    
+      <svg class="arrow-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+        <path fill-rule="evenodd" clip-rule="evenodd" d="M7 7.75C6.58579 7.75 6.25 7.41421 6.25 7C6.25 6.58579 6.58579 6.25 7 6.25H17C17.4142 6.25 17.75 6.58579 17.75 7V17C17.75 17.4142 17.4142 17.75 17 17.75C16.5858 17.75 16.25 17.4142 16.25 17V8.81066L7.53033 17.5303C7.23744 17.8232 6.76256 17.8232 6.46967 17.5303C6.17678 17.2374 6.17678 16.7626 6.46967 16.4697L15.1893 7.75H7Z" fill="#F5F9FC"/>
+      </svg>
+    
+      <h3 class="post-author">
         <%= moment.utc(post.timestamp).format("ddd MMM D YYYY") %> by <%= post.author %>
-    </h3>
-    <div class="post-content markdown">
+      </h3>
+      <div class="post-content markdown">
         <%- post.content %>
-    </div>
-    <% if (post.snipped) { %>
-    <a href="/<%= post.url %>" class="read-more"> Read more <span class="arrow"> --> </span> </a>
-    <% } %>
-</article>
-
-<!-- moved to the bottom since it looks awkward at the top, also in prep for adding call to action/reccomendations to bottom. still better to have at bottom with nothing below it than it at the top with nothing above -->
-<div class="post-item post-seperator<%= finalCategoriesClass %> post-url-<%= post.url %>"></div>
+      </div>
+    </a>
+  </article>
+<% } else { %> 
+  <article class="main-article post-item<%= finalCategoriesClass %> post-url-<%= post.url %>" id="<%= post.url %>">
+      <h1 class="post-title">
+        <%= post.title %>
+      </h1>
+    
+      <h3 class="post-author">
+        <%= moment.utc(post.timestamp).format("ddd MMM D YYYY") %> by <%= post.author %>
+      </h3>
+      <div class="post-content markdown">
+        <%- post.content %>
+      </div>
+  </article>
+<% } %>
+</div>

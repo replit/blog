@@ -2,40 +2,50 @@
 <button class="theme-button-bottom" onclick="toggleTheme()">☀️</button>
 
 <script>
-    //on initial load, uses user preference.
-    //on subsequent load, uses what user has selected with button
+const changingButtonBottom = document.querySelector(".theme-button-bottom");
+const changingButtonTop = document.querySelector(".theme-button-top");
+const logoImg = document.getElementById("logo-img");
+
+function toggleTheme() {
+    if (changingButtonBottom.innerHTML === "🌙") {
+        applyDarkTheme();
+    } else {
+        applyLightTheme();
+    }
+}
+
+function applyDarkTheme() {
+    console.log("Changing to dark");
+    document.body.classList.remove("light");
+    document.body.classList.add("dark");
+    changingButtonBottom.innerHTML = "☀️";
+    logoImg.src = "/images/logo-dark.png";
+    if (changingButtonTop) {
+        changingButtonTop.innerHTML = "☀️";
+    }
+    localStorage.setItem("themeSwitch", "dark");
+}
+
+function applyLightTheme() {
+    console.log("Changing to light");
+    document.body.classList.remove("dark");
+    document.body.classList.add("light");
+    changingButtonBottom.innerHTML = "🌙";
+    logoImg.src = "/images/logo.png";
+    if (changingButtonTop) {
+        changingButtonTop.innerHTML = "🌙";
+    }
+    localStorage.setItem("themeSwitch", "light");
+}
+
+document.addEventListener("DOMContentLoaded", function() {
     if (window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches) {
-        if (window.localStorage.getItem("themeSwitch") != "light") {
-            toggleTheme();
+        if (localStorage.getItem("themeSwitch") !== "light") {
+            applyDarkTheme();
         }
-    } else if (window.localStorage.getItem("themeSwitch") == "dark") {
-        toggleTheme();
+    } else if (localStorage.getItem("themeSwitch") === "dark") {
+        applyDarkTheme();
     }
+});
 
-    function toggleTheme() {
-        let changingButtonBottom = document.getElementsByClassName("theme-button-bottom")[0];
-        let changingButtonTop = document.getElementsByClassName("theme-button-top")[0];
-
-        if (changingButtonBottom.innerHTML == "☀️") {
-            console.log("Changing to dark");
-            //we don't have to talk about this ok?
-            document.getElementById("cssHolder").innerHTML =
-                ":root {/* Color variables */--primary-color: #0079F2;--text-color: white;--text-color-diff: #9C9C9C;--bg-color: #0E1525;--dark-grey200: rgb(228, 228, 228);--dark-grey300: rgb(228, 228, 228, 0.64);--light-grey600: #1C2333;--light-grey500: #1C2333;--code-snippet-highlight:var(--light-grey600);--code-snippet-text: #ce9a78;--hljs-markdown-background:#1c2333;--hljs-markdown-subst:var(--text-color);--hljs-markdown-comment:#608b4e;--hljs-markdown-deletion:#ce9a78;--hljs-markdown-selection:#ce9a78;--hljs-markdown-pseudo:#bc6060;--hljs-markdown-literal:#9cdcfe;--hljs-markdown-addition:#569cd6;--hljs-markdown-meta:#1f7199;--hljs-markdown-meta-string:#4d99bf;--spacer-color: #696969;}";
-            //ok but for real, this was the cleanest solution I could come up with to switch the theme to dark.
-
-            document.getElementById("logo-img").src = "/images/logo-dark.png";
-            changingButtonBottom.innerHTML = "🌙";
-            changingButtonTop.innerHTML = "🌙";
-            localStorage.setItem("themeSwitch", "dark");
-        } else {
-            //what happens when you switch back to light
-            console.log("Changing to light");
-            //just clears that <style> tag
-            document.getElementById("cssHolder").innerHTML = "";
-            document.getElementById("logo-img").src = ".//images/logo.png";
-            changingButtonBottom.innerHTML = "☀️";
-            changingButtonTop.innerHTML = "️️️️☀️";
-            window.localStorage.setItem("themeSwitch", "light");
-        }
-    }
 </script>

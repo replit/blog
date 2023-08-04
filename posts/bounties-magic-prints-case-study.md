@@ -89,17 +89,5 @@ If you have an idea for a software task you want done for you, email bounties@re
 ### Post a Bounty and see what you can ship this week!
 
 <div style="display: flex; justify-content: center;">
-      <a class="cta-btn" href="https://join.replit.com/bounties" target="_blank"
-        style="display: flex;
-        flex-direction: row;
-        color: #fff;
-        background-color: #0079F2;
-        padding: 12px 18px;
-        width: fit-content;
-        border-radius: 8px;
-        justify-content: center;
-        align-items: center;
-        transition-duration: 0.1s;
-        text-decoration: none;
-        font-size: 1.1em;">Learn More         </a>
+      <a class="cta-btn" href="https://join.replit.com/bounties" target="_blank">Learn More         </a>
 </div>

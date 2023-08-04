@@ -140,18 +140,7 @@ By this time next year, the Replit app will be even more powerful, fast, and edu
 
 <div style="display: flex; justify-content: center;">
   <a class="cta-btn" href="https://replit.com/mobile" target="_blank"
-    style="display: flex;
-    flex-direction: row;
-    color: #fff;
-    background-color: #0079F2;
-    padding: 12px 18px;
-    width: fit-content;
-    border-radius: 8px;
-    justify-content: center;
-    align-items: center;
-    transition-duration: 0.1s;
-    text-decoration: none;
-    font-size: 1.1em;">Download the App</a>
+>Download the App</a>
 </div>
 
 

@@ -1,10 +1,50 @@
-:root {
-  /* Color variables */
-  --text-color: black;
-  --text-color-diff: black;
-  --bg-color: white;
+/*
+Dear future person who stumbles on this,
 
-  --primary-color: #0F87FF;
+I am so sorry about all this code. I don't know why it's so cursed and messy and horrible and unreadable andinefficient etc.
+
+I don't think the core code of this blog has been touched in several years. 
+
+I've just recently tried to edit some of the styling to make it more accessible and improve the design so that it looks somewhat more decent. But it's all just bandaids. 
+
+I think ideally, we should scrap this whole thing and start afresh with a whole new code and styling. 
+
+~ Bookie0
+*/
+:root {
+    /* Spacing variables */
+  --spacing-half: 4px;
+  --spacing-1: 8px;.;
+  --spacing-2: 16px;
+  --spacing-3: 24px;
+  --spacing-4: 32px;
+  --spacing-5: 40px;
+  --spacing-6: 48px;
+  --spacing-7: 52px;
+  --spacing-8: 60px;
+}
+
+.light {
+  --text-color: #07080A;
+  --text-color-diff: #3D4047;
+  
+  --bg-root: #EBECED;
+  --bg-default: #FCFCFC;
+  --bg-default-transparent: rgba(252, 252, 252, 0.40);
+  --bg-higher: #F0F1F2;
+  --bg-highest: #E4E5E6;
+
+  --accent-primary-dimmest: #B2D9FF;
+  --accent-primary-dimmer: #6BB5FF;
+  --accent-primary-default: #0F87FF;
+  --accent-primary-stronger: #005CB8;
+  --accent-primary-strongest: #004182;
+
+  --outline-dimmest: #D2D4D6;
+  --outline-dimmer: #C0C3C4;
+  --outline-default: #AFB1B3;
+  --outline-stronger: #98999C;
+  --outline-strongest: #74767A;
 
   --code-snippet-text: #c10000;
   --code-snippet-highlight: #ffeded;
@@ -18,17 +58,55 @@
 
   --spacer-color: #e4e4e4;
 
-  /* Spacing variables */
-  --spacing-half: 4px;
-  --spacing-1: 8px;.;
-  --spacing-2: 16px;
-  --spacing-3: 24px;
-  --spacing-4: 32px;
-  --spacing-5: 40px;
-  --spacing-6: 48px;
-  --spacing-7: 52px;
-  --spacing-8: 60px;
+  --post-item-shadow: 0px 4px 8px 0px rgba(2, 2, 3, 0.08);
 }
+
+.dark {
+   --text-color: #F5F9FC;
+  --text-color-diff: #C2C8CC;
+
+  --bg-root: #0E1525;
+  --bg-default: #1C2333;
+  --bg-default-transparent: rgba(28, 35, 51, 0.20);
+  --bg-higher: #2B3245;
+  --bg-highest: #3C445C;
+  
+  --accent-primary-dimmest: #004182;
+  --accent-primary-dimmer: #0053A6;
+  --accent-primary-default: #0079F2;
+  --accent-primary-stronger: #57ABFF;
+  --accent-primary-strongest: #B2D9FF;
+  
+  --outline-dimmest: #2B3245;
+  --outline-dimmer: #3C445C;
+  --outline-default: #4E5569;
+  --outline-stronger: #5F677A;
+  --outline-strongest: #70788C;
+ 
+  --dark-grey200: rgb(228, 228, 228);
+  --dark-grey300: rgba(228, 228, 228, 0.64);
+  --light-grey600: #1C2333;
+  --light-grey500: #1C2333;
+  
+  --code-snippet-highlight: var(--light-grey600);
+  --code-snippet-text: #ce9a78;
+  
+  --hljs-markdown-background: #1c2333;
+  --hljs-markdown-subst: var(--text-color);
+  --hljs-markdown-comment: #608b4e;
+  --hljs-markdown-deletion: #ce9a78;
+  --hljs-markdown-selection: #ce9a78;
+  --hljs-markdown-pseudo: #bc6060;
+  --hljs-markdown-literal: #9cdcfe;
+  --hljs-markdown-addition: #569cd6;
+  --hljs-markdown-meta: #1f7199;
+  --hljs-markdown-meta-string: #4d99bf;
+  
+  --spacer-color: #696969;
+  
+  --post-item-shadow: 0px 4px 8px 0px rgba(2, 2, 3, 0.32);
+}
+
 
 /* Global styling */
 
@@ -42,7 +120,7 @@ body {
   font-family: "IBM Plex Sans", sans-serif;
   font-size: 16px;
   line-height: 160%;
-  background-color: var(--bg-color);
+  background-color: var(--bg-root);
   color: var(--text-color);
 }
 
@@ -101,58 +179,149 @@ body {
 
 /* Blog post */
 
-.arrow {
-  font-size: 15px;
-  font-weight: 500;
-  font-family: "Inter", sans-serif;
+.back-container {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  width: 720px;
+  margin-bottom: 16px;
+}
+
+.back-container svg {
+  transition: left 120ms ease-out;
+  left: 0;
+  position: relative;
+}
+
+.back-container svg path {
+  fill: var(--text-color);
 }
 
 .back {
   text-decoration: none;
   color: var(--text-color);
-  transition: 150ms color ease-in-out;
-  max-width: 720px;
-  width: 100%;
+  transition: color 120ms ease-in-out;
+  padding: 4px;
+  padding-left: 0;
+  display: flex;
+  align-items: center;
+  gap: 4px;
 }
 
-.back:hover {
-  color: var(--primary-color);
+.back:hover svg {
+  left: -4px;
 }
 
-a.back:hover span {
-  color: var(--accent-color);
+.back:hover, .back:hover svg path {
+  color: var(--accent-primary-stronger);
+  fill: var(--accent-primary-stronger);
 }
 
-a.back span {
-  transition: 100ms;
+.back:focus-visible {
+  outline: 2px solid var(--accent-primary-default);  
+  border-radius: 8px;  
 }
 
-/* These two following rules fix the bug where the words move to the right instead of the arrow moving to the left when you hover over "Back to Blog" */
+/* IMPORTANT:
 
-.back span {
-  position: relative;
-  transition: 150ms ease-in-out;
-  margin: 0 0 0 0;
-  padding: 0 0 0 4px;
-}
+If you want to add styles JUST to the blog card (ie: the one that is shown on the main blog.replit.com page), make sure it has the `.card` class. 
 
-.back:hover span {
-  margin: 0 4px 0 0;
-  padding: 0 0 0 0;
-}
-/* end of stupid fix to stupid bug bookie wouldn't stop talking about */
+If not, the styles will also apply to the main article on the individual blog page. 
+
+For some reason, they used the same HTML code, so I did a temporary hack in `post.ejs` and roughly duplicated the code twice (`card` = VS `main-article`)
+
+~  Bookie0 
+*/
 
 .post-item {
   width: 720px;
   margin: 0 auto;
-  transition: ease-in-out; /* gotta be a smooth criminal */
+  transition: 120ms ease-out; /* gotta be a smooth criminal */
+  padding: 16px;
+  border-radius: 16px;
+  border: 1px solid var(--outline-dimmest);
+  margin-bottom: 32px;
+  position: relative;
+  cursor: pointer;
 }
 
-.post-title a {
+.post-item.main-article {
+  border: none;
+  cursor: auto;
+  transform: none !important;
+  padding: 0;
+}
+
+.post-item .arrow-icon {
+  position: absolute;
+  top: 0;
+  right: 0;
+  transition: 120ms ease-out;
+}
+
+.post-item .arrow-icon path {
+  fill: var(--text-color);
+}
+
+.post-item a {
+  text-decoration: none;
+  position: relative;
+}
+
+.post-item.card:hover {
+  transform: scale(1.01);
+  box-shadow: var(--post-item-shadow);
+}
+
+.post-item:hover .arrow-icon {
+  top: -4px;
+  right: -4px;
+}
+
+.post-item:active {
+  transform: scale(1);
+}
+
+.post-item a:focus-visible {
+  outline: none;
+}
+
+.post-item.card > a::after {
+  position: absolute;
+  content: '';
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.post-item a:focus-visible::after {
+  outline: 2px solid var(--accent-primary-default);
+  outline-offset: 18px;
+  border-radius: 0.1px;
+}
+
+.post-item.card .markdown, .post-item.card .markdown * {
+  margin-bottom: 0;
+}
+
+.post-title {
+  margin-top: 0;
+  margin-bottom: 8px;
+  width: calc(100% - 32px);
+}
+
+.post-author {
+  color: var(--text-color-diff);
+  margin-top: 0;
+  font-size: 14px;
+}
+
+.post-title {
   font-family: "IBM Plex Sans", sans-serif;
   font-weight: 500;
   line-height: 1.25;
-  font-size: 1.75em;
+  font-size: 24px;
   color: var(--text-color);
   text-decoration: none;
   transition: 0.2s color ease-in-out;
@@ -163,13 +332,9 @@ div.markdown > p > a {
   transition: 150ms;
 }
 
-div.markdown > p > a:hover {
-  color: #2998ff;
-  transition: 150ms;
-}
 /* end of hover stuff */
 
-.post-title a:hover {
+.post-title:hover {
   color: var(--primary-color);
 }
 
@@ -283,7 +448,8 @@ div.markdown > p > a:hover {
   display: flex;
   justify-content: flex-start;
   flex-wrap: wrap;
-  margin-bottom: 0px;
+  margin-bottom: 32px;
+  gap: 8px;
 }
 
 .categories-child {
@@ -291,9 +457,7 @@ div.markdown > p > a:hover {
 }
 
 .category-holder {
-  margin-right: 5px;
-  margin-top: 5px;
-  margin-bottom: 5px;
+  margin: 0;
 }
 
 .categories-holder:last-child {
@@ -301,43 +465,46 @@ div.markdown > p > a:hover {
 }
 
 .category {
-  transition-duration: 0.25s;
   border-radius: 100px;
-  color: var(--text-color);
+  color: var(--text-color-diff);
   font-family: "IBM Plex Sans", sans-serif;
-  font-weight: 300;
-  font-size: 20px;
-  padding: 3px;
-  padding-left: 12px;
-  padding-right: 12px;
-  background-color: var(--bg-color);
-  border: solid #9c9c9c 1px;
   text-decoration: none;
   display: inline-block;
   cursor: pointer;
   text-align: center;
+  padding: 4px 12px;
+  font-size: 16px;
+  line-height: 22px;
+  background-color: var(--bg-root);
+  border: 1px solid var(--outline-dimmer);
+  transition: background 120ms ease-out;
 }
 
-@media all and (max-width: 900px) { 
-  .category {
-    padding: 0;
-    padding-left: 8px;
-    padding-right: 8px;
-    font-size: 16px;
-  }
-
-  .category-holder {
-    margin-right: 4px;
-    margin-top: 4px;
-    margin-bottom: 4px;
-  }
+.category-selected {
+  background: var(--accent-primary-dimmest);
+  border: 1px solid var(--accent-primary-stronger);
+  color: var(--text-color);
 }
 
-.category-selected,
 .category:hover {
-  color: #ffffff;
-  background-color: #0070e0;
-  border: solid #0070e0 1px;
+  background: var(--bg-default);
+}
+
+.category:active {
+  border: 1px solid var(--accent-primary-default);
+}
+
+.category-selected:hover {
+  background: var(--accent-primary-dimmest);
+  border: 1px solid var(--accent-primary-stronger);
+}
+
+.category:focus-visible {
+  outline: 2px solid var(--accent-primary-default);
+}
+
+.category-selected:focus-visible {
+  outline: 2px solid var(--accent-primary-strongest);
 }
 
 .category > p {
@@ -350,50 +517,64 @@ div.markdown > p > a:hover {
   position: fixed;
   bottom: 1.25em;
   right: 1em;
-  font-weight: 500;
+  height: 32px;
+  font-size: 14px;
+  padding: 12px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 8px;
 
-  padding: 12px var(--spacing-2);
-  border-radius: 6px;
-
-  background: var(--text-color-diff);
-  color: var(--bg-color);
+  background: var(--bg-default);
+  color: var(--text-color);
   box-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.25);
 
   text-decoration: none;
-  transition: 0.2s background ease-in-out;
+  transition: background 120ms ease-out;
 }
 
 .repl-link:hover {
-  background: var(--dark-grey200);
+  background: var(--bg-higher);
   text-decoration: none;
+}
+
+.repl-link:focus-visible {
+  outline: 2px solid var(--accent-primary-default);
 }
 
 /* Change Theme Button */
 
 .theme-button-bottom {
-  position: fixed;
-  bottom: 5.75em;
-  right: 1.22em;
-  font-weight: 500;
-
-  padding: 12px var(--spacing-2);
-  border-radius: 6px;
-
-  background: var(--text-color-diff);
-  color: var(--bg-color);
-  box-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.25);
-
+  /* position: fixed; */
+  /* bottom: 4em; */
+  /* right: 1.22em; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 8px;
+  border-radius: 8px;
+  border: 1px solid var(--outline-dimmest);
   text-decoration: none;
-  transition: 0.2s background ease-in-out;
-
-  border: transparent;
+  transition: background 120ms ease-out;
+  width: 32px;
+  height: 32px;
+  background: var(--bg-root);
 }
 
 .theme-button-bottom:hover {
-  background: var(--dark-grey200);
+  background: var(--bg-default);
   text-decoration: none;
   cursor: pointer;
 }
+
+.theme-button-bottom:active {
+  border-color: var(--accent-primary-default);
+}
+
+.theme-button-bottom:focus-visible {
+  outline: 2px solid var(--accent-primary-default);
+}
+
 
 .theme-button-top {
   display: none;
@@ -418,24 +599,184 @@ div.markdown > p > a:hover {
     display: none;
   }
 
-  .theme-button-bottom {
-    display: none;
-  }
-
   .theme-button-top {
     display: inline;
   }
 }
+
+textarea:focus, input:focus{
+  outline: none;
+}
+.navigation {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 auto auto auto;
+  max-width: 1800px;
+  width: 100%;
+  padding: 16px 0;
+}
+.navigation-container, .search-container {
+  flex: 4;
+  display: flex;
+  align-items: center;
+}
+.search-container {
+  position: relative;
+  width: 720px;
+  margin-bottom: 16px;
+}
+
+.search-container input {
+  background: var(--bg-default);
+  border-radius: 8px;
+  padding: 8px;
+  padding-left: 32px;
+  border: 1px solid var(--outline-dimmest);
+  transition: border 120ms ease-out;
+  font-weight: 400;
+  font-size: 14px;
+}
+
+.search-container input:hover {
+  border-color: var(--outline-default);
+}
+
+.search-container input:focus {
+  outline: 2px solid var(--accent-primary-default);
+}
+
+.search-container input::placeholder {
+  color: var(--text-color-diff);
+}
+
+.search-container svg {
+  position: absolute;
+  left: 8px;
+}
+
+.search-container svg path {
+  fill: var(--text-color-diff);
+}
+
+.signupHolder {
+display: flex;
+  
+align-items: flex-end;
+gap: 8px;
+}
+
+.logo {
+  display: flex;
+}
+.searchBox {
+    display: flex; /* none */
+    align-self: center;
+    flex-direction: column;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    width: 100%;
+    margin: 0px;
+    border: none;
+    padding: 8px 12px;
+    font-family: "IBM Plex Sans", sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+    border-radius: 4px;
+}
+.navigation div {
+    display: flex;
+    align-items: center;
+}
+.navigation-links {
+  text-decoration: none;
+  padding: 4px 8px;
+  color: var(--text-color);
+  transition: color 120ms ease-out;
+  font-weight: 500;
+}
+.navigation-links:hover {
+    color: var(--accent-primary-stronger);
+}
+.navigation-links:focus-visible {
+  outline: 2px solid var(--accent-primary-default);
+  border-radius: 8px;
+}
+.navigation .sign-up {
+  margin: 0px;
+  padding: 8px;
+  background-color: var(--accent-primary-dimmer);
+  border-radius: 8px;
+  text-decoration: none;
+  color: var(--text-color);
+  transition: background-color 120ms ease-out;
+  border: 1px solid transparent;
+  height: 32px;
+  display: flex;
+  font-size: 14px;
+  align-items: center;
+  justify-content: center;
+  outline-offset: 0;
+}
+.navigation .sign-up:hover {
+  background-color: var(--accent-primary-default);
+}
+
+.navigation .sign-up:active {
+  border: 1px solid var(--accent-primary-strongest);
+}
+.navigation .sign-up:focus-visible {
+  outline: 2px solid var(--accent-primary-strongest);
+}
+
+.navigation-container img {
+    margin: 0 12px;
+    padding-top: 4px;
+    width: 110px;
+}
+
+@media all and (max-width: 900px) {
+    .navigation img {
+        margin: 0;
+    }
+    .navigation-links {
+        display: none;
+    }
+
+  .search-container, .search-container input {
+    width: 100%;
+  }
+
+  .back-container {
+    width: 100%;
+  }
+}
+
 
 /* Markdown blog */
 
 .markdown {
   color: var(--text-color);
   line-height: 180%;
-  background: var(--bg-color);
+  background: var(--bg-root);
   max-width: 800px;
   font-size: 16px;
   margin: var(--spacing-3) auto;
+}
+
+.markdown a {
+  color: var(--accent-primary-stronger) !important;
+  text-decoration: none;
+  transition: color 120ms ease-out;
+}
+
+.markdown a:hover {
+  color: var(--accent-primary-strongest) !important ;
+}
+
+.markdown a:focus-visible {
+  outline: 2px solid var(--accent-primary-default);
+  border-radius: 4px;
 }
 
 .markdown h1,
@@ -867,4 +1208,32 @@ a.cta-button:hover {
 
 table {
   width: 100%;
+}
+
+.markdown a.cta-btn {
+  margin: 0px;
+  padding: 8px 32px;
+  background-color: var(--accent-primary-dimmer);
+  border-radius: 10px;
+  text-decoration: none;
+  color: var(--text-color) !important;
+  transition: background-color 120ms ease-out;
+  border: 1px solid transparent;
+  display: flex;
+  font-size: 16px;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+}
+
+.markdown a.cta-btn:hover {
+  background: var(--accent-primary-default);
+}
+
+.markdown a.cta-btn:active {
+  border: 1px solid var(--accent-primary-strongest);
+}
+
+.markdown a.cta-btn:focus-visible {
+  outline: 2px solid var(--accent-primary-strongest);
 }

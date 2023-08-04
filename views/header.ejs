@@ -1,157 +1,19 @@
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6"></script>
 
-<!-- bruh why aren't these in the main css file -->
-<style>
-      textarea:focus, input:focus{
-        outline: none;
-    }
-    .navigation {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin: 0 auto auto auto;
-        max-width: 1800px;
-        width: 100%;
-        padding: 16px 0;
-    }
-    .navigation-container, .search-container {
-        flex: 4;
-        display: flex;
-        align-items: center;
-    }
-    .search-container {
-        flex: 5;
-    }
-    .signupHolder {
-    display: flex;
-    flex-direction: row-reverse;
-    align-items: flex-end;
-    flex: 4
-    }
-    .signupHolder * {
-        line-height: 25.6px;
-    }
-    .searchBoxContainer {
-        display: flex; /* none */
-        align-self: center;
-        padding-left: 12px;
-        background-color: var(--bg-color);
-        color: var(--text-color);
-        max-width: 800px;
-        width: 100%;
-        margin: 0px 40px;
-        border: solid #9C9C9C 1px;
-        border-radius: 4px;
-    }
-    .searchBoxContainerUpper {
-        display: flex;
-        align-items: center;
-    }
-    .searchBoxContainerLower {
-        display: flex;
-        align-items: center;
-        margin: 0;
-        margin-bottom: 20px;
-        width: 100%;
-        max-width: 720px;
-        display: none;
-    }
-    .searchBox {
-        display: flex; /* none */
-        align-self: center;
-        flex-direction: column;
-        background-color: var(--bg-color);
-        color: var(--text-color);
-        width: 100%;
-        margin: 0px;
-        border: none;
-        padding: 8px 12px;
-        font-family: "IBM Plex Sans", sans-serif;
-        font-size: 16px;
-        font-weight: 500;
-        border-radius: 4px;
-    }
-    .navigation div {
-        display: flex;
-        align-items: center;
-    }
-    .navigation-links {
-        text-decoration: none;
-        padding: 4px 8px 8px 8px;
-        margin: 4px;
-        color: var(--text-color);
-        transition: 0.2s color ease-in-out;
-    }
-    .navigation-links:hover {
-        color: #0070e0;
-    }
-    .navigation .sign-up {
-        margin: 0px;
-        padding: 4px 8px;
-        background-color: #0070e0;
-        border-radius: 4px;
-        font-weight: 500;
-        text-decoration: none;
-        color: white;
-        transition: 0.2s opacity ease-in-out;
-    }
-    .navigation .sign-up:hover {
-        opacity: 0.9;
-    }
-    .navigation-container img {
-        margin: 0 12px;
-        padding-top: 4px;
-        width: 110px;
-    }
-    @media all and (max-width: 900px) {
-        .navigation img {
-            margin: 0;
-        }
-        .navigation-links {
-            display: none;
-        }
-    }
-
-    @media all and (max-width: 900px) {
-        .navigation-container, .signupHolder {
-            flex: 8;
-        }
-
-        .searchBoxContainerUpper {
-            display: none;
-        }
-
-        .searchBoxContainerLower {
-            display: flex;
-        }
-    }
-
-    @media all and (max-width: 1400px) {
-        .signupHolder {
-            flex: 8;
-        }
-    }
-</style>
 <!-- trying to understand some of this code made my mental state slowly deteriorate, as you can see through my comments. -p -->
 <nav class="navigation">
     <div class="navigation-container">
         <!-- no idea why the image was hardcoded lmao. id added since logo is changed for dark theme -->
         <a class="logo" href="//replit.com"><img id="logo-img" src="/images/logo.png" alt="Replit" /></a>
         <a class="navigation-links" href="//replit.com/site/ide">Features</a>
-        <a class="navigation-links" href="//replit.com/site/jobs">Jobs</a>
+        <a class="navigation-links" href="//replit.com/site/careers">Careers</a>
         <a class="navigation-links" href="/">Blog</a>
         <a class="navigation-links" href="//replit.com/site/pricing">Pricing</a>
     </div>
-    <div class="search-container">
-        <section class="searchBoxContainer searchBoxContainerUpper">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
-            <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
-            </svg>
-            <input type="text" id="searchBoxUpper" name="searchBox" placeholder="Search" class="searchBox">
-        </section>
-    </div>
+   
     <div class="signupHolder">
+        <%- include('theme-control'); %>
         <a class="sign-up" href="//replit.com/signup" onclick="javascript:analytics.track('Signup Requested', {'from': 'blog', 'location': 'header'});">Sign up</a>
-        <button class="theme-button-top" onclick="toggleTheme()">☀️</button>
+        
     </div>
 </nav>

@@ -68,19 +68,7 @@ Switching contexts is a waste of your valuable time and focus. Ghostwriter Chat 
 With Ghostwriter Chat, developers can generate, transform, refactor, explain, and debug code, with much more to come. We’re excited to continue iterating and shipping new features to create a delightful, productive, coding experience. Subscribe to Ghostwriter today and, for a limited time, get free access to the Ghostwriter Chat beta. The Docs can be found [here](https://docs.replit.com/power-ups/ghostwriter/ghostwriter-chat).
 
 <div style="display: flex; justify-content: center;">
-  <a class="cta-btn" href="https://replit.com/ai" target="_blank"
-    style="display: flex;
-    flex-direction: row;
-    color: #fff;
-    background-color: #E7713D;
-    padding: 12px 18px;
-    width: fit-content;
-    border-radius: 8px;
-    justify-content: center;
-    align-items: center;
-    transition-duration: 0.1s;
-    text-decoration: none;
-    font-size: 1.1em;">Activate Ghostwriter Chat</a>
+  <a class="cta-btn" href="https://replit.com/ai" target="_blank">Activate Ghostwriter Chat</a>
 </div>
 
 ## Team shoutouts

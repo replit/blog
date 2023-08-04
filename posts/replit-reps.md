@@ -12,19 +12,7 @@ profiles: ornella,dillonb07,cool-sidd,codingMASTER398,rbinfinity,hugoonreplit,Va
 Applications are now [open](https://replit-reps.replit-community.repl.co/) for the Spring 2023 cohort of Replit Reps, which will kick off in February 2023! 
 
 <div style="display: flex; justify-content: center;">
-      <a class="cta-btn" href="https://replit-reps.replit-community.repl.co/" target="_blank"
-        style="display: flex;
-        flex-direction: row;
-        color: #fff;
-        background-color: #0079F2;
-        padding: 12px 18px;
-        width: fit-content;
-        border-radius: 8px;
-        justify-content: center;
-        align-items: center;
-        transition-duration: 0.1s;
-        text-decoration: none;
-        font-size: 1.1em;">Apply Now!</a>
+      <a class="cta-btn" href="https://replit-reps.replit-community.repl.co/" target="_blank">Apply Now!</a>
     </div>
 
 For those who aren't familiar, Replit Reps are Replit’s community ambassadors. They’re passionate about making programming fun, accessible, and exciting! They enjoy making awesome projects and sharing their skills. They believe that Replit and coding is for everyone, and that anyone should be able to make something great in a judgement-free zone. Plus, they’re excited to work with our team.
