@@ -117,7 +117,6 @@
 <script>
 const changingButtonBottom = document.querySelector(".theme-button-bottom");
 const changingButtonTop = document.querySelector(".theme-button-top");
-const logoImg = document.getElementById("logo-img");
 
 function toggleTheme() {
     if (localStorage.getItem("themeSwitch") === "dark") {    
@@ -132,7 +131,6 @@ function applyDarkTheme() {
     document.body.classList.remove("light");
     document.body.classList.add("dark");
     changingButtonBottom.innerHTML = "☀️";
-    logoImg.src = "/images/logo-dark.png";
     if (changingButtonTop) {
         changingButtonTop.innerHTML = "☀️";
     }
@@ -144,7 +142,6 @@ function applyLightTheme() {
     document.body.classList.remove("dark");
     document.body.classList.add("light");
     changingButtonBottom.innerHTML = "🌙";
-    logoImg.src = "/images/logo.png";
     if (changingButtonTop) {
         changingButtonTop.innerHTML = "🌙";
     }
