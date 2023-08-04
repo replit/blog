@@ -10,7 +10,7 @@ function toggleTheme() {
     if (localStorage.getItem("themeSwitch") === "dark") {    
       applyLightTheme();
     } else {
-        applyDarkTheme();
+      applyDarkTheme();
     }
 }
 
@@ -19,7 +19,6 @@ function applyDarkTheme() {
     document.body.classList.remove("light");
     document.body.classList.add("dark");
     changingButtonBottom.innerHTML = "☀️";
-    logoImg.src = "/images/logo-dark.png";
     if (changingButtonTop) {
         changingButtonTop.innerHTML = "☀️";
     }
@@ -31,7 +30,6 @@ function applyLightTheme() {
     document.body.classList.remove("dark");
     document.body.classList.add("light");
     changingButtonBottom.innerHTML = "🌙";
-    logoImg.src = "/images/logo.png";
     if (changingButtonTop) {
         changingButtonTop.innerHTML = "🌙";
     }
