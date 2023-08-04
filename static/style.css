@@ -254,8 +254,8 @@ For some reason, they used the same HTML code, so I did a temporary hack in `pos
 
 .post-item .arrow-icon {
   position: absolute;
-  top: 0;
-  right: 0;
+  top: 16px;
+  right: 16px;
   transition: 120ms ease-out;
 }
 
@@ -265,7 +265,6 @@ For some reason, they used the same HTML code, so I did a temporary hack in `pos
 
 .post-item a {
   text-decoration: none;
-  position: relative;
 }
 
 .post-item.card:hover {
@@ -274,8 +273,8 @@ For some reason, they used the same HTML code, so I did a temporary hack in `pos
 }
 
 .post-item:hover .arrow-icon {
-  top: -4px;
-  right: -4px;
+  top: 12px;
+  right: 12px;
 }
 
 .post-item:active {
@@ -297,8 +296,7 @@ For some reason, they used the same HTML code, so I did a temporary hack in `pos
 
 .post-item a:focus-visible::after {
   outline: 2px solid var(--accent-primary-default);
-  outline-offset: 18px;
-  border-radius: 0.1px;
+  border-radius: 16px;
 }
 
 .post-item.card .markdown, .post-item.card .markdown * {
