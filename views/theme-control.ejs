@@ -7,10 +7,10 @@ const changingButtonTop = document.querySelector(".theme-button-top");
 const logoImg = document.getElementById("logo-img");
 
 function toggleTheme() {
-    if (changingButtonBottom.innerHTML === "🌙") {
-        applyDarkTheme();
+    if (localStorage.getItem("themeSwitch") === "dark") {    
+      applyLightTheme();
     } else {
-        applyLightTheme();
+        applyDarkTheme();
     }
 }
 
@@ -39,16 +39,12 @@ function applyLightTheme() {
 }
 
 document.addEventListener("DOMContentLoaded", function() {
-    if (window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches) {
-        if (localStorage.getItem("themeSwitch") !== "light") {
-            applyDarkTheme();
-        }
-    } else if (localStorage.getItem("themeSwitch") === "dark") {
+    if (localStorage.getItem("themeSwitch") === "dark") {
         applyDarkTheme();
     }
 
     else {
-        applyDarkTheme();
+        applyLightTheme();
     }
 });
 
