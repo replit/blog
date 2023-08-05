@@ -255,6 +255,10 @@ For some reason, they used the same HTML code, so I did a temporary hack in `pos
   padding: 0;
 }
 
+.post-item.main-article .post-content.markdown a {
+  color: var(--text-color) !important;
+}
+
 .post-item .arrow-icon {
   position: absolute;
   top: 16px;
@@ -765,7 +769,7 @@ gap: 8px;
   margin: var(--spacing-3) auto;
 }
 
-.markdown a {
+.main-article .markdown a {
   color: var(--accent-primary-stronger) !important;
   text-decoration: none;
   transition: color 120ms ease-out;
