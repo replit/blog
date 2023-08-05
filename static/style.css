@@ -232,6 +232,9 @@ For some reason, they used the same HTML code, so I did a temporary hack in `pos
 
 ~  Bookie0 
 */
+.post-wrapper {
+  width: 100%;
+}
 
 .post-item {
   width: 720px;
