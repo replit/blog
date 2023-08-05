@@ -1,5 +1,5 @@
 ---
-title: "Fewer restarts and faster networking for all"
+title: "Fewer Restarts and Faster Networking for All"
 author: "Scott Kennedy"
 cover: https://blog.replit.com/images/google/replit_google_cloud_header.png
 categories: eng

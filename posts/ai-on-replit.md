@@ -1,5 +1,5 @@
 ---
-title: "State of AI Development: 34000% growth in AI projects, OpenAI's dominance, the rise of open-source, and more"
+title: "State of AI Development: 34x growth in AI projects, OpenAI's dominance, the rise of open-source, and more"
 author: Jeff Burke
 date: 2023-07-14
 cover: https://blog.replit.com/images/aiOnReplit/01_AIProjectsOnReplit.png
