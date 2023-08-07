@@ -64,7 +64,9 @@
                 docElement.className = docElement.className ? [docElement.className, isTouchClass].join(" ") : isTouchClass;
             })("ontouchstart" in window || (window.DocumentTouch && document instanceof DocumentTouch));
         </script>
-       <script>
+       <!-- seems like we don't actually need this for themes to work
+    i'll comment it out to avoid the error in console -->
+       <!-- <script>
       if (localStorage.getItem("themeSwitch") === "dark") {
         applyDarkTheme();
       }
@@ -72,7 +74,7 @@
       else {
         applyLightTheme();
       }
-    </script>
+    </script> -->
     </head>
      <body id="body" style="display:none">
         <!-- iirc there was a reason for adding an id instead of just getting a list by class and then getting the first index. only thing i remember is that it wouldn't work /shrug -->
