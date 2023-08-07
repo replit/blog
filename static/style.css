@@ -255,7 +255,7 @@ For some reason, they used the same HTML code, so I did a temporary hack in `pos
   padding: 0;
 }
 
-.post-item.main-article .post-content.markdown a {
+.post-item.card .post-content.markdown a {
   color: var(--text-color) !important;
 }
 
