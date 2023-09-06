@@ -4,7 +4,7 @@ Welcome to the source code for the Replit blog!
 
 ## How to make a blog post
 
-We have a handbook doc that runs you through how to make your blog post from drafting to publishing, check it out [here](https://replit.com/@util/handbook#marketing/blog.md).
+We have a handbook doc that runs you through how to make your blog post from drafting to publishing, check it out [here](https://docs.google.com/document/d/1np2uBRnmCkkJltCWll7oV-IuwkcJem2EMGoNQyKt040/edit#heading=h.49852hvllkdm).
 
 ### Run
 
