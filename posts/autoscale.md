@@ -8,11 +8,27 @@ categories: news,product
 
 ![](/images/autoscale-launch/header_new.png)
 
-Today we are announcing two major new hosting products available to all Hacker and Pro subscribers. Scalable hosting infrastructure solidifies Replit as the fastest place to go from idea to production:
+Today, we are announcing our biggest release yet. Scalable hosting infrastructure directly from the editor. This release transforms Replit into an end-to-end platform to go from idea to production for your next project or startup. Two new products are immediately available to all Hacker and Pro subscribers:
 1. **Autoscale Deployments** - Infrastructure that scales up when your app goes viral and scales down when your app goes unused. Only pay for the resources you use.
 2. **Static Deployments** - Free option to host client-side sites like blogs and websites. 
 
 Best of all, it's directly from the editor. Deploy to scalable infrastructure directly from the place you build. No additional vendors. Just Replit.
+
+<style>
+  .video-container {
+  position: relative;
+  padding-bottom: 56.25%;
+}
+
+.video-container iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+</style>
+<div class="video-container"><iframe src="https://www.youtube.com/embed/A5_qYYKEVEg?si=Ez8oXfqXgW76fLYa" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
 
 For all Deployments information, visit the [deployments page](https://replit.com/deployments) or the [Replit pricing page](https://replit.com/pricing). If you’d like to learn more about how we built this, check out [our technical blog](http://blog.replit.com/deployments-image-streaming). 
 
@@ -36,7 +52,7 @@ We created a calculator on [replit.com/pricing](http://replit.com/pricing) to he
 
 Any usage beyond your bundle will be charged starting at $0.000024/second. For more on pricing and limits, visit the [deployments page](https://replit.com/site/deployments) and the [Replit pricing page](https://replit.com/pricing).
 
-If you'd like to build a project with Autoscale 
+If you'd like to build a project with Autoscale Deployments, then check out this [AI Meeting Transcriber tutorial](https://replit.com/@DavidAtReplit/Meeting-Transcriber?v=1).
 
 ## Static Deployments
 

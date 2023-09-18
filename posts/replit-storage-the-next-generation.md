@@ -16,7 +16,7 @@ Historically Replit limited files in each Repl to [1 GiB of storage space](https
 
 ## How Repls Previously Operated
 
-![](/images/replit-storage-the-next-generation/replit-architecture-pre-margarine.png "The arthitecture of Replit in the before times")
+![](/images/replit-storage-the-next-generation/replit-architecture-pre-margarine.png "The architecture of Replit in the before times")
 
 
 All Repls use [btrfs](https://en.wikipedia.org/wiki/Btrfs) as their filesystem of choice. Back in 2018 when this decision was made, btrfs was already a very stable filesystem (and even some Linux distributions, [like Fedora, later adopted it by default](https://fedoraproject.org/wiki/Changes/BtrfsByDefault)). Aside from its stability / performance considerations, the two features we really liked about btrfs were that it supported setting quotas (to enforce the 1 GiB per-Repl limit) and that it supported [copy-on-write snapshots](https://fedoramagazine.org/working-with-btrfs-snapshots/) as the building blocks for storage.

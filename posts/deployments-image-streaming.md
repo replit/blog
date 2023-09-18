@@ -9,7 +9,7 @@ categories: news,product
 ![](/images/deployments-image-streaming/lazy_header.png)
 
 
-Replit Deployments is our new offering that allows you to quickly go from idea, to code, to production. To make the experience as seamless as possible, we built tooling to convert a repl into a container imager which can be deployed to either a Google Cloud Virtual Machine or to Cloud Run. Early on, we started to hit some issues with large images taking too long to deploy to a virtual machine. It could take minutes to pull and unpack the container image before it could be started. There’s two angles of attack: reduce the image size or speed up the pulling of images. It's preferable to shrink the container image size; however, that is not always possible. In this post we’ll go into some of the technologies and approaches used to speed up image pulling/booting.
+Replit Deployments is our new offering that allows you to quickly go from idea, to code, to production. To make the experience as seamless as possible, we built tooling to convert a Repl into a container imager which can be deployed to either a Google Cloud Virtual Machine or to Cloud Run. Early on, we started to hit some issues with large images taking too long to deploy to a virtual machine. It could take minutes to pull and unpack the container image before it could be started. There’s two angles of attack: reduce the image size or speed up the pulling of images. It's preferable to shrink the container image size; however, that is not always possible. In this post we’ll go into some of the technologies and approaches used to speed up image pulling/booting.
 
 
 ## What is a container image?
@@ -27,12 +27,12 @@ The process of downloading and unpacking large images is slow for a couple of re
 
 ![basic timeline of container cold boot where layers must be downloaded before the container starts](../static/images/deployments-image-streaming/download-before.svg)
 
-Again, the best solution to improve image pulling speeds is to make the image smaller. Use slimmer base images and don’t copy files you don’t need, there’s many resources online on how to optimize depending on which tools and languages you are using. However, in our case, we want to avoid making the user write optimized Dockerfiles and we want to be general enough to deploy any repl. While we continue to optimize the image size, it became clear that optimizing image pulling may be a faster approach to get improved deployment times.
+Again, the best solution to improve image pulling speeds is to make the image smaller. Use slimmer base images and don’t copy files you don’t need, there’s many resources online on how to optimize depending on which tools and languages you are using. However, in our case, we want to avoid making the user write optimized Dockerfiles and we want to be general enough to deploy any Repl. While we continue to optimize the image size, it became clear that optimizing image pulling may be a faster approach to get improved deployment times.
 
 
 ## Lazy Image Streaming
 
-In practice, containers don’t use all of the files in the image’s file system. Yet, normally, the container cannot start until the full filesystem is pulled and unpacked. What if we could start the container before the image was fully downloaded? It turns out that this is possible and there are many different projects implementing this. Most of these projects utilize a special “filesystem” in the linux kernel called FUSE (Filesystem in Userspace). This feature allows user-space processes to implement the filesystem. The kernel will forward all filesystem requests to the FUSE process which will then handle the request.
+In practice, containers don’t use all of the files in the image’s file system. Yet, normally, the container cannot start until the full filesystem is pulled and unpacked. What if we could start the container before the image was fully downloaded? It turns out that this is possible and there are many different projects implementing this. Most of these projects utilize a special “filesystem” in the linux kernel called [FUSE (Filesystem in Userspace)](https://en.wikipedia.org/wiki/Filesystem_in_Userspace#:~:text=Filesystem%20in%20Userspace%20(FUSE)%20is,systems%20without%20editing%20kernel%20code). This feature allows user-space processes to implement the filesystem. The kernel will forward all filesystem requests to the FUSE process which will then handle the request.
 
 FUSE allows decoupling the container’s root file system from downloading the file system itself. As file system requests are made (i.e. readdir/open/read) the FUSE process can download the files and directory metadata on demand instead of needing them up-front. However, compressed tarballs do not provide random access to the files inside. This is a problem if we want to pull files on demand. To address this problem, there are a couple of approaches: convert the image into a format that is seekable or push additional metadata that makes existing images seekable. These are the approaches taken by the eStargz Snapshotter and the SOCI snapshotter, respectively.
 
@@ -77,11 +77,11 @@ Lazy image streaming comes with some trade-offs, the main one is that FUSE is mu
 
 ## Results
 
-Without lazy image streaming enabled, it used to take 3-4 minutes for some repls to cold boot in the VM. With SOCI snapshotter enabled, we can now cold boot the container in under 30 seconds even on small VMs with a small number of vCPUs.
+Without lazy image streaming enabled, it used to take 3-4 minutes for some Repls to cold boot in the VM. With SOCI snapshotter enabled, we can now cold boot the container in under 30 seconds even on small VMs with a small number of vCPUs.
 
 Cloud Run deployments also benefit from a similar technology that Google has developed which also provides image streaming transparently for images hosted by Artifact Registry. This same feature can be enabled for Google Kubernetes Engine (GKE), you can read more about that [here](https://cloud.google.com/kubernetes-engine/docs/how-to/image-streaming).
 
-Utilizing image streaming, we were able to cut over 3 minutes from repl deployment times. We’ll continue to optimize our image building process and deployment flow to make deployments even faster in the future.
+Utilizing image streaming, we were able to cut over 3 minutes from Repl deployment times. We’ll continue to optimize our image building process and deployment flow to make deployments even faster in the future.
 
 ## Come work with us
 

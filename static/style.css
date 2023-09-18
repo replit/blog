@@ -107,6 +107,16 @@ I think ideally, we should scrap this whole thing and start afresh with a whole 
   --post-item-shadow: 0px 4px 8px 0px rgba(2, 2, 3, 0.32);
 }
 
+/* HLJS colors are not working for us, using a hack for dark mode. Probably should be set above */
+.hljs-string {
+  color: #4d99bf !important;
+}
+
+.hljs-number {
+  color: #4d99bf !important;
+}
+
+
 
 /* Global styling */
 
@@ -998,6 +1008,10 @@ p > em {
 
 .readMore {
   margin-bottom: 20px;
+}
+
+.twitter-iframe {
+  outline: 1px solid red;
 }
 
 .twitter-cta {
