@@ -1,4 +1,4 @@
-p---
+---
 title: "Building the #1 LLM Comparison Tool with Bounties - nat.dev"
 author: "The Replit Team"
 date: 2023-04-11

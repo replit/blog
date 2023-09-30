@@ -1,6 +1,7 @@
+---
 title: "Showcasing Startups on Replit"
 author: "The Startups Team"
-date: 2023-09-18
+date: 2023-09-15
 cover: https://blog.replit.com/images/startup-showcase-2023-09-15/startup-showcase-2023_09_15-cover.jpg
 categories: ventures, news, other
 ---

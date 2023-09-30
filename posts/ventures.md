@@ -6,7 +6,7 @@ cover: https://blog.repl.it/images/ventures/ventures.jpg
 categories: ventures
 ---
 
-<img src="https://blog.repl.it/images/ventures/ventures_small.jpg" alt="ventures" width="100%" style="width:100%"/>
+<img src="https://blog.repl.it/images/ventures/ventures.jpg" alt="ventures" width="100%" style="width:100%"/>
 
 ### TL;DR
 
