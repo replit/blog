@@ -1,0 +1,81 @@
+<h2>The Backstory</h2>
+<p><img src="https://blog.replit.com/images/url-shortener-tutorial/slack.png" alt="The Slack message I received last October">
+In October of 2020, Meghan, our people person, messaged me asking if there was a professional-looking URL shortener. Over the next 48 hours, I created <a href="https://replit.sh">Replit.sh</a>, a URL shortener for use by the Replit team and <a href="https://github.com/replit-discord/Replit.sh/tree/4ea4d708d3d970a63e7dcf980127510ee0bcda75">published it on Github</a> for anyone to use. For the past few days, I have been working on rewriting the entire system from the ground up and so it just made sense for me to make a tutorial on how it is done.</p>
+<h2>The Tools Being Used</h2>
+<p>To have a nice balance of simplicity and performance , I decided to use a Node.js repl and a library called nanoexpress, a library similar to express, but with some of the features removed and some pretty optimized code to have much lower latency and much higher throughput than regular express. Since nanoexpress doesn&#39;t include server rendering of pages and I want to keep this as simple as possible, links will have to be manually entered into <code>links.json</code> and then loaded in every time you restart the program. Though it isn&#39;t a library, I am also going to be writing this as a <code>module</code>, since nanoexpress doesn&#39;t support the <code>require()</code> function.</p>
+<h2>Setting Up</h2>
+<p>First things first, we need to get our project going. Create a new Node.js repl, and using the package manager, install nanoexpress.</p>
+<p><img src="https://blog.replit.com/images/url-shortener-tutorial/package.png" alt="Installing the package"></p>
+<p>Next, we can set up our project as a <code>node module</code> by adding <code>&quot;type&quot;: &quot;module&quot;</code> to our <code>package.json</code>. We do this because nanoexpress can&#39;t be used with the <code>request()</code> function, and using <code>import</code> requires your project to be set up as a <code>node module</code>. This will also require us to run this project with the <code>--experimental-modules</code> tag enabled, which we&#39;ll set up in a little bit. In the end, that file should look something like this:</p>
+<pre><code class="language-json">{
+  &quot;name&quot;: &quot;simple-url-shortener&quot;,
+  &quot;version&quot;: &quot;1.0.0&quot;,
+  &quot;type&quot;: &quot;module&quot;,
+  &quot;description&quot;: &quot;&quot;,
+  &quot;main&quot;: &quot;index.js&quot;,
+  &quot;scripts&quot;: {
+    &quot;test&quot;: &quot;echo \&quot;Error: no test specified\&quot; &amp;&amp; exit 1&quot;
+  },
+  &quot;keywords&quot;: [],
+  &quot;author&quot;: &quot;&quot;,
+  &quot;license&quot;: &quot;ISC&quot;,
+  &quot;dependencies&quot;: {
+    &quot;nanoexpress&quot;: &quot;^3.0.2&quot;
+  }
+}
+</code></pre>
+<p>Then, let&#39;s create a <code>.replit</code> file, which will allow us to run node with experimental modules, and paste this in:</p>
+<pre><code class="language-py">run = &quot;node index.js --experimental-modules&quot;
+</code></pre>
+<p>Last but certainly not least, let&#39;s get a <code>Hello world!</code> program going in our <code>index.js</code> like this:</p>
+<pre><code class="language-js">import nanoexpress from &#39;nanoexpress&#39;
+
+const app = nanoexpress();
+
+app.get(&#39;/&#39;, async (req, res) =&gt; {
+    return res.send(&quot;Hello world!&quot;);
+});
+
+app.listen(3000);
+</code></pre>
+<h2>The JSON</h2>
+<p>Now that we have a simple program going, it is time to move onto the JSON. Wanting to go the easy and straightforward route, I went for a single JSON object to be used, where each key is a URL id (think of <code>2Q3gfQU</code> in <code>https://bit.ly/2Q3gfQU</code>) and the corresponding value is the URL. It is fast since it is a dictionary lookup, and no <code>for</code> loops are involved. This is what the said JSON might look like: </p>
+<pre><code class="language-json">{
+  &quot;piero&quot;: &quot;https://piemadd.com/&quot;,
+  &quot;replit&quot;: &quot;https://replit.com/&quot;,
+  &quot;mark&quot;: &quot;https://replit.com/mark/&quot;
+}
+</code></pre>
+<p>To load this into our program, we&#39;ll use the standard js library and then the built-in JSON parsing. First, let&#39;s import the library and load the file, which I have <code>links.json</code>:</p>
+<pre><code class="language-js">import fs from &#39;fs&#39;;
+
+let rawdata = fs.readFileSync(&#39;links.json&#39;);
+let urls = JSON.parse(rawdata);
+</code></pre>
+<p>This will create a global dictionary named <code>urls</code> containing our URLs. Since there is no use for the main page, I&#39;ve decided to use it as an index of all the URLs. To do this, we simply have to replace <code>&quot;Hello world!&quot;</code> with <code>Object.keys(urls)</code> in our <code>/</code> route. Handling specific URLs is not that much different. Our route will be for <code>/:id</code>, where <code>:id</code> means that anything after the <code>/</code> will be passed on as <code>req.params.id</code>. We can then use that to find our corresponding URL and redirect the user, like this:</p>
+<pre><code class="language-js">app.get(&#39;/:id&#39;, async (req, res) =&gt; {
+    let url = urls[req.params.id];
+    return res.redirect(url);
+})
+</code></pre>
+<p>Now when a user goes to a URL like <code>/piero</code> they get redirected to my website, <code>piemadd.com</code>.</p>
+<p>In the end, our code should look like this:</p>
+<pre><code class="language-js">import nanoexpress from &#39;nanoexpress&#39;;
+import fs from &#39;fs&#39;;
+
+const app = nanoexpress();
+
+let urls = JSON.parse(fs.readFileSync(&#39;links.json&#39;));
+
+app.get(&#39;/&#39;, async (req, res) =&gt; {
+    return res.send(Object.keys(urls));
+});
+
+app.get(&#39;/:id&#39;, async (req, res) =&gt; {
+    return res.redirect(urls[req.params.id]);
+});
+
+app.listen(3000);
+</code></pre>
+<h2>Closing Remarks</h2>
+<p>At 16 lines in length, this URL shortener is impressive, in not only its abilities and size but its speed as well, though you need to add the links directly to the JSON file. If you would like to fork this project for your own use, check out <a href="https://replit.com/@piemadd/simple-url-shortener">the repl here</a>. Any constructive criticism is appreciated, and make sure to follow <a href="https://tiktok.com/@replit">our TikTok</a> for some tutorials on the very basics of programming on Replit.</p>

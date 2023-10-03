@@ -1,0 +1,109 @@
+<p>Recently, I took it upon myself to both learn TypeScript and reverse engineer Amtrak&#39;s train tracking API. The result of this was the <a href="https://www.npmjs.com/package/amtrak">Amtrak NPM Package</a> and my own <a href="https://api.amtrak.piemadd.com/">Amtrak Train Tracking API</a>. I wanted to make it easier for others to use the API, as the data received from <a href="https://maps.amtrak.com/services/MapDataService/trains/getTrainsData">Amtrak&#39;s endpoint</a> isn&#39;t useable without the use of decryption, and even then the resulting data is all in one massive JSON object.</p>
+<p>How I built this library is towards the bottom of this post, if you&#39;re more into that sorta thing, but I also highly recommend learning the library&#39;s usage works first. More detailed docs about the API and this library will always be available <a href="https://api.amtrak.piemadd.com/docs">here</a>, so if you want to use this library in more depth, that is where you should go.</p>
+<blockquote>
+<p>Note: These two examples are available in <a href="https://replit.com/@piemadd/Amtrak-5-Lines">this repl</a>.</p>
+</blockquote>
+<h2>The 5 Lines</h2>
+<p>The 5 line example I&#39;m showing here is grabbing the list of trains passing through Chicago Union Station (CHI), logging the number of trains in the returned list, and then logging the list itself. </p>
+<pre><code class="language-js">const amtrak = require(&#39;amtrak&#39;); // Imports the library as `amtrak`
+
+let stationCode = &quot;CHI&quot;; // Station code for Chicago Union Station
+
+amtrak.fetchStation(stationCode).then((station) =&gt; { // Fetches the data relating to &quot;CHI&quot; (Chichago Union Station)
+    console.log(`There are ${station.length} trains going in and out of ${stationCode} today.`); // Log the number of trains going in/out of the station
+    console.log(station); // Logs the entire list
+});
+</code></pre>
+<p>Feel free to modify the three letter code in the code example (list of stations and their codes can be found <a href="https://en.wikipedia.org/wiki/List_of_Amtrak_stations">here</a>), for example this is what the code for ATL (Atlanta) would look like:</p>
+<pre><code class="language-js">const amtrak = require(&#39;amtrak&#39;); // Imports the library as `amtrak`
+
+let stationCode = &quot;ATL&quot;; // Station code for Atlanta Peachtree Station
+
+amtrak.fetchStation(stationCode).then((station) =&gt; { // Fetches the data relating to &quot;CHI&quot; (Chichago Union Station)
+    console.log(`There are ${station.length} trains going in and out of ${stationCode} today.`); // Log the number of trains going in/out of the station
+    console.log(station); // Logs the entire list
+});
+</code></pre>
+<h2>More Detailed Example</h2>
+<p>Chances are, your application isn&#39;t going to print out the raw JSON you get from the library, so I&#39;ve made a much cleaner code sample, though it does take up a whopping 20 lines (so much bloat I know /s). This example does the same exact thing, but makes the train information pretty before logging it to the console. I&#39;m also taking advantage of the <code>Date</code> objects returned by the library to print the dates/times in a pleasing fashion and using the library&#39;s built in <code>tzConv()</code> function to convert a three-letter timezone to a fully expanded one (EX: EST =&gt; America/New_York):</p>
+<pre><code class="language-js">const amtrak = require(&#39;amtrak&#39;);
+
+let stationCode = &quot;CHI&quot;; // Station code for Chicago Union Station
+
+amtrak.fetchStation(stationCode).then((station) =&gt; {
+    console.log(`There are ${station.length} trains going in and out of ${stationCode} today.`)
+
+    station.forEach((train) =&gt; {
+        let optionsDate = { weekday: &#39;long&#39;, year: &#39;numeric&#39;, month: &#39;long&#39;, day: &#39;numeric&#39;, timeZone: amtrak.tzConv(train.tz) };
+        let optionsTime = { timeStyle: &quot;short&quot;, timeZone: amtrak.tzConv(train.tz) };
+
+        console.log(`Train Number: ${train.trainNum}`);
+        if (train.schArr) {console.log(`Train scheduled to arrive on ${train.schArr.toLocaleString(&#39;en-US&#39;, optionsDate)} at ${train.schArr.toLocaleString(&#39;en-US&#39;, optionsTime)} ${train.tz}`)};
+
+        if (train.schDep) {console.log(`Train scheduled to depart on ${train.schDep.toLocaleString(&#39;en-US&#39;, optionsDate)} at ${train.schDep.toLocaleString(&#39;en-US&#39;, optionsTime)} ${train.tz}`)};
+
+        if (train.postArr) {console.log(`Train arrived on ${train.postArr.toLocaleString(&#39;en-US&#39;, optionsDate)} at ${train.postArr.toLocaleString(&#39;en-US&#39;, optionsTime)} ${train.tz}`)};
+
+        if (train.postDep) {console.log(`Train departed on ${train.postDep.toLocaleString(&#39;en-US&#39;, optionsDate)} at ${train.postDep.toLocaleString(&#39;en-US&#39;, optionsTime)} ${train.tz}`)};
+        console.log(&quot;&quot;);
+    })
+})
+</code></pre>
+<h2>How I Built The Library</h2>
+<p>Chances are you&#39;re also wondering how I built this library. <a href="https://maps.amtrak.com/services/MapDataService/trains/getTrainsData">Amtrak&#39;s endpoint</a> returns a single, massive, encrypted JSON object. While the decryption is only a few lines long, understanding how to do it is what made my brain go numb. I ended up resorting to <a href="https://news.ycombinator.com/item?id=17605290">this hackernews thread</a>, in which one of the commenters uncovered how the encryption functioned. After a few hours and a head-shaped dent in my desk, I had these semi-cursed lines of code written: </p>
+<pre><code class="language-js">const decrypt = (content: string, key: string) =&gt; {
+    return crypto.AES.decrypt(
+        crypto.lib.CipherParams.create({ ciphertext: crypto.enc.Base64.parse(content) }),
+        crypto.PBKDF2(key, crypto.enc.Hex.parse(sValue), { keySize: 4, iterations: 1e3 }),
+        { iv: crypto.enc.Hex.parse(iValue) }
+    ).toString(crypto.enc.Utf8)
+};
+
+const data = await axios.get(dataUrl);
+const mainContent = data.substring(0, data.length - masterSegment);
+const encryptedPrivateKey = data.substr(data.length - masterSegment, data.length);
+const privateKey = decrypt(encryptedPrivateKey, publicKey).split(&#39;|&#39;)[0]
+const { features:parsed } = JSON.parse(decrypt(mainContent, privateKey));
+</code></pre>
+<p>Now that I had a massive, 900KB JSON object, I could start cleaning the data and making it easy to use. One of the first (and easiest) problems I had to tackle was the data types used in the object.</p>
+<pre><code class="language-js">{
+    &quot;coordinates&quot;: [
+      -121.81821231083048,
+      38.01807522955585
+    ],
+    &quot;OBJECTID&quot;: 664932,
+    &quot;lon&quot;: null,
+    &quot;lat&quot;: null,
+    &quot;gx_id&quot;: &quot;1021404&quot;,
+    &quot;ViewStn2&quot;: null, //train time WHEN IT ACTUALLY EXISTS
+    &quot;ViewStn1&quot;: null, //eastern WHEN IT ACTUALLY EXISTS
+    &quot;StatusMsg&quot;: &quot;SERVICE DISRUPTION&quot;,
+    &quot;EventSchDp&quot;: null, //i forgor 💀
+    &quot;EventSchAr&quot;: null,
+    &quot;Heading&quot;: &quot;E&quot;,
+    &quot;LastValTS&quot;: &quot;8/25/2021 2:54:12 PM&quot;, //WHERE DA TRAIN IS
+    &quot;EventTZ&quot;: null,
+    &quot;EventT&quot;: null,
+    &quot;EventDT&quot;: null,
+    &quot;EventCode&quot;: &quot;MTZ&quot;,
+    &quot;DestCode&quot;: &quot;OKJ&quot;,
+    &quot;OrigCode&quot;: &quot;BFD&quot;,
+    &quot;RouteName&quot;: &quot;San Joaquins&quot;,
+    &quot;TrainState&quot;: &quot;Active&quot;,
+    &quot;OriginTZ&quot;: &quot;P&quot;,
+    &quot;OrigSchDep&quot;: &quot;8/25/2021 8:12:00 AM&quot;, //ORGIN TIMEZONE BRUH
+    &quot;Aliases&quot;: null,
+    &quot;updated_at&quot;: &quot;8/25/2021 6:22:51 PM&quot;, //EASTERN ALWAYS???
+    &quot;created_at&quot;: &quot;8/25/2021 6:22:51 PM&quot;, //EASTERN ALWAYS???
+    &quot;CMSID&quot;: &quot;1241245650084&quot;,
+    &quot;ID&quot;: 1021404,
+    &quot;TrainNum&quot;: &quot;713&quot;,
+    &quot;Velocity&quot;: &quot;0.915229976177216&quot;,
+    &quot;Stations&quot;: {}
+}
+</code></pre>
+<p>It seems like the developers decided that storing certain variables as strings, seemingly at random, was the way to go. So, for example, you&#39;ll see the coordinates returned as floats, but the velocity is a string?</p>
+<p>Additionally, the Dates are returned as strings, not even in a standardized format such as ISO-8061. Speaking of dates, this was my next problem. While I could create a new <code>Date</code> object and pass this string, I don&#39;t know which timezone each date is from, much less daylight or standard time. So I made a little function that figures out whether daylight or savings time is observed in the US to fix the daylight savings issue. </p>
+<p>In terms of timezones, it was much more complex. While I have the timezone where the train starts and know some times which are always in eastern time, there are a few times in an unknown timezone, that of the train&#39;s location. To get this timezone, I used the rough difference between the time the train sent data last (train time) and when the train&#39;s information was updated in Amtrak&#39;s database (eastern time). </p>
+<p>After all of the data is cleaned, I can return the data, also in a single massive object, but this time the data is easier to work with. However, I knew that downloading all of the data for every Amtrak train wasn&#39;t the cleanest solution. So I decided to use this library to create a REST API to host the data to fix this. Doing so allows developers from any language to interact with Amtrak&#39;s tracking data and reduce the amount of data needed to download. As I knew this functionality was handy, I implemented the endpoints back into the Amtrak library, meaning I bootstrapped my library with itself.</p>
+<p>I hope you enjoyed my sorta-in-depth tutorial and explanation of Amtrak.js, have fun building!</p>

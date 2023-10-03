@@ -1,0 +1,361 @@
+<p>Transcription, or speech-to-text (STT), is a very helpful feature for various use cases, from AI assistants to video captioning. You can use it to create immersive virtual experiences and accessible interfaces unlike ever before. It’s no wonder STT-driven apps and services are in high demand.</p>
+<p>In this article, you’ll learn how to implement STT functionality in your own app with ease using <a href="https://www.assemblyai.com/">AssemblyAI</a>. Its API provides simple access to advanced AI models that can transcribe your audio or video files and even real-time streams.</p>
+<p>You’ll use AssemblyAI together with <a href="https://reactjs.org/">React</a>, <a href="https://nextjs.org/">Next.js</a>, and <a href="https://replit.com/">Replit</a> to build a simple app for transcribing uploaded files. You can follow along with <a href="https://replit.com/@areknawo/AssemblyAI-STT-App">the repl here</a>.</p>
+<h2>What Is AssemblyAI</h2>
+<p>Before diving in, take a moment to get to know AssemblyAI and its vast feature set.</p>
+<p>On top of both real-time and async transcription, AssemblyAI API provides many features related to general audio intelligence:</p>
+<ul>
+<li>Automatic speakers detection and differentiation</li>
+<li>Intelligent punctuation and content summarization</li>
+<li>Support for custom/niche vocabulary</li>
+<li>Sensitive content moderation</li>
+<li>Detection of topic and entities, like company names or locations in the audio</li>
+</ul>
+<p>All the above is already possible with AssemblyAI, and upcoming features like translation and emotion detection will only unlock more potential.</p>
+<p>Again, there’s a lot you can do with AssemblyAI. Examples include captioning videos, transcribing phone calls, or moderating sensitive content. With AssemblyAI, the sky’s the limit.</p>
+<h2>Implementing a Speech-to-Text App with AssemblyAI</h2>
+<p>Now, without further ado, get started in building your STT app by creating a new Next.js repl.</p>
+<p><img src="https://i.imgur.com/k6g18m9.png" alt="Creating Next.js repl"></p>
+<p>Use your repl’s shell to install the dependencies and initialize <a href="https://tailwindcss.com/">Tailwind</a>:</p>
+<pre><code class="language-bash">npm install -D tailwindcss postcss autoprefixer
+npm install axios clsx multiparty
+npx tailwindcss init -p
+</code></pre>
+<p>The dependencies installed with this command include the following:</p>
+<ul>
+<li><a href="https://tailwindcss.com/">Tailwind</a> and <a href="https://postcss.org/">PostCSS</a> to use utility-first CSS in the frontend</li>
+<li><a href="https://github.com/lukeed/clsx">clsx</a> for operating CSS class strings</li>
+<li><a href="https://axios-http.com/">Axios</a> as an isomorphic HTTP client for the frontend and backend (Next.js API routes)</li>
+<li><a href="https://github.com/pillarjs/multiparty">multiparty</a> to parse <code>multipart/form-data</code> request contents used in file uploads</li>
+</ul>
+<p>To finish setting up Tailwind, you’ll need to edit a few files. Start with <code>tailwind.config.js</code>:</p>
+<pre><code class="language-javascript">module.exports = {
+  content: [
+    &quot;./pages/**/*.{js,ts,jsx,tsx}&quot;,
+    &quot;./components/**/*.{js,ts,jsx,tsx}&quot;,
+  ],
+  theme: {
+    extend: {},
+  },
+};
+</code></pre>
+<p>Next, inside <code>styles/globals.css</code>, add the necessary <code>@tailwind</code> directives:</p>
+<pre><code class="language-css">@tailwind base;
+@tailwind components;
+@tailwind utilities;
+</code></pre>
+<p>Finally, make sure <code>styles/globals.css</code> is imported from inside <code>pages/\_app.js</code>:</p>
+<pre><code class="language-javascript">import &quot;../styles/globals.css&quot;;
+
+const MyApp = ({ Component, pageProps }) =&gt; {
+  return &lt;Component {...pageProps} /&gt;;
+};
+
+export default MyApp;
+</code></pre>
+<h3>Connecting with AssemblyAI</h3>
+<p>To connect with AssemblyAI, you’ll create three separate Next.js API routes, each responsible for a different part of the transcription process.</p>
+<p>To authenticate with the API, you’ll need an <a href="https://app.assemblyai.com/signup">AssemblyAI account</a> and a copy of your API key from the dashboard. AssemblyAI provides three hours of audio transcription and a limit of five concurrent transcriptions at any given moment for free, which should be sufficient for this demo app.</p>
+<p><img src="https://i.imgur.com/0nJPBFW.png" alt="AssemblyAI sign-up form"></p>
+<p>To ensure the safety of your API key, place it inside the <strong>Secrets</strong> (environment variables) menu in your repl. It’ll then be easily accessible from API routes under the <code>process.env</code> object. For this example, use <code>ASSEMBLYAI_API_KEY</code> as the variable name.</p>
+<p><img src="https://i.imgur.com/dI1hrRJ.png" alt="Replit Secrets menu"></p>
+<h3>Uploading Audio Files</h3>
+<p>With the key in place, you can now create the first API route: <code>pages/api/upload.js</code>. This route will be responsible for storing the audio file from the frontend and making it available to the AssemblyAI API.</p>
+<p>Here, you’ll have to use the <code>multiparty</code> library to parse the request. For that, consider creating a helper function.</p>
+<pre><code class="language-javascript">import multiparty from &quot;multiparty&quot;;
+
+const parseForm = (req) =&gt; {
+  return new Promise((resolve, reject) =&gt; {
+    const form = new multiparty.Form();
+
+    form.parse(req, (error, fields, files) =&gt; {
+      if (error) {
+        reject(error);
+      } else {
+        resolve({ fields, files });
+      }
+    });
+  });
+};
+</code></pre>
+<p>The <code>parseForm</code> function uses <code>multiparty</code> to parse the <code>multipart/form-data</code> request and save incoming files. The result will be two lists of fields and files acquired from the form data.</p>
+<p>To make proper use of <code>parseForm</code>, create a <code>handler</code> function where the whole request will be handled and responded to accordingly.</p>
+<pre><code class="language-javascript">import axios from &quot;axios&quot;;
+import fs from &quot;fs-extra&quot;;
+// ...
+
+const handler = async (req, res) =&gt; {
+  const assembly = axios.create({
+    baseURL: &quot;https://api.assemblyai.com/v2&quot;,
+    headers: {
+      authorization: process.env.ASSEMBLYAI_API_KEY,
+      &quot;content-type&quot;: &quot;application/json&quot;,
+      &quot;transfer-encoding&quot;: &quot;chunked&quot;,
+    },
+  });
+  try {
+    const { files } = await parseForm(req);
+    const file = await fs.readFile(files.data[0].path);
+    const response = await assembly.post(&quot;/upload&quot;, file);
+
+    res.status(200).json(response.data);
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+export const config = {
+  api: {
+    bodyParser: false
+  },
+}
+export default handler;
+</code></pre>
+<p>While it’s not mandatory to use, AssemblyAI API provides a dedicated <code>/upload</code> endpoint to upload local files for transcription. While you can host the audio files yourself, this endpoint is a convenient and secure alternative.</p>
+<p>To use the <code>/upload</code> endpoint, initialize the API request with proper headers, read the file to buffer, and send the request using the POST method. If the operation is successful, the API will respond with a private URL (available only to AssemblyAI servers) that points to your audio file and allows for its transcription down the line. For privacy reasons, the file will be automatically removed from the servers as soon as it’s transcribed.</p>
+<p>Finally, export the handler function alongside a route <code>config</code> object. Setting Next.js’s built-in <code>bodyParser</code> is necessary in order for multiparty to work correctly.</p>
+<h3>Requesting Transcription</h3>
+<p>Now that you’ve got the audio file URL ready, you can make a transcription request. For that, create a new API route at <code>pages/api/transcribe.js</code>.</p>
+<pre><code class="language-javascript">import axios from &quot;axios&quot;;
+
+const handler = async (req, res) =&gt; {
+  const assembly = axios.create({
+    baseURL: &quot;https://api.assemblyai.com/v2&quot;,
+    headers: {
+      authorization: process.env.ASSEMBLYAI_API_KEY,
+      &quot;content-type&quot;: &quot;application/json&quot;,
+    },
+  });
+
+  try {
+    const response = await assembly.post(&quot;/transcript&quot;, {
+      audio_url: req.body.data.url,
+    });
+
+    res.status(200).json(response.data);
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+export default handler;
+</code></pre>
+<p>This handler wraps a POST request to the <code>/transcript</code> endpoint. The request body should be a JSON object with the <code>audio_url</code> property pointing to the audio file URL.</p>
+<p>Now that the transcription request is submitted, AssemblyAI will begin processing it. To access the results, you’ll have to use another endpoint.</p>
+<h3>Accessing Transcription Result</h3>
+<p>Sending a GET request to AssemblyAI’s <code>/transcript/:id</code> endpoint will return details of the transcription and the current status of its processing. To ensure that the transcription is completed, you’ll have to make repeated requests to the endpoint. When the <code>status</code> property of response JSON is <code>completed</code> or <code>error</code>, it means that the transcription has been processed. In the case of an error, you’ll be able to learn more about it from JSON’s <code>error</code> property.</p>
+<p>To use the endpoint, create the following API route in <code>pages/api/result.js</code>:</p>
+<pre><code class="language-javascript">const axios = require(&quot;axios&quot;);
+
+const handler = async (req, res) =&gt; {
+    const assembly = axios.create({
+        baseURL: &quot;https://api.assemblyai.com/v2&quot;,
+        headers: {
+            authorization: process.env.ASSEMBLYAI_API_KEY,
+            &quot;content-type&quot;: &quot;application/json&quot;,
+        },
+    });
+
+    try {
+        const response = await assembly.get(`/transcript/${req.body.data.id}`);
+
+        res.status(200).json(response.data);
+    } catch (error) {
+        console.error(error)
+    }
+}
+
+export default handler;
+</code></pre>
+<p>Requests to this API route will be made in a loop from the frontend, passing the ID acquired from the original transcription request.</p>
+<h3>Building the Frontend</h3>
+<p>With backend API routes ready, it’s time to build the frontend. For this example, the UI will be simple, consisting only of a file selector, action button, and output zone. The entire app will fit inside <code>pages/index.js</code>.</p>
+<p>Start by creating the UI and functional structure of the app.</p>
+<pre><code class="language-javascript">import Head from &quot;next/head&quot;;
+import { useState } from &quot;react&quot;;
+import clsx from &quot;clsx&quot;;
+
+const wait = (time) =&gt; {
+  return new Promise((resolve) =&gt; {
+    setTimeout(resolve, time);
+  });
+};
+const upload = async (file) =&gt; {
+  // ...
+};
+const transcribe = async (url) =&gt; {
+  // ...
+};
+const Loader = () =&gt; {
+  // ...
+};
+const App = () =&gt; {
+  const [file, setFile] = useState();
+  const [status, setStatus] = useState(&quot;&quot;);
+  const [transcription, setTranscription] = useState(&quot;&quot;);
+  const [error, setError] = useState(&quot;&quot;);
+  const handleInput = async (event) =&gt; {
+    // ...
+  };
+  const handleTranscription = async () =&gt; {
+    // ...
+  };
+
+  return (
+    &lt;div className=&quot;w-full h-full flex justify-center&quot;&gt;
+      &lt;Head&gt;
+        &lt;title&gt;AssemblyAI STT App&lt;/title&gt;
+        &lt;meta name=&quot;description&quot; content=&quot;AssemblyAI Speech To Text App&quot; /&gt;
+        &lt;link rel=&quot;icon&quot; href=&quot;/favicon.ico&quot; /&gt;
+      &lt;/Head&gt;
+      &lt;div className=&quot;w-full max-w-lg p-2&quot;&gt;
+        &lt;label className=&quot;flex flex-col items-center text-white rounded-lg p-2 bg-blue-500 hover:bg-blue-600 cursor-pointer transition-colors duration-150&quot;&gt;
+          &lt;span className=&quot;text-base leading-normal&quot;&gt;
+            Select a {file ? &quot;different&quot; : &quot;&quot;} file
+          &lt;/span&gt;
+          &lt;input type=&quot;file&quot; className=&quot;hidden&quot; onInput={handleInput} /&gt;
+        &lt;/label&gt;
+        &lt;button
+          className=&quot;rounded-lg border-2 p-2 w-full mt-2 hover:bg-gray-100 transition-colors duration-150 disabled:opacity-40&quot;
+          disabled={!file}
+          onClick={handleTranscription}
+        &gt;
+          Transcribe
+        &lt;/button&gt;
+        {file &amp;&amp; (
+          &lt;div
+            className={clsx(
+              &quot;rounded-lg border-2 mt-2 p-2&quot;,
+              error &amp;&amp; &quot;border-red-500&quot;
+            )}
+          &gt;
+            {transcription &amp;&amp; !error ? (
+              transcription
+            ) : (
+              &lt;div className=&quot;w-full flex justify-center&quot;&gt;
+                {status &amp;&amp; !error &amp;&amp; (
+                  &lt;&gt;
+                    &lt;Loader /&gt;
+                    &lt;span className=&quot;ml-2 capitalize&quot;&gt;{status}...&lt;/span&gt;
+                  &lt;/&gt;
+                )}
+                {error &amp;&amp; &lt;span className=&quot;text-red-500&quot;&gt;{error}&lt;/span&gt;}
+                {!status &amp;&amp;
+                  !error &amp;&amp;
+                  `File &quot;${file.name}&quot; ready for transcription`}
+              &lt;/div&gt;
+            )}
+          &lt;/div&gt;
+        )}
+      &lt;/div&gt;
+    &lt;/div&gt;
+  );
+};
+
+export default App;
+</code></pre>
+<p>The <code>upload</code> and <code>transcribe</code> functions contain the extracted logic for interacting with the API, while the <code>Loader</code> component is a basic SVG spinner circle:</p>
+<pre><code class="language-javascript">// ...
+const Loader = () =&gt; {
+  return (
+    &lt;svg
+      className=&quot;animate-spin h-6 w-6 text-black&quot;
+      xmlns=&quot;http://www.w3.org/2000/svg&quot;
+      fill=&quot;none&quot;
+      viewBox=&quot;0 0 24 24&quot;
+    &gt;
+      &lt;circle
+        className=&quot;opacity-25&quot;
+        cx=&quot;12&quot;
+        cy=&quot;12&quot;
+        r=&quot;10&quot;
+        stroke=&quot;currentColor&quot;
+        strokeWidth=&quot;4&quot;
+      &gt;&lt;/circle&gt;
+      &lt;path
+        className=&quot;opacity-75&quot;
+        fill=&quot;currentColor&quot;
+        d=&quot;M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z&quot;
+      &gt;&lt;/path&gt;
+    &lt;/svg&gt;
+  );
+};
+// ...
+</code></pre>
+<p>The <code>handleInput</code> function will be triggered on every file input change. It’ll start/restart the whole process, resetting the state and saving the file reference.</p>
+<pre><code class="language-javascript">// ...
+const handleInput = async (event) =&gt; {
+  setFile(event.target.files[0]);
+  setTranscription(&quot;&quot;);
+  setError(&quot;&quot;);
+  setStatus(&quot;&quot;);
+  event.target.value = null;
+};
+// ...
+</code></pre>
+<p>Finally, <code>handleTranscription</code> is triggered when the user decides to transcribe the selected file. It handles updating the progress status and displaying errors if any appear.</p>
+<pre><code class="language-javascript">// ...
+const handleTranscription = async () =&gt; {
+  try {
+    setStatus(&quot;uploading&quot;);
+    const url = await upload(file);
+    setStatus(&quot;transcribing&quot;);
+    const data = await transcribe(url);
+    setTranscription(data.text);
+    setStatus(&quot;&quot;);
+  } catch (error) {
+    console.error(error);
+    setError(error.message);
+  }
+};
+// ...
+</code></pre>
+<p>The UI should now look like this:</p>
+<p><img src="https://i.imgur.com/WOOMDkN.png" alt="Speech-to-text app frontend"></p>
+<h3>Connecting with the Backend</h3>
+<p>You still have to connect the frontend with the backend to make the app fully operational. Start by implementing the <code>upload</code> function:</p>
+<pre><code class="language-javascript">import axios from &quot;axios&quot;;
+// ...
+
+const upload = async (file) =&gt; {
+  const formData = new FormData();
+
+  formData.append(&quot;data&quot;, file);
+
+  const response = await axios.post(&quot;/api/upload&quot;, formData, {
+    headers: {
+      &quot;Content-Type&quot;: &quot;multipart/form-data&quot;,
+    },
+  });
+
+  return response.data.upload_url;
+};
+// ...
+</code></pre>
+<p>The function uses Axios to make a POST request to the <code>/upload</code> API route, with <code>multipart/form-data</code> content containing the selected audio file. In the end, the private audio file URL from AssemblyAI API is returned.</p>
+<p>You can then pass on this URL to the <code>transcribe</code> function, which uses it to initialize and get the transcription results.</p>
+<pre><code class="language-javascript">// ...
+const transcribe = async (url) =&gt; {
+  const response = await axios.post(&quot;/api/transcribe&quot;, { data: { url } });
+  const id = response.data.id;
+
+  let data = response.data;
+
+  while (data.status !== &quot;completed&quot; &amp;&amp; data.status !== &quot;error&quot;) {
+    await wait(1000);
+    const response = await axios.post(&quot;/api/result&quot;, { data: { id } });
+
+    data = response.data;
+  }
+
+  return data;
+};
+// ...
+</code></pre>
+<p>Requests to the <code>/result</code> API route are sent in a loop with a minimum of one second between each request. If the <code>status</code> property is <code>completed</code> or <code>error</code>, the function returns the transcription data. In the case of an error, details are available under the <code>error</code> property.</p>
+<p>The final result should look like this:</p>
+<p><img src="https://i.imgur.com/ttJzZsh.png" alt="Speech-to-text app"></p>
+<p>Again, you can check it out live using <a href="https://replit.com/@areknawo/AssemblyAI-STT-App">this repl</a>.</p>
+<h2>Conclusion</h2>
+<p>In this article, you’ve learned how to use the AssemblyAI API. You’ve learned how to integrate it with frameworks, like Next.js and React, and you’ve created a working app that can transcribe all kinds of audio files. As you might suspect, this is just the tip of the iceberg, as AssemblyAI provides many more features—like real-time transcription and audio intelligence—that you can use to build various complex apps.</p>
+<p>This whole app has been implemented in the cloud using the <a href="http://replit.com/">Replit</a> online IDE. Replit can help you build all sorts of applications, including speech-to-text apps, while encouraging you to code for fun and explore the unknown.</p>

@@ -1,0 +1,26 @@
+<p>For some time now, it&#39;s been possible to link your custom domain to your Repl. You buy that perfect domain name, connect it to your website hosted on Replit, and you&#39;re good to go! Custom domains help you create a unique home on the internet - for your blog, a product you&#39;re launching, or just a space to try new ideas.</p>
+<p>We are rolling out domain linking improvements - direct apex domain linking, magic domain linking, and multiple domain support. We also updated our domain verification logic! You can experience these right now if you&#39;re an explorer. Otherwise, these will make it to you soon!</p>
+<h2>Domain Verification Logic</h2>
+<p>Previously, we would verify your domain by attempting to access a special Replit proxy-enabled route on the domain. As the number of domains grew, our servers&#39; time spent verifying domains increased. We wanted to make this process more efficient. We updated the logic to verify DNS (the internet&#39;s address book) records - speedy! - before further checks. Verification happens on a slightly different cadence, in batches now.</p>
+<p>In addition, every evening, we reverify domains. This daily re-verification process checks to see if we can still access your repl through your domain. If we encounter a problem, your domain linking status panel will update to show the domain is no longer &quot;verified.&quot; Where possible, we&#39;ll show you the records that we see to make troubleshooting easier.</p>
+<p>Because we are now verifying DNS records, and services like Cloudflare&#39;s &quot;orange-cloud&quot; modify DNS, we added TXT record verification to save you from having to turn off Cloudflare (or other systems) protection to successfully link.</p>
+<p><img src="https://blog.replit.com/images/domain_linking/replit-domain-linking-creating.png" alt="images/domain_linking/replit-domain-linking-creating.png"></p>
+<h2>Apex Domain Linking</h2>
+<p>An &quot;apex domain&quot; is the top-level name in a domain. For example, replit.com is an apex domain, but blog.replit.com is not. These have special requirements in DNS. One requirement is that the CNAME record type we typically use to link must not be at the domain&#39;s apex. Service providers like Cloudflare offer features like &quot;CNAME Flattening&quot; that implement just-in-time resolution to let you work around this limitation. However, if your DNS service provider does not support this feature, you were out of luck.</p>
+<p>We built a separate proxy for your apex domains to work around this. This apex domain proxy uses a TXT record to figure out your repl&#39;s location and then forwards web traffic to it. That means you can use an A record in your domain&#39;s DNS; everything just works!</p>
+<h2>Magic Domain Linking</h2>
+<p>As we began implementing more options for domain verification that use TXT records, we realized we could utilize this to enable <a href="https://replit.com/@mattiselin/dns-magic-linking">&quot;magic&quot; domain linking</a>. Magic linking allows your domain to work similarly to the existing <username>.repl.co domain - without the repl.co!</p>
+<p>This apex domain proxy runs at 34.132.134.162 - that can be used for your A record (and you&#39;ll see it in the domain linking setup screen too).</p>
+<p>Let&#39;s look at an example - I recently bought mattsrepls.com. I want all my repls to be available at that domain.</p>
+<ul>
+<li>Step 1: I create a TXT record <code>replit-user=mattiselin</code> on this domain.</li>
+<li>Step 2: I create an A record pointing at <code>34.132.134.162</code> (the apex domain proxy) on mattsrepls.com</li>
+<li>Step 3: I create a wildcard CNAME record (<code>*.mattsrepls.com</code>) pointing at <code>mattiselin.repl.co</code></li>
+</ul>
+<p><img src="https://blog.replit.com/images/domain_linking/replit-domain-linking-magic.png" alt="images/domain_linking/replit-domain-linking-magic.png"></p>
+<p>I have a Flask demo at <a href="https://replit.com/@mattiselin/flask-1#main.py">https://replit.com/@mattiselin/flask-1#main.py</a>. Usually, this would be <a href="https://flask-1.mattiselin.repl.co">https://flask-1.mattiselin.repl.co</a>. Now that I&#39;ve added these magic linking records, this is accessible at <a href="https://flask-1.mattsrepls.com">https://flask-1.mattsrepls.com</a> too!</p>
+<p>Our infrastructure will notice that you don&#39;t have a verified custom domain for the request and immediately kick off a DNS request to look for your <code>replit-user</code> TXT record. If we find it, we&#39;ll treat the request like it was on the repl.co domain. We cache the DNS lookup, so even though the DNS request is already low-latency, the users of your websites won&#39;t get hit with increased latency on every request.</p>
+<h2>Multiple Domain Linking</h2>
+<p>Finally, the new verification logic enables support for multiple domains to point to a single repl. You might have a website that you want to appear at flask-1.mattsrepls.com and mattsrepls.com simultaneously - that&#39;s now possible! Each domain has an independent verification process and state.</p>
+<p><img src="https://blog.replit.com/images/domain_linking/replit-domain-linking-multiple.png" alt="images/domain_linking/replit-domain-linking-multiple.png"></p>
+<p>Happy domain linking!</p>

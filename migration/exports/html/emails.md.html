@@ -1,0 +1,52 @@
+<p>Emails are the wild west of the internet. A lawless land filled with incompatibility and unexpected behaviors. At the same time, it’s still one of the best ways we can reach our customers and inform them about new features and events that they might be interested in. I’m going to talk about a recent experience I had with the emails, specifically Gmail iOS dark mode. My hope is that you can learn from this experience and it’ll save you the time and turmoil it cost me.</p>
+<p>We try to publish our newsletters once every two weeks. Wednesday is the day I release the draft for people to review. Thursday I put the plain text into our newsletter HTML. Finally on Friday I put our email into Sendgrid, put out test emails, and when everyone gives the go ahead they’re sent out to thousands of thousands of people. Except one Friday, things didn&#39;t go as planned.</p>
+<p><img src="https://blog.replit.com/images/emails/whitethemeemail.png" alt="Gmail&#39;s inverted version of our email"></p>
+<p>For whatever reason, the email our CEO recived was totally inverted. The background color and text color are opposite of what they’d normally be. That newsletter should have looked like this instead:</p>
+<p><img src="https://blog.replit.com/images/emails/real_newsletter.PNG" alt="Normal email"></p>
+<p>So what gives? Why did just our CEO receive a light theme email, and everyone else got our normal dark theme email? The answer is, of course, what email client people are using. If you go on your browser and visit a website, and then visit that same website on a different browser, it should look pretty much the same. However if you open the same email with HTML on different email clients, it would not be hard to find differences between them. Our CEO is using Gmail, on iOS 14 darkmode. Thanks to <a href="https://www.litmus.com/blog/the-ultimate-guide-to-dark-mode-for-email-marketers/">Litmus</a> we can see that email clients have varying support for when users request dark mode.</p>
+<p><img src="https://blog.replit.com/images/emails/darkmode.PNG" alt="Email darkmode compare"></p>
+<p>There’s a lot to unpack here, but right now we’re specifically interested in the Gmail iOS app. We can see that it (along with Outlook 2019 Windows 10) does a full invert. That would explain why our email was totally changed. So, if there was some way to detect when Gmail was using dark mode, we could change the CSS to invert everything, and then Gmail inverts the email back to its original state! Except Gmail, unlike the top 3 clients in the table above, does not support media queries to detect dark mode. Media queries essentially conditional CSS that only applies if something is true. For example, if someone has a small screen, you might use a media query to detect that and change the CSS so that the html doesn’t spread out as much. But Gmail does not support that. In fact, according to <a href="https://www.caniemail.com/">CanIEmail</a> Gmail doesn’t support a lot of styling, despite being the second most popular email client.</p>
+<p><img src="https://blog.replit.com/images/emails/gmail_stinks.PNG" alt="Gmail needs to step it up"></p>
+<p>30th out of 32 is not a good score. Enough complaining though, this problem needs a solution. I stumbled across this <a href="https://github.com/hteumeuleu/email-bugs/issues/68">GitHub repository called “email-bugs”</a>. The purpose is to help developers discover why an email client might be acting weird. Low and behold the dark mode inversion had a very long issue thread, starting from October 2019! In this thread people were posting countless emails being broken by this inversion. Sometimes those inversions were pretty funny.</p>
+<p><img src="https://blog.replit.com/images/emails/we_missed_you.PNG" alt="Fun email gone creepy"></p>
+<p>But most of the people in the thread were just reporting that this was a problem. Theories were crafted on how to fix it but no one had an answer. Until-</p>
+<p><img src="https://blog.replit.com/images/emails/the_solution.PNG" alt="The promised hotfix"></p>
+<p>More than a year after this was an issue, someone finally had the solution. Or really, a hack. Here is a quick summary of how it works.</p>
+<p>This hack abuses a few CSS properties Gmail supports, <code>linear-gradient</code> and <code>mix-blend-mode</code>. You need to nest three <code>&lt;div&gt;</code> elements that apply a background and font color.</p>
+<pre><code class="language-html">&lt;div style=&quot;background:#000; background-image:linear-gradient(#000,#000); color:#fff;&quot;&gt;
+    &lt;div style=&quot;background:#000; mix-blend-mode:screen;&quot;&gt;
+        &lt;div style=&quot;background:#000; mix-blend-mode:difference;&quot;&gt;
+            Lorem ipsum dolor, sit amet, consectetur adipisicing elit.
+        &lt;/div&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+<p>Gmail, when inverting the colors, will change the CSS to look like this:</p>
+<pre><code class="language-html">&lt;div style=&quot;background:#fff; background-image:linear-gradient(#000,#000); color:#000;&quot;&gt;
+    &lt;div style=&quot;background:#fff; mix-blend-mode:screen;&quot;&gt;
+        &lt;div style=&quot;background:#fff; mix-blend-mode:difference;&quot;&gt;
+            Lorem ipsum dolor, sit amet, consectetur adipisicing elit.
+        &lt;/div&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+<p><code>mix-blend-mode: difference</code> tells Gmail that the darker of the colors should be subtracted from the lighter color.  When darkmode, this means the background is <code>#fff - #fff</code> which is <code>#000</code> (black). When in lightmode, it means the background is <code>#000 - #000</code> which is also <code>#000</code>! But what about font color? Specifically in lightmode, the equation would look like <code>#000 - #fff</code>. Except there are no negative colors, so Gmail will take the absolute value of the difference, which ends up being <code>#fff</code> (white). The whole hack is a bit more complicated than this, especially when you try using colors other than black and white, so I suggest giving <a href="https://www.hteumeuleu.com/2021/fixing-gmail-dark-mode-css-blend-modes/">Rémi Parmentier’s blog post a read</a> if you want the full explanation.</p>
+<p>The last thing we need to do before implementing these changes is make it a Gmail specific fix. We don’t want this code running on clients where our email is already working! To do this we can take advantage of the fact that email clients are inconsistent. <a href="https://howtotarget.email/">HowToTarget.email</a> provides information on different hacks that will allow you to run CSS, but only for certain email clients. Gmail’s hack looks like this:</p>
+<pre><code class="language-css">u + .body .foo {
+  css here….
+}
+</code></pre>
+<p>For whatever reason, Gmail changes the DOCTYPE element into <code>&lt;u&gt;&lt;/u&gt;</code>. By then giving the <code>&lt;body&gt;</code> element the <code>class=”body”</code> tag, we can create CSS that will only run on Gmail. Except I don’t have an iPhone, so I can’t see if it’s actually working. In fact, I can’t see if our email works on most of the devices we send our emails to, because I only own a few devices and clients! Having a device for each service is totally unreasonable. The solution is email testing tools.  We use <a href="https://www.litmus.com/">Litmus</a>, however many other options are available, such as:</p>
+<ul>
+<li><a href="https://putsmail.com/">PutsMail</a></li>
+<li><a href="http://www.inboxinspector.com/">Inbox Inspector</a></li>
+<li><a href="https://mailtrap.io/">Mailtrap</a></li>
+<li><a href="http://www.emailreach.com/">EmailReach</a></li>
+<li><a href="https://www.emailonacid.com/signup">Email on Acid</a></li>
+<li>And many more!</li>
+</ul>
+<p>All we have to do is paste our email’s code into the Litmus website, and they’ll send back screenshots from different clients and devices of what it looks like. Luckily on almost all the clients, our email looks great! Unfortunately, this is what iOS Gmail dark mode looks like, after we added the hack.</p>
+<p><img src="https://blog.replit.com/images/emails/inverted_more.PNG" alt="So close...."></p>
+<p>The good news is, our background and text color is fixed! The bad news is images and the header’s colors are inverted.</p>
+<p>This is unfortunately where our story ends. Despite our best efforts we were not able to fix the images and stop them from inverting. Until Gmail adds more features that let us detect dark mode, this will be a problem. We decided that the inverted images email is better than the light mode dark mode mess we started with, and that’s the version we’ll be sending out from now on. We’ll keep our eyes peeled if Gmail adds any new features but until then, try to be a bit understanding if our emails, or any emails for that matter, look slightly off.</p>
+<p>Emails are the wild west of the internet. A lawless land filled with incompatibility and unexpected behaviors. Creating the greatest email of all time requires hacky work arounds, and obscure tricks. If you’re thinking about sending newsletters to your subscribers, do your research and use email testing tools. If you have any questions, you can contact me at <code>nathan@repl.it</code> or <code>Zwack010#0001</code> on the <a href="https://replit.com/discord">Replit Discord</a>. Thanks for reading my story, and good luck developing!</p>

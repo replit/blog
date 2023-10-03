@@ -1,0 +1,128 @@
+<p>To make it so that anyone with a web browser can code on Replit, our backend infrastructures runs on preemptible VMs. That means the computer running your code can shutdown at any time! We&#39;ve made it really fast for repls to reconnect when that happens. Despite our best efforts, though, people had been seeing repls stuck connecting for a long time. After some profiling and digging into the Docker source code, we found and fixed the problem. Our session connection error rate dropped from 3% to under 0.5% and our 99th percentile session boot time dropped from 2 minutes to 15 seconds.</p>
+<p>There were many different causes of stuck repls, varying from: unhealthy machines, race conditions that lead to deadlock, and slow container shutdowns. This post focuses how we fixed the last cause, slow container shutdowns. Slow container shutdowns affected nearly everyone using the platform and would cause a repl to be inaccesible for up to a minute.</p>
+<h3>Replit Architecture</h3>
+<p>Before going in depth on fixing slow container shutdowns, you&#39;ll need some knowledge of Replit&#39;s architecture.</p>
+<p>When you open a repl, the browser opens a websocket connection to a Docker container running on a preemptible VM. Each of the VMs run something we call <code>conman</code>, which is short for container manager.</p>
+<p>We must ensure that there is only a single container per repl at anytime. The container is used to facilitate multiplayer features, so its important that every user in the repl connects to the same container.</p>
+<p>When a machine that hosts these Docker containers shuts down, we have to wait for each container to be destroyed before they can be started again on some other machine. Since we use preemptible instances, this process happens frequently.</p>
+<p>Below you can see the typical flow when trying to access a repl on a mid-shutdown instance.</p>
+<p><img src="https://blog.replit.com/images/destroying-stuck-repls/simplified_arch.png" alt="Simplified diagram of repl.it conman architecture"></p>
+<ol>
+<li>A user opens their repl which opens the IDE and attempts to connect to the backend evaluation server via a WebSocket.</li>
+<li>The request hits a load balancer which selects a conman instance to proxy to based on CPU usage.</li>
+<li>A healthy, living conman gets the request. Conman notices that the request is for a container that is living on a different conman and proxies the request there.</li>
+<li>Sadly this conman is shutting down and rejects the WebSocket connection!</li>
+</ol>
+<p>Requests will continue to fail until either:</p>
+<ol>
+<li>The docker container is shut down and the repl container entry in the global store is removed.</li>
+<li>Conman finishes shutting down and is no longer accessible. In this case, the first conman will remove the old repl container entry and start a new container.</li>
+</ol>
+<h3>Slow Container Shutdowns</h3>
+<p>Our preemptible VMs are given 30 seconds to cleanly shutdown before they are forcibly terminated. After some investigation, we found that we rarely finished shutting down within those 30 seconds. This prompted us to dig further and instrument the machine shutdown routine.</p>
+<p>After adding some more logging and metrics around machine shutdowns, it became clear that calls to <code>docker kill</code> were taking much longer than expected. <code>docker kill</code> usually took a few milliseconds to kill a repl container during normal operation, but we spent 20+ seconds killing 100-200 containers at the same time during shutdown.</p>
+<p>Docker offers two ways to stop a container: <code>docker stop</code> and <code>docker kill</code>. Docker stop sends a <code>SIGTERM</code> signal to the container and gives it a grace period to gracefully shutdown. If the container doesn&#39;t shutdown within the grace period, the container is sent <code>SIGKILL</code>. We don&#39;t care about gracefully shutting down the container and would rather shut it down as quickly as possible. <code>docker kill</code> sends <code>SIGKILL</code> which should kill the container immediately. For some reason, the theory did not match reality, <code>docker kill</code> shouldn&#39;t be taking on the order of seconds to <code>SIGKILL</code> the container. There must be something else going on.</p>
+<p>To dig into this, here is a script which will create 200 docker containers and time how long it takes to kill them at the same time.</p>
+<pre><code class="language-bash">#!/bin/bash
+
+COUNT=200
+echo &quot;Starting $COUNT containers...&quot;
+for i in $(seq 1 $COUNT); do
+    printf .
+    docker run -d --name test-$i nginx &gt; /dev/null 2&gt;&amp;1
+done
+
+echo -e &quot;\nKilling $COUNT containers...&quot;
+time $(docker kill $(docker container ls -a --filter &quot;name=test&quot; --format &quot;{{.ID}}&quot;) &gt; /dev/null 2&gt;&amp;1)
+
+echo -e &quot;\nCleaning up...&quot;
+docker rm $(docker container ls -a --filter &quot;name=test&quot; --format &quot;{{.ID}}&quot;) &gt; /dev/null 2&gt;&amp;1
+</code></pre>
+<p>Running this on the same kind of VM we run in production, a GCE n1-highmem-4 instance, yields:</p>
+<pre><code>Starting 200 containers...
+................................&lt;trimmed&gt;
+Killing 200 containers...
+
+real    0m37.732s
+user    0m0.135s
+sys     0m0.081s
+
+Cleaning up...
+</code></pre>
+<p>This confirmed our suspicions that something is going in inside the Docker runtime which causes shutdowns to be so slow. Time to dig into Docker itself...</p>
+<p>Docker daemon has an option to <a href="https://docs.docker.com/config/daemon/#enable-debugging">enable debug logging</a>. These logs let us peak into what what&#39;s happening inside of dockerd and each entry has a timestamp so it might provide some insight into where all this time is being spent.</p>
+<p>With debug logging enabled, let&#39;s rerun the script and look at dockerd&#39;s logs. This will output a lot of log messages since we are dealing with 200 container, so I&#39;ve hand-selected portions of the logs that are of interest.</p>
+<pre><code>2020-12-04T04:30:53.084Z	dockerd	Calling GET /v1.40/containers/json?all=1&amp;filters=%7B%22name%22%3A%7B%22test%22%3Atrue%7D%7D
+2020-12-04T04:30:53.084Z	dockerd	Calling HEAD /_ping
+2020-12-04T04:30:53.468Z	dockerd	Calling POST /v1.40/containers/33f7bdc9a123/kill?signal=KILL
+2020-12-04T04:30:53.468Z	dockerd	Sending kill signal 9 to container 33f7bdc9a1239a3e1625ddb607a7d39ae00ea9f0fba84fc2cbca239d73c7b85c
+2020-12-04T04:30:53.468Z	dockerd	Calling POST /v1.40/containers/2bfc4bf27ce9/kill?signal=KILL
+2020-12-04T04:30:53.468Z	dockerd	Sending kill signal 9 to container 2bfc4bf27ce93b1cd690d010df329c505d51e0ae3e8d55c888b199ce0585056b
+2020-12-04T04:30:53.468Z	dockerd	Calling POST /v1.40/containers/bef1570e5655/kill?signal=KILL
+2020-12-04T04:30:53.468Z	dockerd	Sending kill signal 9 to container bef1570e5655f902cb262ab4cac4a873a27915639e96fe44a4381df9c11575d0
+...
+</code></pre>
+<p>Here we can see the requests to kill each container, and that <code>SIGKILL</code>is sent almost immediately to each container.</p>
+<p>Heres some log entries seen around 30 seconds after executing <code>docker kill</code>:</p>
+<pre><code>...
+2020-12-04T04:31:32.308Z	dockerd	Releasing addresses for endpoint test-1&#39;s interface on network bridge
+2020-12-04T04:31:32.308Z	dockerd	ReleaseAddress(LocalDefault/172.17.0.0/16, 172.17.0.2)
+2020-12-04T04:31:32.308Z	dockerd	Released address PoolID:LocalDefault/172.17.0.0/16, Address:172.17.0.2 Sequence:App: ipam/default/data, ID: LocalDefault/172.17.0.0/16, DBIndex: 0x0, Bits: 65536, Unselected: 65529, Sequence: (0xfa000000, 1)-&gt;(0x0, 2046)-&gt;(0x1, 1)-&gt;end Curr:202
+2020-12-04T04:31:32.308Z	dockerd	Releasing addresses for endpoint test-5&#39;s interface on network bridge
+2020-12-04T04:31:32.308Z	dockerd	ReleaseAddress(LocalDefault/172.17.0.0/16, 172.17.0.6)
+2020-12-04T04:31:32.308Z	dockerd	Released address PoolID:LocalDefault/172.17.0.0/16, Address:172.17.0.6 Sequence:App: ipam/default/data, ID: LocalDefault/172.17.0.0/16, DBIndex: 0x0, Bits: 65536, Unselected: 65530, Sequence: (0xda000000, 1)-&gt;(0x0, 2046)-&gt;(0x1, 1)-&gt;end Curr:202
+2020-12-04T04:31:32.308Z	dockerd	Releasing addresses for endpoint test-3&#39;s interface on network bridge
+2020-12-04T04:31:32.308Z	dockerd	ReleaseAddress(LocalDefault/172.17.0.0/16, 172.17.0.4)
+2020-12-04T04:31:32.308Z	dockerd	Released address PoolID:LocalDefault/172.17.0.0/16, Address:172.17.0.4 Sequence:App: ipam/default/data, ID: LocalDefault/172.17.0.0/16, DBIndex: 0x0, Bits: 65536, Unselected: 65531, Sequence: (0xd8000000, 1)-&gt;(0x0, 2046)-&gt;(0x1, 1)-&gt;end Curr:202
+2020-12-04T04:31:32.308Z	dockerd	Releasing addresses for endpoint test-2&#39;s interface on network bridge
+2020-12-04T04:31:32.308Z	dockerd	ReleaseAddress(LocalDefault/172.17.0.0/16, 172.17.0.3)
+2020-12-04T04:31:32.308Z	dockerd	Released address PoolID:LocalDefault/172.17.0.0/16, Address:172.17.0.3 Sequence:App: ipam/default/data, ID: LocalDefault/172.17.0.0/16, DBIndex: 0x0, Bits: 65536, Unselected: 65532, Sequence: (0xd0000000, 1)-&gt;(0x0, 2046)-&gt;(0x1, 1)-&gt;end Curr:202
+</code></pre>
+<p>These logs don&#39;t give us a full picture of everything dockerd is doing, but this makes it seem like dockerd might be spending a lot of time releasing network addresses.</p>
+<p>At this point in my adventure, I decided it was time to start digging into docker engine&#39;s source code and build my own version of dockerd with some extra logging.</p>
+<p>I started out by looking for the codepath that handles container kill requests. I added some extra log messages with timings of different spans and eventually I found out where all this time was being spent:</p>
+<p><code>SIGKILL</code> is sent to the container and then before responding to the HTTP request, the engine waits for the container to no longer be running (<a href="https://github.com/docker/engine/blob/ab373df1125b6002603456fd7f554ef370389ad9/daemon/kill.go#L174">source</a>)</p>
+<pre><code>    &lt;-container.Wait(context.Background(), containerpkg.WaitConditionNotRunning)
+</code></pre>
+<p>The <code>container.Wait</code> function returns a channel which receives the exit code and any error from the container. Unfortunately, to get the exit code and error, a lock on the interal container struct must be acquired. (<a href="https://github.com/docker/engine/blob/ab373df1125b6002603456fd7f554ef370389ad9/container/state.go#L212-L233">source</a>)</p>
+<pre><code class="language-go">  ...
+
+    go func() {
+        select {
+        case &lt;-ctx.Done():
+            // Context timeout or cancellation.
+            resultC &lt;- StateStatus{
+                exitCode: -1,
+                err:      ctx.Err(),
+            }
+            return
+        case &lt;-waitStop:
+        case &lt;-waitRemove:
+        }
+
+        s.Lock() // &lt;-- Time is spent waiting here
+        result := StateStatus{
+            exitCode: s.ExitCode(),
+            err:      s.Err(),
+        }
+        s.Unlock()
+
+        resultC &lt;- result
+    }()
+
+    return resultC
+
+  ...
+</code></pre>
+<p>As it turns out, this container lock is held while cleaning up network resources and the <code>s.Lock()</code> above ends up waiting for a long time. This happens inside <a href="https://github.com/docker/engine/blob/ab373df1125b6002603456fd7f554ef370389ad9/daemon/monitor.go#L27-L103"><code>handleContainerExit</code></a>. The container lock is held for the duration of the function. This function calls the container&#39;s <a href="https://github.com/docker/engine/blob/ab373df1125b6002603456fd7f554ef370389ad9/daemon/start.go#L226-L266"><code>Cleanup</code></a> method which releases network resources.</p>
+<p>So why does it take so long to cleanup network resources? The network resources are handled via <a href="https://man7.org/linux/man-pages/man7/netlink.7.html">netlink</a>. Netlink is used to communicate between user and kernel-space processes and in this case is being used to communicate with a kernel-space process to configure network interfaces. Unfortunately, netlink works via a serial interface and all the operations to release the address of each container are bottlenecked by netlink.</p>
+<p>Things started to feel a bit hopeless here. It didn&#39;t seem like there was anything we could do differently to escape waiting for network resources to be cleaned up. But, maybe we could bypass Docker altogether when killing containers.</p>
+<p>As far as we are concerned, we want to kill the container but we don&#39;t need to wait for network resources to be cleaned up. The important thing is that the container will no longer produce any side effects. For example, we don&#39;t want the container to take anymore filesystem snapshots.</p>
+<p>The solution I went with was to bypass docker by killing the container&#39;s pid directly. Conman records the pid of the container after it is started and then sends <code>SIGKILL</code> to the container when it becomes time to be killed. Since a container forms a pid namespace, when the container&#39;s pid terminates, all other processes in the container/pid namespace also terminate.</p>
+<p>From <code>pid_namespaces</code> <a href="https://man7.org/linux/man-pages/man7/pid_namespaces.7.html">manual page</a>:</p>
+<blockquote>
+<p>If the &quot;init&quot; process of a PID namespace terminates, the kernel terminates all of the processes in the namespace via a SIGKILL signal.</p>
+</blockquote>
+<p>Given this, we can be reasonably confident that after sending <code>SIGKILL</code> to the container, that the container no longer produces any side effects.</p>
+<p>After this change was applied, control of repls would be relinquished under a few seconds during shutdown. This was a massive improvement over the 30+ seconds before and brought our session connection error rate down from ~3% to well under 0.5%. Additionally, the 99th percentile of session boot times dropped from ~2 minutes to ~15 seconds.</p>
+<p>To recap, we identified that slow VM shutdowns were leading to stuck repls and poor user experience. After some investigation, we determined that Docker was taking 30+ seconds to kill all the containers on the VM. As a solution, we circumvent Docker and kill the containers ourselves. This has lead to fewer stuck repls and faster session boot times. We hope that this provides an even smoother experience on Replit!</p>

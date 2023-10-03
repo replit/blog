@@ -1,0 +1,101 @@
+<p><img src="https://blog.replit.com/images/deployments-launch/deploy-art.png" alt=""></p>
+<p>After a 5 year Hosting beta, we&#39;re ready to Deploy.</p>
+<h3>Introducing Replit Deployments</h3>
+<p>Today we’re releasing <a href="https://replit.com/site/deployments">Replit Deployments</a>, the fastest way to go from idea to production in any language. It’s a ground up rebuild of our application hosting infrastructure. Here’s a list of features we’re releasing today:</p>
+<ul>
+<li>Your hosted VM will rarely restart, keeping your app running and stable. You’re Always On by default. No need to run pingers or pay extra.</li>
+<li>Say goodbye to the “Repl Waking” screen because your VM doesn’t go to sleep.</li>
+<li>Isolated VM resources for your app will give you improved security and performance.</li>
+<li>Control when you release to users so you can fix your app without breaking prod.</li>
+<li>Link your custom domain, or pick a custom subdomain under the .replit.app domain.</li>
+</ul>
+<p>Over the coming weeks and months, we’ve got even more features to share with you.</p>
+<p>But before we jump into features, let’s look back on the history of Hosting on Replit…</p>
+<h3>Hosting on Replit: 5 years in beta</h3>
+<p>In 2018, Replit enabled the world’s fastest <a href="https://blog.replit.com/hosting">coding → hosting</a> workflow when we announced the first beta version of Replit Hosting. Replit created a way to run code for any language in the browser. Because of the way Replit is built, it only took sharing a URL to turn it into a hosting platform, too. Over the years, we kept experimenting by adding new features like <a href="https://blog.replit.com/alwayson">Always On</a>, <a href="https://blog.replit.com/boosts">Boosts</a>, <a href="https://blog.replit.com/repl-analytics">Analytics</a>, <a href="https://blog.replit.com/repl-status">a Status Manager</a>, and <a href="https://blog.replit.com/postgresql-db-launch">PostgreSQL databases</a>.</p>
+<p>Today, Replit hosts millions of applications and handles tens of billions of monthly requests, so we know you love the ease and simplicity of our hosting.</p>
+<p>But we’re not satisfied yet. We want it to be better. And we’ve heard the same from you about legacy Replit Hosting:</p>
+<ul>
+<li>When you edit your code, you don’t want to break your active users</li>
+<li>Our uptime isn’t good enough to build applications you depend on every day</li>
+<li>Your Repls run on <a href="https://blog.replit.com/regular-vms">preemptible VMs</a> that can be restarted when demand for machines is high</li>
+<li>“Repl Waking” screens when we’re slow to boot your Repl can be frustrating for your users</li>
+<li>Lack of isolation can mean your Discord bot starts getting rate limited unexpectedly</li>
+</ul>
+<p>Let’s take a look at how Replit Deployments solves these problems…</p>
+<h3>Isolating your production app from development with Deployments</h3>
+<p>First, we’ve separated your development environment and your production environment. This means you can work on your app without affecting live users. Now you can add features and fix bugs, and only deploy to your users when you’re ready.</p>
+<p><strong>Release</strong> any repl you’re working on into production by running a <strong>Deployment</strong>. You’ll notice a new button in your header:</p>
+<p><img src="https://blog.replit.com/images/deployments-launch/release-dropdown.png" alt="Click release"></p>
+<p>Clicking <strong>Deploy your project</strong> will let you pick the size of machine you need.</p>
+<p><img src="https://blog.replit.com/images/deployments-launch/machine-tier.png" alt="Pick your tier"></p>
+<p>Select your <code>.replit.app</code> domain name, or <a href="https://docs.replit.com/hosting/deployments/custom-domains">attach to your own custom domain</a> on the Domains tab, and Deploy!</p>
+<p><img src="https://blog.replit.com/images/deployments-launch/pick-domain.png" alt="Pick your sub-domain"></p>
+<p>When you’re ready to update the live version, it’s just a single click away with <strong>Redeploy</strong>.</p>
+<p>Many Replit templates are already pre-configured for deployment to keep things fast and simple. Advanced users can also:</p>
+<ul>
+<li>Customize the Build command</li>
+<li>Customize the Run command</li>
+<li>Set production-specific secrets values separate from development values</li>
+</ul>
+<h3>Debugging your application with logs</h3>
+<p>Since your development and production environments are now different, you’ll need a way to see what’s happening if something’s not right. You can do that by accessing your Repl’s logs from the Logs tab:</p>
+<p><img src="https://blog.replit.com/images/deployments-launch/view-logs.png" alt="Logs tab"></p>
+<h3>Pricing</h3>
+<p>For small projects like simple web servers and bots, we start as low as $0.20/day per Repl. If you wind up building the next viral generative AI app, you can go up to 4 dedicated CPU and 16 GiB RAM.</p>
+<p>Explore all your options at <a href="https://replit.com/pricing">replit.com/pricing</a>.</p>
+<h3>Going viral? Scale up to dedicated CPUs.</h3>
+<p>More and more, we’re seeing startups build their <a href="http://crear.ai/">businesses</a> <a href="https://berri.ai/">using</a> <a href="https://blog.replit.com/fig">Replit</a>. When your idea goes from viral sensation to new business, scale up with a simple <strong>Redeploy</strong>.</p>
+<p>Our Shared CPU machines are great for apps that get occasional traffic and only need to handle bursts of workload. Shared CPUs are less expensive, but can only fully consume the CPU they are assigned for “bursts” of time based on a <a href="https://en.wikipedia.org/wiki/Token_bucket">token bucket algorithm</a>. They’re great for intermittent traffic where you don’t need to consume a lot of CPU for long periods of time.</p>
+<p>When you’re ready to scale up, you’ll want to upgrade to a Dedicated CPU VM. This way you’ll be able to handle steady streams of traffic or chew through large amounts of data with no problem. Want to pin multiple CPUs to 100% all day long? Dedicated CPUs have you covered. We’ve also equipped our Dedicated CPU VMs with 10x more outbound transfer to help you handle increased traffic.</p>
+<p>Don’t worry about getting your choice wrong, a new machine type is only a couple of clicks away if you choose to <strong>Manage</strong> your tier.</p>
+<p><img src="https://blog.replit.com/images/deployments-launch/upgrade.png" alt="Manage your tier"></p>
+<h3>On the go? Deploy and monitor from the Replit Mobile App.</h3>
+<p>We’ve all been there. You’re on the go and your on-call pager ringtone goes off. If only you could re-deploy with a quick fix without getting to your primary computer. Not a problem with Replit Hosting. Using the Replit mobile app you can check your logs, fix your code, and re-deploy your application, all from your phone.</p>
+<h3>Improved security and isolation</h3>
+<p>Replit Deployments are built on Google Cloud Platform, so you get <a href="https://cloud.google.com/security/">industry leading security features</a> like data encryption in transit and at rest. We’ve also kept security in mind for the details of how your application gets deployed:</p>
+<ul>
+<li>When you deploy to a Dedicated VM, you’re getting your own <a href="https://cloud.google.com/compute">GCE VM</a>. This is a more secure boundary than other solutions that rely only on containers.</li>
+<li>All of your resources are kept in a <a href="https://cloud.google.com/resource-manager/docs/cloud-platform-resource-hierarchy">GCP project</a> specific to your user. This adds a resource, permission, and network boundary to keep other users’ code away from yours.</li>
+<li>Your application secrets are stored in <a href="https://cloud.google.com/secret-manager">GCP Secret Manager</a> to keep them safe from outside users.</li>
+</ul>
+<h3>Changes: No more filesystem persistence, Repl Auth coming soon</h3>
+<p>One consequence of separating development and hosting is that writes to the local filesystem will not persist to the Repl. You can write as normal, but the data will disappear on any following re-deploys and will not show up in your development Repl.</p>
+<p>Some users have relied on <a href="https://blog.replit.com/filesystem-persistence-for-all">this feature</a> in the past to store application data in a local SQLite database, for example. Going forward, you should use remote storage options like <a href="https://docs.replit.com/hosting/databases/replit-database">Replit DB</a> or <a href="https://docs.replit.com/hosting/databases/postgresql-on-replit">PostgreSQL</a>. We’ll continue to add more storage options based on your feedback. Let us know what you want to see most!</p>
+<p>Finally, in this initial launch, we don’t have support for <a href="https://docs.replit.com/hosting/repl-auth-sidebar">Repl Auth</a>. We’ll bring it to Replit Deployments in the next few weeks.</p>
+<h3>More features coming soon…</h3>
+<p>This release is the beginning. We want to hear what you want to see next in hosting and we’ll adjust our roadmap accordingly. Some ideas we’re already playing with:</p>
+<ul>
+<li>On Demand hosting for pay-as-you-go pricing</li>
+<li>Autoscaling and load balancing</li>
+<li>Static hosting where you only pay for bandwidth (outbound transfer)</li>
+<li>Cron jobs to run on your schedule</li>
+<li>Ephemeral deployments that expire when you want</li>
+<li>Hosted Functions for inexpensive request-based pricing</li>
+<li>Custom machine shapes with configurable CPU and RAM</li>
+<li>Larger machines for bigger workloads</li>
+<li>Deploying to multiple regions to better serve users around the world</li>
+<li>More storage options: MongoDB, Redis, object storage, etc</li>
+<li>SSH to your hosted application’s machine</li>
+</ul>
+<p>Share your wish list with us on <a href="https://ask.replit.com/t/introducing-replit-deployments/20856">this post in the Replit Ask forum</a>.</p>
+<hr>
+<h3>FAQ</h3>
+<h5>Is the current hosting product (sharing repl.co URLs) being removed?</h5>
+<p>Legacy Replit Hosting, where application hosting is accomplished by sharing your development environment’s <code>repl.co</code> URL, is now in maintenance mode. We will not be adding any new features to Replit Hosting, but applications will continue to run.</p>
+<p>Instead, we’ll make Replit Deployments a best in class product. That means adding more features, offering new deployment types, and helping you grow from idea to full fledged business.</p>
+<h5>Is sharing Repls to the Replit community changing?</h5>
+<p>No. Community sharing will continue to work as it does today. This launch doesn’t impact that. In the future, we’d like to make Deployments the main way to share with the community, but we don’t have those details ready yet.</p>
+<h5>Why isn’t there a free tier for Replit Deployments like there is for Replit Hosting?</h5>
+<p>We’re still working on how a free tier should be structured for Deployments. We want to make sure:</p>
+<ul>
+<li>You can experiment with lots of small ideas before they take off and need higher levels of resources.</li>
+<li>Sharing to the Replit community remains accessible and exciting.</li>
+</ul>
+<p>We’ll have more details to share here soon.</p>
+<h5>What’s happening to repl.co sites?</h5>
+<p>Nothing is happening to <code>repl.co</code> websites today. It’s still possible to share the <code>repl.co</code> URL backing your development environment. But we think you’ll have a better experience using the new workflow and explicitly deploying your apps.</p>
+<h5>Are pingers banned from accessing Replit Deployments URLs?</h5>
+<p>No. Pinger sites like <a href="https://uptimerobot.com/">UpTimeRobot</a> can be a good way to monitor your app for unexpected crashes. In the past, users also used those sites to keep repls “warm” for smooth wake-ups. That’s no longer necessary with Deployments as the app is always warm and running.</p>
+<h5>Where can I leave feedback?</h5>
+<p>To give feedback, just respond to <a href="https://ask.replit.com/t/introducing-replit-deployments/20856">the post on Replit Ask forum</a>. We’re eager to hear your feedback on the product and what features you want next.</p>

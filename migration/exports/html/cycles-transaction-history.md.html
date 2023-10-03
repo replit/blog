@@ -1,0 +1,62 @@
+<p><img src="https://blog.replit.com/images/cycles_transaction/banner.png" alt="Cycles Cover Image"></p>
+<p>Earlier this year we introduced <a href="https://docs.replit.com/cycles/about-cycles">Cycles</a> to the platform, a virtual token that can be earned or purchased to add compute power and functionality for your Repls. </p>
+<p>Hundreds of thousands of cycles transactions have been made to date. And now more Replit community members are able to earn cycles of their own through bounties!</p>
+<p>In the past, Replit transactions looked something like this: 
+<img src="https://blog.replit.com/images/cycles_transaction/old_transactions.png" alt="image"></p>
+<p>With this view, although simple, it’s hard to know where exactly your cycles are going, whether it&#39;s spending on powerups, purchasing, or sending to other replit community members via tips and bounties. There’s also nothing actionable you can do with this information. </p>
+<p>Our initial focus for the first iteration was purely around cycles functionalty. Now there are even more things you can use cycles for, we&#39;re revisiting the experience to focus on helping you find information on where you spent or earned cycles on Replit!</p>
+<p>As a goal of my internship, I wanted to work on a more complex engineering problem and learn more about the cycles team, which is why I took on this project!</p>
+<p>The goals for this project are to: </p>
+<ul>
+<li>Make the cycles transaction page extensible for future cycles products we build on replit</li>
+<li>Surface transaction IDs (so it&#39;s easy to see that each transaction is unique)</li>
+<li>Group transactions by categories </li>
+<li>Surface details about what the transaction is</li>
+</ul>
+<p>The new page looks like this:
+<img src="https://blog.replit.com/images/cycles_transaction/newpage.gif" alt="gif"></p>
+<p>So, how did we get there? </p>
+<p>I broke my project down into 3 phases: </p>
+<ol>
+<li>Talking to replit community members to understand what they would like to see on the transaction history page.</li>
+<li>Developing an initial design &amp; working with our awesome designer Larry to translate the requirements I gathered into designs.</li>
+<li>Working on the engineering implementation from database design to front-end implemenation.</li>
+</ol>
+<p>Let&#39;s dig into understanding how cycles and transactions work on replit: </p>
+<p>We have a table to represent transactions, users, balances, and wallets for interactions that require holding cycles in Google Cloud Spanner. The transactions table in this system is a source of truth for all transactions made on replit. </p>
+<p>In Postgres, we have tables for each type of purchase you can make on replit, for example a table for powerups, bounties, tips, and more. These tables hold more contextual information on the detail of the transaction itself. </p>
+<p>Outside of these spanner tables, we use postgres tables to hold more contextual information about the transactions itself. For example, bouties, powerups, tips all have their own tables that hold more details. 
+<img src="https://blog.replit.com/images/cycles_transaction/table_1.png" alt="image"></p>
+<p>Let&#39;s go through an example. What happens when you purchase a power up on Replit?</p>
+<ol>
+<li>First it&#39;ll create a Repl order that indicates the type of power-up. For example, always on. </li>
+<li>Then it&#39;ll link this Repl order to another transactions table in postgres.</li>
+<li>In the transactions table, it creates a transaction id that&#39;s linked to the transactions table in spanner.</li>
+</ol>
+<p><img src="https://blog.replit.com/images/cycles_transaction/table_2.png" alt="image"></p>
+<p>One of the main engineering challenges was that the Spanner transactions table is too simple. It was sufficient to provide data for the current view, but if we want Replit community members to be able to see more details on their transaction, it will need to use the transaction ID to search all the possible tables to find this information which will be an expensive compute. </p>
+<p>As part of the project, I introduced a new column to the spanner table called Metadata. Note: this change will only be rolled out to new transactions going forward!</p>
+<p>Let&#39;s see how the <code>metadata</code> would look like for an example <code>boost</code> transaction. </p>
+<pre><code class="language-js">metadata: {
+  system: &#39;web-postgres&#39;
+  relation: &#39;repl_order&#39;
+  power_up_type: &#39;boost&#39;
+  id:
+}
+</code></pre>
+<p>The metadata will act as a reference to contextual data within the transactions table, making it easier to find information about Cycles Transactions. </p>
+<ul>
+<li><code>system</code>: refers to the system the data lives on, whether it&#39;s postgres or anything else.</li>
+<li><code>relation</code>: corresponds to the postgres table where the transaction is from.</li>
+<li><code>id</code>: will be used in the future to query additional data from the table such as Repls/bounty names.</li>
+</ul>
+<p>Using this metadata, I was able to query and categorize transactions based on their table relations as you can see in the view. </p>
+<p>The new cycles transaction history will be rolled out to explorers today and will slowly rollout to everyone next week. Start making new transactions on replit to try it out at <a href="https://replit.com/cycles">https://replit.com/cycles</a>. </p>
+<p>This is only the start of the new Cycles Transaction History and I&#39;m excited for the Replit team to continue building upon more features for this!</p>
+<p>A few features I&#39;m looking forward to the team adding: </p>
+<ul>
+<li>Connecting the Repls you purchased your powerups for. This way you can easily see which Repl you spent it on</li>
+<li>Ability to see who you got tips from and include the link to their profile in your transaction</li>
+<li>Filtering by transaction categories and ability to view transactions in a specific date range</li>
+</ul>
+<p>Overall this was a really fun internship and I learned a lot! Thanks so much Replit for the opportunity :) </p>

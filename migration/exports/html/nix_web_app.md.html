@@ -1,0 +1,413 @@
+<p>Learning a new programming language can be a very difficult task. Where should you start? How do I improve my skills from &quot;Hello, World!&quot; to building complete applications? It helps to have a starter project. One of my favourites is building a web app. I have been learning the Nix package manager for a few weeks now - <a href="https://blog.replit.com/nix_dynamic_version">starting with creating a dynamic version system</a> - and I think its the perfect time to write a web application with it (Even though I probably shouldn&#39;t).</p>
+<p>But wait, isn&#39;t Nix a package manager and reproducible build system? Am I going to write an entire post on how to package a PHP app with Nix and run it? Well, yes and no. Nix is indeed a build system, but Nix packages are configured using a functional programming language (also named Nix) created specifically for the Nix package manager. Since Nix is a complete programming language, this means we can execute it without building a package thanks to the interpreter built into the Nix package manager itself. Clearly, Nix was not built for web development, but let&#39;s see how far we can take it.</p>
+<h2>Hello, World!</h2>
+<p>In the long list of reasons why Nix was not created for building web applications, we have the reality that starting a web server that executes Nix code through Nix itself is not feasible at the moment. Nix is not the type of application that can be configured to wait for calls on some hostname/port and execute arbitrary code when a client connects. It is much easier to use something like <code>nix eval</code> through a more standard web server, so we&#39;ll do just that.</p>
+<p>Let&#39;s start by creating a mandatory &quot;Hello, World!&quot; example with Nix. For this post, I have created all the code inside of a <a href="https://replit.com/@replitguillaume/NixWebApp">Nix repl on replit.com</a>. Feel free to follow along in that repl or to create your own.</p>
+<p>Create a new repl using the <strong>nix (beta)</strong> language to get started, click on the three dots icon next to the Files header in the filetree and select &quot;Show config files&quot;. Once the config files are visible, open the <code>replit.nix</code> file and replace <code>pkgs.cowsay</code> with <code>pkgs.python3</code>, we will need python later. Now that the repl is configured, create a <code>default.nix</code> file inside of a directory named <code>app</code> and write the following code in it.</p>
+<pre><code class="language-nix"># ./app/default.nix
+{ }:
+rec {
+  get = &#39;&#39;
+    &lt;html&gt;
+      &lt;head&gt;
+        &lt;title&gt;Nix web server - Home&lt;/title&gt;
+      &lt;/head&gt;
+      &lt;body&gt;
+        &lt;h1&gt;Hello from Nix!&lt;/h1&gt;
+      &lt;/body&gt;
+    &lt;/html&gt;
+  &#39;&#39;;
+}
+</code></pre>
+<p>The code looks a lot like a standard derivation file. The basis of the <code>default.nix</code> file is a function (The signature for a Nix function is <code>arg: body</code>) that takes an attribute set as its single argument and should return _<em>something</em>. Like most functional programming languages, Nix automatically uses the last statement of a function as the return value for that function. In fact, Nix only allows a single statement per function, purely functional. When executed, the code in this default file will return an attribute set with a single attribute: <code>get</code>. This get attribute contains our &quot;Hello, World!&quot; HTML code.</p>
+<p>Now, how do we run this code through a web server? For this post, we will be using a python web server, but you could use anything you like, even bash. Here is the code for our web server, paste it in a file named <code>server.py</code> in the repl root directory (not in <code>./app</code>).</p>
+<pre><code class="language-python"># ./server.py
+from http.server import BaseHTTPRequestHandler, HTTPServer
+import subprocess
+
+hostName = &quot;0.0.0.0&quot;
+serverPort = 8080
+
+class NixServer(BaseHTTPRequestHandler):
+    def do_GET(self):
+        self.send_response(200)
+        self.send_header(&quot;Content-type&quot;, &quot;text/html&quot;)
+        self.end_headers()
+
+        command = &#39;nix eval --raw -f ./app get&#39;
+
+        # Run nix
+        process = subprocess.Popen(command.split(), stdout=subprocess.PIPE)
+
+        output, _ = process.communicate()
+        self.wfile.write(output)
+
+if __name__ == &quot;__main__&quot;:        
+    webServer = HTTPServer((hostName, serverPort), NixServer)
+    print(&quot;Server started http://%s:%s&quot; % (hostName, serverPort))
+
+    try:
+        webServer.serve_forever()
+    except KeyboardInterrupt:
+        pass
+
+    webServer.server_close()
+    print(&quot;Server stopped.&quot;)
+</code></pre>
+<p>The important part here is line 14: <code>command = &#39;nix eval --raw -f ./app get&#39;</code>. Using the <code>subprocess</code> package, we trigger the <code>nix eval</code> command. The <code>--raw</code> option tells nix to return the result as an unquoted string, which makes things simpler for this server. We then use the <code>-f</code> option to tell Nix to use the <code>default.nix</code> file from the <code>app</code> directory. Finally, the last option tells nix which attribute from the returned attribute set to print. Combined, this will interpret our <code>./app/default.nix</code> file - thus executing the function in that file - and get the content of the <code>get</code> attribute, printing the HTML code as a raw string. Type <code>python ./server.py</code> in the repl console and wait for the web preview to appear, you should see the &quot;Hello, World!&quot; message displayed on screen.</p>
+<h2>Adding a router</h2>
+<p>Displaying HTML is all fine and good, but most web applications include more than a single page of content.  Nix can&#39;t access anything from the web server or the environment, it is fully isolated. We need to find some way to know which URL the user accessed in our web app to display the correct page. We could use the python server to handle calling different Nix files based on which path the user access, but we want to do as much as possible directly in Nix. Instead of trying to frontload all the work to the python server, let&#39;s get the path from the url in python and give it to Nix as an argument. Update the <code>do_GET</code> method with this new code.</p>
+<pre><code class="language-python"># ./server.py
+def do_GET(self):
+    self.send_response(200)
+    self.send_header(&quot;Content-type&quot;, &quot;text/html&quot;)
+    self.end_headers()
+    
+    # Update the command to add the --arg option
+    command = f&#39;nix eval --arg route &quot;{self.path}&quot; --raw -f ./app get&#39;
+    
+    # Run nix
+    process = subprocess.Popen(command.split(), stdout=subprocess.PIPE)
+    
+    output, _ = process.communicate()
+    self.wfile.write(output)
+</code></pre>
+<p>We can extend the <code>nix eval</code> command to pass arguments to Nix using the <code>--arg</code> option. Here, we pass a <code>route</code> attribute as the value of the path from the web server. Let&#39;s see how we can use this in the <code>default.nix</code> file.</p>
+<pre><code class="language-nix"># ./app/default.nix
+{ route ? &quot;/&quot; }:
+let
+  routes = {
+    &quot;/&quot; = &#39;&#39;
+      &lt;html&gt;
+        &lt;head&gt;
+          &lt;title&gt;Nix web server - Home&lt;/title&gt;
+        &lt;/head&gt;
+        &lt;body&gt;
+          &lt;h1&gt;Hello from Nix!&lt;/h1&gt;
+          &lt;ul&gt;
+            &lt;li&gt;&lt;a href=&quot;/nix&quot;&gt;Nix info&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href=&quot;/404&quot;&gt;404&lt;/a&gt;&lt;/li&gt;
+          &lt;/ul&gt;
+        &lt;/body&gt;
+      &lt;/html&gt;
+    &#39;&#39;;
+    &quot;/nix&quot; = &#39;&#39;
+      &lt;html&gt;
+        &lt;head&gt;
+          &lt;title&gt;Nix web server - Nix&lt;/title&gt;
+        &lt;/head&gt;
+        &lt;body&gt;
+          &lt;h1&gt;Nix info&lt;/h1&gt;
+          &lt;p&gt;
+            Nix is running on ${builtins.currentSystem}
+          &lt;p&gt;
+          &lt;/p&gt;
+            &lt;i&gt;With the caveat that a python web server is serving everything...&lt;/i&gt;
+          &lt;/p&gt;
+        &lt;/body&gt;
+      &lt;/html&gt;
+    &#39;&#39;;
+  };
+in rec {
+  get = if builtins.hasAttr route routes then routes.&quot;${route}&quot; else &#39;&#39;
+      &lt;html&gt;
+        &lt;head&gt;
+          &lt;title&gt;Nix web server - Not found&lt;/title&gt;
+        &lt;/head&gt;
+        &lt;body&gt;
+          &lt;h1&gt;404 Page ${route} not found&lt;/h1&gt;
+        &lt;/body&gt;
+      &lt;/html&gt;
+  &#39;&#39;;
+}
+</code></pre>
+<p>Let&#39;s unpack this. On line 2, we can see the <code>route</code> argument added as a key from the attribute set. Anything given to the <code>--arg</code> option of the <code>nix eval</code> command will be added here using the format <code>--arg key value</code>. On line 3, we create a <code>let..in</code> block that defines another attribute set with our possible routes, each returning some HTML. Remember when I said that Nix function could only contain one statement? The <code>let..in</code> block is a special expression that allows us to bypass this limitation by defining variables in this block and passing them to whatever statement follows the <code>in</code>. For example:</p>
+<pre><code class="language-nix">{ entry ? 0 }:  
+let
+    foo = &quot;bar&quot;;
+    bar = 1;
+    file = builtins.readFile ./some-file.txt;
+in if entry == 1 then foo else bar
+</code></pre>
+<p>This statement defines three variables and uses two of them in an <code>if</code> statement. <code>If</code> statements must always have a <code>then</code> block and a <code>else</code> block. No single line <code>if</code> or <code>else if</code> here. We can do a lot more with the <code>let</code> statement, but the one thing we cannot do is to trigger side effects. Nix is incredibly lazy and does not allow code that does something without assigning it to a variable. Furthermore, it will not interpret unused code. For example, the <code>file</code> variable above will not be interpreted and the <code>some-file.txt</code> file will not be read, even though we assign its content to a variable. The <code>?</code> on line 1 character defines the default value of an attribute in an attribute set. If the <code>entry</code> key is not set when the function is called, it will default to <code>0</code>. </p>
+<p>To go back to our own code, the core of the router is on line 36 were we use an <code>if</code> statement to set the value of the <code>get</code> attribute. The condition checks if the <code>routes</code> set from line 4 has a key equal to the passed route using <code>builtins.hasAttr</code>. If yes, it fetches the value for that attribute with the <code>dot</code> operator and returns the HTML. If not, it will instead return the content of a 404 page. This is code acts as a sort of <code>switch</code> statement and is one of the best way to implement an <code>else if</code> statement in Nix.</p>
+<p>Restart the by typing CTRL+C then typing <code>python ./server.py</code>. You should now see the &quot;Hello, World!&quot; message printed on the web preview, with some links. Clicking on those links will route you to the pages we have defined.</p>
+<h2>Adding an API</h2>
+<p>We now have a very nice set of web pages, and it&#39;s still fairly fast considering how we&#39;re running it. Yet, it&#39;s all static content. No web application would be complete without some sort of data management! It is time to take our app to the next level by adding a TODO API.</p>
+<p>Let&#39;s start with some refactoring. Create a <code>./app/get.nix</code> file, we will move the code from <code>./app/default.nix</code> there with a few modifications.</p>
+<pre><code class="language-nix"># ./app/get.nix
+{ }:
+let
+  routes = {
+    &quot;/&quot; = &#39;&#39;
+      &lt;html&gt;
+        &lt;head&gt;
+          &lt;title&gt;Nix web server - Home&lt;/title&gt;
+        &lt;/head&gt;
+        &lt;body&gt;
+          &lt;h1&gt;Hello from Nix!&lt;/h1&gt;
+          &lt;ul&gt;
+            &lt;li&gt;&lt;a href=&quot;/nix&quot;&gt;Nix info&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href=&quot;/404&quot;&gt;404&lt;/a&gt;&lt;/li&gt;
+          &lt;/ul&gt;
+        &lt;/body&gt;
+      &lt;/html&gt;
+    &#39;&#39;;
+    &quot;/nix&quot; = &#39;&#39;
+      &lt;html&gt;
+        &lt;head&gt;
+          &lt;title&gt;Nix web server - Nix&lt;/title&gt;
+        &lt;/head&gt;
+        &lt;body&gt;
+          &lt;h1&gt;Nix info&lt;/h1&gt;
+          &lt;p&gt;
+            Nix is running on ${builtins.currentSystem}
+          &lt;p&gt;
+          &lt;/p&gt;
+            &lt;i&gt;With the caveat that a python web server is serving everything...&lt;/i&gt;
+          &lt;/p&gt;
+        &lt;/body&gt;
+      &lt;/html&gt;
+    &#39;&#39;;
+  };
+
+  getContent = route: if builtins.hasAttr route routes then routes.&quot;${route}&quot; else &#39;&#39;
+      &lt;html&gt;
+        &lt;head&gt;
+          &lt;title&gt;Nix web server - Not found&lt;/title&gt;
+        &lt;/head&gt;
+        &lt;body&gt;
+          &lt;h1&gt;404 Page ${route} not found&lt;/h1&gt;
+        &lt;/body&gt;
+      &lt;/html&gt;
+  &#39;&#39;;
+in getContent
+</code></pre>
+<p>The main difference here compared to <code>default.nix</code> is that we return a function for the router rather than call it through an attribute set.</p>
+<p>Going back to <code>default.nix</code>, we can update the code there to <code>import</code> this function and use it rather than have the router live in the default file. It makes our code a little easier to manage and will keep the file size small as we add more code. <code>import</code> is a special keyword that will execute the function in the given file (hence why we give it an attribute set as its second argument) and return its return value. In this case, <code>./get.nix</code> returns the <code>getContent</code> function and that&#39;s what we receive from <code>import</code>.</p>
+<pre><code># ./app/default.nix
+{ route ? &quot;/&quot; }:
+let
+  getContent = import ./get.nix {};
+in rec {
+  get = getContent route;
+}
+</code></pre>
+<p>Now, let&#39;s add a <code>./app/post.nix</code> file and get started building a small API. We will be using the Replit database in this post, but feel free to use any database system you want.</p>
+<pre><code class="language-nix"># ./app/post.nix  
+{ pkgs ? import &lt;nixpkgs&gt;{}, replit_db_url ? &quot;&quot; }:
+let
+  postApi = route: body: let
+    setTodos = builtins.readFile (pkgs.runCommand &quot;setTodos&quot; {
+      buildInputs = [ pkgs.cacert pkgs.curl ];
+    } &#39;&#39;
+      curl ${replit_db_url} -d &#39;todos=${body}&#39; | tr -d &#39;\n&#39; &gt; $out
+    &#39;&#39;);
+
+    routes = {
+      &quot;/api/todos&quot; = setTodos;
+    };
+  in if builtins.hasAttr route routes then routes.&quot;${route}&quot; else &#39;&#39;
+      Not found
+  &#39;&#39;;
+in postApi
+</code></pre>
+<p>Let&#39;s go over this code. First, on line 2, we define our function with two attributes: the base nix packages and a <code>replit_db_url</code> string. We will get back to the <code>replit_db_url</code> attribute later. The nix packages include all the utility packages provided by Nix, which can be found in <a href="https://github.com/NixOS/nixpkgs">their own repo</a>. In the case of the <code>pkgs</code> attribute, it means Nix will automatically fetch all packages even if we do not pass it in the attribute set.</p>
+<p>In the <code>let..in</code> block, we define our router function like in the <code>./app/get.nix</code> file with an added <code>body</code> parameter. The router only defines one route, which triggers a function called <code>setTodos</code> when the route is accessed. We define everything inside of the <code>postApi</code> function to make sure the <code>setTodos</code> function has access to the <code>body</code> attribute.</p>
+<p>This <code>setTodos</code> function is where the magic happens. We use the <code>pkgs.runCommand</code> function to trigger a bash script on the server. This script will call the <code>curl</code> command and add data into the Replit database through its HTTP API. We then assign the result of this command, cleaned of all line breaks, to the magic <code>$out</code> variable. <code>runCommand</code> will write everything added to <code>$out</code> to its derivation file, which we then need to read using <code>builtins.readFile</code>. Since <code>runCommand</code> does not have anything installed by default, we also give it a few tools to make sure curl works.</p>
+<p>Remember when I said that Nix does not allow side effects? <code>runCommand</code> is the best way to work around that. Nix will still not execute the bash script if the result is not read through a variable, but, as long as we make sure it is, we can trigger any side effect we want in the bash script.</p>
+<p>We can use the <code>runCommand</code> code to write a <code>GET</code> version of this as well, let&#39;s return to <code>./app/get.nix</code> and add a few more lines of code.</p>
+<pre><code class="language-nix"># ./app/get.nix
+{ pkgs ? import &lt;nixpkgs&gt;{}, replit_db_url ? &quot;&quot; }:
+let
+  getTodos = builtins.readFile (pkgs.runCommand &quot;getTodos&quot; {
+      buildInputs = [ pkgs.cacert pkgs.curl ];
+      dummy = builtins.currentTime;
+    } &#39;&#39;
+      curl ${replit_db_url}/todos | tr -d &#39;\n&#39; &gt; $out
+  &#39;&#39;);
+
+  routes = {
+      # Same routes, content cut for brevity
+    ...
+    &quot;/api/todos&quot; = getTodos;
+  };
+
+  getContent = ...; # Same code, content cut for brevity
+in getContent
+</code></pre>
+<p>The code is very similar to the <code>./app/post.nix</code> code, but we fetch the todos data with curl rather than set them.</p>
+<p>You may notice the <code>dummy = builtins.currentTime</code> line in <code>runCommand</code>, what&#39;s up with that? Nix is very good at avoiding unnecessary executions. It checks the content of the shell script and all the attributes given as the second parameter to determine if anything changes. If Nix decides the previous execution of <code>runCommand</code> has all the data needed already, it will not execute the bash script and instead resolve to the result of the previous execution. This was less of a problem with our <code>POST</code> code since Nix will always re-execute the code if its content changes (Which it will when the <code>POST</code> body data is different, unless the user adds the same TODO twice), but our <code>GET</code> code has no changing dependencies. We need to make sure to tell Nix to always rerun that script. The <code>dummy</code> attribute does so by creating a dependency to the current time, meaning it is sure to change between each execution.</p>
+<p>Let&#39;s update the <code>./app/default.nix</code> file to connect those changes and expose our API endpoints.</p>
+<pre><code class="language-nix"># ./app/default.nix
+{ pkgs ? import &lt;nixpkgs&gt;{}, route ? &quot;/&quot;, body ? &quot;{}&quot;, replit_db_url ? &quot;&quot; }:
+let
+  getContent = import ./get.nix { inherit pkgs; inherit replit_db_url; };
+  postApi = import ./post.nix { inherit pkgs; inherit replit_db_url; };
+in rec {
+  get = getContent route;
+  post = postApi route body;
+}
+</code></pre>
+<p>We added a few attributes to the attribute set of our function and now expose a second attribute to our returned set for <code>POST</code> calls. We use the <code>inherit</code> keyword to pass attributes to our imported packages without having to type <code>pkgs = pkgs</code>, it is the equivalent of doing <code>{ foo: foo }</code> in an object in JavaScript for example. We need to also update the python web server to provide those as arguments, replace the <code>NixServer</code> class with the following code.</p>
+<pre><code class="language-python"># ./server.py
+class NixServer(BaseHTTPRequestHandler):
+    def do_GET(self):
+        self.send_response(200)
+        self.send_header(&quot;Content-type&quot;, &quot;text/html&quot;)
+        self.end_headers()
+
+        replit_db_url = os.getenv(&quot;REPLIT_DB_URL&quot;)
+
+        command = f&#39;nix eval --arg route &quot;{self.path}&quot; --arg replit_db_url &quot;{replit_db_url}&quot; --raw -f ./app get&#39;
+
+        # Run nix
+        process = subprocess.Popen(command.split(), stdout=subprocess.PIPE)
+
+        output, _ = process.communicate()
+        self.wfile.write(output)
+
+    def do_POST(self):
+        self.send_response(200)
+        self.send_header(&quot;Content-type&quot;, &quot;text/html&quot;)
+        self.end_headers()
+
+        content_length = int(self.headers[&#39;Content-Length&#39;])
+        post_data = self.rfile.read(content_length)
+        post_body = json.dumps(post_data.decode(&#39;utf-8&#39;))
+        replit_db_url = os.getenv(&quot;REPLIT_DB_URL&quot;)
+
+        command = [
+          &quot;nix&quot;,
+          &quot;eval&quot;,
+          &quot;--arg&quot;,
+          &quot;route&quot;,
+          f&#39;&quot;{self.path}&quot;&#39;,
+          &quot;--arg&quot;,
+          &quot;body&quot;,
+          f&#39;{post_body}&#39;,
+          &quot;--arg&quot;,
+          &quot;replit_db_url&quot;,
+          f&#39;&quot;{replit_db_url}&quot;&#39;,
+          &quot;--raw&quot;,
+          &quot;-f&quot;,
+          &quot;./app&quot;,
+          &quot;post&quot;
+        ]
+
+        # Run nix
+        process = subprocess.Popen(command, stdout=subprocess.PIPE)
+
+        output, _ = process.communicate()
+        self.wfile.write(output)
+</code></pre>
+<p>The URL for the Replit database is available as an environment variable for all repls. We can fetch it and pass it to the <code>nix eval</code> command using the <code>--arg</code> option. We also added a <code>do_POST</code> method to the class to process <code>POST</code> calls with the <code>post</code> attribute returned from Nix. This method will pass all the attributes we expect, plus the decoded body from the <code>POST</code> call. Remember that <code>pkgs</code> has a default value that sets it to a link to all Nix packages, so we can omit it from our <code>nix eval</code> call.</p>
+<p>Restart the server and try accessing these two endpoints using Curl or Postman with the repl URL (Available in the web preview). The <code>GET</code> endpoint should return the data saved by the <code>POST</code> endpoint!</p>
+<h2>Adding a web app</h2>
+<p>We now have static content and a dynamic API, all that&#39;s left for our TODO app is to connect to the two together! For this application, I decided to go framework-less and use a web component. A web component is a custom HTML element managed through JavaScript. Think React, but without all its JSX fancyness.</p>
+<p>Create a <code>./app/app.js</code> file and copy the following code in there:</p>
+<pre><code class="language-javascript">// ./app/app.js
+class TodoList extends HTMLElement {
+  constructor() {
+    super();
+    this.todos = null;
+  }
+
+  // Called when the component connects to the DOM. I.E. When it is rendered for the first time.
+  connectedCallback() {
+    this.render();
+    
+    this.fetchTodos();
+  }
+
+  fetchTodos() {
+    fetch(&#39;/api/todos&#39;).then(data =&gt; data.json()).then(result =&gt; {
+      this.todos = result;
+      this.render();
+    }).catch(() =&gt; {
+      // This block exist to handle cases were the API returns an empty string (no data)
+      this.todos = [];
+      this.render();
+    });
+  }
+
+  saveTodos(event) {
+      // Don&#39;t actually submit the form.
+    event.preventDefault();
+
+    const newTodo = this.querySelector(&quot;#todo-form #new-todo&quot;).value;
+
+    fetch(&#39;/api/todos&#39;, {
+      method: &#39;POST&#39;,
+      body: JSON.stringify(this.todos.concat({ task: newTodo })),
+    }).then(() =&gt; {
+      this.fetchTodos();
+    });
+  }
+
+  render() {
+    if (!this.todos) {
+      this.innerHTML = &#39;&lt;i&gt;Loading...&lt;/i&gt;&#39;;
+      return;
+    }
+
+    this.innerHTML = `
+      &lt;div&gt;
+        &lt;ul&gt;
+          ${this.todos.map(todo =&gt; `
+            &lt;li&gt;
+              ${todo.task}
+            &lt;/li&gt;
+          `).join(&#39;&#39;)}
+        &lt;/ul&gt;
+        &lt;form id=&quot;todo-form&quot;&gt;
+          &lt;input placeholder=&quot;Add a task&quot; id=&quot;new-todo&quot; name=&quot;new-todo&quot; /&gt;
+          &lt;button type=&quot;submit&quot;&gt;Add&lt;/button&gt;
+        &lt;/form&gt;
+      &lt;/div&gt;
+    `;
+
+    this.querySelector(&quot;#todo-form&quot;).addEventListener(&#39;submit&#39;, this.saveTodos.bind(this));
+  }
+}
+    
+customElements.define(&#39;todo-list&#39;, TodoList);
+</code></pre>
+<p>I won&#39;t go into too much details about web components in this article. What&#39;s important here is that <code>connectedCallback</code> is triggered when the component is picked up by the browser and rendered on screen. We tell that component to render a loading indicator and start fetching todos using our <code>GET</code> API from the previous section. Once fetched, we rerender and display the list of todos plus a small form instead of the loading indicator. Creating a todo using the form will call the <code>POST</code> API endpoint, then trigger a refetch of the <code>GET</code> endpoint, and finally a rerender.</p>
+<p>Let&#39;s update the <code>routes</code>set of our <code>./app/get.nix</code> file to use this component, replace the first route with the following code.</p>
+<pre><code class="language-nix">&quot;/&quot; = &#39;&#39;
+  &lt;html&gt;
+    &lt;head&gt;
+      &lt;title&gt;Nix web server - Home&lt;/title&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+      &lt;h1&gt;Hello from Nix!&lt;/h1&gt;
+      &lt;ul&gt;
+        &lt;li&gt;&lt;a href=&quot;/todos&quot;&gt;Todo list page&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href=&quot;/nix&quot;&gt;Nix info&lt;/a&gt;&lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/body&gt;
+  &lt;/html&gt;
+&#39;&#39;;
+&quot;/todos&quot; = &#39;&#39;
+  &lt;html&gt;
+    &lt;head&gt;
+      &lt;title&gt;Nix web server - Todos&lt;/title&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+      &lt;h1&gt;Listing todos&lt;/h1&gt;
+      &lt;todo-list&gt;&lt;/todo-list&gt;
+      &lt;script&gt;
+        ${builtins.readFile ./app.js}
+      &lt;/script&gt;
+    &lt;/body&gt;
+  &lt;/html&gt;
+&#39;&#39;;
+</code></pre>
+<p>We added a link to the new <code>/todos</code> route in our home page. This <code>/todos</code> route adds the web component we created and copies the JavaScript code into a script tag by reading the JavaScript file. Nix knows to copy unquoted paths like these to its store and can access our JavaScript file no problem.</p>
+<p>Refresh the web preview (no need to reset the server since we didn&#39;t change any of the python code) and you should see the new link. Clicking on the todo list link will trigger the web component code and show you an empty list of todos. Try adding a new todo using the form, you&#39;ll see the list refreshing after around 5 seconds. Be patient, it is <em>very</em> slow.</p>
+<h2>Conclusion</h2>
+<p>What did we learn today? We learned the hard way that Nix isn&#39;t suited to web development - which was to be expected - but also that Nix can be very slow for what seems to be fairly basic operations. Nix is a build system first, while it has many optimizations (Which we had to work around) to make things faster, it&#39;s not made to provide the type of performance web applications need. The <code>runCommand</code> function creates a new build derivation that configures a <em>lot</em> of things and creates new processes. It&#39;s meant to take some time as Nix figures out what it needs to do. <code>builtins.readFile</code> adds another layer of complexity as Nix creates yet another process to fetch and read the file.</p>
+<p>But what about <code>fetchUrl</code>? Could it be faster and simpler than <code>runCommand</code>? Unfortunately, <code>fetchUrl</code> uses a bash script and curl behind the scene, which ends up being very similar in structure and performance to our <code>runCommand</code> setup, but without our <code>dummy</code> attribute. This leads to caching issues where adding more than one todo won&#39;t change the result of the <code>GET</code> call. <code>fetchUrl</code> is meant to fetch and unpack archives for using them in build processes, not make <code>GET</code>/<code>POST</code> calls to an HTTP API.</p>
+<p>I think there might be some way to hack Nix a little bit more by making use of the <code>runCommand</code> cache we had to work around with the <code>dummy</code> attribute. There might be some way to use that to our advantage to always return the latest version of the saved data when calling the <code>GET</code> endpoint unless a <code>POST</code> call has happened. This could lead to a slow first <code>GET</code> call, but instant subsequent calls. Until a todo is added (Maybe we&#39;ll explore that in a part 2!).</p>
+<p>What I love about the Nix language is how simple it is. There is very little bloat and the core of the language can be learned really quickly (we only missed the <code>with</code> keyword in this post, we covered everything else!). There is definitely some potential for writing applications with this language. This was a fun adventure and a very good way to learn the Nix language, but it seems my dream of a Nix powered web application will have to wait until an interpreter makes its way on the Internets.</p>

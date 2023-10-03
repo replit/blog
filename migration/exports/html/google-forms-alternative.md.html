@@ -1,0 +1,714 @@
+<p><a href="https://replit.com">Replit</a>, a cloud native code environment, provides all the tools you need to collaborate, create, test, and deploy software applications in a single place. Think of it as a new-generation Integrated Development Environment (IDE), with integrated support for authentication/authorization, data persistence, and auto deployment that makes your software development experience thrive. </p>
+<p>Replit’s cloud native nature means you only need a web browser to get started, reducing your cost in local infrastructure, and allowing you to work in real-time even if your team is remote. </p>
+<p>In this tutorial, you’ll learn how to create a <a href="https://www.python.org">Python web application</a> that lets you build dynamic forms. You’ll be able to display different sections given specific conditions.</p>
+<p>This might sound similar to <a href="https://www.google.com/forms/about/">Google Forms</a>, but you’ll be able to create several extension points to make the application more customizable and robust. </p>
+<p><img src="https://i.imgur.com/sGRUmcU.gif" alt="Dynaform sample"></p>
+<h2>Implementing the Google Forms Alternative</h2>
+<p>Before you begin this tutorial, you’ll need to create a <a href="https://replit.com/signup?from=landing">Replit account</a>. It’s a comprehensive solution for developers who want to create web applications, APIs, static HTML sites, frontend applications, games, and more. The integrated environment supports a large number of programming languages (C#, Java, Python, JS, Erlang, QBasic, Swift, Dart, Kotlin) and provides templates for many frameworks (Rails, Kaboom, Django, Pygame, Flask). It also integrates with GitHub natively and includes all that’s required to launch a software product.</p>
+<p>Sign in if you already have an account. You can also follow along on <a href="https://replit.com/@NicolasBohorqu1/Dynaform?v=1">this article’s repl</a>. </p>
+<p>Once signed in to Replit, create a Python repl with the Flask template. There’s no need to install anything once you’ve selected the template Flask—Replit automatically adds the necessary imports to the <code>pyproject.toml</code> file and creates a <code>main.py</code> file with the required code. </p>
+<p>Select a new project template.</p>
+<p><img src="https://i.imgur.com/id2WObq.png" alt="Replit flask template"></p>
+<p>The example application (DynaForm) will allow the users to:</p>
+<ul>
+<li>Create forms with several sections and fields per section.</li>
+<li>Customize the order of the sections on a form based on dynamic criteria (an answer that has a specific value or function).</li>
+<li>Respond to a form.</li>
+<li>View answers as a table.</li>
+<li>Export answers to a Google Spreadsheet.</li>
+</ul>
+<p>Here’s a diagram of the application’s components:</p>
+<p><img src="https://i.imgur.com/3ITmsJT.png" alt="Dynaform design"></p>
+<p>You’re able to define the dynamic views and the behavior of the entire form using a master-detail model (FormContainer and SectionForm) that contains a workflow definition and a target spreadsheet.</p>
+<p>By taking advantage of the nature of Replit&#39;s database, each instance of the FormContainer will include its own set of answers as a collection of Python&#39;s dictionaries in which keys are each of the section fields. The <code>utils</code> and <code>gsheets</code> files contain helper code for the entire project.</p>
+<h3>Building the Models</h3>
+<p>The master part of the <code>master-detail model</code> is the FormContainer class—it’s defined as a simple <a href="https://wtforms.readthedocs.io/en/3.0.x/">WTForm</a> with three attributes (<code>name</code>, <code>spreadsheet_id</code>, and <code>workflow</code>) and a custom validator.</p>
+<p>To help you separate the master details classes from the controllers, views, and utils code, add a new file named <code>forms.py</code> and include this code: </p>
+<pre><code class="language-python">import json
+from flask_wtf import FlaskForm
+from wtforms.validators import InputRequired, Length
+from wtforms import StringField, TextAreaField, SubmitField, ValidationError
+
+class FormContainerForm(FlaskForm):
+  class Meta:
+    csrf = False
+        
+  name = StringField(
+    &quot;Form name&quot;,
+    validators=[
+        InputRequired(),
+        Length(min=4, max=255)
+    ]
+  )
+
+  spreadsheet_id = StringField(
+    &quot;Google Spreadsheet Id&quot;,
+    validators=[
+        InputRequired(),
+        Length(min=20, max=255)
+    ]
+  )
+
+  workflow = TextAreaField(
+    &quot;Workflow Definition (JSON)&quot;,
+    validators=[
+        InputRequired()
+    ]
+  )
+
+  submit = SubmitField(&quot;Create form&quot;)
+
+  def validate_workflow(form, field):
+    try:
+      json.loads(field.data)
+    except:
+      raise ValidationError(&quot;Use a valid JSON please&quot;)
+</code></pre>
+<p><img src="https://i.imgur.com/4yoBu4s.png" alt="Adding forms.py"></p>
+<p>This code defines the <code>FormContainerForm</code> class, its attributes, validators, and Submit button. The custom validator function <code>validate_workflow(form, field)</code> is applied to the workflow attribute and tries to parse the string content as a JSON document. If it fails, the <code>ValidationError</code> exception occurs. </p>
+<p>While the class has three attributes declared, its instances will include the answers and a collection of the SectionForm. The SectionForm class can also be defined in a similar way in the same file:</p>
+<pre><code class="language-python">class SectionForm(FlaskForm):
+  class Meta:
+    csrf = False
+        
+  sectionId = StringField(
+    &quot;Task Id&quot;,
+    validators=[
+        InputRequired(),
+        Length(min=3, max=255)
+    ]
+  )
+
+  section = TextAreaField(
+    &quot;Section Definition (JSON)&quot;,
+    validators=[
+        InputRequired()
+    ]
+  )
+
+  submit = SubmitField(&quot;Save section&quot;)
+
+  def validate_section(form, field):
+    try:
+      json.loads(field.data)
+    except:
+      raise ValidationError(&quot;Use a valid JSON please&quot;)
+</code></pre>
+<p>Using Python&#39;s libraries in Replit&#39;s projects is straightforward—just add them to the <code>pyproject.toml</code> file. Replit will update the environment and install all the required dependencies:</p>
+<pre><code class="language-toml">[tool.poetry]
+name = &quot;repl_python3_Flask&quot;
+version = &quot;0.1.0&quot;
+description = &quot;Dynamic forms&quot;
+authors = [&quot;Nicolas Bohorquez &lt;nicolas.bohorquez@alephsa.com&gt;&quot;]
+
+[tool.poetry.dependencies]
+python = &quot;^3.8&quot;
+Flask = &quot;^2.0.2&quot;
+WTForms = &quot;^3.0.1&quot;
+Flask-WTF = &quot;^1.0.0&quot;
+replit = &quot;^3.2.4&quot;
+google-api-python-client = &quot;^2.34.0&quot;
+google-auth-httplib2 = &quot;^0.1.0&quot;
+google-auth-oauthlib = &quot;^0.4.6&quot;
+
+[tool.poetry.dev-dependencies]
+
+[build-system]
+requires = [&quot;poetry-core&gt;=1.0.0&quot;]
+build-backend = &quot;poetry.core.masonry.api&quot;
+</code></pre>
+<h3>Building the Controllers</h3>
+<p>The controllers layer will initialize the models with default values, persist the changes into the Replit&#39;s Database, and redirect or render the appropriate view in each case.</p>
+<p>To start, you’ll use the <a href="https://en.wikipedia.org/wiki/Create,_read,_update_and_delete">CRUD (create, read, update, and delete)</a> actions for the FormContainer. </p>
+<p>First, replace the original code in the <code>main.py</code> file with the following contents:</p>
+<pre><code class="language-python">import json
+import uuid
+from replit import db
+from gsheets import write_spread_sheet_data
+from forms import FormContainerForm, SectionForm
+from flask import Flask, render_template, flash, redirect, url_for, request
+from utils import db_init, dotdict, default_wf, default_sections, evaluate, hash_id, tabulate_answers, to_pretty_json
+
+db_init()
+app = Flask(&#39;app&#39;)
+app.secret_key = &#39;A-SUPER-SECRET-STRING&#39;
+
+@app.route(&quot;/&quot;, methods=[&quot;GET&quot;])
+def list():
+  forms = db[&quot;forms&quot;]
+  return render_template(&quot;list.html&quot;, forms = forms)
+
+@app.route(&quot;/add&quot;, methods=[&quot;GET&quot;])
+@app.route(&quot;/add/&lt;formName&gt;&quot;, methods=[&quot;GET&quot;, &quot;POST&quot;])
+def add(formName=None):
+  formData = FormContainerForm(request.form)
+  fName = &quot;newform&quot;
+  #new form
+  if request.method == &quot;GET&quot;:
+    formData.workflow.data = default_wf()
+  #edit existing form
+  if request.method == &quot;GET&quot; and formName is not None:
+    form = dotdict(db[&quot;forms&quot;][hash_id(formName)])
+    formData.workflow.data = form.workflow
+    formData.spreadsheet_id.data = form.spreadsheet_id
+    formData.name.data = form.name
+    fName = form.name
+  #saving form
+  if request.method == &quot;POST&quot; and formData.validate():
+    fName = formData.name.data
+    formId = hash_id(fName)
+    #edit only workflow, keep sections and answers
+    if formId in db[&quot;forms&quot;]:
+      form = dotdict(db[&quot;forms&quot;][formId])
+      form.workflow = json.dumps(json.loads(formData.workflow.data), indent=2)
+      form.spreadsheet_id = formData.spreadsheet_id.data
+      db[&quot;forms&quot;][formId] = form
+    #persist the new form
+    else:    
+      db[&quot;forms&quot;][formId] = {
+          &quot;name&quot;: fName
+          , &quot;spreadsheet_id&quot; : formData.spreadsheet_id.data
+          , &quot;workflow&quot;: formData.workflow.data
+          , &quot;sections&quot;: default_sections()
+          , &quot;answers&quot;: {}
+      }
+
+    flash(&quot;Form saved!&quot;)
+    return redirect(url_for(&#39;sections&#39;, formName=fName, form=formData))
+
+  return render_template(&quot;add.html&quot;, formName=fName, form=formData)
+
+@app.route(&#39;/delete/&lt;formName&gt;&#39;)
+def delete(formName):
+  del db[&quot;forms&quot;][hash_id(formName)]
+  flash(&quot;Form deleted!&quot;)
+  return redirect(url_for(&#39;list&#39;))
+</code></pre>
+<p>Several methods are defined:</p>
+<ul>
+<li>The <strong>list</strong> loads all the available forms from the database and renders the view. You can think of <a href="https://docs.replit.com/hosting/database-faq">Replit&#39;s database</a> as a persistent Python dictionary. More formally, it’s a key-value cloud storage with client interfaces for several programming languages, including <a href="https://www.javascript.com">JavaScript</a>, <a href="https://go.dev">Go</a>, and Python. </li>
+<li>The <strong>add</strong> method has three purposes: initialize new forms to be persisted with a default workflow and default sections; persist new forms; and update existing ones. It redirects to the sections CRUD view for new/edited forms or to the add view in case of the form initialization.</li>
+</ul>
+<blockquote>
+<p>Notice that the <em>add</em> method is mapped as a route with or without the <code>formName</code> argument, this will be used to understand if you need to initialize, add, or edit a <em>FormContainer</em>. </p>
+</blockquote>
+<ul>
+<li>The <strong>delete</strong> method requires a <code>formName argument</code> to delete it from the database. It includes a confirmation message before redirecting to the list action.</li>
+</ul>
+<p>Some complementary helper methods are imported from the utils and gsheets modules that haven’t been created yet. To fix this, create a <code>utils.py</code> file with the following contents:</p>
+<pre><code class="language-python">import json
+import hashlib
+import logging
+from replit import db
+
+logging.basicConfig(level=logging.DEBUG)
+logger = logging.getLogger(&quot;utils_logger&quot;)
+
+class dotdict(dict):
+    &quot;&quot;&quot;dot.notation access to dictionary attributes&quot;&quot;&quot;
+    __getattr__ = dict.get
+    __setattr__ = dict.__setitem__
+    __delattr__ = dict.__delitem__
+
+def db_init():
+  if &quot;forms&quot; not in db.keys():
+      db[&quot;forms&quot;] = {}
+
+def hash_id(id):
+  result = hashlib.md5(str(id).encode())
+  return result.hexdigest()
+
+def default_wf():
+  return json.dumps({
+    &quot;init&quot;:{
+      &quot;section&quot;:&quot;init&quot;
+      ,&quot;transitions&quot;:[
+        {
+          &quot;taskId&quot;: &quot;end&quot;
+          , &quot;condition&quot;: &quot;answer.name.lower() == &#39;None&#39;.lower()&quot;
+        }
+        , {
+          &quot;taskId&quot;: &quot;more&quot;
+          , &quot;condition&quot;: &quot;True&quot;
+        }
+      ]
+    }
+    , &quot;more&quot;:{
+      &quot;section&quot;:&quot;more&quot;
+      ,&quot;transitions&quot;:[
+        {
+          &quot;taskId&quot;: &quot;end&quot;
+          , &quot;condition&quot;: &quot;True&quot;
+        }
+      ]
+    }
+    , &quot;end&quot;:{
+      &quot;section&quot;:&quot;end&quot;
+    }
+  }
+, indent=2)
+
+def default_sections():
+  return json.dumps({
+    &quot;init&quot;:
+    [
+      {
+        &quot;type&quot;: &quot;paragraph&quot;,
+        &quot;subtype&quot;: &quot;p&quot;,
+        &quot;label&quot;: &quot;Hello, this is a simple form&quot;
+      },
+      {
+        &quot;type&quot;: &quot;text&quot;,
+        &quot;required&quot;: True,
+        &quot;label&quot;: &quot;Name&quot;,
+        &quot;placeholder&quot;: &quot;What is your name?&quot;,
+        &quot;className&quot;: &quot;form-control&quot;,
+        &quot;name&quot;: &quot;name&quot;,
+        &quot;subtype&quot;: &quot;text&quot;
+      },
+      {
+        &quot;type&quot;: &quot;button&quot;
+        ,&quot;label&quot;: &quot;Submit&quot;
+        ,&quot;subtype&quot;: &quot;submit&quot;
+        ,&quot;name&quot;: &quot;submit&quot;
+      }
+    ],
+    &quot;more&quot;:
+    [
+      {
+        &quot;type&quot;: &quot;paragraph&quot;,
+        &quot;subtype&quot;: &quot;p&quot;,
+        &quot;label&quot;: &quot;Tell us a little bit more, please&quot;
+      },
+      {
+        &quot;type&quot;: &quot;text&quot;,
+        &quot;required&quot;: True,
+        &quot;label&quot;: &quot;Surname&quot;,
+        &quot;placeholder&quot;: &quot;What is your surname?&quot;,
+        &quot;className&quot;: &quot;form-control&quot;,
+        &quot;name&quot;: &quot;surename&quot;,
+        &quot;subtype&quot;: &quot;text&quot;
+      },
+      {
+        &quot;type&quot;: &quot;button&quot;
+        ,&quot;label&quot;: &quot;Submit&quot;
+        ,&quot;subtype&quot;: &quot;submit&quot;
+        ,&quot;name&quot;: &quot;submit&quot;
+      }
+    ],
+    &quot;end&quot;:
+      [
+        {
+        &quot;type&quot;: &quot;paragraph&quot;
+        ,&quot;subtype&quot;: &quot;p&quot;
+        ,&quot;label&quot;: &quot;Thank you&quot;
+        }
+      ]
+    }
+, indent=2)
+
+def evaluate( wf, step, vals):
+  answer = dotdict(vals)
+
+  if step != &quot;&quot; and &quot;transitions&quot; in wf[step]:
+    for t in wf[step][&quot;transitions&quot;]:
+      try:
+        if eval(t[&quot;condition&quot;],{&#39;__builtins__&#39;:{}, &quot;answer&quot;:answer}) == True:
+          return str(t[&quot;taskId&quot;])
+      except Exception as e:
+        print(&#39;Error evaluating condition: %s&#39; % t[&quot;condition&quot;])
+        logger.error(e)
+
+  return &#39;init&#39;    
+
+def tabulate_answers(vals):
+  kDict = {&quot;id&quot;:None}
+  answers = []
+  for id in vals:
+    ko = sorted(vals[id].keys())
+    for k in ko:
+      kDict[k] = None
+
+  for id in vals:
+    currAnswers = []
+    for k in kDict.keys():
+      v = id
+      if k != &quot;id&quot;:
+        v = vals[id][k] if k in vals[id] else &quot;&quot;
+      currAnswers.append(str(v))
+    answers.append(currAnswers)
+  return kDict.keys(), answers
+
+def to_pretty_json(value):
+  return json.dumps(value, sort_keys=True, indent=4, separators=(&#39;,&#39;, &#39;: &#39;))
+</code></pre>
+<p>The <code>utils.py</code> file includes several small chunks of code that are used across the entire project:</p>
+<ul>
+<li><code>dotdict</code> is a wrapper class that helps you use dot notation to access elements in a dictionary (<code>dict.key</code>).</li>
+<li>The <code>db_init()</code> method creates an empty collection with the key <em>forms</em> into the Replit’s database if it doesn’t exist yet.</li>
+<li>The <code>hash_id(id)</code> method uses MD5 hashing algorithm to create some sort of identifier of instances inside the Replit’s database. </li>
+<li><code>evaluate(wf, step, vals)</code> executes the transition logic of the FormContainer sections (more detail on this method later).</li>
+<li><code>tabulate_answers(vals)</code> transforms the answers collection of dictionaries into a list of strings containing the labels of the form’s questions, and a list of answers to those questions. This will be helpful for rendering and exporting the final user&#39;s answers collected in each form.</li>
+</ul>
+<p>The most interesting part of this project is the workflow/sections definition.</p>
+<p>The <code>utils.py</code> file contains two helper methods: <code>default_wf</code> and <code>default_sectons</code>. The workflow consists of a set of tasks in a dictionary with the name of the step as key. Each step contains a section, which will be the actual view that’s rendered, and some transitions, which are the possible next steps in the flow. Each transition contains a <code>taskId</code> that is the expected next step, and a condition that will be evaluated dynamically to select the proper transition. </p>
+<p>The flow requires an <code>init</code> step and an <code>end</code> step without transitions to stop the flow. Similarly the <code>default_sections</code> method creates a JSON object that contains sections named in the same vein as the workflow&#39;s steps.</p>
+<p>Each section is a JSON array of fields. The schema for the definition is borrowed from the <a href="https://formbuilder.online/">FormBuilder</a> project, since it’s the tool that will render the sections in the browser. </p>
+<p>Also, you need to add a <code>gsheets.py</code> file that contains the necessary code to authenticate and access the <a href="https://developers.google.com/sheets/api">Google Spreadsheet API</a>. For now, add the following code to the file:</p>
+<pre><code class="language-python">import os
+import json
+from google.oauth2 import service_account
+from googleapiclient.discovery import build
+from googleapiclient.errors import HttpError
+
+# If modifying these scopes, update the secret google-json-key.
+SCOPES = [&#39;https://www.googleapis.com/auth/spreadsheets&#39;]
+
+def load_user_secrets_from_local():
+  creds_json = json.loads(os.environ[&#39;google-json-key&#39;])
+  credentials = service_account.Credentials.from_service_account_info(
+        creds_json, scopes=SCOPES)
+  return credentials
+
+def write_spread_sheet_data(spreadsheet_id, headers, table):
+  creds = load_user_secrets_from_local()
+  table.insert(0,[str(h) for h in headers])
+  try:
+    service = build(&#39;sheets&#39;, &#39;v4&#39;, credentials=creds)
+    body = {
+        &#39;values&#39;: table
+    }
+    result = service.spreadsheets().values().update(
+        spreadsheetId=spreadsheet_id, range=&quot;A1&quot;,
+        valueInputOption=&#39;USER_ENTERED&#39;, body=body).execute()
+    return result.get(&#39;updatedCells&#39;)
+  except HttpError as err:
+    print(err)
+</code></pre>
+<p>This file only contains two methods: one to authenticate (<code>load_user_secrets_from_local</code>) and another (<code>write_spread_sheet_data</code>) to write the collected answers of a form into a spreadsheet (more detail on this later).</p>
+<p>For now, let’s complete the CRUD logic by adding the necessary code to manage the sections of a FormContainer.</p>
+<p>Add the following code to the <code>main.py</code> file. This includes the CRUD implementation for the SectionForm model that is very similar to the previous one: a method to list all the sections in a form (<strong>sections</strong>), one to initialize/add/edit a single section (<strong>section</strong>), and one to remove a section from the FormContainer:</p>
+<pre><code class="language-python">@app.route(&quot;/sections/&lt;formName&gt;&quot;, methods=[&quot;GET&quot;, &quot;POST&quot;])
+def sections(formName):
+  form = dotdict(db[&quot;forms&quot;][hash_id(formName)])
+  sections = json.loads(form.sections)
+  newSectionId = str(uuid.uuid4())
+  return render_template(&quot;sections.html&quot;, form = form, sections=sections, newSectionId=newSectionId)
+
+@app.route(&quot;/section/&lt;formName&gt;&quot;, methods=[&quot;GET&quot;])
+@app.route(&quot;/section/&lt;formName&gt;/&lt;sectionId&gt;&quot;, methods=[&quot;GET&quot;,&quot;POST&quot;])
+def section(formName, sectionId=None):
+  form = dotdict(db[&quot;forms&quot;][hash_id(formName)])
+  formData = SectionForm(request.form)
+  sections = json.loads(form[&quot;sections&quot;])
+  section = sections[sectionId] if sectionId in sections else json.loads(&quot;[{}]&quot;)
+  if request.method == &quot;GET&quot;:
+    formData.sectionId.data = sectionId
+    formData.section.data = json.dumps(section)
+
+  if request.method == &quot;POST&quot; and formData.validate():
+    sectionId = formData.sectionId.data
+    sections[sectionId] = json.loads(formData.section.data)
+    form[&quot;sections&quot;] = json.dumps(sections, indent=2)
+    db[&quot;forms&quot;][hash_id(formName)] = form
+    flash(&quot;Section saved!&quot;)
+    return redirect(url_for(&#39;sections&#39;, formName=formName))
+
+  return render_template(&quot;section.html&quot;, formName=formName, form = formData, section=section, sectionId=sectionId)
+
+@app.route(&quot;/remove/&lt;formName&gt;/&lt;section&gt;&quot;, methods=[&quot;GET&quot;, &quot;POST&quot;])
+def remove(formName, section):
+  form = dotdict(db[&quot;forms&quot;][hash_id(formName)])
+  sections = json.loads(form[&quot;sections&quot;])
+  del sections[section]
+  form[&quot;sections&quot;] = json.dumps(sections)
+  db[&quot;forms&quot;][hash_id(formName)] = form
+  
+  flash(&quot;Section removed!&quot;)
+  return redirect(url_for(&#39;sections&#39;, formName=formName))
+</code></pre>
+<p>The <code>section</code> method requires a <code>formName</code> argument (remember that sections are the details in the master-detail model), and can receive an optional one (<code>sectionId</code>) if you need to initialize, add, or edit a section in a form.</p>
+<h3>Building the Views</h3>
+<p>The views for the CRUD actions are simple <a href="https://jinja.palletsprojects.com/en/3.0.x/templates/">Jinja</a> templates composed of HTML and some render logic that creates a simple layout.</p>
+<p>To create the layout, create a new folder in Replit named <code>templates</code> and then add a file named <code>layout.html</code> with the following contents:</p>
+<pre><code class="language-html">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+    &lt;head&gt;
+        &lt;title&gt;Dynaforms v1&lt;/title&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            &lt;ul class=flashes&gt;
+            {% for message in messages %}
+            &lt;li&gt;{{ message }}&lt;/li&gt;
+            {% endfor %}
+            &lt;/ul&gt;
+        {% endif %}
+    {% endwith %}
+
+    &lt;ul&gt;
+        &lt;li&gt;&lt;a href=&quot;/&quot;&gt;View forms&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href=&quot;/add&quot;&gt;Create form&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+
+
+    {% block body %}{% endblock %}
+    &lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+<p>The layout contains three common elements: </p>
+<ul>
+<li>a header with all the messages included to confirm operations</li>
+<li>two links to the basic actions of the application (list all the available forms and create a new form)</li>
+<li>the render of the body of the derived views</li>
+</ul>
+<p>Now that the layout is defined, create a new <code>list.html</code> file. This will be the view that shows the available forms with the following code:</p>
+<pre><code class="language-html">{% extends &quot;layout.html&quot; %}
+{% block body %}
+    &lt;h1&gt;DynaForms&lt;/h1&gt;
+    &lt;ul&gt;
+    {% for id, f in forms.items()|sort(attribute=&#39;1.name&#39;) %}
+        &lt;li&gt;&lt;a href=&quot;/section/{{ f.name }}&quot;&gt;{{ f.name }} &lt;/a&gt; | &lt;a href=&quot;/sections/{{ f.name }}&quot;&gt;Sections&lt;/a&gt; | &lt;a href=&quot;/execute/{{ f.name }}&quot;&gt;Respond&lt;/a&gt; | &lt;a href=&quot;/add/{{ f.name }}&quot;&gt;Edit&lt;/a&gt;  | &lt;a href=&quot;/delete/{{ f.name }}&quot;&gt;Delete&lt;/a&gt; 
+        {% if f[&quot;answers&quot;].keys()|length &gt; 0 %}
+        | &lt;a href=&quot;/answers/{{ f.name }}&quot;&gt;View answers&lt;/a&gt; 
+        {% endif %}
+        &lt;/li&gt;
+    {% endfor %}
+    &lt;/ul&gt;
+
+{% endblock %}|
+</code></pre>
+<p>This view extends the previously created <code>layout</code> and adds a body that iterates over the forms dictionary and renders the name of the form and some useful links to other actions. </p>
+<p>Once the list view is done, continue with the add/edit view for the FormContainer. This requires you to render an HTML form that captures the name of the FormContainer, the associated Google Spreadsheet ID, and the workflow definition.</p>
+<p>Before you create the view, it’s helpful to render the FormContainer form by adding a new <code>macros.html</code> file with the this code:</p>
+<pre><code class="language-html">{% macro render_field(field) %}
+  &lt;dt&gt;{{ field.label }}
+  &lt;dd&gt;{{ field(**kwargs)|safe }}
+  {% if field.errors %}
+    &lt;ul class=errors&gt;
+    {% for error in field.errors %}
+      &lt;li&gt;{{ error }}&lt;/li&gt;
+    {% endfor %}
+    &lt;/ul&gt;
+  {% endif %}
+  &lt;/dd&gt;
+{% endmacro %}
+</code></pre>
+<p>Create an <code>add.html</code> file to leverage the power of WTForm to render the add/edit view of the <code>add</code> action:</p>
+<pre><code class="language-html">{% extends &quot;layout.html&quot; %}
+{% block body %}
+    {% from &quot;_macros.html&quot; import render_field %}
+    &lt;h1&gt;Create Form&lt;/h1&gt;
+    &lt;form action=&quot;/add/{{formName}}&quot; method=&quot;post&quot;&gt;
+      &lt;dl&gt;
+        &lt;dt&gt;Title:
+        &lt;dd&gt;{{ form.name }}
+        &lt;dt&gt;Workflow:
+        &lt;dd&gt;{{ form.workflow(cols=&quot;50&quot;, rows=&quot;20&quot;)|safe }}
+      &lt;/dl&gt;
+        
+      {{ form.submit }}
+    &lt;/form&gt;
+{% endblock %}
+</code></pre>
+<p>This template creates a static form that captures the name of the FormContainer and its workflow. To show the sections of a single FormContainer, add a <code>sections.html</code> view—this will iterate over each section in a form and uses JavaScript to highlight the JSON definition of the section:</p>
+<pre><code class="language-html">{% extends &quot;layout.html&quot; %}
+{% block body %}
+    &lt;h1&gt;{{form.name}} - Form sections&lt;/h1&gt;
+    &lt;div&gt;&lt;a href=&quot;/section/{{form.name}}/{{newSectionId}}&quot;&gt;Add section&lt;/a&gt;&lt;/div&gt;
+    &lt;table&gt;
+     &lt;thead&gt;
+        &lt;tr&gt;
+          &lt;th&gt;Id&lt;/th&gt;&lt;th&gt;JSON definition&lt;/th&gt;&lt;th&gt;Actions&lt;/th&gt;
+        &lt;/tr&gt;
+     &lt;/thead&gt;
+     &lt;tbody&gt;
+       {% for k,v in sections.items() %}
+        &lt;tr&gt;
+          &lt;td&gt;{{k}}&lt;/td&gt;
+          &lt;td&gt;
+            &lt;pre&gt;
+              &lt;code class=&quot;language-json&quot;&gt;{{v|tojson_pretty|safe}}&lt;/code&gt;
+            &lt;/pre&gt;
+          &lt;/td&gt;
+          &lt;td&gt;
+            &lt;a href=&quot;/section/{{form.name}}/{{k}}&quot;&gt;Edit&lt;/a&gt; | 
+            &lt;a href=&quot;/remove/{{form.name}}/{{k}}&quot;&gt;Delete&lt;/a&gt; 
+          &lt;/td&gt;
+        &lt;/tr&gt;
+       {% endfor %}
+     &lt;/tbody&gt;
+    &lt;/table&gt;
+    &lt;link rel=&quot;stylesheet&quot; href=&quot;https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/styles/default.min.css&quot;&gt;
+&lt;script src=&quot;https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/highlight.min.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/languages/json.min.js&quot;&gt;&lt;/script&gt;
+&lt;script&gt;hljs.highlightAll();&lt;/script&gt;
+{% endblock %}
+</code></pre>
+<p>At this point, you can run the code using the big green button in the Replit’s IDE to test the first CRUD set of actions that manages the FormContainer lifecycle.</p>
+<h3>Dynamic Form Rendering</h3>
+<p>The previous sections created the structure needed to hold the forms, but now they need to be rendered to collect answers. To do this, you need execution logic that will evaluate the workflow defined and render the proper section.</p>
+<p>You can view the default workflow as a simple flowchart:</p>
+<p><img src="https://i.imgur.com/zcGHLNY.png" alt="Default workflow flowchart"></p>
+<p>The condition to show the <code>more</code> or the <code>end</code> section depends on the value of the <code>name</code> field. If it’s equal to the <code>none</code> string, then the <code>end</code> section will be rendered. Otherwise more details are collected using the <code>more</code> section. </p>
+<blockquote>
+<p>The condition uses the <a href="https://docs.python.org/3/library/stdtypes.html#str.lower">Python&#39;s String <code>lower()</code> method</a> method. You can use any of Python&#39;s methods as part of the condition definition. </p>
+</blockquote>
+<p>Previously you defined the method <code>evaluate( wf, step, vals)</code> in the  <code>utils.py</code> file. This is used to evaluate the conditions and return the next step to be rendered:</p>
+<pre><code class="language-python">def evaluate( wf, step, vals):
+  answer = dotdict(vals)
+
+  if step != &quot;&quot; and &quot;transitions&quot; in wf[step]:
+    for t in wf[step][&quot;transitions&quot;]:
+      try:
+        if eval(t[&quot;condition&quot;],{&#39;__builtins__&#39;:{}, &quot;answer&quot;:answer}) == True:
+          return str(t[&quot;taskId&quot;])
+      except Exception as e:
+        logger.error(&#39;Error evaluating condition: %s&#39; % t[&quot;condition&quot;])
+        logger.error(e)
+
+  return &#39;init&#39;    
+</code></pre>
+<p>To evaluate the condition of the workflow definition, the current step and the current values of the answers are crucial.</p>
+<p>The first step in any workflow is the one labeled as <code>init</code>. It’s the default returned value. Otherwise each transition is evaluated using Python&#39;s eval function. This function takes the condition defined and passes the current state of the answer dictionary as an object to be used in the evaluation.</p>
+<p>In this way, the condition <code>answer.name.lower() == &#39;None&#39;.lower()</code> takes the value of the <code>name</code> field in the current answer and compares it to a fixed value. When the first condition is evaluated as True, the method returns the step defined in the transition as the next step.</p>
+<p>This evaluation logic requires an action in the controller that will take the formName as an argument to initialize the workflow execution with a new answer. This action loads the proper section to be rendered in each step of the execution. </p>
+<p>In the <code>main.py</code> file the <code>execute</code> action is defined:</p>
+<pre><code class="language-python">@app.route(&#39;/execute/&lt;formName&gt;&#39;, methods=[&quot;GET&quot;, &quot;POST&quot;])
+def execute(formName):
+  vals = {}
+  currStep = &quot;&quot;
+  formId = hash_id(formName)
+  formData = dotdict(request.form)
+  form = dotdict(db[&quot;forms&quot;][formId])
+  #keys of the dynamic form that comes as part of the response but are not needed as part of the workflow evaluation
+  metaKeys = [&quot;formName&quot;, &quot;formResponseId&quot;, &quot;sectionName&quot;, &quot;submit&quot;]
+  formResponseId = formData.formResponseId if &quot;formResponseId&quot; in formData else str(uuid.uuid4())
+  currVals = db[&quot;forms&quot;][formId][&quot;answers&quot;][formResponseId] if formResponseId in db[&quot;forms&quot;][formId][&quot;answers&quot;] else vals
+  
+  if request.method == &quot;POST&quot;:
+    currStep = formData[&quot;sectionName&quot;]
+    vals = { k:v for (k,v) in formData.items() if k not in metaKeys}
+  
+  currVals.update( vals )  
+  #workflow&#39;s transition evaluation
+  currStep = evaluate( json.loads(form.workflow), currStep, currVals )
+  #persist the current answer values
+  db[&quot;forms&quot;][formId][&quot;answers&quot;][formResponseId] = currVals
+  #load the section to be rendered in the next step
+  section = [{k:val for (k,val) in v.items()} for v in json.loads(form.sections)[currStep]]
+
+  return render_template(&#39;navigate.html&#39;, formName=form.name, section=json.dumps(section),  sectionName=currStep, formResponseId=formResponseId)
+</code></pre>
+<p>The companion view <code>navigate.html</code> defines a static form that always goes to the same <code>execute</code> action. It includes hidden fields to pass the form definition and current step being rendered:</p>
+<pre><code class="language-html">{% extends &quot;layout.html&quot; %}
+{% block body %}
+    &lt;h1&gt;{{formName}} - {{sectionName}}&lt;/h1&gt;
+    &lt;section id=&quot;sectionName&quot;&gt;
+      &lt;div&gt;
+        &lt;form id=&quot;form&quot; action=&quot;/execute/{{formName}}&quot; method=&quot;POST&quot;&gt;
+          &lt;input type=&quot;hidden&quot; name=&quot;formName&quot; value=&quot;{{formName}}&quot;/&gt;
+          &lt;input type=&quot;hidden&quot; name=&quot;sectionName&quot; value=&quot;{{sectionName}}&quot;/&gt;
+          &lt;input type=&quot;hidden&quot; name=&quot;formResponseId&quot; value=&quot;{{formResponseId}}&quot;/&gt;
+          &lt;div id=&quot;formContainer&quot;&gt;&lt;/div&gt;
+        &lt;/form&gt;
+      &lt;/div&gt;
+      &lt;script src=&quot;https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js&quot;&gt;&lt;/script&gt;
+      &lt;script src=&quot;https://formbuilder.online/assets/js/form-render.min.js&quot;&gt;&lt;/script&gt;
+      &lt;script&gt;
+        jQuery($ =&gt; {
+          const escapeEl = document.createElement(&quot;textarea&quot;);
+          const formData = &#39;{{section|safe}}&#39;;
+          const addLineBreaks = html =&gt; html.replace(new RegExp(&quot;&gt;&lt;&quot;, &quot;g&quot;), &quot;&gt;\n&lt;&quot;);
+          // Grab markup and escape it
+          const $markup = $(&quot;&lt;div/&gt;&quot;);
+          $markup.formRender({ formData });
+          
+          // set &lt; code &gt; innerText with escaped markup
+          $(&quot;#formContainer&quot;).append( addLineBreaks($markup.formRender(&quot;html&quot;)) );
+        });
+      &lt;/script&gt;
+    &lt;/section&gt;
+{% endblock %}
+</code></pre>
+<p>It also uses the <a href="https://jquery.com">jQuery&#39;s</a> form-render plugin to dynamically add the HTMLl fields defined in the section of the current step. Once you click the <code>respond</code> link for each form, the execution starts with a new answer. </p>
+<p>You can add a simple view of the form&#39;s answers by adding the <code>answers</code> action to the <code>main.py</code> file. Rely on the logic to transform the collection of dictionaries that represents the answers in the Replit&#39;s database into a simple tabular form of the previously defined <code>tabulate answers</code> method:</p>
+<pre><code class="language-python">@app.route(&#39;/answers/&lt;formName&gt;&#39;)
+def answers(formName):
+    form = db[&quot;forms&quot;][hash_id(formName)]
+    headers, table = tabulate_answers(form[&quot;answers&quot;])
+
+    return render_template(&#39;answers.html&#39;,
+                           form=form,
+                           keys=headers,
+                           answers=table)
+</code></pre>
+<p>The <code>answers.html</code> view renders the table with all the collected answers for the current FormContainer:</p>
+<pre><code class="language-html">{% extends &quot;layout.html&quot; %}
+{% block body %}
+    &lt;h1&gt;{{form.name}} - Answers&lt;/h1&gt;
+    &lt;table&gt;
+      &lt;thead&gt;
+        &lt;tr&gt;
+      {% for k in keys %}
+          &lt;th&gt;&lt;b&gt;{{k}}&lt;/b&gt;&lt;/th&gt;
+      {% endfor %}
+        &lt;/tr&gt;
+      &lt;/thead&gt;
+      {% for r in answers %}
+          &lt;tr&gt;
+            {% for c in r %}
+            &lt;td&gt;{{c}}&lt;/td&gt;
+            {% endfor %}
+          &lt;/tr&gt;
+      {% endfor %}
+    &lt;/ul&gt;
+
+{% endblock %}
+</code></pre>
+<p><img src="https://i.imgur.com/AjYLjiM.png" alt="Dynamic answers collected"></p>
+<p>Notice that one execution took the direct ending path (the <code>surname</code> field was not collected), and the other one followed the entire workflow.</p>
+<h3>Export to Google Spreadsheets</h3>
+<p>Now that you can define dynamic forms and collect answers, you can share them using Google Spreadsheets. To do this, create a new project in the <a href="https://console.cloud.google.com">Google Cloud Platform</a> using the console.</p>
+<p><img src="https://i.imgur.com/CHgmD7E.png" alt="Google Cloud project"> </p>
+<p>Activate the Google Sheet API for the project using the Google Console API <a href="https://console.cloud.google.com/apis/library">Library</a>.</p>
+<p><img src="https://i.imgur.com/J7IDZMU.png" alt="Google project add API"></p>
+<p>After activation, you need a <a href="https://developers.google.com/identity/protocols/oauth2/service-account#python">service account</a> to access the spreadsheet. You can add a new service account using the <a href="https://console.cloud.google.com/iam-admin/serviceaccounts">IAM &amp; Admin management</a> Google Console.</p>
+<p><img src="https://i.imgur.com/1poulCT.png" alt="Create a service account"></p>
+<p>Remember to grant the editor role to the service account in order to be able to modify the spreadsheet associated with the FormContainer.</p>
+<p><img src="https://i.imgur.com/V4y8hhR.png" alt="Add the editor role"></p>
+<p>Grant user access to the service account.</p>
+<p><img src="https://i.imgur.com/pkFGr28.png" alt="Grant user access"></p>
+<p>Finally, you need a JSON file key to identify the service account through the API. Generate these through the KEYS tab of the service account by clicking <strong>ADD KEY</strong>.</p>
+<p><img src="https://i.imgur.com/lqnMkzh.png" alt="Add new key"></p>
+<p>Copy the contents of the JSON file and return to the Replit IDE. Click <strong>Lock</strong> to create a new Secret.</p>
+<p><img src="https://i.imgur.com/3Q2UVjr.png" alt="Secrets or env vars"></p>
+<p>Name the Secret <code>google-json-key</code> and copy the entire contents of the JSON key file previously created.</p>
+<p><img src="https://i.imgur.com/kxiCHMo.png" alt="Google secret key env var"></p>
+<p>This is the environment variable read in the <code>load_user_secrets_from_local</code> method of the <code>gsheets.py</code> defined before. Now the <code>write_spread_sheet_data</code> can send an authenticated request to the API to update the spreadsheet with all the answers collected from a form. </p>
+<p>Finally, add the following code to the <code>main.py</code> file:</p>
+<pre><code class="language-python">@app.route(&#39;/export/&lt;formName&gt;&#39;)
+def export_gs(formName):
+    form = db[&quot;forms&quot;][hash_id(formName)]
+    headers, table = tabulate_answers(form[&quot;answers&quot;])
+    cells = write_spread_sheet_data(form[&quot;spreadsheet_id&quot;], headers, table)
+    flash(&quot;%s Answers of %s exported to google sheets&quot; % (formName, cells))
+    return redirect(url_for(&#39;list&#39;))
+</code></pre>
+<p>This method takes the tabulated answers and writes them to the spreadsheet defined as an attribute of the current FormContainer. As feedback, it will render the number of answers written into the spreadsheet.</p>
+<p>But before you can do that, you must share the spreadsheet with the user of the service account created (you can find the email at the <code>client_email</code> key of the JSON file generated).</p>
+<p><img src="https://i.imgur.com/W37YjEA.png" alt="Shared spreadsheet"></p>
+<h2>Going Further</h2>
+<p>You can improve this schema of dynamic form rendering in several ways. Consider the following suggestions using Replit&#39;s environment:</p>
+<ul>
+<li>Add an authentication/authorization schema based on the current user&#39;s profile, a simple matter with Replit&#39;s <a href="https://replit-py.readthedocs.io/en/latest/api.html#replit.web.app.ReplitAuthContext">ReplitAuthContext</a>. A working example of how to use it is available on the <a href="https://docs.replit.com/tutorials/28-technical-challenge-site">Technical Challenge Website</a>.</li>
+<li>It’s <a href="https://nedbatchelder.com/blog/201206/eval_really_is_dangerous.html">dangerous to use <code>eval</code> to evaluate the transition&#39;s conditions</a>. The JSON schema used to define the workflow is fragile. Explore the possibility of replacing it with a more industry-standard workflow like the
+<a href="https://spiffworkflow.readthedocs.io/en/latest/">BPMN Specification (Business Process Model and Notation)</a>.</li>
+<li>The SectionForm editor could use the jQuery&#39;s <a href="https://formbuilder.online/"><em>form-builder</em></a> plugin to allow end users to create their sections following the <a href="https://en.wikipedia.org/wiki/WYSIWYG">WYSIWYG paradigm</a>.</li>
+<li>Extend the solution to include dynamic CSS style definitions for the section&#39;s rendering view. This will make your forms more aesthetically pleasing and user-friendly. They can also be improved to respond and render properly on mobile devices.</li>
+<li>Add a method to export the collected answers as a CSV file or another format to be used in a spreadsheet, like <a href="LibreOffice">LibreOffice</a>.</li>
+</ul>
+<h2>Conclusion</h2>
+<p>Using <a href="https://replit.com/">Replit&#39;s</a> platform makes it easy to create a simple MVC web application. With the code editor, file manager, and Replit&#39;s key-value database, you can create CRUD interfaces and a dynamic yet simple evaluation engine. </p>
+<p>Use or fork the <a href="https://replit.com/@NicolasBohorqu1/Dynaform?v=1">repl from this tutorial</a> and continue to practice setting up simple form websites that are more customizable than Google Forms.</p>

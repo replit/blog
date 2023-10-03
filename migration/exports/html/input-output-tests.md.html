@@ -1,0 +1,36 @@
+<p>Today, a highly requested feature has been released: <strong>Input/Output testing &amp; autograding</strong>.  The Input/Output Tests pane is embeded within all new and existing Teams for Education projects.</p>
+<img src="https://cms.repl.it/assets/input-output-tests.png" style="width: 400px" alt="input/output tests">
+
+<p>This pane contains tools designed to simplify testing code. Instead of manually entering typing input and checking output for every submission, the autograder allows you to define and automate testing. </p>
+<h2>How do I use it?</h2>
+<p>Input/Output tests is only available for projects created within the <a href="https://repl.it/teams">Teams for Education</a> product. This feature is available on all projects - new and existing. </p>
+<p>Click on the <img src="https://cms.repl.it/assets/input-output-tests-checkmark.png" alt="checkmark" style="width: 30px; margin: 0; display: inline-block; vertical-align: middle;"> icon within the workspace sidebar nav to reveal the Input/Output tests pane.</p>
+<p>Click on the <img src="https://cms.repl.it/assets/input-output-tests-create-test.png" alt="create test button" style="width: 100px; margin: 0; display: inline-block; vertical-align: middle;"> button to reveal a form with the following fields:</p>
+<img src="https://cms.repl.it/assets/input-output-tests-create.png" alt="create test form" style="width:400px">
+
+<ul>
+<li><code>Test name</code> - This is the name of the test, which is for you and your students to identify it. </li>
+<li><code>Input</code> (optional) - This is where you put in the input for your test. </li>
+<li><code>Expected output</code> - This is the output which the program is expected to have.</li>
+<li><code>Type</code> (default: <code>match</code>) - This is how we represent how we compare the actual output of the script with the expected output.<ul>
+<li><code>match</code> - The test passes if the expected output is in (or equal to) the actual output.  The JavaScript equivalent is <code>actualOutput.includes(expectedOutput)</code>. </li>
+<li><code>exact</code> - The test passes if the expected output is equal to the actual output. (though, we allow a trailing newline). The equivalent to this in JavaScript is <code>expectedOutput === actualOutput || expectedOutput + &#39;\n&#39; === actualOutput</code>.</li>
+<li><code>regex</code> - The test passes if the test matches the expectedOutput compiled as a regex. This is equivalent to <code>actualOutput.match(expectedOutput)</code>.</li>
+</ul>
+</li>
+</ul>
+<p>If you don&#39;t want to be lenient of an extra newline and have a truly exact match with the expectedOutput and actualOutput, you can use the <code>regex</code> with a <code>^</code> at the start and <code>$</code> at the end. Keep in mind though, that you&#39;ll have to escape other regex characters.</p>
+<p>Tests cases can be added, edited, and deleted at any time - even after the project has been published. This added flexibility allows you to get started with testing right away. </p>
+<p>If a test fails, you can view the results by clicking <img src="https://cms.repl.it/assets/input-output-tests-results-btn.png" alt="results button" style="width: 70px; margin: 0; display: inline-block; vertical-align: middle;"> that appear on each test case:</p>
+<p><img src="https://cms.repl.it/assets/input-output-tests-failed.png" 
+alt="input output test failed" style="width:400px"></p>
+<h2>What if I want to add tests to a pre-existing project?</h2>
+<p>All changes applied to Input/Output tests within a project will be applied to the submissions automatically. Students will not need to refork to the original project to use updated test cases from their instructors. </p>
+<h2>Migrating from Repl.it Classroom</h2>
+<p>Input/Ouput tests created within Repl.it Classroom assignments can now be migrated to Teams for Education using the <a href="https://repl.it/classroom-migration">Classroom Migration Tool</a>. </p>
+<p>If you migrated your Classroom since 12/11/2020, you&#39;ll see your input/output tests in your new Team. If you migrated your Classroom before then, you&#39;ll be able to migrate your Classroom again.</p>
+<h2>Giving Feedback Goes a Long Way</h2>
+<p>Teachers continue to express their enthusiasm for multiplayer Repls, annotations, and group projects. We will continue to build on these new platform features to provide a seamless collaborative experience for project based learning. </p>
+<p>Are you dreaming of Repl.it features to make you a superhero in your classroom? We want to hear about it! Contact <a href="mailto:derrick@repl.it">Derrick McMillen</a> directly via email. You can also leave feedback for us <a href="https://repl.it/feedback/p/teams-for-education-autograder-inputoutput-tests">via Canny</a>.</p>
+<p><img src="https://repl.art/multi2.png" alt="replbot"></p>
+<p>Learn more about <em>Teams for Education</em> in our <a href="https://docs.repl.it/Teams/Projects">documentation</a>.</p>

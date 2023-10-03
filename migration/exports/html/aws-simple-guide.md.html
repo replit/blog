@@ -1,0 +1,153 @@
+<h2>Or, what I wish you I knew before building Repl.it&#39;s code execution service</h2>
+<p><img src="https://i.imgur.com/k013j1R.png" alt="aws"></p>
+<blockquote class="twitter-tweet" data-lang="en"><p lang="en" dir="ltr">new drinking game &quot;name that AWS service
+logo&quot;</p>&mdash; TJ Holowaychuk (@tjholowaychuk) <a href="https://twitter.com/tjholowaychuk/status/712445764878733312">March 23, 2016</a></blockquote>
+<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+<p>I, by no means, identify as a devops or even a backend engineer. Most of my
+professional experience has been equally split between frontend/product and
+developer tooling. I also primarily learn by doing and bias towards simplicity
+and MVPs -- almost to a fault. So when I approached building a service on AWS
+I took a very simple path and increased complexity as the service scaled
+up. Here are all the steps that I went through before getting to something that
+I&#39;m not totally ashamed of.</p>
+<h2>eval.repl.it</h2>
+<p><a href="https://repl.it">Repl.it</a> is a simple yet powerful in-browser development
+environment. Initially we ran only languages that could be compiled to JS and
+run in the browser. However, as we added more features -- such as filesystem
+access -- and wanted to add more
+languages we needed to migrate to a server-side solution. I wrote the service in
+Go, Docker, and multiple other languages responsible for evaluating code in
+their respective environment.</p>
+<p>It&#39;s a tricky service to build, secure, scale, and monitor, however, this is not
+what this post is about. It can easily apply to most other web services.</p>
+<h2>ssh, checkout, and start</h2>
+<p>EC2 instances are <a href="https://en.wikipedia.org/wiki/Virtual_private_server">virtual private
+servers</a> (which is the
+fundamental building blocks for cloud computing). So I booted one up
+(relatively straightforward), ssh&#39;d into it, git cloned my repo, added my service
+to <a href="http://upstart.ubuntu.com/getting-started.html">Ubuntu upstart</a> and called
+it a day. A few days after we launched, the service went down from an
+OutOfMemoryError. After using larger and larger instances (adding CPU, Memory,
+disk space, i.e. vertical scaling)
+the service kept getting more popular and having one instance meant a single
+point of failure.</p>
+<h2>Horizontal scaling</h2>
+<p>To avoid a single point failure and since there are limits to how much vertical
+scaling we can do, we can start thinking about adding more machines.</p>
+<p>(However, before jumping into horizontal scaling you need to externalize any in-memory
+state into a shared resource like Redis).</p>
+<p>Luckily, another great tool in the EC2 toolbox is
+<a href="https://github.com/open-guides/og-aws#amis">AMIs</a>. AMIs are immutable images
+used to launch pre-configured EC2 instances. After configuring and deploying code
+to your EC2 instance you can create an image from it. Afterwards, you can launch
+as many instances with that image as you want.</p>
+<p>But now something needs to do the routing to the different instances. For that,
+we can use AWS&#39;s Elastic Load Balancer. It&#39;s really easy to create, configure
+and add instances to.</p>
+<h2>A quick note on websockets</h2>
+<p>ELB, up until recently, didn&#39;t have support for websockets. Now, you can launch
+what&#39;s called an <a href="https://aws.amazon.com/elasticloadbalancing/applicationloadbalancer/">Application Load
+Balancer</a>
+which has first-class support for Websockets. For classic ELB you&#39;re stuck with
+using TCP which has multiple quirks with the most pressing issue you might
+run into is that it does round-robin routing. That means that it will distribute
+connections to the backends by cycling deterministically between them. Since
+websockets are long-running connections it&#39;s only a matter of time
+before you have one instance carrying a much bigger load while
+others are starving. For this I had to build all sorts of bells and whistles
+but I&#39;ll spare the details on -- just try to use the new thing (I haven&#39;t tried it yet).</p>
+<h2>Failing at scale</h2>
+<p>Luckily for our product, our company and the people we serve we
+continued to grow. Unlucky for me, founder, CEO, engineer, and now Devops, at scale things
+starts to fail in unexpected ways. For example, hardware might fail and your
+instance can become unreachable. To add insult to injury, Amazon will send you an email that
+sounds like an obituary &quot;Amazon EC2 Instance scheduled for retirement&quot;.</p>
+<p>Going in, launching and adding instances to the load-balancer proved to be
+too time consuming (also meant that I&#39;m always on-call, although that&#39;s
+generally a problem when you&#39;re starting up).</p>
+<h2>Automation, yay!</h2>
+<p>I take it that a corner-stone of Devops is automation. There is an entire
+industry of tools that simplifies provisioning and deploying new
+machines. However, I decided to stick within the confines of point-and-click AWS since it worked
+well thus far. But this was the hardest step to figure out. Essentially if you want
+to automate scaling and deployment you need to learn the following things
+and the inter-play between them:</p>
+<ol>
+<li>Codedeploy: a service that automates checking out a git revision of your code
+into an EC2 instance</li>
+<li>EC2 Launch Configuration: lets you create configuration (size, image etc) of
+EC2 instances that you want to
+launch</li>
+<li>EC2 AutoScaling group: lets describe how many instances you want to launch
+and deploy and the policies used to scale up or scale down.</li>
+</ol>
+<p>After some research I figured out that I needed all those things and what they
+do. I first created the launch configuration with my AMI id and the configuration
+that I used to put in manually every time I launched an EC2 instance. Then, I
+created the AutoScaling group on top of the launch configuration. Finally, I
+signed up for Codedeploy (it&#39;s not part of EC2) and had it linked to the
+AutoScaling group.</p>
+<p>Now every time a new instance is launched Codedeploy will
+checkout your code from Github (or S3) and place it in a predefined path. It
+also allows you to define lifecycle hooks that you can use to shutdown your
+service, do any cleanups, installation or what have you before starting it back
+up again. Here is a flowchart from the AWS docs on how Codedeploy works with AutoScaling.</p>
+<p><img src="https://dmhnzl5mp9mj6.cloudfront.net/application-management_awsblog/images/AS%20CD%20flowchart.png" alt="flowchart"></p>
+<p>Finally, when you want to deploy a new revision of your code you put your commit sha into
+a Codedeploy form and it runs on your machines to update and re-launch your
+app. Feels too good to be true. And it kind of is.</p>
+<h2>Codedeploy woes</h2>
+<p>Codedeploy solves a real need for people like me who are not professional
+DevOps. I can have continuous-deployment-like service without building all
+the custom infrastructure companies usually have to build.</p>
+<p>However, there were some issues that made it unreliable and eventually unusable
+for me:</p>
+<ol>
+<li>Lack of visibility over the deployment. Errors are cryptic and logs are
+truncated. It seems like it should just stream the logs from the deployment
+immediately back to the website. But it doesn&#39;t.</li>
+<li>Lack of comprehensive deployment strategies. While deploying, your
+instance will be removed from the load-balancer rotation, so deploying on all
+machines at once meant a downtime. The only option to do zero-downtime is the
+&quot;one-by-one&quot; deployment, however, if only one machine fails to deploy, say a
+transient failure in the installation process, it will rollback the entire
+deploy.</li>
+<li>There are some bugs with the system that someone on the Codedeploy team told
+me are being fixed. But I had issues with race-conditions between the
+AutoScaling, load-balancer and Codedeploy. And issues with the deploys going on
+forever and timing out after an hour or so.</li>
+</ol>
+<p>This meant that deployment for us often took down the service and was very
+painful. On the flip-side the Codedeploy team is responsive and seems eager to
+fix those issues.</p>
+<h2>Taking the big step: Ansible</h2>
+<p>Now that I have a good understanding of EC2&#39;s building blocks, I&#39;m ready to move
+on to a real automation tool: Ansible. I first flirted with Ansible in my
+development environment. I use Vagrant and I needed a reproducible way to build development
+machines. As a React engineer when I took a look at Ansible, it immediately made
+sense. It&#39;s adding a layer of idempotency using a declarative language over a
+highly stateful and mutative process. Similar to how React sits on top of the
+DOM and makes it nice to talk to.</p>
+<p>Luckily, after some googling I found this <a href="https://atplanet.co/blog/ec2-auto-scaling-with-ansible.html">amazing step-by-step
+guide</a> to
+automating my EC2 setup (AMIs, load-balancer, AutoScaling).</p>
+<p>I spent the past few days writing yml files to describe the different my ec2
+configuration. It went really well, and now I can launch an entirely new cluster
+in 30 minutes. This makes it easy to deploy often and with confidence.</p>
+<h2>Conclusion</h2>
+<p>Now, instead of taking a day off to deploy and always be on the look-out for
+fires we can move a lot faster on features. Someone with experience may have
+skipped everything and jumped to the last step but:</p>
+<ol>
+<li>It would&#39;ve been an over-engineered solution given that nobody was using the
+service on day zero.</li>
+<li>It was a great opportunity to really internalize what every tool I added to
+my arsenal did.</li>
+</ol>
+<p>I&#39;d happily take a bit of beating instead of cargo-culting my way out of engineering
+problems.</p>
+<p>If you have experience with this sort of stuff then consider
+joining our <a href="https://repl.it/site/jobs">small team</a>, we&#39;re
+growing very fast and I&#39;m sure this is not the end of the scaling journey. Email
+us: <a href="mailto:jobs@repl.it">jobs@repl.it</a></p>

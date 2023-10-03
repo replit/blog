@@ -1,0 +1,148 @@
+<p>At Repl.it, we want to provide a top-tier online programming
+experience in as many languages as we can support. Today, we’ll show
+you just how we do that.</p>
+<p>Let&#39;s look at our 64th and newest language, <a href="https://en.wikipedia.org/wiki/Emacs_Lisp">Emacs
+Lisp</a>.</p>
+<p>Emacs Lisp is the <a href="https://en.wikipedia.org/wiki/Scripting_language">scripting
+language</a> used by
+the <a href="https://www.gnu.org/software/emacs/">Emacs</a> text editor. What
+makes Emacs Lisp on Repl.it interesting is that Emacs Lisp runs
+exclusively in the Emacs editor, which is a full, interactive
+application—not just a command-line program like Python or Ruby.</p>
+<p>You might be wondering how we handled this. In fact, our
+infrastructure was already generic enough to deal with a repl inside
+of Emacs inside of Repl.it!</p>
+<ul>
+<li><a href="https://repl.it/l/elisp">Check it out here!</a></li>
+</ul>
+<p>Let’s take a look at how this was implemented. You might be surprised
+at just how little code was required!</p>
+<h2>Polygott</h2>
+<p>The first stop in adding any new language is
+<a href="https://github.com/replit/polygott">Polygott</a>, our open-source
+project which contains instructions on how to install most of our
+supported languages.</p>
+<p>We use <a href="https://www.docker.com/">Docker</a> to run repls, so this project
+contains a Dockerfile which reads a configuration file for each
+language to find out what to install. The file for Emacs Lisp, minus
+the parts used for testing and other miscellany, <a href="https://github.com/replit/polygott/blob/75603d8168da4860ee3bbf74e42e6ad243c3fe86/languages/elisp.toml">looks like
+this</a>:</p>
+<pre><code class="language-toml">name = &quot;elisp&quot;
+packages = [
+  &quot;emacs26&quot;
+]
+aptRepos = [
+  &quot;ppa:kelleyk/emacs&quot;
+]
+</code></pre>
+<p>Emacs Lisp just needs the <a href="https://packages.ubuntu.com/bionic/emacs-nox">Ubuntu
+package</a> for Emacs—but
+since we want the latest version of Emacs (<a href="https://www.reddit.com/r/emacs/comments/c5df1x/adding_a_language_to_replit_emacs_lisp/es19ksb">as requested on
+Reddit</a>),
+we pull from <a href="https://launchpad.net/~kelleyk/+archive/ubuntu/emacs">Kevin Kelley&#39;s
+PPA</a> instead.
+There are other keys that can be used in the configuration files of
+Polygott for more complex installation and configuration procedures.</p>
+<p>That&#39;s all we really need to pull Emacs Lisp into our Docker images.
+Onwards!</p>
+<h2>Prybar</h2>
+<p>Next up is turning Emacs into a repl for Emacs Lisp. This is handled
+by another of our open-source projects,
+<a href="https://github.com/replit/prybar">Prybar</a>. The idea of Prybar,
+written in <a href="https://golang.org/">Go</a>, is to take every programming
+language that has a repl and expose them all behind the same
+command-line interface (with some shared basic options, like setting
+the interactive prompt).</p>
+<p>We used to implement language repls using a client-server protocol:
+the user would type in some input, we would send it to the repl
+server, and the server would send back the result and output. This
+required us to write a repl server for every language: a small Python
+script for Python, a small Ruby script for Ruby, and so on.</p>
+<p>Now, though, our philosophy is to get out of the way as soon as
+possible. This means that instead of managing communication between
+the client and the programming language, we just start the programming
+language&#39;s built-in repl and then let it handle everything. This means
+several things: less work for us, more supported languages for you,
+language-specific features like tab-completion, and a repl experience
+on Repl.it that is more similar to your offline development.</p>
+<p>That said, sometimes languages&#39; built-in repls don&#39;t provide all the
+features we need. In these cases, we try to use the language&#39;s <a href="https://en.wikipedia.org/wiki/Language_binding">C
+bindings</a> (via
+<a href="https://golang.org/cmd/cgo/">cgo</a>) to access hidden functionality,
+and otherwise we write a small script in the language to emulate the
+features we need.</p>
+<p>Unfortunately, Emacs does not provide an expressive command-line
+interface or good C bindings. What it does provide, though, is an
+excellent repl for Emacs Lisp, right inside Emacs:
+<a href="https://www.masteringemacs.org/article/evaluating-elisp-emacs#the-interactive-emacs-lisp-mode">IELM</a>.
+So we wrote a <a href="https://github.com/replit/prybar/blob/8f73354aa080e98d2b0ab248a80e086e4004947f/prybar_assets/elisp/repl.el">small
+script</a>
+which parses the Prybar configuration options and then jumps into
+IELM. You can try it out on your machine with Docker:</p>
+<pre><code class="language-sh">$ docker run -it --rm replco/prybar prybar-elisp -i
+</code></pre>
+<p>(And while you&#39;re at it, try replacing <code>prybar-elisp</code> with
+<code>prybar-python3</code> or <code>prybar-ruby</code>!)</p>
+<h2>Evaluation server</h2>
+<p>Now that we have the tooling in place, let&#39;s see what our evaluation
+API needs to know in order to provide Emacs Lisp as a language on
+Repl.it.</p>
+<p>For the most part, we just need to write a single JSON file. The
+important bits look like this:</p>
+<pre><code class="language-json">{
+  &quot;category&quot;: &quot;Practical&quot;,
+  &quot;displayName&quot;: &quot;Emacs Lisp (Elisp)&quot;,
+  &quot;entrypoint&quot;: &quot;main.el&quot;,
+  &quot;icon&quot;: &quot;https://icons--util.repl.co/emacs.svg&quot;,
+  &quot;image&quot;: &quot;images.repl.it/polygott&quot;,
+  &quot;name&quot;: &quot;elisp&quot;,
+  &quot;tagline&quot;: &quot;Scripting language for the extensible text editor.&quot;,
+
+  &quot;interpreter&quot;: {
+    &quot;command&quot;: [
+      &quot;/run_dir/prybar-elisp&quot;,
+      &quot;--ps1&quot;,
+      &quot;\u001b[33m\uEEA7\u001b[00m &quot;,
+      &quot;-i&quot;,
+      &quot;-c&quot;,
+      &quot;;; Hint: To type M-x, use ESC x instead.&quot;
+    ]
+  },
+
+  &quot;consoleHeader&quot;: &quot;GNU Emacs 25.2.2&quot;
+}
+</code></pre>
+<p>This file does several things:</p>
+<ul>
+<li>Tells the frontend some basic information about the language (where
+to list it, what its tagline is, where to get the icon). Note that
+we host many of our web assets (not to mention internal tooling) on
+Repl.it, because we love dogfooding.</li>
+<li>Tells our Docker container manager which Docker image to use for
+this language; for new languages, we use Polygott.</li>
+<li>Tells the container how to start a repl for the language. We use
+Prybar with a custom ANSI escape sequence to generate that classy
+repl prompt you see in every language on Repl.it.</li>
+</ul>
+<h2>Frontend</h2>
+<p>All that&#39;s left at this point is to update a few configuration files
+on the Repl.it website. These define things like syntax highlighting
+rules, starter code in the Examples panel, and which categories are
+listed on the <a href="https://repl.it/languages/">Languages</a> page.</p>
+<h2>Conclusion</h2>
+<p>We are proud of how generic we have been able to make our
+infrastructure without sacrificing good support for individual
+languages. It took a lot of work to get to being able to add a
+language (in theory) with only a few configuration files.</p>
+<p>In fact, most of the work in adding Emacs Lisp was integrating it into
+Prybar. This is important to us. We think that by abstracting language
+differences behind a common, <em>open-source</em> interface, we can not only
+free up more time to ship features on Repl.it, but also give back to
+the community in the form of better developer tooling for all.</p>
+<p>Let us know what languages you are most excited to see on Repl.it at
+our <a href="https://repl.it/language-requests/">language requests</a> page. And
+if you&#39;re particularly excited about one, we are always accepting pull
+requests on <a href="https://github.com/replit/polygott">Polygott</a> and
+<a href="https://github.com/replit/prybar">Prybar</a>!</p>
+<p>P.S. Don&#39;t forget to check out <a href="https://repl.it/l/elisp">Emacs Lisp on
+Repl.it</a>.</p>

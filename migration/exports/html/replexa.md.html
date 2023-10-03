@@ -1,0 +1,136 @@
+<p>At Replit, we want to give everyone in the world <strong>computer superpowers</strong>.</p>
+<p>We’re making it easy for anyone with a Replit account to seamlessly build and host <a href="https://www.amazon.com/b?node=21576558011">Amazon Alexa Skills</a> on Replit.</p>
+<p>This blogpost is a start-to-finish tutorial on making Alexa skills on Replit. Something important to note is that you don&#39;t need to have a physical Alexa-enabled device to build this. There is a great simulator in the developer console and a downloadable app on your phone.</p>
+<h3>Overview</h3>
+<ol>
+<li>Configure the Alexa skill in the Amazon Developer console</li>
+<li>Clone the <a href="https://replit.com/@soren/replexa">&quot;Replexa&quot;</a> template</li>
+<li>Define your own intent</li>
+<li>Test your skill</li>
+</ol>
+<h3>How does it work?</h3>
+<p>As an example, what happens when we say: &quot;Alexa, ask Replit about the most recent blogpost&quot;?</p>
+<ol>
+<li>The Alexa unit sends the message to the Alexa cloud and uses natural language processing to figure out the &quot;intent&quot; of the message. In this case, I&#39;m trying to get information about the most recent Replit blog posts.</li>
+<li>Once Alexa knows the intent of the user, it sends a post request with the intent to the webserver that&#39;s hosted in Replit.</li>
+<li>The Replit webserver handles the request. It sends the information back to the Alexa cloud.</li>
+<li>Alexa cloud sends the message back to the physical unit to be spoken back to the user.</li>
+</ol>
+<h3>Creating the skill</h3>
+<p>The first thing to do is create a new Alexa skill in the Amazon Developer Console. You can do this by navigating to <a href="https://developer.amazon.com">https://developer.amazon.com</a> and pressing &quot;developer console&quot; near the top right.</p>
+<img src="https://blog.repl.it/images/replexa-tutorial/image_1.png" alt="amazon developer console" width="100%" style="width:100%"/>
+
+<p>From here, you&#39;re going to click &quot;Alexa Skills Kit&quot; to bring you to the Alexa dashboard. Click &quot;Create Skill&quot; to start the process of creating a new skill.</p>
+<img src="https://blog.repl.it/images/replexa-tutorial/image_2.png" alt="alex skills" width="100%" style="width:100%"/>
+
+<p>Once you name your skill and select your language, click &quot;Custom model&quot; and then select &quot;Provision your own&quot; for the backend. Finally press &quot;Create skill&quot; at the top right of the page.</p>
+<p>After this it&#39;s going to ask about templates, just click &quot;Start from scratch&quot; then go onto the next page. Eventually you&#39;ll see the following page - this means your skill has been created!</p>
+<img src="https://blog.repl.it/images/replexa-tutorial/image_3.png" alt="alexa developer console" width="100%" style="width:100%"/>
+
+<h3>Invocation</h3>
+<p>Next, we will set our invocation. On the left of the screen, click the invocation tab. Invocation is how you&#39;ll start your skill from your Alexa. For example, if your skill invocation name is &quot;Replit blog reader&quot;, to open your skill you would say something like &quot;Alexa, open the Replit blog reader skill&quot;. Once you have entered your skill&#39;s invocation name, click &quot;save model&quot; and &quot;build model&quot; at the top. This can take up to 30 seconds.</p>
+<img src="https://blog.repl.it/images/replexa-tutorial/image_4.png" alt="alexa interaction model" width="100%" style="width:100%"/>
+
+<h3>Interaction Model</h3>
+<p>Click &quot;interaction model&quot; and click &quot;intents&quot; from the left bar. According to the <a href="https://developer.amazon.com/en-US/docs/alexa/custom-skills/create-intents-utterances-and-slots.html">official Alexa documentation</a>, &quot;An intent represents an action that fulfills a user&#39;s spoken request&quot;. In this case, we want to build a skill that gets a summary of the most recent blogpost on the <a href="https://blog.replit.com">Replit blog</a>.</p>
+<p>Each intent has its own set of &quot;utterances&quot;. Utterances are spoken phrases that could trigger an intent. &quot;Get the most recent Replit blogpost&quot; and &quot;Get the Replit blog&quot; should trigger the same intent.</p>
+<p>Create a new intent called <code>GetBlogIntent</code> and add the following utterances:</p>
+<ul>
+<li>Get the most Recent Replit blog</li>
+<li>Show me the Replit blog</li>
+<li>Get the Replit blog</li>
+<li>Replit blog</li>
+</ul>
+<img src="https://blog.repl.it/images/replexa-tutorial/image_5.png" alt="alexa GetBlogIntent" width="100%" style="width:100%"/>
+
+<p>Make sure to click &quot;save model&quot; and &quot;build model&quot; after you&#39;ve added the intent.</p>
+<h3>Hosting in Replit</h3>
+<p>Traditionally, if you want to create an Alexa skill, you have to host the code in an AWS Lambda. While this is an amazing service, Amazon also gives you the option to host your skill using your own webserver. We&#39;ve found that it&#39;s incredibly easy to host Alexa Skills in Replit. You also get the benefits as Replit, such as ReplDB, always-on, and multiplayer. </p>
+<p>First, clone the <a href="https://replit.com/@soren/replexa">Replexa</a> template in Replit.</p>
+<p>Once you have the code open, you&#39;re going to want to grab your skill id from your list of Alexa skills. (Get to this menu by clicking &quot;your skills&quot; at the top right of the developer console.)</p>
+<img src="https://blog.repl.it/images/replexa-tutorial/image_6.png" alt="Alexa custom skill" width="100%" style="width:100%"/>
+
+<p>Copy that and paste it into the template where it says <code>YOUR_SKILL_ID</code>.</p>
+<p>The last step in connecting your repl to your skill is getting the domain. You can copy it by running the repl and copying the domain.</p>
+<img src="https://blog.repl.it/images/replexa-tutorial/image_7.png" alt="repl.co domain" width="100%" style="width:100%"/>
+
+<p>Now that you have your repl&#39;s domain, go to the &quot;endpoint&quot; tab in the amazon developer console. Change the service endpoint type from &quot;AWS Lambda ARN&quot; to &quot;HTTPS&quot;. Paste your repl&#39;s domain into the default region.</p>
+<p>In the drop-down menu, select &quot;My development endpoint is a sub-domain of a domain that has a wildcard certificate from a certificate authority&quot;.
+(This is important)</p>
+<img src="https://blog.repl.it/images/replexa-tutorial/image_8.png" alt="service endpoint type" width="100%" style="width:100%"/>
+
+<h3>Add GetBlogIntent</h3>
+<p>Since we added the <code>GetBlogIntent</code> in the developer console, we have to add an intent handler in our code. Navigate to the <code>intents.py</code> file. Each intent inherits from the <code>AbstractRequestHandler</code>. You must define both the <code>can_handle()</code> and <code>handle()</code> methods for every intent. Our new class will look something like this:</p>
+<pre><code class="language-python"># intents.py
+
+class GetBlogIntentHandler(AbstractRequestHandler):
+  &quot;&quot;&quot;Handler for the get blog intent&quot;&quot;&quot;
+  def can_handle(self, handler_input):
+    return ask_utils.is_intent_name(&quot;GetBlogIntent&quot;)(handler_input)
+  
+  def handle(self, handler_input):
+    # This is where we define the intent
+</code></pre>
+<p>In addition to defining the intent, we also have to register the intent with the <code>SkillBuilder</code> object in <code>main.py</code>. Add the following line to main.py:</p>
+<p><code>sb.add_request_handler(intents.GetBlogIntentHandler())</code>. </p>
+<p><code>main.py</code> should now look something like this:</p>
+<pre><code class="language-python"># main.py
+
+from flask import Flask
+from ask_sdk_core.skill_builder import SkillBuilder
+from flask_ask_sdk.skill_adapter import SkillAdapter
+import intents
+
+sb = SkillBuilder()
+sb.add_request_handler(intents.LaunchRequestHandler())
+sb.add_request_handler(intents.HelpIntentHandler())
+sb.add_request_handler(intents.CancelOrStopIntentHandler())
+sb.add_request_handler(intents.HelloWorldIntentHandler())
+sb.add_request_handler(intents.SessionEndedRequestHandler())
+sb.add_request_handler(intents.GetBlogIntentHandler()) # This is the one we just added!
+sb.add_request_handler(intents.IntentReflectorHandler()) # Register this intent last.
+
+app = Flask(__name__)
+skill_id = &#39;YOUR_SKILL_ID&#39;
+
+skill_adapter = SkillAdapter(
+  skill=sb.create(), 
+  skill_id=skill_id, app=app
+  )
+
+@app.route(&quot;/&quot;, methods=[&quot;GET&quot;, &quot;POST&quot;])
+def invoke_skill():
+    return skill_adapter.dispatch_request()
+
+app.run(&#39;0.0.0.0&#39;, port=443)
+</code></pre>
+<h3>Implementing our new intent</h3>
+<p>To get the most recent blogpost, we&#39;ll use the <code>feedparser</code> library. Here&#39;s the code to get the most recent Replit blog:</p>
+<pre><code class="language-python">#intents.py
+
+import feedparser
+
+class GetBlogIntentHandler(AbstractRequestHandler):
+  &quot;&quot;&quot;Handler for the get blog intent&quot;&quot;&quot;
+  def can_handle(self, handler_input):
+    return ask_utils.is_intent_name(&quot;GetBlogIntent&quot;)(handler_input)
+  
+  def handle(self, handler_input):
+    feed = feedparser.parse(&#39;https://blog.replit.com/feed.xml&#39;)
+    title = feed[&#39;entries&#39;][0][&#39;title&#39;]
+    summary = feed[&#39;entries&#39;][0][&#39;summary&#39;]
+    speak_output = f&#39;The title of this blogpost is {title}. {summary}&#39;
+
+    return (
+      handler_input.response_builder
+          .speak(speak_output)
+          .response
+    )
+</code></pre>
+<h3>Testing</h3>
+<p>Testing Alexa skills is easy! Once you have navigated to your Skill in the Amazon Developer Console, click the &quot;testing&quot; tab. What you see now is an Alexa simulator pre-loaded with your skill. You can type into the console on the left, and it will respond exactly as an Alexa unit would.</p>
+<img src="https://blog.repl.it/images/replexa-tutorial/demo.gif" alt="alexa demo gif" width="100%" style="width:100%"/>
+
+<p>You can also check out <a href="https://youtu.be/rN5e9Po4gHc">this</a> youtube video for a quick demo!</p>
+<h3>If you need help</h3>
+<p>You can reach out to me (Søren) on <a href="https://twitter.com/roodsoren">Twitter</a> or shoot an email to <a href="mailto:soren@replit.com">soren@replit.com</a>. I&#39;ll do my best to respond quickly!</p>

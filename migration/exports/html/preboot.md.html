@@ -1,0 +1,28 @@
+<p><a href="react">Two days</a> ago we introduced our beta support for React frameworks, ranging from
+static-site generators like GatsbyJS, to fullstack frameworks like
+Next.js. Today we&#39;re launching a significant performance enhancement that we&#39;re
+calling <strong>preboot</strong>.</p>
+<p>Whenever you land on a repl, you get a container to develop against. Our containers are generic and work for any
+language/framework. When you land on a React framework, you had to hit &quot;run&quot;
+to start the server (it basically sends a <code>yarn develop</code> or similar to the container)
+. The container manager will then detect an open port, send an
+event to the IDE, which will show you a webview (speeded up gif below) -- afterward, you&#39;re on
+your way building your app.</p>
+<div style='position:relative;padding-bottom:54%'><iframe src='https://gfycat.com/ifr/RingedPerfumedAmericanbittern' frameborder='0' scrolling='no' width='100%' height='100%' style='position:absolute;top:0;left:0' allowfullscreen></iframe></div>
+
+<p>However, this kind of experience is suboptimal because it&#39;s slow. We pride
+ourselves on setting up the development environment within 2 seconds of selecting
+a language/framework so, naturally, we need to do better.</p>
+<p>Luckily, we have previously implemented a pooling mechanism on our
+infrastructure so that containers are ready and hot when you need them. What was
+missing from that is custom &quot;boot&quot; command that gets the container <em>really</em> hot,
+listening on a port, and ready to start serving. So now, when you land on a
+React framework environment, we grab a container for you that&#39;s already
+running -- your repl IDE will simply attach to it.</p>
+<p>Take a look:</p>
+<p><img src="/public/images/blog/react-preboot.gif" alt="react preboot"></p>
+<p>As mentioned in the announcement post, we&#39;re moving fast on getting this
+out of beta into something we&#39;re proud of and can, with confidence, offer
+to you as, if not your primary development environment, at least your
+secondary/prototyping one.</p>
+<p>Stay tuned for more updates.</p>

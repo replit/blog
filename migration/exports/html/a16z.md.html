@@ -1,0 +1,86 @@
+<p>We&#39;re thrilled to announce that we have raised a Seed round led by Andreessen
+Horowitz, with Marc Andreessen and Andrew Chen championing the deal. We&#39;re also
+sharing that a million users are now using Repl.it. Moreover,
+our developers have shipped 250,000 websites/apps since our <a href="/site/blog/platform">hosting platform</a> launch in March.</p>
+<p>We started Repl.it as a side project with the straightforward goal of making it easy to
+get a REPL for your favorite <a href="/languages">language</a> when you need one. Coding,
+we believed, should be as simple as opening a new browser tab.</p>
+<p><img src="https://i.imgur.com/xRLWGYy.png" alt="repl"> <em>How Repl.it looked a few years ago</em></p>
+<p>However, our users wanted more. They misused our system for things it wasn&#39;t
+meant for: they <a href="https://repl.it/talk/share/I-made-Tetris-in-a-python-terminal-and-its-as-bad-as-you-think-need-help-with-flickering-screen/5986">hacked
+games</a>
+into our dumb web terminal, they made <a href="https://repl.it/talk/share/Working-Chatroom/3741">networked
+applications</a> despite not having explicit support for it, and they kept asking for more. Not a day goes by
+without getting emails from users asking how to do one thing or another in our
+environment.</p>
+<p>Encouraged by this tremendous pull from our users, our new goal is to build a
+software development platform where you can, with minimal prior experience,
+develop, ship, and acquire users for your apps -- all in the same place.</p>
+<p>Cloud-computing is one of the most significant paradigm shifts in our industry, yet it remains commandable only by relatively few professionals. It&#39;s similar to when, prior to microcomputers, only big corporations and universities had mainframes. We want Repl.it to be the microcomputer to the cloud&#39;s mainframe.</p>
+<p>Today, while some percentage of our developers use Repl.it as their primary IDE, most professional programmers use it (or other online IDEs) as playgrounds or secondary environments for side-projects. But we believe we can build a more compelling toolchain and platform that, in the future, will be indispensable for developers.</p>
+<h3>Funding</h3>
+<p>After graduating YC last winter, we went out to fundraise. A16z&#39;s ability to spot trends and paradigm-shifting companies in the devtools and cloud infrastructure space made them our top choice. After all, they&#39;ve invested in some of our favorite developer tools ranging from GitHub to Digital Ocean to Netlify.</p>
+<p>Personally, Marc Andreessen&#39;s long view of computing and his
+involvement in the early web platform and the genesis of the cloud (his company LoudCloud might&#39;ve been the one to coin the term) makes him an especially valuable partner to have in this.</p>
+<p>We&#39;re also fortunate to have Andrew Chen as a partner. His experience working with startups in both consumer internet and enterprise spaces is exactly the right expertise we need. Devtool companies generally grow in what resembles a consumer-internet play but end up a B2B company.</p>
+<p>In addition to a16z, we&#39;re happy to see participation from some of our existing investors: Bloomberg Beta, Reach Capital, and Y Combinator. Moreover, we&#39;re joined by some of our friends and mentors that have tremendous experience building relevant companies:</p>
+<ul>
+<li>Paul Graham, founder of Viaweb</li>
+<li>Andrew Sutherland, CTO &amp; founder of Quizlet</li>
+<li>Greg Brockman, CTO of OpenAI</li>
+<li>Olivier Pomel, CEO &amp; founder of Datadog</li>
+<li>Ben Darnell, CTO &amp; founder of CockroachLabs</li>
+<li>Zach Sims, CEO &amp; founder of Codecademy</li>
+</ul>
+<h3>What&#39;s next?</h3>
+<p>We spend most of our time building tech in two major areas:</p>
+<ul>
+<li>IDE: we&#39;re building the world&#39;s fastest online IDE. It loads in less than 2 seconds, and it&#39;s complete with <a href="/site/blog/intel">code-intellisense</a>. It&#39;s also a REPL-driven environment.</li>
+<li>Cloud infrastructure: we&#39;re building a fast and reliable container orchestration
+system that also provides a remote development environment.</li>
+</ul>
+<p>Just last week we released two features that make our platform more compelling for shipping code:</p>
+<ul>
+<li>HTTPS-ready <a href="/talk/announcements/HTTPS-ready-custom-domains-for-websites-and-servers/7766">custom domains</a> for websites/apps</li>
+</ul>
+<p><video controls webkit-playsinline="true" playsinline="" src="https://blog.replit.com/images/blog/domains.mp4"></video>
+<em>Adding a domain name and live-developing a website</em></p>
+<ul>
+<li><a href="/talk/announcements/BetaExplorers-Announcing-replrun-publish-your-terminal-apps-as-websites/7802">repl.run</a>: ship your terminal apps as websites (beta)</li>
+</ul>
+<p><video controls webkit-playsinline="true" playsinline="" src="https://blog.replit.com/images/blog/ez.mp4"></video>
+<em>Building and shipping a terminal snake game</em></p>
+<p>What&#39;s in progress:</p>
+<ul>
+<li>Multiplayer REPLs: text collaboration is easy but imagine collaborating with others on the same container, same filesystem, same interpreter process!</li>
+<li>We&#39;re standardizing our REPL protocol to make it easy to add new languages and for the environment to be genuinely a REPL-driven one. Think Jupyter Kernels but for fullstack REPLs. You&#39;ll be able to add your favorite language/environment to Repl.it.</li>
+<li>Continuous-deployment-like system: it&#39;s going to have a closer gap than traditional (boring) dev-staging-prod pipeline. We think we have something novel to share in this space too.</li>
+<li>We&#39;re about to start working on a distributed filesystem implementation that allows Repl.it users to edit their files in the browser, on <a href="https://github.com/replit/repl.sh">their desktop computer</a>, or in their development container and will all magically sync.</li>
+<li>Bootstrapped IDE: we built a <a href="/site/blog/IDE">small-core functional IDE</a> with the ability to
+live-reload plugins. We think that we have a possibly novel and fantastic plugin
+development experience. We&#39;re looking to open that up for 3rd-party developers soon.</li>
+</ul>
+<p><video controls webkit-playsinline="true" playsinline="" src="https://blog.replit.com/images/blog/ide.mp4?x=1"></video>
+<em>Moving around plugins in the IDE</em></p>
+<p>Within a year, we want to get to a place where more people are using Repl.it to build businesses and ship production software. We&#39;re also excited to push the state-of-the-art forward -- enough boring repetitive stuff.</p>
+<h2>Business</h2>
+<p>Right now, we&#39;re making some revenue through our <a href="/site/pricing">Hacker plan</a> where you
+pay $7 for more compute resources and private projects. But the opportunity is so much bigger than this.</p>
+<p>As we continue to make Repl.it more useful, we think more people will depend on it for their businesses and that will open up commercialization opportunities in the following domains:</p>
+<ul>
+<li>advanced collaboration tools</li>
+<li>development environment hosting</li>
+<li>web hosting</li>
+</ul>
+<h2>Meet our team</h2>
+<p>Our team:</p>
+<ul>
+<li><a href="/@basicer">repl.it/@basicer</a></li>
+<li><a href="/@amasad">repl.it/@amasad</a></li>
+<li><a href="/@timmy_i_chen">repl.it/@timmy_i_chen</a></li>
+<li><a href="/@turbio">repl.it/@turbio</a></li>
+<li><a href="/@masfrost">repl.it/@masfrost</a></li>
+<li><a href="/@hayaodeh">repl.it/@hayaodeh</a></li>
+<li>You? Apply <a href="/jobs">here</a></li>
+</ul>
+<script>document.querySelectorAll('video').forEach(v => v.playbackRate = 2)</script>

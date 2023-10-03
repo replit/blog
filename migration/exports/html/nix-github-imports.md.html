@@ -1,0 +1,30 @@
+<p>Early last year, we made the <a href="https://blog.replit.com/nix">announcement that our infrastructure and Repls</a> now had Nix baked in. Just a few months ago, we announced <a href="https://blog.replit.com/powered-by-nix">all new Repls</a> would be Nix-based. And today, we&#39;re happy to announce that our GitHub imports flow is now also powered by Nix!</p>
+<p>For a while now, the state of Git and GitHub integration within Replit has been a major pain point. One of the foremost problems was that while the rest of Replit jumped on the Nix train, repos imported from GitHub were still forced to use the old Bash style Repls. </p>
+<p>We hear you: it&#39;s frustrating not to have the ability to use our <a href="https://docs.replit.com/programming-ide/installing-packages">packager</a> or to go through a convoluted multi-step import experience. While many other parts of Replit have been getting frequent updates and reworks, the code powering everything Git was left behind. </p>
+<p>It was thought that this change would be a rather significant and difficult change. The longer we pushed it off, the more adamant we became that we&#39;d need to get it done right this time.</p>
+<p>We finally decided that enough was enough - we dove deep into actually resolving this. And after some changes, we very quickly realised that the problem was not nearly as scary as we thought. After some tinkering, your GitHub imports should now be faster and more intuitive than ever!</p>
+<p>Here&#39;s a side-by-side comparison of the two flows:</p>
+<video controls>
+    <source src="https://blog-images.util.repl.co/nix-github-imports/nix-github-imports-video.webm" type="video/webm">
+    <source src="https://blog-images.util.repl.co/nix-github-imports/nix-github-imports-video.mp4" type="video/mp4">
+</video>
+
+<hr>
+<p>We originally thought we would have to do a significant amount of work to integrate Nix into existing language Repls. However, in reality, we realised we could actually do the opposite.</p>
+<p>We would start with an existing Nix language template, clear out the unused files from within it that were associated with the template, then clone in the files from GitHub. In this manner, we could preserve the existing <code>.replit</code> and <code>replit.nix</code> files that were used by each language. And we could also preserve existing environment files that were necessary for certain languages (e.g. the <code>venv</code> folder for Python).</p>
+<p>From there, most of the existing work is already done. We then just needed a way to determine a language template to import into, which files from each template we could remove, and then finally perhaps some other small improvements to the GitHub import flow to make the user experience just a little bit nicer. </p>
+<p>To figure out which language template to clone into, we originally considered looking into analyzing file extensions and content, but this quickly grew unfeasible as we realized the amount of edge cases that we&#39;d have to handle. </p>
+<p>GitHub API to the rescue! The GitHub API exposes <a href="https://docs.github.com/en/rest/repos/repos#list-repository-languages">an endpoint for the languages in a repository</a>. We use this to automatically detect your repository&#39;s language to recommend the correct template.</p>
+<p>Next up, figuring out which files from each template to remove. We want to make sure any Repl-specific files in our templates would be overwritten by the repositories users imported. This meant getting rid of all the boilerplate files, like <code>index.html</code> in the HTML Template, and <code>main.py</code> in the Python Repl.</p>
+<p>As well, we wanted to make sure that users can work end-to-end with Replit and GitHub. This means that the experience from working in a Repl → pushing to GitHub → importing it back should be seamless. And now, it is! <code>.replit</code> and <code>replit.nix</code> configurations pushed to the repository are always reflected in the imported Repl. </p>
+<p>Among our miscellaneous other improvements:</p>
+<ul>
+<li>Revamped the styling of the configuration plugin<ul>
+<li>More options to customize your run and compile commands, as well as an option to use our existing <a href="https://github.com/replit/prybar">Prybar</a> interpreters</li>
+</ul>
+</li>
+<li>Detecting and recommending common run commands, like <code>npm run start</code> for Node.js projects</li>
+</ul>
+<hr>
+<p>This brings us one step closer to fully migrating Replit from our legacy <a href="https://github.com/replit/polygott">Polygott</a> backend to a new Nix world. For more updates on our progress, check out <a href="https://arewenixyet.com/">arewenixyet.com</a>. </p>
+<p>We hope unleashing the full power of Nix on repository imports gives users more power to fine-tune their development environment. We&#39;re excited to see what you create with this new flow!</p>

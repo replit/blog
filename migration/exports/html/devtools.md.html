@@ -1,0 +1,49 @@
+<p>We recently launched a new Replit-native way to inspect and debug web pages you build on Replit. Whether you&#39;re learning the basics or hosting a rich application, quickly being able to inspect the console and DOM is critical to your workflow.</p>
+<p>Browsers ship with developer tools (e.g. <a href="https://developer.chrome.com/docs/devtools/">Chrome</a>), but they have a few shortcomings when working on Replit:</p>
+<ol>
+<li>Inspecting the nested webview iframe using browser DevTools can be complicated</li>
+<li>There are no solid solutions for developers working on mobile devices</li>
+<li>Some schools block access to browser DevTools</li>
+</ol>
+<p>Now all repls that show a webview have access to a Replit-native set of DevTools. Just click the wrench icon to bring it up:</p>
+<p>You can access the console:</p>
+<p><video src="https://blog-images.util.repl.co/devtools/console.webm" controls></video></p>
+<p>Or inspect the DOM:</p>
+<p><video src="https://blog-images.util.repl.co/devtools/inspect-dom.webm" controls></video></p>
+<p>And more.</p>
+<h2>How we built it: Eruda</h2>
+<p><a href="https://github.com/liriliri/eruda">Eruda</a> is the most complete, out-of-the-box solution that works great on mobile. At Replit, we love betting on cool open-source software projects, and we care deeply about supporting our <a href="https://blog.replit.com/mobile-v2">mobile users</a>.</p>
+<p>Eruda was a no brainer decision for us.</p>
+<h2>Challenges: permissions, security, and timing</h2>
+<h3>Permissions</h3>
+<p>Browser DevTools run with higher privileges than the JavaScript loaded with the page. Notably, this allows the tools to inspect <em>all</em> network traffic (images, video, etc.). While some are difficult, if not important, to inspect, others can be easily watched by spying on calls to <code>window.XMLHttpRequest</code> and <code>window.fetch</code>. </p>
+<p>Eruda implemented an open source solution to this, <a href="https://github.com/liriliri/chobitsu">chobitsu</a>, which is an implementation of the <a href="https://chromedevtools.github.io/devtools-protocol/">Chrome DevTools protocol</a> in JavaScript. The Chrome DevTools does not interact with the page directly but talks to an API that implements the protocol. Using a solution based on the Chrome DevTools protocol affords us maximal flexibility for future iterations.</p>
+<h3>Security</h3>
+<p>The nature of a DevTool requires us to have underlying access to the DOM, the <code>window</code> object, cookies, and other resources that are only available if we comply with the <a href="https://developer.mozilla.org/en-US/docs/Web/Security/Same-origin_policy">same origin policy</a>. If you inspect the page, you&#39;ll notice we host devtools with the same origin as the repl itself within a <em>magic</em> <code>__devtools_wrapper.html</code> file. All Repls have this hidden file that serves as a wrapper page for business logic related to the DevTool, including its injection and toggling.</p>
+<h3>Timing</h3>
+<p>The greatest challenge we have had so far is ensuring the DevTools is not missing information it should have captured. We need to ensure our DevTools run before any JavaScript on the page, so we can correctly capture all events the user might need for debugging. For example, an error may be displayed on the <code>console</code> before our tools load.</p>
+<p>Our first attempt looked roughly like this:</p>
+<pre><code class="language-html">&lt;iframe src=&quot;/&quot;&gt;&lt;/iframe&gt;
+&lt;script src=&quot;devtools.js&quot;&gt;&lt;/script&gt;
+</code></pre>
+<p>By the time the devtools script kicks in, the iframe could have run some of its scripts. So we were missing some of the action.</p>
+<p>Attempt two looked like this:</p>
+<pre><code class="language-html">&lt;iframe id=&quot;iframe&quot;&gt;&lt;/iframe&gt;
+&lt;script&gt;
+  iframe.src = &quot;/&quot;;
+  // modify iframe here
+&lt;/script&gt;
+</code></pre>
+<p>The reference of <code>iframe.contentWindow</code> will change after <code>src</code> changes, and there is no way to know precisely when that happens. Modifying the <code>contentWindow</code> at the wrong moment means we will be working with a disposed (and hence useless) <code>window</code> object.</p>
+<p>So we came up with attempt number three: we load an <code>iframe</code> without <code>src</code>, then run.</p>
+<pre><code class="language-ts">const res = await fetch(&quot;/&quot;);
+const html = await res.text();
+injectDevTools(html);
+iframe.contentDocument.open();
+iframe.contentDocument.write(html);
+iframe.contentDocument.close();
+</code></pre>
+<p>This works pretty well for the initial page, but the DevTools disappear when the user navigates to another page. To fix this, we listen to the <code>window</code> &#39;s <code>unload</code> event and run the logic above again for any navigation. The last bug we had is that <code>location.reload</code> within the iframe breaks since the <code>iframe</code> technically has no <code>src</code>, which was then fixed by adding a <code>history.pushState</code> call on top.</p>
+<h2>Try it out!</h2>
+<p>We hope you like the new Replit-native DevTools. We&#39;re really enjoying the experience when working in the webview, either on desktop or mobile.</p>
+<p>And if you enjoy hacking on frontend infrastructure (or other things...), consider <a href="https://jobs.lever.co/replit/35f0e743-429c-4f60-ba07-8de9bbc8fffc">joining us</a>!</p>

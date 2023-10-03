@@ -1,0 +1,64 @@
+<p>If you&#39;ve been on the Repl.it landing page recently, you may have noticed a bit of a change!</p>
+<p>We spent a few weeks revamping our marketing pages and wanted to share a few words about how it went. A lot of design and engineering iteration went into not only making our new pages look great, but also creating a scalable and maintainable system.</p>
+<h2>Our process</h2>
+<h3>Motivation &amp; setup</h3>
+<p>Naturally there were a lot of questions about where to start this redesign: the tone and voice of our copy? The visual style? The product we were advertising? Where the product was going to be in a few months?</p>
+<p>Ultimately this project was primarily motivated by growth and product education. For example, our previous landing page led with &quot;<em>Get your ideas out there</em>&quot;, which is a great message and definitely part of our vision, but says nothing specific about the product. We wanted to approach the redesign not only as an opportunity to refine our visual and brand identity, but to get Repl.it out to millions more people and make the product dead-simple to understand.</p>
+<p>We are a small company and Repl.it evolves rapidly relative to more mature products. It was clear from the beginning that this project wasn&#39;t about glowing text and nice illustrations; it forced us to focus on the main value proposition of the product and prioritize which features would be at the forefront of our brand. We also needed to set up a scalable framework to support information about future features, let us add and remove features easily from any pages, and let us create assets quickly and consistently.</p>
+<h3>Information architecture &amp; copy</h3>
+<p>To help us out with the initial part of our design process, we hired the talented <a href="https://www.tallneil.io/">Neil Shankar</a> to lead on information architecture, auditing, and writing our initial copy.</p>
+<p>The first step of our process involved a <strong>basic audit</strong> of the current landing page. This would set the stage for the rest of the feature / use cases pages since they basically repeated the landing page&#39;s layout.</p>
+<p><img src="https://blog.replit.com/images/new_marketing/audit.png" alt="Site audit"></p>
+<p>After the audit, we realized we needed to focus primarily on one thing: consistency. We got to the drawing (writing?) board and began to layout what key themes we wanted to focus on, both from a product-level perspective and in terms of SEO. We recorded our top 25 organic keywords, and made a list of potential adjective/noun combinations that we would want to lead towards our site. This list isn&#39;t exhaustive, but mainly consisted of:</p>
+<h4>Adjectives</h4>
+<ul>
+<li>Collaborative</li>
+<li>Online</li>
+<li>Browser</li>
+</ul>
+<h4>Nouns</h4>
+<ul>
+<li>IDE</li>
+<li>Coding</li>
+<li>Programming</li>
+<li>Programming language (python/c/c++/html)</li>
+<li>Programming topics (data science, vr, creative coding)</li>
+<li>Algorithms / data structures (quicksort, bubble sort)</li>
+<li>Repl</li>
+</ul>
+<p>From there, we had a good grasp on the features we wanted to focus on: <strong>Instant IDE, Multiplayer, Community, Teams, and Hosting.</strong> Afterwards, we were able to analyze the current sitemap and propose a new structure focused on navigating to features.</p>
+<p>Before:
+<img src="https://blog.replit.com/images/new_marketing/sitemap-old.png" alt="Site audit"></p>
+<p>After:
+<img src="https://blog.replit.com/images/new_marketing/sitemap-new.png" alt="Site audit"></p>
+<h3>Layout &amp; composition</h3>
+<p>We wanted to keep it simple and scalable. We knew we wanted updates to be fast and be able to adapt to a rapidly changing product, so we couldn&#39;t create layouts and designs that were too tightly coupled to specific features.</p>
+<p>Below, you can see our medium-fidelity mockups for all of our feature pages. They largely consist of two components: a hero section with two strong CTAs (calls to action)-- <strong>start coding</strong> and <strong>sign up</strong>-- and various feature sections that alternate the location of their asset and text content.</p>
+<p><img src="https://blog.replit.com/images/new_marketing/layout.png" alt="Layout"></p>
+<h3>Illustration &amp; assets</h3>
+<p>I am definitely not an illustrator by trade, but I do enough in my spare time that I felt comfortable making all of the assets. I wanted to take a more component-based approach to our illustrations so we could make new assets more quickly and consistently.</p>
+<p>We use Figma extensively and for basically every design related task. This includes our UI design, UX design, brainstorming, basic animations, and all of our new illustrations. We are also planning on making several plugins to make designing programming interfaces easier.</p>
+<p>Where Figma came in handy, apart from its collaboration features, was <strong>components and auto-layout</strong>.</p>
+<p>So, not only were we able to design our little robot mascot using components...</p>
+<p><img src="https://blog.replit.com/images/new_marketing/robot-component.png" alt="Robot components"></p>
+<p>But adding auto-layout to the robot and other assets made changes like these smooth and easy:</p>
+<p><img src="https://blog.replit.com/images/new_marketing/replit-illustration-robot.gif" alt="Robot illustration"></p>
+<p><img src="https://blog.replit.com/images/new_marketing/replit-illustration-upm.gif" alt="UPM illustration"></p>
+<p>Their new <strong>smart-animate</strong> feature also allowed us to make this animation, which we use on the IDE feature page, by just interpolating between two frames:</p>
+<p><img src="https://blog.replit.com/images/new_marketing/laptop-floating-frames.png" alt="Laptop animation frames"></p>
+<p><img src="https://blog.replit.com/images/new_marketing/replit-laptop-floating.gif" alt="Laptop animation"></p>
+<p>Needless to say, we&#39;re huge fans of Figma and it&#39;s a core part of our entire design pipeline.</p>
+<h3>Our own headless CMS</h3>
+<p>I&#39;ve already <a href="https://blog.repl.it/cms">written about using our own headless CMS on Repl.it here</a>. Here&#39;s the tl;dr: we write all of our content as JSON files in our CMS repl. Then, each marketing page template requests the JSON, renders the appropriate component based on the &quot;type&quot; of the content block from the JSON, and voila! You&#39;ve got instantly updatable marketing pages, all self-hosted and easily scalable.</p>
+<h2>The results</h2>
+<p>All in all, the redesign can be summarized well by this before/after shot, and we couldn&#39;t be prouder to release it to the public. You can check out the rest of the marketing pages more in depth here:</p>
+<ul>
+<li><a href="https://repl.it/site/ide">IDE</a></li>
+<li><a href="https://repl.it/site/multiplayer">Multiplayer</a></li>
+<li><a href="https://repl.it/site/community">Community</a></li>
+<li><a href="https://repl.it/site/teams">Teams</a></li>
+<li><a href="https://repl.it/site/hosting">Hosting</a></li>
+</ul>
+<p><img src="https://blog.replit.com/images/new_marketing/before-after.png" alt="Before and after"></p>
+<p>As Repl.it evolves, you can expect to see more of this vaporwave inspired aesthetic throughout our branding and UI. And if you&#39;re a talented generalist designer who loves to work on UI, UX, and graphic design, please reach out at <a href="mailto:jobs@repl.it">jobs@repl.it</a> with your resume and portfolio! Bonus points if you&#39;ve got a penchant for programming tools and coding. :)</p>
+<p>(If you know anyone who might be a good fit, let us know as well!)</p>

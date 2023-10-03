@@ -1,0 +1,37 @@
+<p>Mobile is the future of computing. But building good software creation tools for mobile devices is hard. Luckily, at Replit, we like to run toward the hard things.</p>
+<p>This week, we launched a completely rearchitected mobile IDE for web. If you’ve used it before, the new version won’t look much different, but it will likely <em>feel</em> different. </p>
+<h2>Why We Care</h2>
+<p>Mobile devices are the world’s most ubiquitous computers. At Replit, we have kids coding their next big idea on their phone on the way to school, instead of scrolling through social media. We have local communities in developing countries learning &amp; teaching code together on their phones, in order to get hired for jobs. We have colleagues coding prototypes in multiplayer and demoing their work on their phones, while they are on the go.</p>
+<p>We even noticed users sharing Replit coding tutorials on TikTok:</p>
+<blockquote class="tiktok-embed" cite="https://www.tiktok.com/@coding4python3/video/6960360386101120261" data-video-id="6960360386101120261" style="max-width: 605px;min-width: 325px;" > <section> <a target="_blank" title="@coding4python3" href="https://www.tiktok.com/@coding4python3">@coding4python3</a> Antwoorden aan @wewillcum <a title="replit" target="_blank" href="https://www.tiktok.com/tag/replit">#replit</a> <a title="code" target="_blank" href="https://www.tiktok.com/tag/code">#code</a> <a title="coding" target="_blank" href="https://www.tiktok.com/tag/coding">#coding</a> <a title="coding4python3" target="_blank" href="https://www.tiktok.com/tag/coding4python3">#coding4python3</a> <a title="python" target="_blank" href="https://www.tiktok.com/tag/python">#python</a> <a target="_blank" title="♬ origineel geluid - coding4python3" href="https://www.tiktok.com/music/origineel-geluid-6960360619564387078">♬ origineel geluid - coding4python3</a> </section> </blockquote> <script async src="https://www.tiktok.com/embed.js"></script>
+
+<p>The future of personal computing will be on mobile devices. That’s how the next billion software creators will come online.</p>
+<p>With this in mind, it’s important that we bring the best of Replit to our diverse community of users, regardless of their device, geolocation or circumstance. We have our work cut out for us!</p>
+<h2>The Rebuild</h2>
+<p>Our previous mobile client was lacking. After the initial build of the mobile IDE in 2020, we started hitting performance problems with our Redux-based <a href="https://blog.replit.com/ide">plugin architecture</a>. </p>
+<p>The system used too much memory and CPU, making the mobile IDE feel laggy. On low-powered devices, it would crash often. Pieces of UI were plugins, arranged in floating windows. This made the UI and interactions feel clunky. It became hard to maintain and debug issues. This drove engineers away from touching it.</p>
+<p>We spent the last few months rebuilding the mobile web client using a simpler &amp; faster render tree and abstractions called “services”. Services are single-responsibility APIs for various platform capabilities. Examples include the <a href="https://blog.replit.com/replspace-filesystems">filesystem</a>, shellrunner and presence for multiplayer. We got rid of Redux completely.</p>
+<p>The goals for the new iteration were:</p>
+<ul>
+<li><p>Move the source of truth to the backend. </p>
+<ul>
+<li>Services drive the state of the repl UI, including the files and state of the program. They also allow subscriptions so UI components can react to updates right away. This model makes synchronizing clients across devices easier and reduces our memory footprint. With Redux, we had dozens of reducers duplicating state that often drifted and caused unexpected bugs.</li>
+</ul>
+</li>
+<li><p>Use a flexible &amp; maintainable UI.</p>
+<ul>
+<li>We fought the urge to redesign the mobile UI to keep this project scoped. Instead, we focused on writing modular React components that used our new <a href="https://blog.replit.com/rui-eng">design system</a>, along with Hooks for local view state.</li>
+</ul>
+</li>
+</ul>
+<p>We now have a lighter &amp; more manageable mobile web client overall.</p>
+<p>We tested early with our explorers, who felt it was “so [much] smoother”. While A/B testing the new changes, we saw up to 2x increase in weekly retention on mobile.</p>
+<h2>What&#39;s Next?</h2>
+<p>With this big piece of work done, we are focusing on the feedback we hear a lot from our community. These past few months, we&#39;ve also interviewed users to better understand their pain points and workflows on mobile. We’re excited to bring you the next version of our mobile IDE soon. Our upcoming top projects are:</p>
+<ul>
+<li>Make core mobile ergonomics better</li>
+<li>Make repls run faster across the world</li>
+</ul>
+<p>And maybe a surprise or two.</p>
+<p>And we’re hiring.</p>
+<p>If you are excited by hard and impactful problems like these — and we know you are — <a href="https://replit.com/site/careers">come join our team</a>!</p>

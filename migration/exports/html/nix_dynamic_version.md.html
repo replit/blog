@@ -1,0 +1,98 @@
+<p><strong>UPDATE - 05/07/2021</strong> Thanks to <a href="https://www.extrema.is/">Travis Cardwell</a> for letting us know that Nix <em>requires</em> the <a href="https://nixos.org/manual/nixpkgs/stable/#sec-package-naming">version part of the derivation name to start with a digit</a>. The post has been upated from its original version to include this requirement. </p>
+<p>When you open a repl, we link it to a Docker container in the cloud. As we&#39;ve started supporting more and more languages over the years, the size of that Docker image has exploded in size. It can take us up to a week to safely deploy! Any update, no matter the size, to our tooling can&#39;t be shipped to our users as fast as we&#39;d like. This is where our <a href="https://blog.replit.com/nix">migration to Nix</a> comes in. We are now building these tools in our CI pipelines as Nix packages. We can reduce the size of our image to its minimum and provide all our tools and languages through Nix, on demand. One drawback of Nix for us is the need to specify the version in the derivation code (Like you would do in the <code>package.json</code> in NPM for example), rather than rely on image tagging. Before we could move forward, we had to solve one of the harder problems in computer science: versioning.</p>
+<p>We settled on using the commit short sha (first 7 characters of a commit&#39;s ID) as the version for our tools. However, we needed to go edit the <code>default.nix</code> file manually in the tool&#39;s repository every time we needed to publish a version. This wasn&#39;t providing us with the speed and flexibility we wanted, and we wondered if it was possible to generate the version automatically. After all, Nix is a fully fledged programming language, so that should be doable?</p>
+<p>It is, but it was not as easy as we thought.</p>
+<h2>Starting with a Nix package</h2>
+<p>One great thing about Nix is that its entire library of standard packages is available in a very easy to parse GitHub repository. A quick search led me to <a href="https://github.com/NixOS/nixpkgs/blob/master/pkgs/build-support/fetchgitlocal/default.nix">this package in particular</a>. That code does almost the same thing we&#39;re hoping to do: call a <code>runCommand</code> function and execute <code>git rev-parse --short</code> there. With this in hand, I trimmed the code and wrote a quick function to get the short sha.</p>
+<pre><code class="language-nix">{ pkgs ? import &lt;nixpkgs&gt;{} } :
+let
+    inherit(pkgs)
+        stdenv
+        git
+        runCommand;
+in stdenv.mkDerivation {
+    pname = &quot;some-name&quot;; # name is automatically generated with `${pname}-${version}`. Setting name instead would remove the version from it.
+    src = ./.;
+
+    version = runCommand &quot;get-rev&quot; {
+        nativeBuildInputs = [ git ];
+    } &quot;git rev-parse --short HEAD &gt; $out&quot;;
+} 
+</code></pre>
+<p>I set the version to the result of a <code>runCommand</code> invocation where I run <code>git rev-parse</code>. Nix provides the special <code>$out</code> variable in <code>runCommand</code> to pipe or output the result to. When doing so, whatever we set <code>$out</code> to will be put in the variable <code>version</code>. I typed <code>nix-build</code> in my terminal thinking it would work perfectly and... An error saying the directory in the nix store where <code>runCommand</code> happens is not a git directory.</p>
+<p>I had assumed that setting <code>src = ./.</code> would copy all the files to the store before <code>runCommand</code> would run, so it would have access to the <code>.git</code> directory, but that&#39;s not how Nix does things. Instead, Nix will &quot;eagerly&quot; execute my <code>runCommand</code> function to configure the <code>version</code> key in the set before executing the derivation, meaning it will not have fetched the files yet. To add to this complexity, the Nix store runs all builds in a separate drive that cannot access any directories on the main drive. That makes a lot of sense considering how Nix wants all your builds to be totally separated and reproducible. It would defeat the point if it was allowed to play with the host file system. We&#39;ll need to find a way to work around that.</p>
+<p>You can test this limitation using the code above, replace <code>git rev-parse --short HEAD &gt; $out</code> with <code>ls ${toString ./.}</code> and run <code>nix-build</code> again. Ls will complain that the given path is not a file or directory, it&#39;s not available in the environment where nix is executed.</p>
+<h2>Copy the file over</h2>
+<p>Looking back at the code I used for inspiration, there were two very short lines I overlooked which gave an idea on how to potentially solve this: <code>srcStr = toString src;</code> on line 4 and <code>cd ${srcStr}</code> on line 12. This told me I had to get the path to the source, copy the <code>.git</code> directory in the Nix store, and run <code>git rev-parse</code> after having <code>cd</code>ed into that directory. Reading the Nix builtins docs, I founds that it was possible to use the <code>fetchGit</code> function to get files from a local git repository. Since <code>./.</code> is a link to the current working directory, I tried using that to fetch the files in the store. Let&#39;s see this in action.</p>
+<pre><code class="language-nix">{ pkgs ? import &lt;nixpkgs&gt;{} } :
+let
+    inherit(pkgs)
+        stdenv
+        git
+        runCommand
+        copyPathToStore;
+    
+    gitSrc = builtins.fetchGit { url: toString ./.; }; # Yes, I use url with an absolute file path
+in stdenv.mkDerivation {
+    pname = &quot;some-name&quot;;
+    src = ./.;
+
+    version = runCommand &quot;get-rev&quot; {
+        nativeBuildInputs = [ git ];
+    } &quot;cd ${gitSrc} &amp;&amp; git rev-parse --short HEAD &gt; $out&quot;;
+} 
+</code></pre>
+<p>Let&#39;s try <code>nix-build</code>. The <code>cd</code> command works, but <code>git</code> still complains the directory is not a <code>git</code> directory. That happens when the <code>.git</code> folder is missing in a directory or any of its parents, but that should not be the case right? I copied all the files over with <code>fetchGit</code>.</p>
+<p>Turns out, <code>fetchGit</code> does not copy the <code>.git</code> folder when it gets the files. We can test that by running <code>ls -a</code> with the directory given in the error message (Should look something like <code>722wzj4cz72v21gybky6qhw0qj4bvkc7-some-name</code>) as the first argument. The <code>.git</code> directory will be missing in the output. Going back to the docs, I found the <code>filterSource</code> and <code>copyPathToStore</code> functions could help me solve this issue. Both copy files, but the former takes a filter function to remove any unwanted files from the copy and the later is a implementation of <code>filterSource</code> using a filter function that doesn&#39;t filter out any files. Let&#39;s try using <code>copyPathToStore</code> in the code.</p>
+<pre><code class="language-nix">{ pkgs ? import &lt;nixpkgs&gt;{} } :
+let
+    inherit(pkgs)
+        stdenv
+        git
+        runCommand
+        copyPathToStore;
+    
+    src = copyPathToStore ./.;
+in stdenv.mkDerivation {
+    pname = &quot;some-name&quot;;
+    src = inherit src;
+
+    version = runCommand &quot;get-rev&quot; {
+        nativeBuildInputs = [ git ];
+    } &quot;cd ${src} &amp;&amp; git rev-parse --short HEAD &gt; $out&quot;;
+} 
+</code></pre>
+<p><code>copyPathToStore</code> copies to the entire code plus the <code>.git</code> folder and assigns the path to those file to a vatiable called <code>src</code>, no questions asked. Anything that uses the path to the <code>src</code> variable will be able to access that code. I inherit the <code>src</code> variable as the value of the <code>src</code> key in the derivation to save a few operations. If I assigned <code>src = ./.</code>, it would copy all the files <em>twice</em>, which is not optimal. This makes sure that <code>src</code> is equal to whatever path the files where copied to, so the version comes from the same files the derivation will be built with.</p>
+<h2>Reading from <code>runCommand</code></h2>
+<p>Running <code>nix-build</code>, this will still trigger an error from nix. Turns out <code>runCommand</code> outputs a file, not a string. This is for caching purposes. Nothing a <code>builtins.readFile</code> can&#39;t fix, however. After some more tinkering, I noticed I also needed to clean the result of <code>rev-parse</code> a little since it outputs with a <code>\n</code> at the end and Nix really doesn&#39;t like that. Finally, I wanted to remove the <code>cd</code> and make this one single command. Here is the final code.</p>
+<pre><code class="language-nix">{ pkgs ? import &lt;nixpkgs&gt;{} } :
+let
+    inherit(pkgs)
+        stdenv
+        git
+        runCommand
+        copyPathToStore;
+    
+    src = copyPathToStore ./.;
+    revision = runCommand &quot;get-rev&quot; {
+        nativeBuildInputs = [ git ];
+    } &quot;GIT_DIR=${src}/.git git rev-parse --short HEAD | tr -d &#39;\n&#39; &gt; $out&quot;;
+in stdenv.mkDerivation {
+    pname = &quot;some-name&quot;;
+    # Added a digit as the first character of the version to make sure to follow Nix&#39;s
+    # guidelines on the format of the version part of a derivation name.
+    version = &quot;0&quot; + builtins.readFile revision;
+
+    inherit src;
+} 
+</code></pre>
+<p>Typing <code>nix-build</code> will successfully package and build the code and we can confirm it worked by looking at the path of the package in the Nix store, which is outputted at the end of the build process. Nix generates that path by adding the name (remember, the name is equal to <code>${pname}-${version}</code>) as a suffix to the path. Here is mine when I ran the successful build: <code>/nix/store/722wzj4cz72v21gybky6qhw0qj4bvkc7-some-name-7e18f8a</code>. As we can see, the end of that path includes the <code>pname</code> of the package and a dynamically generated <code>version</code>!</p>
+<p>This was quite the journey, but thankfully this code works great and is not too bulky. Next steps: getting this into the official Nix packages?</p>
+<h2>Takeaways</h2>
+<p>The Nix language is definitely different from what I would expect coming from a functional programming background. The code I settled on is far from perfect and I&#39;m sure it could be greatly improved, but I learned a great deal from my time with it. I will leave you with a few takeaways I could have used when I first started with Nix.</p>
+<ul>
+<li>Nix functions build on top of each other. The same way <code>copyPathToStore</code> uses <code>filterSource</code>, many other functions use other packages to do their tasks. This makes the standard library of packages very easy to read and to use as inspiration when trying to do anything in Nix. Whatever you are doing, chances are there already is some function somewhere that does something similar.</li>
+<li>Derivations are attribute sets, not functions. Doing something like <code>version = &quot;something&quot;</code> means you are creating the key <code>version</code> in the set, not creating a variable. Variables can only be created in a <code>let .. in</code> statement. This means it is not possible to run a <code>runCommand</code> function without assigning to something, Nix will throw an error. They meant it when they said it was a pure language.</li>
+<li>Nix is incredibly lazy. It will not interpret any functions or commands it doesn&#39;t feel the need to. You can try that at home by trying to execute a <code>runCommand</code> that prints something to the screen without assigning the result to any variable in the derivation. Nothing will happen. Same thing if you try to read the result with <code>builtins.readFile</code>. Only when assigning it to something like <code>pname</code> or <code>version</code> will it finally execute the code. I expected these kinds of &quot;side-effect-y&quot; functions to run regardless of what the interpreter wants. On the other hand, if it did execute everything, one could imagine how installing one nix package would install all nix packages!</li>
+</ul>
+<p>This small journey into the world of dynamic versions was not an easy one, but as we learn more about Nix and how it can power the future of Replit, I am sure it will help us grow and improve. Happy hacking and, hopefully, I will see you again soon for another Nix post.</p>

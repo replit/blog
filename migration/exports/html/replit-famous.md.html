@@ -1,0 +1,35 @@
+<p><img src="https://blog.repl.it/images/following/feed.png" alt=""></p>
+<p>Replit wouldn&#39;t be Replit without our community. Our community is a global group of hackers, learners, educators, and entrepreneurs from all walks of life. It&#39;s extremely important to us that they have a space to share their work and collaborate with one another.</p>
+<p>Features like <a href="https://blog.replit.com/search">Search</a>, <a href="https://blog.replit.com/profile2">Profiles</a>, and <a href="https://blog.replit.com/publishing">Publishing</a> were all built with the goal of making the on-platform social experience better.</p>
+<p>In the past, if someone you know shared something on Replit, it would get lost in the sea of published Repls. As our community has grown and the number of published Repls has increased, it has become increasingly difficult to discover new content and keep up with the work of your friends. This shouldn&#39;t be the case. If one of my friends publishes a cool Repl, I should know about it!</p>
+<p>Enter: Following!</p>
+<p>Not only can you now follow your friends and other creators on Replit, but their social activity will be broadcasted to the new <a href="https://replit.com/~">“Following feed”</a> on your Replit homepage.</p>
+<p>This feature also gives our top builders a chance to grow their platforms and &quot;get Replit famous&quot;.</p>
+<img src="https://blog.repl.it/images/following/feed.png" alt="The Following feed" width="100%" style="width:100%"/>
+
+<h3>What shows up on the feed?</h3>
+<p>You&#39;ll now get updates from people you follow, including their latest work, what they like, and the cool people they follow</p>
+<h3>How we built it</h3>
+<p>As you may have already realized, the centerpiece of the following feature is the feed. The work required to build it can be separated into two categories:</p>
+<ul>
+<li>Building the feed backend with the help of Postgres triggers.</li>
+<li>Building the feed frontend so that users can have a nice experience viewing content from people they followed.</li>
+</ul>
+<h4>The feed backend</h4>
+<p>The first step was to create an events table in our database. This table would allow us to track actions and events associated with users (Think following, liking, forking, etc...) and query that data in an efficient manner. </p>
+<p>We initially started with 7 events however not all of them would create events viewable in the feed. In fact, some of these events would cause data to be deleted from the events table. Think  of the case where you publish a Repl and then decide to unpublish it. This would cause your Repl to disappear from your followers view.</p>
+<p>To pull this off we used PostgreSQL triggers. Mainly of two types.</p>
+<ul>
+<li>A <code>CREATE</code> trigger which creates a new event every time a new tracked action is taken.</li>
+<li>An <code>UPDATE</code> trigger which updates an existing event every time an action is canceled or modified. For example: deleting, hiding, or un-hiding a comment.</li>
+</ul>
+<h4>The feed frontend</h4>
+<p>Once we had a working feed backend we needed to take care of how the content would appear to users. What we noticed immediately was that the following event would flood the feed as it was by far the most performed action. We even had at one point a user who wrote a script to automatically follow as many users as possible.</p>
+<p>We solved this problem with with both infrastructure and user experience solutions. Sensible rate-limits prevented any user from dominating the feed, and combining similar events together into expandable cards prevented visual clutter. </p>
+<p>Finally, we directed our focus towards polishing the feed to address user feedback, a notable example being the ability to open repls in context without leaving the home page. </p>
+<h3>What&#39;s next</h3>
+<p>Now that we&#39;ve given creators the ability to build their social platforms, the next step for us is empowering creators in our community to earn from their awesome creations.</p>
+<p>This could be anything from a Replit native app store with apps for sale, to community extensions, to consumer-facing ads. We don&#39;t know exactly what the &quot;monetization&quot; avenue looks like, but we&#39;re going to be experimenting with it for the remainder of the year.</p>
+<p>We&#39;ll also keep working on making the core Replit experience <a href="https://www.youtube.com/watch?v=PsO6ZnUZI0g">better, faster, and stronger</a> while we&#39;re at it.. :)</p>
+<p>If any of this is interesting to you, feel free to check out our <a href="https://replit.com/site/careers">careers page</a> or DM me directly on Twitter <a href="https://twitter.com/roodsoren">here</a>.</p>
+<p>One last thing for those who have made it this far -- follow us on Replit below!</p>

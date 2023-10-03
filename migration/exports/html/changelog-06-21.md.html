@@ -1,0 +1,41 @@
+<p>Welcome to the June edition of our monthly changelog, where we highlight some of our big and small feature releases, user experience changes, and bug fixes!</p>
+<p>We love hearing from you! Please leave any feedback you have <a href="https://replit.canny.io/general-feedback">here</a>.</p>
+<h1>Features</h1>
+<ul>
+<li>We released the first version of our multiplayer debugger! See the <a href="https://blog.replit.com/multiplayer-debugging">blog post</a> for all the details.</li>
+<li>You can now observe other users when multiplaying by clicking on their avatar. <img src="https://blog.replit.com/images/changelog/follow-demo.gif" alt="follow demo"></li>
+<li>You can now also see which file other users are in from the filetree. *</li>
+<li>New dotfiles features:<ul>
+<li>nix repls can now use <code>~/${REPL_SLUG}/.config</code> to store their dotfiles / config files in a <a href="https://specifications.freedesktop.org/basedir-spec/basedir-spec-latest.html">XDG Base Directory Specification</a>-compliant way.</li>
+<li>ssh and fluxbox dotfiles are now available at <code>~/${REPL_SLUG}/.config/{ssh,fluxbox}</code> respectively for all repls, nix or non-nix.</li>
+</ul>
+</li>
+<li>Have you ever had the urge to download one, single file from a repl? Now you can! Just click on the three dots next to file name and hit ‘Download’ to download your file. <img src="https://blog.replit.com/images/changelog/single-file-download.gif" alt="downloading just one file. amazing."></li>
+</ul>
+<h1>User experience changes</h1>
+<ul>
+<li>We rolled out an updated profile experience. Visit any replit user&#39;s profile to see their showcased repls. We really like this <a href="https://replit.com/@LeviathanCoding?showcase=2">one</a>!</li>
+<li>The Packages tab has been updated with a fresh coat of paint. Information is now more contextual and notifications happen inline.
+<img src="https://blog.replit.com/images/changelog/packager-updates.png" alt="Packager UX update — packages expand inline now, and versions are exposed"></li>
+<li><code>.replit</code> and Secrets overrides are now evaluated more consistently in more places. In increasing order of priority:<ul>
+<li>The OS environment:<ul>
+<li>The environment baked into Polygott</li>
+<li>The environment injected by Docker</li>
+</ul>
+</li>
+<li>The nix environment</li>
+<li>The <code>.replit</code> file</li>
+<li>Secrets</li>
+</ul>
+</li>
+</ul>
+<h1>Bug fixes</h1>
+<ul>
+<li>GitHub commits should now properly attribute changes to your GitHub account, and will use a privacy email when that setting is enabled on your GitHub account.</li>
+<li>We cleaned up some extra blank space near the home screen header.</li>
+<li>Fixes around deleting team repls.</li>
+<li>The notification icon is back in its correct location.</li>
+<li>Deleting an open file could temporarily open a .env file.</li>
+<li>Users sessions expire much less frequently, keeping you logged into replit longer.</li>
+</ul>
+<p>* enabled for <a href="https://docs.replit.com/misc/explorer">explorers</a></p>

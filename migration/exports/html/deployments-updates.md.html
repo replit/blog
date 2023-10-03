@@ -1,0 +1,68 @@
+<p><img src="https://blog.replit.com/images/deployments-update/header.png" alt=""></p>
+<p>In April, we released <a href="https://replit.com/site/deployments">Replit Deployments</a>, the fastest way to go from software idea to production. We rebuilt our application hosting infrastructure for production-grade applications thanks to your feedback. In this post, we’ll highlight upgrades, bug fixes, and improvements to Deployments since initial release in April.</p>
+<h2>Replit Deployments &gt; Always On</h2>
+<p> Replit Deployments is a better and more reliable than our previous hosting option, Always On:</p>
+<ul>
+<li>Your app is hosted on Google Cloud VMs making it more reliable and stable.</li>
+<li>Isolated VM resources for your app will give you improved security and performance.</li>
+<li>Control when you release to users so you can fix your app without breaking production.</li>
+<li>All VM logs are streamed directly to the Deployments pane in the workspace.</li>
+</ul>
+<h2>2-3x Faster Time-to-Deploy since April</h2>
+<p>A primary metric we’re focused on is total time to deploy. With our improvements, Repls with a large number of packages deploy 2-3x faster.</p>
+<p><img src="https://blog.replit.com/images/deployments-update/deployment-speeds.mp4" alt="Deployments Speed Improvements"></p>
+<p>Here are the upgrades that made this possible:</p>
+<ul>
+<li><strong>Removed limits</strong>: There were <a href="https://cloudcasts.io/article/what-you-need-to-know-about-iops">IOps limits</a> set that led to performance bottlenecks when preparing your Repl to be deployed. We made builds faster by reducing limits when reading from the disk.</li>
+<li><strong>Upgraded build machines</strong>: Our machines now have more RAM and CPU.</li>
+<li><strong>Fixed bugs causing delays in the deployment process</strong>: We squashed dozens of bugs that caused slowdowns in the deployment process. A special thank you to users who brought up many of the bugs in our <a href="https://ask.replit.com/">ask forum</a>.</li>
+</ul>
+<h2>Fewer Failed Deployments</h2>
+<p>Nothing takes you out of the flow like a failed deployment. Deploying your product is the final step in bringing your idea to life, so a failed deployment feels akin to someone tripping you before you cross the finish line for a marathon.</p>
+<p>We hate failed deployments and are consistently looking for new ways to ensure it feels like magic every time you hit “deploy”. Everything should just work.</p>
+<p>Here are the bugs we’ve squashed since our early release in April:</p>
+<ul>
+<li><strong>Symlink error during build</strong>: Symlinks were not working as intended and caused some unexpected behavior.</li>
+<li><strong>Container permissions issue</strong>: Containers were previously not able to access or modify certain files or directories due to incorrectly configured permissions.</li>
+<li><strong>Snapshot error on deployment restart</strong>: Our systems now properly capture and restore container snapshots if a deployment restarted.</li>
+<li><strong>Errors that allowed you to deploy a crashing app</strong>: Crash-looping bots we’re occurring if the distance from program start to program crash was greater than 10 seconds.</li>
+<li><strong>Better support for Cloudflare Proxied DNS</strong>: We now use <a href="https://cert-manager.io/docs/configuration/acme/http01/">HTTP01 challenges</a> instead of <a href="https://letsencrypt.org/docs/challenge-types/#:~:text=TLS%2DALPN%2D01,will%20respond%20to%20validation%20requests.">ALPN01 challenges</a> in our authentication process when interacting with <a href="https://developers.cloudflare.com/dns/manage-dns-records/reference/proxied-dns-records/">Cloudflare Proxied DNS</a> (also known as Orange Cloud). This update ensures seamless integration with Cloudflare and enhances security of the authentication process.</li>
+</ul>
+<h2>Making Deployments Seamless</h2>
+<p>We have built deployments to be an all-in-one product. Building and deploying in the same place makes for a seamless experience. We continue to add and adjust features to make sure you can do it all within Replit.</p>
+<p>Here a few improvements we shipped since April:</p>
+<ul>
+<li><p><strong>Dynamic header button</strong>: You can now see the stage of your deployment and redeploy in a single click without ever opening the deployments pane.</p>
+<p><img src="https://blog.replit.com/images/deployments-update/deployments_button.mp4" alt="new deployments button"></p>
+</li>
+<li><p><strong>Switching deployment logs to NATS</strong>: NATS is a messaging system that allows for lightweight communication between different components of a system. Moving logs to NATS has helped them load significantly faster, as well as supporting live reload.</p>
+</li>
+<li><p><strong>Better logging</strong>: We now surface both application and build logs directly into the primary Deployments pane during the build process so you don’t have to switch between tabs.</p>
+<p><img src="https://blog.replit.com/images/deployments-update/better_logs.mp4" alt="Video showcasing logs"></p>
+</li>
+<li><p><strong>X-Forwarded-For Header</strong>: Deployments now support the X-Forwarded-For Header which can be used to track the originating IP address of a client connecting to a web server through a proxy or load balancer. This will help you know where your users are connecting from.</p>
+</li>
+<li><p><strong>Domains Injected as an environment variable</strong>: When a deployment is running within Replit, it can now access the domain name it is associated with through the REPLIT_DOMAINS environment variable. This can be useful for applications that need to be aware of the domain they are serving or responding to.</p>
+</li>
+</ul>
+<h2>Why you should try Deployments</h2>
+<p>Today, Replit hosts millions of applications and handles tens of billions of monthly requests. Replit is still the best platform to prototype and increasingly our builders are moving towards building real startups on Replit, <a href="ai-on-replit">many of them powered by AI</a>. With that comes the need for a hosting product that can support mission-critical applications. Deployments fill the need extremely well. Always-on doesn’t. We’ve heard the same feedback from you:</p>
+<ul>
+<li>You want separate dev and production environment so your app doesn’t break when you edit your code</li>
+<li>Always-on uptime isn’t good enough to build applications you depend on every day</li>
+<li>Your Repls run on preemptible VMs that can be restarted when demand for machines is high</li>
+</ul>
+<p>If you scroll back to the top of this blog, you’ll notice Deployments answer each and every one of these issues. And if Deployments is missing a feature, we likely have it coming down the pipeline as well.</p>
+<h2>More features coming soon…</h2>
+<p>We’ve made tons of improvements to Deployments since April, but we have many more powerful features we’re actively working on. Many of which you should be hearing about very soon. Here’s what you should keep your eyes out for:</p>
+<ul>
+<li>On-Demand hosting for pay-as-you-go pricing</li>
+<li>Autoscaling and load balancing</li>
+<li>Static hosting where you only pay for bandwidth (outbound transfer)</li>
+<li>Cron jobs to run on your schedule</li>
+<li>Custom machine shapes with configurable CPU and RAM</li>
+<li>Deploying to multiple regions to better serve users around the world</li>
+<li>More storage options: MongoDB, Redis, object storage, etc</li>
+<li>SSH to your hosted application’s machine</li>
+</ul>
+<p>If you’re looking to get started with Deployments, feel free to watch our tutorial video <a href="https://www.youtube.com/watch?v=RPpQNsNhivQ">here</a>.</p>

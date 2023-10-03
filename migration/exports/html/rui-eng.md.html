@@ -1,0 +1,199 @@
+<p>At Replit, we have a small engineering and design team supporting millions of users. Our secret is investing in good tools that make us more productive. In this blog post we&#39;ll give you an insider look into how we implemented one such tool - the Replit design system (or RUI for short).</p>
+<p>The project started as a collection of growth pains:</p>
+<ol>
+<li>Designers were stretched thin on multiple projects and they couldn&#39;t be involved in small tactical decisions</li>
+<li>UI was inconsistent across the product</li>
+<li>Reusing UI code was hard, so engineers built new ones (for example, we had 7 different Avatar components)</li>
+</ol>
+<p>So, we set to build a design system that would help us scale. The high level goals:</p>
+<ol>
+<li>Cover 90% of what we need (don&#39;t chase the very special cases)</li>
+<li>Easy, intuitive and fun to use</li>
+<li>Retain the full power of CSS when it&#39;s needed</li>
+</ol>
+<h2>Technical path</h2>
+<p>Replit&#39;s frontend is built on top of React, a very popular library for building user interfaces. The React ecosystem has dozens of libraries and toolkits for making UIs. So many, that picking one is a hard problem!</p>
+<p>Here&#39;s a list of libraries and approaches we have considered, and the pros and cons we weighed:</p>
+<h3>Styled JSX</h3>
+<p><code>styled-jsx</code> comes built-in with Next.js (which we also use), so most of Replit was styled with it.</p>
+<pre><code class="language-typescript">function AppsList(props) {
+  return (
+    &lt;ul className=&quot;list&quot;&gt;
+      &lt;AppComponent /&gt;
+      &lt;style jsx&gt;{`
+        .list {
+          color: ${props.cool ? &#39;blue&#39; : &#39;black&#39;}
+          padding: var(--spaceing-2);
+        }
+      `}&lt;/style&gt;
+    &lt;/ul&gt;
+  )
+}
+</code></pre>
+<p><em>Pros:</em></p>
+<ol>
+<li>Easy to hack together: there&#39;s nothing to import, just put the CSS next to your components.</li>
+<li>Class names communicate purpose (e.g. <code>.section</code>, <code>.title</code>)</li>
+<li>Just copy-paste CSS from anywhere</li>
+</ol>
+<p><em>Cons:</em></p>
+<ol>
+<li>Too easy to reinvent the wheel (which resulted in 7 different <code>&lt;Avatar&gt;</code> component implementations)</li>
+<li>Composition is <a href="https://replit.com/@frant1c/CssIsHard">hard and confusing</a></li>
+<li>The defaults are not app-friendly (e.g. <code>box-sizing</code>, <code>display: box</code>)</li>
+<li>Easy to have typos in CSS that can only be inspected visually (did you notice <code>--spaceing-2</code> above?)</li>
+</ol>
+<h3>Styled Components</h3>
+<p><code>styled-components</code> was the first library that pioneered a &quot;styled&quot; API: making custom React components with CSS attached. Today, other libraries support a similar way of attaching CSS to components.</p>
+<pre><code class="language-typescript">const AppsList = styled.ul((props) =&gt; {
+  color: props.cool ? &#39;blue&#39; : &#39;black&#39;,
+  padding: tokens.spacing2;
+});
+</code></pre>
+<p><em>Pros:</em></p>
+<ol>
+<li>Can use TypeScripted APIs (typecheck, IDE support)</li>
+<li>Components have semantic names (good for readability)</li>
+<li>Extending components is easy (e.g. <code>styled(AppList)</code>)</li>
+</ol>
+<p><em>Cons:</em></p>
+<ol>
+<li>Cumbersome for rapid prototyping - need to define intermediate components and use props to customize styling</li>
+</ol>
+<h3>Tailwind</h3>
+<p>Tailwind has gained a lot of momentum and is very popular among front-end engineers. The utility classes seem unorthodox and hard to use initially, but once you get used to it it&#39;s actually very fun to style components with Tailwind.</p>
+<pre><code class="language-typescript">function AppsList(props) {
+  return (
+    &lt;ul className={`p-2 ${props.cool ? &#39;fg-blue&#39; : &#39;fg-black&#39;}`}&gt;
+      &lt;AppComponent /&gt;
+    &lt;/ul&gt;
+  )
+}
+</code></pre>
+<p><em>Pros:</em></p>
+<ol>
+<li>Utility classes are addictively productive</li>
+<li>Constrained space to choose from</li>
+<li>Densely packed code</li>
+</ol>
+<p><em>Cons:</em></p>
+<ol>
+<li>Learning curve - need to remember the classnames</li>
+<li>Composition suffers the same CSS problems</li>
+<li>Hard to figure the purpose of divs (e.g. <code>p-2 flex-row</code> is what?)</li>
+<li>All starts from basic HTML defaults</li>
+</ol>
+<h3>Style props (like Chakra UI)</h3>
+<p>Many design systems start from building a &quot;universal React component&quot;, e.g. <code>&lt;Box&gt;</code> in Chakra UI. Other components then build on top of it, adding and removing some props.</p>
+<pre><code class="language-typescript">function AppsList(props) {
+  return (
+    &lt;Box padding={2} color={props.cool ? &#39;blue&#39; : &#39;black&#39;}&gt;
+      &lt;AppComponent /&gt;
+    &lt;/Box&gt;
+  )
+}
+</code></pre>
+<p><em>Pros:</em></p>
+<ol>
+<li>Well typed API</li>
+<li>Control over which customizations are allowed (e.g. could allow <code>padding</code> but not <code>color</code>)</li>
+<li>Could handle things like accessibility for us</li>
+</ol>
+<p><em>Cons:</em></p>
+<ol>
+<li>Domain and styling props mixed together</li>
+<li>Raw CSS power is hard to reach</li>
+<li>Composing conditional props is awkward</li>
+<li>Making extensible components requires props spreading</li>
+</ol>
+<h3>CSS prop (Emotion)</h3>
+<pre><code class="language-typescript">function AppsList(props) {
+  return (
+    &lt;div css={{padding: &#39;var(--spacing-2)&#39;, color: props.cool ? &#39;blue&#39; : &#39;black&#39;}}&gt;
+      &lt;AppComponent /&gt;
+    &lt;/div&gt;
+  )
+}
+</code></pre>
+<p><em>Pros:</em></p>
+<ol>
+<li>Easy to hack</li>
+<li><a href="https://replit.com/@frant1c/CssIsEasierWithEmotion">Intuitive CSS composition</a></li>
+</ol>
+<p><em>Cons:</em></p>
+<ol>
+<li>Requires Babel config change</li>
+<li>CSS prop is &quot;magic&quot;</li>
+<li>Inline CSS can get verbose</li>
+</ol>
+<h3>String literals vs Objects</h3>
+<p>Emotion (and many other libraries) support 2 ways of defining CSS:</p>
+<p><strong>String literals:</strong></p>
+<pre><code class="language-js">css={css`
+  color: ${props.cool ? &#39;blue&#39; : undefined};
+  padding: var(--spaceing-2);
+`}
+</code></pre>
+<p><em>Pros</em>: easy to copy-paste;<br><em>Cons</em>: typos, string interpolation awkwardness</p>
+<p><strong>JavaScript Objects:</strong></p>
+<pre><code class="language-js">css={{
+  padding: &#39;var(--spacing-2)&#39;, 
+  color: props.cool ? &#39;blue&#39; : &#39;black&#39;,
+  &#39;&amp;:hover&#39;: {
+
+  },
+}}
+</code></pre>
+<p><em>Pros</em>: TypeScript, can do some pre-processing with code;<br><em>Cons</em>: hard to copy-paste, more keypresses to type out</p>
+<h1>RUI API</h1>
+<p>In the end we landed on a system that&#39;s using Emotion with object-like styles, has a basic <code>&lt;View&gt;</code> primitive, and provides tailwind-like utility traits that can be mixed in.</p>
+<p>Here&#39;s an example:</p>
+<pre><code class="language-typescript">function AppsList(props) {
+  return (
+    &lt;View tag=&quot;ul&quot; css={[
+      rcss.p(2), rcss.rowWithGap(1), 
+      rcss.color.foregroundDimmer, 
+      props.cool &amp;&amp; rcss.color.accentPrimaryDimmer
+    ]}&gt;
+      &lt;AppComponent /&gt;
+    &lt;/View&gt;
+  )
+}
+</code></pre>
+<ul>
+<li><code>View</code> is our basic building block. Inspired by React Native Web, it has a bunch of basic styles applied, e.g. <code>display: flex</code>, <code>box-sizing: border-box</code>, etc. <code>View</code> accepts an optional <code>tag</code> prop that makes sure the component is rendered as an appropriate semantic HTML element.</li>
+<li>The <code>css</code> prop is powered by Emotion. It accepts an object or an array of objects that contain CSS. Thanks to TypeScript support, we get a great IDE integration and safety guarantees (no more typos!)</li>
+<li><code>rcss</code> (stands for Replit CSS) is a set of utilities that are commonly used, like color, padding, alignment, etc.</li>
+</ul>
+<p>The utilities are super useful and have replaced most of our old &quot;layout components&quot;. For example, we have a utility called <code>rcss.rowWithGap</code> that aligns children components in a row with a gap between them. In the past, we used a special <code>&lt;VStack&gt;</code> component for that. Using the utility is much nicer because it can be mixed into component style without making the React tree more complex.</p>
+<p>Here&#39;s another example. As you can see below, we can &quot;mix-in&quot; a bunch of shared styles (like interactive list item), and Emotion makes sure we can override bits we want to customize:</p>
+<pre><code class="language-typescript">function Button({ big, caption, className }) {
+  return (
+    &lt;View
+      tag=&quot;button&quot;
+      css={[
+        buttonReset,
+        interactive.listItem,
+        rcss.p(big ? 8 : 4),
+        rcss.borderRadius(8),
+        { alignSelf: &#39;start&#39; },
+      ]}
+      className={className}
+    &gt;
+      {caption}
+    &lt;/View&gt;
+  );
+}
+</code></pre>
+<p>If needed, the new <code>&lt;Button&gt;</code> can also be styled with <code>css</code> prop: <code>&lt;Button css={{color: red}} /&gt;</code> (that&#39;s why we need to pipe <code>className</code> — Emotion is a little unintuitive here).</p>
+<h2>Our experience so far</h2>
+<p>It&#39;s been ~ 4 months since we started using RUI and our experience has mainly been very positive. Engineers love the new system and feel productive from day one.</p>
+<p>The IDE support means that the APIs are discoverable and type-safe, so we have more confidence than ever shipping new code.</p>
+<p>Alongside the design system we&#39;ve also built an internal page that has component examples and documentation (generated from source code).</p>
+<p><img src="./images/rui/eng/ui-page.png" alt="RUI component library: components and documentation in one place"></p>
+<p>All our new code is written using RUI, and we opportunistically upgrade the old <code>&lt;styled jsx&gt;</code>, which results in much less code.</p>
+<h2>Acknowledgements</h2>
+<p>Big props to Ashlynn for brainstorming the API and implementation ideas and Barron for setting the design system principles principles and being a kick-ass designer-who-codes.</p>
+<blockquote>
+<p>We expect that real success will only be achieved through close collaboration between system-sensitized visual and conceptual designers and design-centered software engineers and managers.<br>— Designing Visual Interfaces, 1995, Sun Microsystems</p>
+</blockquote>

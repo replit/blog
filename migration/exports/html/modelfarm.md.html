@@ -1,0 +1,17 @@
+<p><img src="https://blog.repl.it/images/modelfarm/modelfarm-cover.gif" alt=""></p>
+<p>At Replit, we continue to ship features with a unique north star in mind: providing the shortest path from idea to software running in production. Last week’s <a href="https://blog.replit.com/autoscale">Autoscaling and Static Deployments</a> announcement was another key step in building an end-to-end platform that supports scalable, production-ready projects. Today, we announce <strong>Replit ModelFarm</strong>, the fastest and safest way to build Generative AI applications.</p>
+<p>You can now build Gen AI apps without the hassle of API key management – Replit ModelFarm natively supports secure access to 3rd-party Gen AI providers. Developers will be able to focus only on building, without having to worry about their <a href="https://www.vice.com/en/article/93kkky/people-pirating-gpt4-scraping-openai-api-keys">API keys leaking</a>. In the future, we will also provide an integrated billing system with support for quota limits, alarms, and more. And if you want to use any additional APIs, our <a href="https://blog.replit.com/keeping-your-api-keys-safe">Secrets feature</a> makes it safe and straightforward.</p>
+<p>Through October 15th, all our Hacker and Pro subscribers will have <strong>free access to a selection of Gen AI models</strong> offered by <a href="https://cloud.google.com/vertex-ai/docs/generative-ai/learn/overview">Google Cloud Vertex AI</a>. All the models are accessible both from the development environment and from any deployed app, just by installing the Replit AI libraries in <a href="https://docs.replit.com/ai/model-farm/python">Python</a> or <a href="https://docs.replit.com/ai/model-farm/typescript">JavaScript/TypeScript</a>.</p>
+<p>Writing your first Gen AI app is as easy as:</p>
+<pre><code class="language-python">from replit.ai.modelfarm import CompletionModel
+
+model = CompletionModel(&quot;text-bison&quot;)
+prompts = [&quot;What is the best way to learn AI?&quot;]
+completion = model.complete(prompts, max_output_tokens=50, temperature=0.2)
+
+print(completion.responses[0].choices[0].content)
+</code></pre>
+<p>Replit ModelFarm supports chat models, code models, and text embeddings. To find out more, <a href="https://docs.replit.com/ai/model-farm/">check out our documentation</a> or try out our <a href="https://replit.com/@replit/ModelFarm-Bun-Chat?v=1#README.md">sample app</a>.</p>
+<p><img src="https://blog.repl.it/images/modelfarm/demo2.mp4" alt="demo video"></p>
+<p>The speed of adoption of Gen AI has reached a scale never witnessed before in the tech world. In our recent <a href="https://blog.replit.com/ai-on-replit">State of AI Development post</a>, we report 80% quarter-on-quarter growth in the number of Gen AI projects created on Replit. We don’t expect this growth to slow down anytime soon – if anything, the energy that AI builders have been pouring into their projects never ceases to amaze us. Now, we want <strong>every</strong> software creator to turn into an AI software creator.</p>
+<p>Generative AI has sparked the imagination of millions already. We can’t wait to see what you will build with Replit ModelFarm!</p>

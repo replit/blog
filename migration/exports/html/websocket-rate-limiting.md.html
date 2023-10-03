@@ -1,0 +1,108 @@
+<p><a href="https://en.wikipedia.org/wiki/Rate_limiting">Rate limiting</a> is standard
+practice for services offering an API. It&#39;s used for both protecting against bad
+actors, for example, attempting
+<a href="https://en.wikipedia.org/wiki/Denial-of-service_attack">DOS</a> attacks and to
+simply enforce limits on the service. There are many resources on the web on
+how to implement a rate limiter in your favorite language/stack. However, I
+couldn&#39;t find anything on how to rate limit Websocket connections (they differ in that they are persistent connections).[](preview end)</p>
+<p>If you&#39;re implementing an HTTP API rate limiter and your service endpoint is a
+single server then it&#39;s pretty simple -- you keep an in-memory variable that you
+increment. Things get trickier, however, when you&#39;re serving requests from multiple
+servers. That&#39;s when you start needing a central shared &quot;state&quot;. For this, most
+developers use <a href="http://redis.io">Redis</a>. In fact, the rate limiting use
+case is so prevalent in Redis that it gets a mention on the docs for the
+<a href="http://redis.io/commands/INCR">INCR</a> function:</p>
+<pre><code>FUNCTION LIMIT_API_CALL(ip)
+ts = CURRENT_UNIX_TIME()
+keyname = ip+&quot;:&quot;+ts
+current = GET(keyname)
+IF current != NULL AND current &gt; 10 THEN
+    ERROR &quot;too many requests per second&quot;
+ELSE
+    MULTI
+        INCR(keyname,1)
+        EXPIRE(keyname,10)
+    EXEC
+    PERFORM_API_CALL()
+END
+</code></pre>
+<p>The requirement here is to limit calls to 10 calls per second per IP address. So
+a key is constructed by concatenating the user&#39;s IP address with the current
+timestamp. This is then incremented with every call and checked to make sure
+they haven&#39;t exceeded the limit. Simple enough (you can also implement this using
+your favorite language and Redis library).</p>
+<p>In our case, our <a href="/site/api">code execution API</a> gives our
+customers and users an HTTP and a Websocket interface. The reason you&#39;d
+need a persistent connection is to build a <a href="/site/blog/swift">stateful
+interpreter/REPL</a>. But persistent connections costs us system
+resources because we need to start a container and an interpreter/compiler
+process that waits for the next command to execute. For this reason we have to
+enforce a limit on concurrent open connections. The challenge with this is
+implementing it
+for a distributed service (we serve our users from different servers with no
+centralized server managing state). As we&#39;ve seen above, Redis is the go-to
+technology to solve this problem. However, our use case differs in that we don&#39;t
+limit calls for a certain time interval, instead our limit is one the total number of
+open connections at any given time.</p>
+<p>The first solution that came to mind:</p>
+<ol>
+<li>Have every server store and update in Redis the current number of connections
+<em>per user</em> they&#39;re handling</li>
+<li>Every time a request comes in, we aggregate the number of connections for a
+given user that all servers are handling and check it against the limits
+imposed by our service</li>
+</ol>
+<p>More concretely, here is how this can be implemented:</p>
+<ol>
+<li>Servers are assigned unique IDs (this could be their IP addresses or what have
+  you)</li>
+<li>Servers maintain their connection count in a key made up of their unique id
+  and the user id: <code>customer-limit-{userId}:{serverUid}</code></li>
+<li>Maintaining a count is done by simply constructing the key and
+  incrementing/decrementing it on every connection/disconnection
+  respectively</li>
+<li>Count aggregation for a given user is done by using the Redis pattern
+  matching feature: <code>KEYS customer-limit-{userId}:*</code> and then <code>MGET</code> to get all
+  the counts</li>
+<li>Finally sum the counts and check it against the limits imposed by our service
+  for every incoming request for every user</li>
+</ol>
+<p>This serves our purpose but it has a fundamental flaw. One of the basics in
+designing distributed systems is to plan for failure -- but this assumes that
+our servers never fails. If a server goes down (or if the network fails) then it
+never gets a chance to decrement it&#39;s user count and we have zombie &quot;concurrent
+users&quot; counted on our customers for ever. Oops.</p>
+<p>To handle this I took a similar approach to Redis -- using the <code>EXPIRE</code> function
+to set an expiration time on our keys. But since we care about the total count
+we can&#39;t just ignore older keys. We need to constantly refresh them (something
+similar to the <a href="https://en.wikipedia.org/wiki/Memory_refresh">DRAM refresh
+process</a>):</p>
+<pre><code class="language-go">/* starts a goroutine that continuously refreshes keys owned by us */
+func refresher(pool Pool) {
+    go func() {
+        for {
+            // Grab a redis connection
+            conn := pool.Get()
+            // Get all keys that is &quot;owned&quot; by this server
+            keys, err := redis.Strings(conn.Do(&quot;KEYS&quot;, &quot;*:&quot;+serverUid))
+            if err != nil {
+                debug(&quot;error refreshing keys&quot;, err)
+            } else {
+                for _, key := range keys {
+                    // Expire in 10 minutes unless refreshed (we do it every 3 minutes)
+                    conn.Do(&quot;EXPIRE&quot;, key, 10*60)
+                }
+            }
+
+            conn.Close()
+
+            // Sleep for three minutes and refresh again.
+            time.Sleep(time.Minute * 3)
+        }
+    }()
+}
+</code></pre>
+<p>This function starts a goroutine that continuously refreshes all keys owned by the
+server/process. If a server goes down then its keys will be expired (deleted) in 10
+minutes. And the connection count will be correct again!</p>
+<p>This works pretty well in practice but <a href="https://twitter.com/amasad">let me know</a> if you see any flaws in it 😊</p>

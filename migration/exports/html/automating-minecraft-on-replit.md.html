@@ -1,0 +1,478 @@
+<p>Replcraft is a library that allows you to automate parts of your base on a
+Minecraft server using code, directly from a repl. Replcraft allows you to
+get and place blocks, check for entities, move and craft items, read
+redstone, and more.</p>
+<p>This tutorial will cover a number of small projects you can build using
+Replcraft. If you&#39;d be interested in joining an official Replit community
+Minecraft server, seeing more Minecraft-related content in the future, or you just
+want to leave general feedback, you can do so by commenting on
+<a href="https://replit.com/@LeeFleming/Automating-Minecraft-on-Replit#README.md">this repl</a>.</p>
+<h2>Getting started</h2>
+<p>Before you begin, you&#39;ll need a <a href="https://replit.com/login">Replit account</a> and a Minecraft account.
+To get started, fork the <a href="https://replit.com/@LeeFleming/Replcraft#readme.md">Replcraft template</a> and join a Minecraft server
+running the Replcraft plugin. Next, create a special <em>structure</em> made up of a frame
+of iron blocks:</p>
+<p><img src="https://blog.replit.com/images/automating-minecraft-on-replit/01_empty_5x5x5_structure.png" alt="A 5x5x5 structure"></p>
+<p>After you&#39;re done building the structure, place a sign on the side with the lines
+<code>REPL</code>, two blank lines, and your Minecraft username. Sneak-interact with the sign
+to receive your token.</p>
+<p><img src="https://blog.replit.com/images/automating-minecraft-on-replit/02_structure_sign.png" alt="The contents of the sign on the structure"></p>
+<p>You can click your token in chat to copy it. Paste your newly acquired token into a
+<a href="https://docs.replit.com/tutorials/08-storing-secrets-and-history">secret</a> called <code>token</code>. You&#39;re now ready to go.</p>
+<h2>Creating things</h2>
+<p>You can now perform all sorts of actions from your repl. To start off, lets
+place some blocks inside the structure. You&#39;ll need to provide the materials by
+placing a chest directly adjacent to any part of your structure and filling it
+with the required blocks. That chest is now considered part of the structure&#39;s
+inventory, and the <code>setBlock(x, y, z, block)</code> method will pull from it as
+necessary.</p>
+<pre><code class="language-javascript">const ReplCraft = require(&#39;./lib/replcraft.js&#39;);
+let client = new ReplCraft();
+
+(async () =&gt; {
+  await client.login(process.env.token);
+  client.setBlock(0, 0, 0, &#39;minecraft:cobblestone&#39;); // !
+})();
+</code></pre>
+<p><img src="https://blog.replit.com/images/automating-minecraft-on-replit/03_5x5x5_with_cobble.png" alt="A block of cobblestone placed in the structure"></p>
+<h3>Tips</h3>
+<ul>
+<li>All coordinates are relative to your structure.
+<code>(0, 0, 0)</code> is located in the northwest corner.</li>
+<li>To figure out what block string to use, you can use the <code>getBlock(x, y, z)</code> method:<pre><code class="language-javascript">// ...
+let block = await client.getBlock(0, 0, 0);
+console.log(block);
+</code></pre>
+</li>
+<li><code>setBlock</code> will break any block already at the given coordinates and deposit
+all dropped items into any available chest connected to the structure. An
+alternative form of the API is also available to specify a specific chest
+inside the structure to use:
+<code>setBlock(x, y, z, block, sourceChestX, scy, scz, destinationChestX, dcy, dcz)</code>.</li>
+<li>To break a block without placing a new one, you can use the <code>minecraft:air</code> psuedoblock:
+<code>setBlock(0, 0, 0, &#39;minecraft:air&#39;)</code></li>
+</ul>
+<h2>Watching for block updates</h2>
+<p><code>getBlock</code> is useful, but what if we need to know about block changes
+immediately? Replcraft provides a set of event-based and poll-based update
+streams that you can subscribe to with the <code>watch</code> and <code>poll</code> methods. When a
+subscribed block changes, the client will emit a <code>block update</code> event.</p>
+<p>Lets use <code>poll</code> to efficiently gather lots of cobblestone:</p>
+<pre><code class="language-javascript">// ...
+client.poll(0, 0, 0);
+client.on(&#39;block update&#39;, (cause, block, x, y, z) =&gt; {
+  if (block == &#39;minecraft:cobblestone&#39;) {
+    // `air` is a special block that represents no block.
+    // We can place it for its side effect of breaking any existing block.
+    client.setBlock(0, 0, 0, &#39;minecraft:air&#39;);
+  }
+});
+</code></pre>
+<p><img src="https://blog.replit.com/images/automating-minecraft-on-replit/04_cobblestone_miner.gif" alt="A cobblestone generator. The cobblestone disappears frequently."></p>
+<p>Now whenever our cobblestone generator generates a new block, we can
+immediately break it without having to constantly hit the API with <code>getBlock</code> or
+<code>setBlock</code> requests. However, <code>watch</code> and <code>poll</code> come with some respective downsides:</p>
+<ul>
+<li>Due to API limitations, <code>watch</code> is only capable of catching certain
+kinds of changes. It&#39;s useful for when you need to see a known-good
+type of change fast.</li>
+<li><code>poll</code> will catch all types of changes by constantly re-examining all
+polled blocks. Repolling every single block would be slow, so only
+one block is examined per tick. The more blocks you poll, the longer it
+takes for you to be notified about changes to any individual block.
+Note that <code>poll</code> can miss changes if a block is changed and then
+changed back - for example, if we&#39;re replacing broken cobblestone
+faster than we can check for it.</li>
+<li>Using both together can be a powerful tool.</li>
+</ul>
+<h2>Checking for entities</h2>
+<p>Another thing we can automate is checking for entities inside your region.
+Maybe you have someone that you want to play a prank on: when they enter
+your structure, it should trap them! Anybody else should be left alone, though.</p>
+<p>Lets first conceal our structure so that they don&#39;t suspect a thing:</p>
+<p><img src="https://blog.replit.com/images/automating-minecraft-on-replit/05_concealed_structure.png" alt="A large structure with a hallway built into it"></p>
+<p>Then, to figure out what blocks we&#39;ll need to place, lets run a utility script:</p>
+<pre><code class="language-javascript">client.watchAll();
+client.on(&#39;block update&#39;, (cause, block, x, y, z) =&gt; {
+  console.log({ cause, block, x, y, z });
+});
+</code></pre>
+<p>And then place some blocks:</p>
+<pre><code>{ cause: &#39;place&#39;, block: &#39;minecraft:cobblestone&#39;, x: 1, y: 1, z: 1 }
+{ cause: &#39;place&#39;, block: &#39;minecraft:cobblestone&#39;, x: 1, y: 2, z: 1 }
+</code></pre>
+<p>Excellent. Let&#39;s prepare our trap and await our victim...</p>
+<pre><code class="language-javascript">const ReplCraft = require(&#39;./lib/replcraft.js&#39;);
+const sleep = ms =&gt; new Promise(res =&gt; setTimeout(res, ms));
+(async () =&gt; {
+  let client = new ReplCraft();
+  await client.login(process.env.token);
+
+  while(true) {
+    let entities = await client.getEntities();
+    let has_victim = entities.some(entity =&gt; {
+      return (
+        entity.type == &#39;PLAYER&#39; &amp;&amp; // Look for players...
+        entity.name == &#39;eelblock&#39; &amp;&amp; // Named &quot;eelblock&quot;...
+        entity.x &lt;= 1 // And then wait for them to get all the way inside
+      )
+    });
+    if (has_victim) break; // We&#39;ve got him!
+    await sleep(1000); // Nobody here, let&#39;s check again later...
+  }
+
+  // The trap is sprung!
+  client.setBlock(1, 1, 1, &#39;minecraft:obsidian&#39; /* indestructible! */);
+  client.setBlock(1, 2, 1, &#39;minecraft:obsidian&#39;);
+})();
+</code></pre>
+<p><img src="https://blog.replit.com/images/automating-minecraft-on-replit/06_hallway_trapped.png" alt="A hallway blocked off with obsidian"></p>
+<p>Curses! Foiled again!</p>
+<p>Though it seems our trap isn&#39;t very useful after all.
+They&#39;ve just teleported <code>/home</code> - oops!</p>
+<h2>Listening for redstone</h2>
+<p>Unfortunately, <code>getEntities()</code> is an expensive API call! To make it cheaper, we
+can utilize regular old pressure plates and redstone. <code>watch</code> is capable of
+observing redstone-related block updates, which allows us to efficiently watch
+redstone-enabled blocks such as a redstone lamp.</p>
+<p>First, lets use our utility script again and place a redstone lamp:</p>
+<pre><code>{ cause: &#39;place&#39;, block: &#39;minecraft:redstone_lamp[lit=false]&#39;, x: 0, y: 0, z: 1 }
+</code></pre>
+<p><img src="https://blog.replit.com/images/automating-minecraft-on-replit/07_pressure_plate_lamp.png" alt="A pressure plate and a redstone lamp inside the concealed structure"></p>
+<p>We can now <code>watch</code> that lamp, and take an action when something triggers the pressure plate.</p>
+<pre><code class="language-javascript">// ...
+await client.watch(0, 0, 1);
+client.on(&#39;block update&#39;, async (cause, block, x, y, z) =&gt; {
+  if (block == &#39;minecraft:redstone_lamp[lit=true]&#39;) {
+    // Spring the trap! Or do other things!
+  }
+});
+</code></pre>
+<h2>Automatic crafting</h2>
+<p>Lets automate some crafting. Replcraft provides the <code>craft(x, y, z, itemRef[])</code>
+method which takes a destination for the crafted item and nine <em>item
+references</em>. An item reference is an object of the form <code>{ x, y, z, index }</code>,
+referring to the coordinates of the chest containing the ingredient and the slot
+index in that chest. The list of item references must be nine nullable item
+references long, and corresponds to a 3x3 crafting table grid.</p>
+<p>In order to <em>find</em> item references, you can use the <code>getInventory(x, y, z)</code>
+method, which returns an array of <code>{ index, type, amount }</code> describing the items
+in a given container.</p>
+<p>Here&#39;s our setup:
+<img src="https://blog.replit.com/images/automating-minecraft-on-replit/08_crafting_booth.png" alt="A structure containing three chests"></p>
+<p>First of all, let&#39;s define some recipes. A quick word of warning: recipes
+must <em>exactly</em> match their vanilla definitions, and can&#39;t be shifted around
+like they can in a regular crafting table. Try moving the recipe to the left
+or flipping it horizontally if you&#39;re having trouble getting it to work.</p>
+<pre><code class="language-javascript">let cobble = &#39;minecraft:cobblestone&#39;;
+let stick = &#39;minecraft:stick&#39;;
+let recipes = {
+  sword: [
+    cobble, null, null,
+    cobble, null, null,
+    stick , null, null
+  ],
+  // ...
+}
+</code></pre>
+<p>Then, describe where to find the items:</p>
+<pre><code class="language-javascript">let items = {
+  &#39;minecraft:cobblestone&#39;: {
+    location: [0, 0, 1],
+    stacks: await client.getInventory(0, 0, 1)
+  },
+  &#39;minecraft:stick&#39;: {
+    location: [0, 0, 2],
+    stacks: await client.getInventory(0, 0, 2)
+  }
+}
+</code></pre>
+<p>And now, put it all together. For each item, look up its ingredient in the
+items table, do some quick math to make sure there&#39;s enough, then commit the
+crafting operation:</p>
+<pre><code class="language-javascript">const ReplCraft = require(&#39;./lib/replcraft.js&#39;);
+(async () =&gt; {
+  let client = new ReplCraft();
+  await client.login(process.env.token);
+
+  let cobble = &#39;minecraft:cobblestone&#39;;
+  let stick = &#39;minecraft:stick&#39;;
+  let tools = {
+    sword: [
+      cobble, null, null,
+      cobble, null, null,
+      stick , null, null
+    ],
+    pickaxe: [
+      cobble, cobble, cobble,
+      null  , stick , null  ,
+      null  , stick , null
+    ],
+    shovel: [
+      cobble, null, null,
+      stick , null, null,
+      stick , null, null
+    ],
+    axe: [
+      cobble, cobble, null,
+      cobble, stick , null,
+      null  , stick , null
+    ]
+  };
+
+  let items = {
+    &#39;minecraft:cobblestone&#39;: {
+      location: [0, 0, 1],
+      stacks: await client.getInventory(0, 0, 1)
+    },
+    &#39;minecraft:stick&#39;: {
+      location: [0, 0, 2],
+      stacks: await client.getInventory(0, 0, 2)
+    }
+  }
+
+  for (let [tool, ingredients] of Object.entries(tools)) {
+    console.log(&quot;Crafting&quot;, tool);
+    await client.craft(0, 0, 0, ingredients.map(itemType =&gt; {
+      if (itemType == null) return null;
+
+      let item = items[itemType].stacks.filter(item =&gt; {
+        return item.type == itemType &amp;&amp; item.amount &gt; 0;
+      })[0];
+      if (!item) throw new Error(`Out of ${itemType}`);
+      item.amount -= 1;
+
+      let [x, y, z] = items[itemType].location;
+      return { index: item.index, x, y, z };
+    }));
+  }
+})();
+</code></pre>
+<p><img src="https://blog.replit.com/images/automating-minecraft-on-replit/09_crafting_results.png" alt="Four crafted tools in a chest"></p>
+<p>Excellent! This script will only make one of each tool, but you can modify it to
+watch the chest and keep it restocked. You could also experiment with automating
+the entire pipeline, running a tree farm and cobblestone generator to supply the
+raw materials.</p>
+<h2>Advanced building: Cut and paste</h2>
+<p>Are you bored of your current environment? Let&#39;s move your entire base somewhere
+else! To make this scheme even more interesting, we&#39;ll use minecarts to
+automatically move lots of material long distances.</p>
+<p>Here&#39;s our setup:</p>
+<p><img src="https://blog.replit.com/images/automating-minecraft-on-replit/10_two_structures.png" alt="Two structures connected via minecart"></p>
+<p>In order to move our house, we&#39;re going to check what each block is, remove the
+block, wait for the minecart to transport it, and finally place it in the other
+structure. We&#39;ll also need to make two seperate clients, one for each structure.</p>
+<p>To iterate the whole structure, we can use the <code>getSize()</code> API to retrieve its
+interior dimensions. Then, for each block, move it to the other structure. This
+means we&#39;ll have to break it, wait for the minecart to transport it, and then
+place it again on the other side.</p>
+<p>Let&#39;s try it:</p>
+<pre><code class="language-javascript">const ReplCraft = require(&#39;./lib/replcraft.js&#39;);
+
+const sleep = ms =&gt; new Promise(res =&gt; setTimeout(res, ms));
+let sourceClient = new ReplCraft();
+let destClient = new ReplCraft();
+
+(async () =&gt; {
+  await sourceClient.login(process.env.tokenSource);
+  await destClient.login(process.env.tokenDest);
+
+  let [size_x, size_y, size_z] = await destClient.getSize();
+
+  for (let y = 0; y &lt; size_y; y++) {
+    for (let x = 0; x &lt; size_x; x++) {
+      for (let z = 0; z &lt; size_z; z++) {
+        let block = await sourceClient.getBlock(x, y, z);
+        await sourceClient.setBlock(x, y, z, &#39;minecraft:air&#39;);
+        // Wait for the minecart to make a roundtrip.
+        // If you&#39;re particularly inventive, you can figure out how to
+        // use redstone signals or container checking to determine when
+        // the items have arrived, or use more minecarts to deliver them faster.
+        await sleep(5000);
+        try {
+         await destClient.setBlock(x, y, z, block);
+        } catch(ex) {
+         console.log(`Failed to move block at ${x} ${y} ${z}: ${ex}`);
+        }
+      }
+    }
+  }
+})()
+</code></pre>
+<p>Let&#39;s try it!</p>
+<p><video controls autoplay muted loop src="https://blog.replit.com/images/automating-minecraft-on-replit/11_structure_timelapse.webm" alt="A timelapse of one structure's contents being moved into the other"></video></p>
+<p>It works! Unfortunantly, it&#39;s not perfect and we&#39;ve lost some glass blocks:</p>
+<pre><code>Error: invalid operation: No GLASS available in any attached chests. @ (0, 1, 2)
+Error: invalid operation: No GLASS available in any attached chests. @ (2, 1, 0)
+Error: invalid operation: No GLASS available in any attached chests. @ (2, 1, 4)
+</code></pre>
+<p>When breaking blocks, normal Minecraft rules apply. Stone becomes cobblestone,
+and glass shatters. You&#39;ll have to find an alternate source of glass, or accept
+the lost blocks. The roof blocks have also slightly deformed because stairs
+change their connections when their neighbors are broken. We could fix this
+by scanning the whole structure in advance.</p>
+<h2>Advanced building: Drawing images</h2>
+<p>Lets try something a little more artistic. Start off with a <code>16</code>x<code>1</code>x<code>16</code>
+ structure, and add at least four stacks of each color of wool to chests
+ connected to the structure.
+<img src="https://blog.replit.com/images/automating-minecraft-on-replit/12_empty_wool_canvas.png" alt="A pancake-shaped structure that looks a bit like a painting frame"></p>
+<p>Now we&#39;ll need to figure out what color the various wool blocks are.
+<a href="https://gaming.stackexchange.com/a/47214">This answer</a> provides a list we can use. Let&#39;s convert that into a
+more useful format. We can use this <a href="https://regex101.com/r/9ZjR4H/1">regular expression and replacement rule</a>
+to convert the list into psuedo-json:</p>
+<p><img src="https://blog.replit.com/images/automating-minecraft-on-replit/13_regex101.png" alt="A regex in an editor. See above link for contents."></p>
+<p>Then we can convert our psuedo-json into actual json and then from an array into an
+object by writing a bit of javascript around it. Note that we&#39;ve split our hex
+color into three hex numbers, and then added <code>0x</code> in front of them so that
+javascript will recognize them as numeric hex literals.</p>
+<pre><code class="language-javascript">console.log(JSON.stringify(Object.fromEntries([
+  [&quot;White&quot;, 0xe4, 0xe4, 0xe4],
+  [&quot;Light Gray&quot;, 0xa0, 0xa7, 0xa7],
+  [&quot;Dark Gray&quot;, 0x41, 0x41, 0x41],
+  [&quot;Black&quot;, 0x18, 0x14, 0x14],
+  [&quot;Red&quot;, 0x9e, 0x2b, 0x27],
+  [&quot;Orange&quot;, 0xea, 0x7e, 0x35],
+  [&quot;Yellow&quot;, 0xc2, 0xb5, 0x1c],
+  [&quot;Lime Green&quot;, 0x39, 0xba, 0x2e],
+  [&quot;Green&quot;, 0x36, 0x4b, 0x18],
+  [&quot;Light Blue&quot;, 0x63, 0x87, 0xd2],
+  [&quot;Cyan&quot;, 0x26, 0x71, 0x91],
+  [&quot;Blue&quot;, 0x25, 0x31, 0x93],
+  [&quot;Purple&quot;, 0x7e, 0x34, 0xbf],
+  [&quot;Magenta&quot;, 0xbe, 0x49, 0xc9],
+  [&quot;Pink&quot;, 0xd9, 0x81, 0x99],
+  [&quot;Brown&quot;, 0x56, 0x33, 0x1c],
+].map(([color, r, g, b]) =&gt; {
+  return [
+    &#39;minecraft:&#39; + color.toLowerCase().replace(/\s/, &#39;_&#39;) + &#39;_wool&#39;,
+    [r, g, b]
+  ];
+}))));
+</code></pre>
+<p>We can then take the output from that command, and do a few more edits by hand
+to tidy it up:</p>
+<pre><code class="language-javascript">let wools = {
+  &quot;minecraft:white_wool&quot;: [228,228,228],
+  &quot;minecraft:light_gray_wool&quot;: [160,167,167],
+  &quot;minecraft:gray_wool&quot;: [65,65,65], // dark_gray is actually just gray
+  &quot;minecraft:black_wool&quot;: [24,20,20],
+  &quot;minecraft:red_wool&quot;: [158,43,39],
+  &quot;minecraft:orange_wool&quot;: [234,126,53],
+  &quot;minecraft:yellow_wool&quot;: [194,181,28],
+  &quot;minecraft:lime_wool&quot;: [57,186,46], // lime_green is actually just lime
+  &quot;minecraft:green_wool&quot;: [54,75,24],
+  &quot;minecraft:light_blue_wool&quot;: [99,135,210],
+  &quot;minecraft:cyan_wool&quot;: [38,113,145],
+  &quot;minecraft:blue_wool&quot;: [37,49,147],
+  &quot;minecraft:purple_wool&quot;: [126,52,191],
+  &quot;minecraft:magenta_wool&quot;: [190,73,201],
+  &quot;minecraft:pink_wool&quot;: [217,129,153],
+  &quot;minecraft:brown_wool&quot;: [86,51,28]
+};
+</code></pre>
+<h3>Reading the image</h3>
+<p>We&#39;re going to use the <a href="https://www.npmjs.com/package/jimp">Jimp</a> library to read an image and rescale it if
+necessary.</p>
+<p>First, we need to load an image. Upload an image to your repl and then load
+it with Jimp:</p>
+<pre><code class="language-javascript">let image = await Jimp.read(&#39;image.png&#39;);
+image.resize(16, 16);
+</code></pre>
+<p>After that, we&#39;ll need to figure out what color of wool to use. To do that,
+we can compare our wool colors with the image colors, and pick the closest one.
+An easy way to do this is to treat both colors as coordinates and calculate the
+distance between them:
+<code>distance = sqrt((x2 - x1)**2 + (y2 - y1)**2 + (z2 - z1)**2)</code>.</p>
+<p>To find the closest points, calculate the distances for each possible color and
+take the shortest one:</p>
+<pre><code class="language-javascript">let pixel = Jimp.intToRGBA(image.getPixelColor(x, y));
+let { wool } = Object.entries(wools)
+  .map(([wool, [r, g, b]]) =&gt; { // Calculate the distances
+    let distance = Math.sqrt((pixel.r - r)**2 + (pixel.g - g)**2 + (pixel.b - b)**2);
+    return { wool, distance };
+  })
+  .reduce((a, b) =&gt; { // Find the shortest distance
+    return a.distance &lt; b.distance ? a : b;
+  });
+</code></pre>
+<h3>Draw it!</h3>
+<p>Lets put all our code together and iterate over each block:</p>
+<pre><code class="language-javascript">const ReplCraft = require(&#39;./lib/replcraft.js&#39;);
+const Jimp = require(&#39;jimp&#39;);
+
+let client = new ReplCraft();
+let wools = {
+  &quot;minecraft:white_wool&quot;: [228,228,228],
+  &quot;minecraft:light_gray_wool&quot;: [160,167,167],
+  &quot;minecraft:gray_wool&quot;: [65,65,65],
+  &quot;minecraft:black_wool&quot;: [24,20,20],
+  &quot;minecraft:red_wool&quot;: [158,43,39],
+  &quot;minecraft:orange_wool&quot;: [234,126,53],
+  &quot;minecraft:yellow_wool&quot;: [194,181,28],
+  &quot;minecraft:lime_wool&quot;: [57,186,46],
+  &quot;minecraft:green_wool&quot;: [54,75,24],
+  &quot;minecraft:light_blue_wool&quot;: [99,135,210],
+  &quot;minecraft:cyan_wool&quot;: [38,113,145],
+  &quot;minecraft:blue_wool&quot;: [37,49,147],
+  &quot;minecraft:purple_wool&quot;: [126,52,191],
+  &quot;minecraft:magenta_wool&quot;: [190,73,201],
+  &quot;minecraft:pink_wool&quot;: [217,129,153],
+  &quot;minecraft:brown_wool&quot;: [86,51,28]
+};
+
+(async () =&gt; {
+  let image = await Jimp.read(&#39;image.png&#39;);
+  image.resize(16, 16);
+
+  await client.login(process.env.token);
+  let [size_x, _, size_z] = await client.getSize();
+
+  let promises = [];
+  for (let x = 0; x &lt; size_x; x++) {
+    for (let z = 0; z &lt; size_z; z++) {
+      let pixel = Jimp.intToRGBA(image.getPixelColor(x, z));
+      let { wool } = Object.entries(wools)
+        .map(([wool, [r, g, b]]) =&gt; {
+          let distance = Math.sqrt((pixel.r - r)**2 + (pixel.g - g)**2 + (pixel.b - b)**2);
+          return { wool, distance };
+        })
+        .reduce((a, b) =&gt; {
+          return a.distance &lt; b.distance ? a : b;
+        });
+      promises.push(client.setBlock(x, 0, z, wool));
+    }
+  }
+  await Promise.all(promises);
+  console.log(&quot;Done!&quot;);
+})();
+</code></pre>
+<p><img src="https://blog.replit.com/images/automating-minecraft-on-replit/14_canvas_with_apple.png" alt="The canvas structure, now filled with wool art of an apple"></p>
+<p>Great success!</p>
+<h2>Side note: Fuel</h2>
+<p>ReplCraft has a concept of <em>fuel</em>, which you use to power API requests. If you run
+out of fuel, your client library will start throwing errors. Fuel is optional and
+can be provided by multiple configurable sources, but this tutorial assumes it&#39;s
+disabled.</p>
+<p>Three <em>fuel strategies</em> exist and can be configured by server owners:</p>
+<ul>
+<li>Item strategies, requiring you to burn items in a structure&#39;s inventory to power
+requests. For example, 1 gold nugget might be configured to provide 100 fuel.</li>
+<li>Ratelimit strategies, which provide a set amount of fuel per time period.
+These just exist to prevent you from spamming the server with API calls.</li>
+<li>Economy strategies, which use in-game currency to pay for API calls.</li>
+</ul>
+<p>If you see errors referencing these strategies, you&#39;ll need to offer up the appropriate fuel. You can make your script wait for fuel to become available instead of throwing errors by setting <code>client.retryOnFuelError(true)</code>. You can also monitor for fuel exhaustion via <code>client.on(&quot;outOfFuel&quot;, ex =&gt; { /* ... */ })</code>.</p>
+<h1>Going further</h1>
+<p>You now know how to make lots of stuff with Replcraft, but that&#39;s only the beginning.</p>
+<p>ReplCraft can be used to automate lots of things. Create automated farms, expose
+redstone over HTTP, create a clever escape room, automatically craft items,
+build an interactive game inside Minecraft, manipulate ChestShop prices, etc.
+However, it&#39;s limited to anything you can build a structure around, and it
+requires you to manage the supply of blocks!</p>
+<p>Bot libraries such as <a href="https://github.com/PrismarineJS/mineflayer">Mineflayer</a> allow you to do anything a
+regular player can (but may be against the rules on many servers), and learning
+how to make mods with the <a href="https://www.spigotmc.org/wiki/spigot-plugin-development/">Spigot</a>, <a href="https://mcforge.readthedocs.io/en/1.18.x/">Forge</a> or <a href="https://fabricmc.net/wiki/start">Fabric</a>
+APIs can give you much more control over the game itself.</p>
+<p>Minecraft is a highly customizable game, and if you&#39;re interested in seeing
+more Minecraft related content or an official Replit community Minecraft
+server running Replcraft, please leave a comment on <a href="https://replit.com/@LeeFleming/Automating-Minecraft-on-Replit#README.md">this repl</a>.</p>

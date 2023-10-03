@@ -1,0 +1,215 @@
+<p>At Repl.it we aim to make the full power of programming easily accessible for
+everyone. That&#39;s why when we designed our <a href="/api">code execution service</a> we decided that
+we would not timebox users&#39; programs or sessions. [](preview end)</p>
+<p>This was a great design decision because it allowed people to build complex
+programs, things like infinite looping animations, and games -- like this
+<a href="https://repl.it/BybT/6">fun text-based game</a>:</p>
+<p><img src="/public/images/blog/text-game.gif" alt="text game"></p>
+<p>But this also meant you could hit infinite loops. And in most cases this was
+okay because you can hit stop and we&#39;d kill the program for you. Except this failed in
+two cases:</p>
+<ol>
+<li>If the program was sending so much output data to your browser that it was
+causing it lock up.</li>
+<li>If the program was running in your browser (as the case is with
+the JavaScript languages we support).</li>
+</ol>
+<p><strong>[tl;dr]</strong> You&#39;ll be pleased to know that we fixed these two
+instances as well and -- as always -- here are some gifs to demonstrate, followed by a technical
+explanation for the curious.</p>
+<p><img src="/public/images/blog/infinite-loop.gif" alt="infinite loop in python">
+<em>Infinite hello world in python</em></p>
+<p><img src="/public/images/blog/infinite-loop2.gif" alt="infinite loop"></p>
+<p><em>Infinite loop in JavaScript</em></p>
+<h2>Browser crashing from too much output</h2>
+<p>Because we want to enable interactive programs like the text-based game
+mentioned above we have to stream output from user programs directly to the
+browser. To do this we first start user programs in tty-mode (we make the
+program think that it&#39;s attached to a terminal), more specifically, we attach a
+<a href="http://man7.org/linux/man-pages/man7/pty.7.html">pseudo-terminal (pty)</a>. However,
+ptys also adds additional functionality that we don&#39;t need. For example it
+outputs (echos) every input given to it which is useful for regular terminals
+but not for us since we want to control the user experience on the client-side.</p>
+<p>To make a pty as pipe-like as possible (i.e. raw i/o) then we can use the
+following C program which uses the builtin linux <a href="http://man7.org/linux/man-pages/man3/termios.3.html">termios
+API</a>:</p>
+<pre><code class="language-c">#include &lt;termios.h&gt;
+
+int makeraw(int fd) {
+  struct termios tp;
+  if (tcgetattr(fd, &amp;tp) == -1) {
+    return 1;
+  }
+  cfmakeraw(&amp;tp);
+  if (tcsetattr(fd, TCSAFLUSH, &amp;tp) == -1) {
+    return 1;
+  }
+  return 0;
+}
+</code></pre>
+<p>Now that we&#39;ve made sure that user programs stream perfectly to the client-side
+we need to make sure we don&#39;t crash the browser by overloading it. This is
+taken care by our frontend servers written in Go. What we do is make sure
+that we don&#39;t send output to the browser at a rate that exceeds 20 messages per
+second. We came up with this number via trial and error while making sure we
+don&#39;t cripple any existing use case (like say, animations or games).</p>
+<p>Luckily, Go has primitives that makes this sort of thing easy. The following is
+the actual goroutine we use to periodically flush the output buffer.</p>
+<pre><code class="language-go"> flushTicker := time.NewTicker(time.Second / 20)
+ go func() {
+   for {
+     &lt;-flushTicker.C
+
+     if done {
+       flushTicker.Stop()
+       return
+     }
+
+     if outputBuf.Len() &gt; 0 {
+       flush()
+     }
+   }
+ }()
+</code></pre>
+<p>With this, users will likely not see their browser lock up if they hit an
+infinite loop that includes output.</p>
+<h2>Browser locking up from infinite loops in JavaScript</h2>
+<p>We run most of our languages on our <a href="https://repl.it/api">code execution
+infrastructure</a>. However, in order to gain access to
+browser APIs, JavaScript (and compile-to-js) languages need to run on the user&#39;s
+browser. This presents many interesting challenges, one of which, is protecting
+the user from locking up the browser from infinite loops. This can happen
+because the UI and the JavaScript running on the page all run in the same single
+thread (taking turns).</p>
+<p>The first thought that may come to your mind is &quot;run it in a worker!&quot; -- which
+is a web standard that allows us to start a background process and interact with
+it via message passing -- and this works perfectly fine to protect against
+locking up the browser. But now we&#39;re back at square one -- we don&#39;t have access
+to all the browser APIs that people want to use.</p>
+<p>So the only other solution that we&#39;ve seen used on <a href="https://jsbin.com">JSBin</a>
+is to transform the JavaScript code to add time or iteration counters to protect
+against infinite loops. The problem with this solution (as of this writing) is
+that it hits a couple of edgecases. Like for example the following code (which
+is, by the way, adapted from an actual user code that we saw) will halt with an infinite loop error:</p>
+<pre><code class="language-js">var a;
+do {
+ a = prompt(&#39;hello&#39;)
+ console.log(a);
+} while (a !== &#39;quit&#39;);
+</code></pre>
+<p>Another edgecase that we wanted to protect against was an async
+infinite loop (which should be fine, because it yields to the event loop and
+doesn&#39;t lock up the browser):</p>
+<pre><code class="language-javascript">function *x() {
+  while (true) yield 1;
+}
+
+var g = x();
+console.log(g.next());
+
+// Should not think that it&#39;s been running non stop for a second
+setTimeout(() =&gt; {
+  console.log(g.next());
+}, 1000);
+</code></pre>
+<p>So we came up with the following set of heuristics to handle those edgecases. A loop will throw an
+error if the following was true:</p>
+<ol>
+<li>It happens in a single run (doesn&#39;t yield to the event loop)</li>
+<li>A high number of iterations</li>
+<li>The loop is taking too long</li>
+</ol>
+<p>We implemented this using <a href="http://babeljs.io/">Babel</a> and leveraged it&#39;s
+<code>retainLines</code> generator option to make sure that line numbers are reported
+correctly on errors.</p>
+<p>If you&#39;re curious here is an adapted version of our Babel plugin which I think
+is pretty straightforward:</p>
+<pre><code class="language-javascript">&#39;WhileStatement|ForStatement|DoWhileStatement&#39;: (path) =&gt; {
+  // A variable holding when the loop was started
+  const loopStart = path.scope.parent.generateUidIdentifier(&#39;loopStart&#39;);
+  const loopStartInit = dateNow();
+  path.scope.parent.push({
+    id: loopStart,
+    init: loopStartInit,
+  });
+
+  // An iterator that is incremented with each iteration
+  const iterator = path.scope.parent.generateUidIdentifier(&#39;loopIt&#39;);
+  const iteratorInit = t.numericLiteral(0);
+  path.scope.parent.push({
+    id: iterator,
+    init: iteratorInit,
+  });
+
+  // setTimeout to protect against breaking async and generator funcs.
+  path.insertBefore(
+    t.expressionStatement(
+      t.callExpression(
+        t.identifier(&#39;setTimeout&#39;),
+        [t.functionExpression(
+          null,
+          [],
+          t.blockStatement([
+            t.expressionStatement(
+              t.assignmentExpression(
+                &#39;=&#39;,
+                loopStart,
+                t.identifier(&#39;Infinity&#39;),
+              ),
+            ),
+          ]),
+        )],
+      ),
+    ),
+  );
+
+  // If statement and throw error if it matches our criteria
+  const guard = t.ifStatement(
+    t.logicalExpression(
+      &#39;&amp;&amp;&#39;,
+      t.binaryExpression(
+        &#39;&gt;&#39;,
+        t.updateExpression(
+          &#39;++&#39;,
+          iterator,
+          true,
+        ),
+        t.numericLiteral(maxIteration),
+      ),
+      t.binaryExpression(
+        &#39;&gt;&#39;,
+        t.binaryExpression(
+          &#39;-&#39;,
+          dateNow(),
+          loopStart,
+        ),
+        t.numericLiteral(maxLoopTimeMs),
+      ),
+    ),
+    t.throwStatement(
+      t.newExpression(
+        t.identifier(&#39;RangeError&#39;),
+        [t.stringLiteral(
+          &#39;Potential infinite loop. You can disable this from settings.&#39;,
+        )],
+      ),
+    ),
+  );
+
+  // No block statment e.g. `while (1) 1;`
+  if (!path.get(&#39;body&#39;).isBlockStatement()) {
+    const statement = path.get(&#39;body&#39;).node;
+    path.get(&#39;body&#39;).replaceWith(
+      t.blockStatement([
+        guard,
+        statement,
+      ]),
+    );
+  } else {
+    path.get(&#39;body&#39;).unshiftContainer(&#39;body&#39;, guard);
+  }
+}
+</code></pre>
+<p>Users can also turn this off from the settings. Let us know if we missed
+something or there is a better way to implement this. Hope you have infinite fun
+with this.</p>

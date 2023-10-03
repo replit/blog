@@ -1,0 +1,50 @@
+<p>Today we&#39;re launching a long-awaited feature in the Workspace: Tabs! Yes, you can finally:</p>
+<ul>
+<li>Open two files side by side</li>
+<li>Open as many shells as you&#39;d like</li>
+<li>Remove tools you don&#39;t need to use</li>
+</ul>
+<p><img src="https://blog.replit.com/images/tabs/amasad-tabs-demo.gif" alt="tabs demo"></p>
+<p>It&#39;s important to note that these problems could&#39;ve been solved in <em>many</em> different ways, but we decided to fix all of them from the ground up. Instead of building bespoke features to solve individual painpoints, we focused on creating a <em>flexible system</em> that could solve a range of use cases with one new primitive: the general-purpose tab.</p>
+<p>Let&#39;s dive in!</p>
+<h2>How it works</h2>
+<p>Here, you are looking at a new tab in the workspace.
+<img src="https://blog.replit.com/images/tabs/new-tab.jpg" alt="new tab"></p>
+<p>You&#39;ll notice a few things. When you open a new tab, you see a list of recently accessed files and tools. You can search through all available tools like <code>Shell</code>, <code>Console</code>, <code>Docs</code>, and <code>Markdown</code>, as well as search through files and file contents. Search and discovery of Replit&#39;s capabilities are available in every new tab you open.</p>
+<p>Because you can open files <em>and</em> different tools in tabs, you can mix and match all kinds of tabs together based on what you need for your project. You can put your Discord bot directly next to the shell that&#39;s testing it. You can create a row of tabs for each step in an interactive tutorial. You can have docs directly next to your tutorial code. You can set up a pair programming environment with your friend on one side and you on the other.</p>
+<p>In short: you can organize the Workspace based on how you <em>think</em> about your project– not just around content type.</p>
+<p><img src="https://blog.replit.com/images/tabs/tabs-screenshot.jpg" alt="tabs screenshot"></p>
+<p>This isn&#39;t just important for users. Arbitrary tabs and layout customization also unlocks a lot of flexibility for us (the Replit team!) to build customized environments inside Replit itself. For example, we&#39;re thinking of letting you save layout when you publish templates– meaning we can preload the exact tools you&#39;ll need for different languages and environments. We can build hyper-specific templates and tools for educators just by customizing the tabs loaded in a Repl. This is a huge win for flexibility <em>and</em> scalability.</p>
+<h2>Design challenges</h2>
+<p>The main design challenge with creating this was not only figuring out the behavior <em>within</em> a tab itself, but the behavior between tabs.</p>
+<ul>
+<li>Should you be able to open multiple instances of any tool, like the console?</li>
+<li>How do we group tools together? Are files distinct from tools?</li>
+<li>Should everything– including tools like the shell and console– actually be represented as files?<ul>
+<li>Tangential philosophical question: what is the difference between a file and an app?</li>
+</ul>
+</li>
+<li>What do we search by default?</li>
+<li>What is the default position for a newly opened tab?</li>
+<li>What happens when you delete the last tab in a pane?</li>
+<li>When you observe someone in the workspace, should you just see their file, or all of their open tabs?</li>
+<li>Should we support undo/redo with opening and closing tabs?</li>
+</ul>
+<p>We didn&#39;t answer all of these questions in this release, but trust us– if you find something that seems missing or would be a great addition– we probably have it planned in a future release :)</p>
+<h2>Taking inspiration from the Browser</h2>
+<p><img src="https://blog.replit.com/images/tabs/chrome-tabs.jpg" alt="chrome tabs"></p>
+<p>We took a lot of inspiration from web browsers here. The browser is an extremely general purpose tool– a powerful system that lets billions of people do anything based around three simple primitives: windows, tabs, and URLs.</p>
+<p>Browser tabs are basically like &quot;containers&quot; for tasks– you put a URL inside of them, and you are transported into another world– whether it&#39;s a Replit tab for your next project, a tutorial on YouTube, or a Netflix tab to watch a movie. The same core primitives can be combined in infinite ways, and we want to setup Replit to eventually support a wide range of tasks too– maybe even watching Netflix!</p>
+<h2>What does this unlock?</h2>
+<p>Different tools that you load inside of a Replit tab are kind of like URLs– except instead of uniquely identifying a resource that lives on the Internet, the little buttons you see in the search menu are unique identifiers for resources that live inside of the Replit Workspace.</p>
+<p>Although Replit isn&#39;t a browser, Replit <em>is</em> a general purpose tool that needs to support many kinds of work and tasks. And, especially since we want to lay the groundwork for extensions / apps / plugins, we need to build a solid, generic system that won&#39;t &quot;lock us in&quot; to what people expect most IDEs to do– for example, just opening up different files. Besides working on coding-specific tools and supporting a wider range of software creators, there may be a world where we can make Repls entirely dedicated to gaming, creating music, or doing scientific research. And tabs get us one step closer to that!</p>
+<h2>What&#39;s next?</h2>
+<p>This release is one of many that will be rolling out over the next few months in the Workspace. Next up, we&#39;ll be releasing <code>splits</code>, which will let you customize the layout and positioning of entire panes in the Workspace, adding more flexibility to how you organize your projects.</p>
+<p>After that, we&#39;ll be focusing on cleaning up the sidebar, and thinking about things like different &quot;desktops&quot; and making continuous quality of life improvements to the coding experience.</p>
+<p>More to come soon!</p>
+<p>If you&#39;d like to leave feedback, please leave a comment on <a href="https://replit.com/@amasad/New-Tabs-System-Rolling-Out?v=1">Amjad&#39;s repl</a>.</p>
+<style type="text/css" rel="stylesheet">
+    img {
+        border-radius: 8px !important;
+    }
+</style>

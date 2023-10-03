@@ -1,0 +1,18 @@
+<p>In August last year, we announced <a href="https://blog.replit.com/repl-identity">Repl Identity</a>, a signed identity for every Repl that your code can use to authenticate other Repls when communicating with your APIs and services.</p>
+<p>For a quick refresher, you can try out the <a href="https://replit.com/@mattiselin/repl-identity#main.go">demo</a> that decodes the identity token and outputs it to the shell.</p>
+<p>We have a <a href="https://github.com/replit/go-replidentity">Go package</a> for this already (<a href="https://pkg.go.dev/github.com/replit/go-replidentity">docs here</a>), but there&#39;s a limited selection of bindings for other languages. To that end, we&#39;re rolling out a command-line tool in every Repl that allows you to use features like Repl Identity in any language that can run a subprocess.</p>
+<p>Here&#39;s a quick demo that you can try in our own Repls:</p>
+<pre><code class="language-shell">$ TOKEN=$($REPLIT_CLI identity create -audience=&quot;the target repl id&quot;)
+$ $REPLIT_CLI identity verify -audience=&quot;the target repl id&quot; -token=&quot;${TOKEN}&quot; -json
+{
+  &quot;replid&quot;: &quot;ff2d906a-0a47-482b-9067-1ac0a078c394&quot;,
+  &quot;user&quot;: &quot;mattiselin&quot;,
+  &quot;slug&quot;: &quot;replit-cli&quot;,
+  &quot;aud&quot;: &quot;the target repl id&quot;
+}
+</code></pre>
+<p>Check out this example <a href="https://replit.com/@mattiselin/repl-identity-cli#main.py">Python Repl</a> that creates and verifies a Repl Identity token:</p>
+<iframe frameborder="0" width="100%" height="500px" src="https://replit.com/@mattiselin/repl-identity-cli?embed=true#main.py"></iframe>
+
+<p>You can wrap this command in your code to do token creation and verification without needing a direct language binding.</p>
+<p>Enjoy!</p>

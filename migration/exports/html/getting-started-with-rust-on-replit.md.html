@@ -1,0 +1,335 @@
+<p>If you’ve been debating which new programming language to learn, <a href="https://www.rust-lang.org/">Rust</a> is a strong option. According to a recent Stack Overflow <a href="https://insights.stackoverflow.com/survey/2021">developer survey</a>, Rust is:</p>
+<ul>
+<li>The most loved programming language, according to almost eighty-seven percent of surveyed developers.</li>
+<li>One of the highest-paid languages, only behind Ruby, Perl, and a pack of ever-lucrative functional languages.</li>
+</ul>
+<p>The best way to learn Rust, of course, is to start coding. This is where Replit comes in.</p>
+<p><a href="https://replit.com/">Replit</a> is a collaborative in-browser integrated development environment (IDE) that supports over fifty programming languages with built-in tooling to write and organize code; manage dependencies; perform version control; and build, run, test, and visualize execution of applications.</p>
+<p>There are a few reasons to use Replit when learning Rust:</p>
+<ul>
+<li>Replit gives you a ready-to-use environment to play with a new language or framework. No need to worry about prerequisites, SDKs, package managers, or runners—just focus on coding.</li>
+<li>Replit’s real-time collaborative environment is a great fit when you learn in a group or want to perform assignments in a guided learning setup.</li>
+</ul>
+<p>In this tutorial, you’re going to roll out a ready-to-use Rust development environment using Replit and then build a demo application.</p>
+<h2>Creating a Rust Workspace on Replit</h2>
+<p>First, set up your workspace. <a href="https://replit.com/login">Log in to Replit</a> using your Google, GitHub, or Facebook account:</p>
+<p><img src="https://imgur.com/gaOqkO0.png" alt="Log in to Replit"></p>
+<p>You’ll see the home page: </p>
+<p><img src="https://imgur.com/JiQwN3C.png" alt="Replit home"></p>
+<p>To create a new Replit workspace (a.k.a. <em>repl</em>) for Rust development, click the blue <strong>+</strong> icon in the top right corner. For a shortcut, go to the <strong>Search &amp; run commands</strong> field, type <code>rust</code>, and select the suggested <strong>replit/Rust</strong> project template:</p>
+<p><img src="https://imgur.com/8ISb6uW.png" alt="Creating a new workspace"></p>
+<p>Confirm or correct the suggested repl settings and click <strong>Create Repl</strong>: </p>
+<p><img src="https://imgur.com/pUSbW2H.png" alt="Confirm repl settings"></p>
+<p>You should see a ready-to-use Rust repl with a basic <code>Hello, world!</code> Rust application: </p>
+<p><img src="https://imgur.com/yu36S38.png" alt="Default Rust workspace on Replit"></p>
+<h2>Exploring the Rust Workspace</h2>
+<p>Your workspace view will consist of a few major components:</p>
+<ol>
+<li><p>The code editor in the middle is where you’ll spend most of your time. Based on <a href="https://codemirror.net/6/">CodeMirror</a>, it provides basic Rust code editing functionality like syntax highlighting, matching delimiters, and code folding, as well as more advanced features like navigation, reference search, formatting, and code actions.</p>
+</li>
+<li><p>On the right, you can see a pane with two tabs: <strong>Console</strong> and <strong>Shell</strong>. Both can be used for performing Bash-style commands, but the <strong>Console</strong> is also used to display the output of your Rust application whenever you click <strong>Run</strong>.</p>
+</li>
+<li><p>On the left, the <strong>Files</strong> pane displays the structure of your repl, including source files and package manager configuration files, as well as the build output in the <strong>Packager files</strong> section.</p>
+</li>
+<li><p>The vertical control bar to the left of the <strong>Files</strong> pane lets you open other panes in the same area. These include <strong>Version control</strong>, <strong>Packages</strong>, <strong>Secrets</strong>, <strong>Settings</strong>, <strong>Database</strong>, and <strong>Unit tests</strong>.</p>
+<p> <img src="https://imgur.com/XamOs9S.png" alt="Replit settings"></p>
+</li>
+<li><p>The <strong>Run</strong> button at the top helps build and run your application.</p>
+</li>
+</ol>
+<p>By default, a new Rust repl contains a single source file, <code>main.rs</code>, inside the <code>src</code> directory. The file contains the entry function <code>main()</code> that prints “Hello, world!”</p>
+<p>The repl also contains two configuration files, <code>Cargo.toml</code> and the auto-generated <code>Cargo.lock</code>, which are related to <a href="https://doc.rust-lang.org/cargo/index.html">Cargo</a>, Rust’s package manager. Cargo uses a few <a href="https://doc.rust-lang.org/cargo/guide/project-layout.html">package layout conventions</a>, one of which makes <code>src/main.rs</code> the default executable file.</p>
+<p>If you click <strong>Run</strong> and watch the <strong>Console</strong> pane, the <code>cargo run</code> command will start, followed by a few lines of build progress reports, and <code>Hello, world!</code> will be displayed: </p>
+<p><img src="https://imgur.com/rzGjV5c.png" alt="Hello, world!"></p>
+<p>This means that the Rust environment set up by Replit is working just fine.</p>
+<h2>Writing a Rust Application on Replit</h2>
+<p>You’re going to write a small Rust application using your new repl. This application will consist of a few source files and unit tests, depend on an external package, and use Replit’s built-in key-value database.</p>
+<h3>Adding a Library Function</h3>
+<p>The default repl currently contains a single file, <code>src/main.rs</code>, with the <code>main()</code> function serving as the application’s entry point. You’ll extend this file later, but for now, add a different file to host a function that implements the binary search algorithm:</p>
+<p>In the <strong>Files</strong> pane, right-click the <code>src</code> node and select <strong>Add file</strong>: </p>
+<p><img src="https://imgur.com/miE2UXJ.png" alt="Adding a new file"></p>
+<p>Name the file <code>lib.rs</code> and press <strong>Enter</strong>. The file will be created and opened in the code editor.</p>
+<p>Switch to the code editor and paste the following code into <code>lib.rs</code>:</p>
+<pre><code class="language-rust">pub fn find(array: &amp;[i32], value: i32) -&gt; Option&lt;usize&gt; {
+    let mut left_boundary = 0;
+    let mut right_boundary = if array.len() &gt; 0 { array.len() - 1 } else { 0 };
+    let mut diff_between_boundaries = right_boundary - left_boundary;
+    let mut index;
+
+    if array.len() == 0 || value &gt; array[array.len() - 1] || value &lt; array[0] {
+        return None;
+    }
+
+    while diff_between_boundaries &gt; 1 {
+        index = left_boundary + (diff_between_boundaries / 2);
+        if value == array[index] {
+            return Some(index);
+        } else if value &gt; array[index] {
+            left_boundary = index;
+        } else if value &lt; array[index] {
+            right_boundary = index;
+        }
+        diff_between_boundaries = right_boundary - left_boundary;
+    }
+
+    if value == array[left_boundary] {
+        return Some(left_boundary);
+    }
+    if value == array[right_boundary] {
+        return Some(right_boundary);
+    }
+    return None;
+}
+</code></pre>
+<p>Here are some notes on the code you just added:</p>
+<ul>
+<li><code>src/lib.rs</code> is the default location for a library file. This is based on the same Cargo conventions that make <code>src/main.rs</code> the default executable file.</li>
+<li>The <code>find()</code> function takes two parameters. One of the parameters, <code>&amp;[i32]</code>, is an immutable reference, a.k.a. <em>borrow</em>. For more on borrowing and references, see <a href="https://doc.rust-lang.org/book/ch04-02-references-and-borrowing.html">the Rust book</a>.</li>
+<li>The <code>find()</code> function returns a value of type <code>Option&lt;usize&gt;</code>. <a href="https://tourofrust.com/35_en.html"><code>Option</code></a> is a generic enum to represent nullable values. The enum contains two members, <code>Some(value)</code> and <code>None</code>, either of which can be returned from the function.</li>
+<li>The four local variables declared at the start of the function all have the <code>mut</code> keyword to allow updating their values. This is necessary because by default, local variables in Rust are immutable.</li>
+<li>The <code>right_boundary</code> variable demonstrates that <code>if</code> can be used as an expression the same way that ternary conditional operators are used in other languages.</li>
+</ul>
+<h3>Adding and Running Unit Tests</h3>
+<p>Next, add unit tests to check that binary search works correctly. You’ll borrow a test suite from <a href="https://github.com/exercism/rust/tree/main/exercises/practice/binary-search">Exercism’s binary search exercise</a>.</p>
+<p>In the <strong>Files</strong> pane’s toolbar, click <strong>Add folder</strong>: </p>
+<p><img src="https://imgur.com/0OF123C.png" alt="Adding a folder"></p>
+<p>Name the folder <code>tests</code> and press <strong>Enter</strong>. If necessary, drag the new folder to the root of the file tree to place it alongside <code>src</code> and <code>Cargo.toml</code>.</p>
+<p>Right-click the new folder and select <strong>Add file</strong>. Name the new file <code>tests.rs</code> and press <strong>Enter</strong>.</p>
+<p>Switch to the code editor and paste the following code into <code>tests.rs</code>:</p>
+<pre><code class="language-rust">use binary_search::find;
+
+#[test]
+fn finds_a_value_in_an_array_with_one_element() {
+    assert_eq!(find(&amp;[6], 6), Some(0));
+}
+
+#[test]
+fn finds_first_value_in_an_array_with_two_element() {
+    assert_eq!(find(&amp;[1, 2], 1), Some(0));
+}
+
+#[test]
+fn finds_second_value_in_an_array_with_two_element() {
+    assert_eq!(find(&amp;[1, 2], 2), Some(1));
+}
+
+#[test]
+fn finds_a_value_in_the_middle_of_an_array() {
+    assert_eq!(find(&amp;[1, 3, 4, 6, 8, 9, 11], 6), Some(3));
+}
+
+#[test]
+fn finds_a_value_at_the_beginning_of_an_array() {
+    assert_eq!(find(&amp;[1, 3, 4, 6, 8, 9, 11], 1), Some(0));
+}
+
+#[test]
+fn finds_a_value_at_the_end_of_an_array() {
+    assert_eq!(find(&amp;[1, 3, 4, 6, 8, 9, 11], 11), Some(6));
+}
+
+#[test]
+fn identifies_that_a_value_is_not_included_in_the_array() {
+    assert_eq!(find(&amp;[1, 3, 4, 6, 8, 9, 11], 7), None);
+}
+
+#[test]
+fn a_value_smaller_than_the_arrays_smallest_value_is_not_included() {
+    assert_eq!(find(&amp;[1, 3, 4, 6, 8, 9, 11], 0), None);
+}
+
+#[test]
+fn a_value_larger_than_the_arrays_largest_value_is_not_included() {
+    assert_eq!(find(&amp;[1, 3, 4, 6, 8, 9, 11], 13), None);
+}
+
+#[test]
+fn nothing_is_included_in_an_empty_array() {
+    assert_eq!(find(&amp;[], 1), None);
+}
+</code></pre>
+<p>Open <code>Cargo.toml</code> in the editor. In the <code>[package]</code> section, locate the line with the <code>name</code> property and change it to read <code>name = &quot;binary_search&quot;</code>: </p>
+<p><img src="https://imgur.com/xAowgCo.png" alt="Updated package name in Cargo.toml"></p>
+<p>In the <strong>Console</strong> pane on the right, run the following command:</p>
+<pre><code class="language-shell">cargo test
+</code></pre>
+<p>You should see the following output in the console: </p>
+<p><img src="https://imgur.com/0anpM3f.png" alt="Unit test output"></p>
+<p>Cargo has detected unit tests in the <code>tests</code> directory, run them all, and reported that ten of ten available unit tests were passing.</p>
+<p>Next you’ll return to the default executable file, <code>src/main.rs</code>, to perform binary search with user-submitted values.</p>
+<h3>Reading User Input</h3>
+<p>The executable file in your repl runs in a console environment. You’re going to add interactivity and enable it to read user input. Since the binary search function works with numbers, you’ll need to make sure that user input can be converted to an integer.</p>
+<p>Open <code>src/main.rs</code> in the editor. Select all and paste the following code:</p>
+<pre><code class="language-rust">use std::io;
+
+fn main() {
+  read_input();
+}
+
+fn read_input() -&gt; Option&lt;i32&gt; {
+    println!(&quot;Please provide an integer value to search:&quot;);
+
+    let mut input_text = String::new();
+    io::stdin()
+        .read_line(&amp;mut input_text)
+        .expect(&quot;Failed to receive value&quot;);
+    let trimmed_input = input_text.trim();
+
+    return match trimmed_input.parse::&lt;i32&gt;() {
+        Ok(int_value) =&gt; {
+            println!(&quot;Great! Let&#39;s search for {}&quot;, int_value);
+            Some(int_value)
+        }
+        Err(..) =&gt; {
+            println!(&quot;Oops, {} doesn&#39;t look like an integer&quot;, trimmed_input);
+            None
+        }
+    };
+}
+</code></pre>
+<p>Here’s what happens in this code:</p>
+<ul>
+<li>The <code>main()</code> function calls a new function, <code>read_input()</code>.</li>
+<li><code>read_input()</code> prompts the user to enter a number to search, reads user input, checks if it’s actually a number (more specifically, if it can be converted to integer type <code>i32</code>), and reports an error otherwise.</li>
+<li>The <code>parse::&lt;i32&gt;()</code> function returns a <code>Result</code>. Similar to <code>Option</code>, this is another commonly used generic enum that helps either return a value or fail. The two variants of this enum are <code>Ok</code> and <code>Err</code>, and here they are used as two cases of the <code>match</code> statement.</li>
+<li>The <code>..</code> operator in <code>Err(..)</code> is used to ignore the error information object. Here, it’s replaced with a custom error message.</li>
+<li>Note that inside the two cases of the <code>match</code> block, there&#39;s no <code>return</code> keyword. If the last statement in a <code>match</code> is an expression without a semicolon, Rust knows it’s a return statement. <code>Some(int_value)</code> in the <code>Ok</code> block is therefore equivalent to <code>return Some(int_value);</code>.</li>
+</ul>
+<p>If you click <strong>Run</strong>, you’ll be prompted to enter a number to search. Here’s what the output is like in two different scenarios.</p>
+<p>If you enter an integer, the application will acknowledge the input as valid: </p>
+<p><img src="https://imgur.com/tGkaU7D.png" alt="User input is parsed as integer"></p>
+<p>If you enter anything that can’t be interpreted as an integer, the application will report an error: </p>
+<p><img src="https://imgur.com/LTlIu4E.png" alt="User input is not an integer"></p>
+<h3>Passing User Input to the Library Function</h3>
+<p>Now that the application can perform binary search and process user input, it’s time to connect the dots.</p>
+<p>Open <code>src/main.rs</code> in the code editor. Add a new line to the beginning of the file and insert a new import statement:</p>
+<pre><code class="language-rust">use binary_search::find;
+</code></pre>
+<p>Select the <code>main()</code> function and paste the following code:</p>
+<pre><code class="language-rust">fn main() {
+    if let Some(int_value) = read_input() {
+        try_find(int_value)
+    }
+}
+</code></pre>
+<p>At the end of the file, insert the following new function:</p>
+<pre><code class="language-rust">fn try_find(int_value: i32) {
+    let array = &amp;[1, 3, 5, 8, 13, 21, 34, 55, 89, 144, 233, 377, 634];
+
+    match find(array, int_value) {
+        None =&gt; println!(&quot;This number was not found in the array&quot;),
+        Some(found_position) =&gt; {
+            println!(
+                &quot;Found the value at position {}&quot;, &amp;found_position
+            );
+        }
+    }
+}
+</code></pre>
+<p>Here are a few things to note about these code updates:</p>
+<ul>
+<li>The <code>main()</code> function now checks if <code>read_input()</code> returned an actual integer, and if it did, the integer is passed to the new <code>try_find()</code> function. Notice the use of the <code>if let</code> syntax, which is significantly shorter than writing a <code>match</code> and ignoring one of its cases.</li>
+<li>The new <code>try_find()</code> function serves as a wrapper for the binary search function, displaying user-friendly messages depending on search results. It also hard-codes an array to search in.</li>
+</ul>
+<p>Click <strong>Run</strong> and try entering a valid number to search for.</p>
+<p>If you enter <code>755</code>, which is larger than the largest number in the hard-coded array, the application will correctly report that it’s not found in the array: </p>
+<p><img src="https://imgur.com/tpj7V7T.png" alt="Number not found"></p>
+<p>If you enter <code>13</code>, which is in the array, the application will report that the number is found and specify its exact position in the array: </p>
+<p><img src="https://imgur.com/GElinXN.png" alt="Number found"></p>
+<p>The application now receives user input, validates it, passes over to the binary search function, and reports readable results.</p>
+<h3>Adding a Third-Party Package</h3>
+<p>This demo application uses Cargo to maintain its structure and run commands. Cargo is a package manager that helps add and use packages from the <a href="https://crates.io/">community registry</a>. For example, if you don’t like the way the application displays its messages in the console, you can install a package to change that.</p>
+<p>To the left of the <strong>Files</strong> pane, click the <strong>Packages</strong> icon to display the corresponding pane: </p>
+<p><img src="https://imgur.com/O0gXl7E.png" alt="Packages"></p>
+<p>Using the search bar in the <strong>Packages</strong> pane, look for a package called <a href="https://crates.io/crates/bunt"><code>bunt</code></a>.</p>
+<p>When search results appear, click the <strong>+</strong> icon next to the search result for <code>bunt</code> to install the package:</p>
+<p><img src="https://imgur.com/JyNRpnV.png" alt="Install package"></p>
+<p>Replit will launch a Cargo command to install the package and report progress in the <strong>Packages</strong> and <strong>Console</strong> panes. Once installation is complete, open <code>Cargo.toml</code> from the <strong>Files</strong> pane and verify that the <code>bunt</code> package is added to the <code>[dependencies]</code> section: </p>
+<p><img src="https://imgur.com/ionuH3v.png" alt="Third-party package installed"></p>
+<p>Open <code>src/main.rs</code> and add a new import statement at the beginning of the file:</p>
+<pre><code class="language-rust">use bunt;
+</code></pre>
+<p>Inside the <code>try_find()</code> function, locate the second print statement:</p>
+<pre><code class="language-rust">println!(&quot;Found the value at position {}&quot;, &amp;found_position);
+</code></pre>
+<p>And replace it with the following:</p>
+<pre><code class="language-rust">bunt::println!(&quot;{$green}Found{/$} the value at position {[green+bold]}&quot;,
+                &amp;found_position);
+</code></pre>
+<p>The application now uses formatting style tags provided by the <code>bunt</code> package to format the console output when it finds a submitted number. To see what it looks like, click <strong>Run</strong> and search for a number that you know can be found in the hard-coded array, such as <code>5</code>:</p>
+<p><img src="https://imgur.com/J7Fqw7K.png" alt="Formatted console output"></p>
+<h3>Working with the Replit Database</h3>
+<p>Every repl, including this Rust repl, comes with a bundled key-value database that can be accessed via an environment variable, <code>REPLIT_DB_URL</code>. The <strong>Database</strong> pane on the left contains quick documentation on the various commands that you can perform with the database:</p>
+<p><img src="https://imgur.com/ChQr729.png" alt="Database pane"></p>
+<p>You’ll add two functions to work with the database. One will save each found number along with its position in the array, and the other will read and display all numbers found in the array so far.</p>
+<p>In the <strong>Files</strong> pane, right-click the <code>src</code> folder and select <strong>Add file</strong>.</p>
+<p>Name the file <code>db.rs</code> and press <strong>Enter</strong>. The file will be created and opened in the code editor.</p>
+<p>Switch to the code editor and paste the following code into <code>db.rs</code>:</p>
+<pre><code class="language-rust">use std::env;
+use std::process::Command;
+
+pub fn read_all_from_db() {
+    let read_all_command = Command::new(&quot;curl&quot;)
+        .arg(format!(&quot;{}?prefix=&quot;, get_replit_db_url()))
+        .output()
+        .expect(&quot;Failed to read all keys&quot;);
+
+    println!(
+        &quot;All numbers found in the array so far: \n{}&quot;,
+        String::from_utf8_lossy(&amp;read_all_command.stdout)
+    );
+}
+
+pub fn save_to_db(key: &amp;i32, value: &amp;usize) {
+    let key_value_pair = format!(&quot;{}={}&quot;, key, value);
+
+    Command::new(&quot;curl&quot;)
+        .arg(get_replit_db_url())
+        .arg(&quot;-d&quot;)
+        .arg(&amp;key_value_pair)
+        .output()
+        .expect(&quot;Failed to create a new key-value pair&quot;);
+}
+
+fn get_replit_db_url() -&gt; String {
+    return env::var(&quot;REPLIT_DB_URL&quot;).unwrap();
+}
+</code></pre>
+<p>Open <code>main.rs</code> in the code editor and insert the following code between the import statements and the <code>main()</code> function:</p>
+<pre><code class="language-rust">mod db;
+</code></pre>
+<p>In <code>main.rs</code>, select the <code>try_find()</code> function and paste the following:</p>
+<pre><code class="language-rust">fn try_find(int_value: i32) {
+    let array = &amp;[1, 3, 5, 8, 13, 21, 34, 55, 89, 144, 233, 377, 634];
+
+    match find(array, int_value) {
+        None =&gt; println!(&quot;This number was not found in the array&quot;),
+        Some(found_position) =&gt; {
+            bunt::println!(
+                &quot;{$green}Found{/$} the value at position {[green+bold]}&quot;,
+                &amp;found_position
+            );
+            db::save_to_db(&amp;int_value, &amp;found_position);
+        }
+    }
+
+    db::read_all_from_db();
+}   
+</code></pre>
+<p>Here’s what’s happening:</p>
+<ul>
+<li><code>db.rs</code> contains three functions:<ul>
+<li><code>get_replit_db_url()</code> reads the URL of the database from the environment variable.</li>
+<li><code>save_to_db()</code> programmatically performs a <code>curl</code> command to write a new key-value pair.</li>
+<li><code>read_all_from_db()</code> performs another <code>curl</code> command to read all keys that were previously added to the database, then writes the list of keys to the console.</li>
+</ul>
+</li>
+<li>Two of the three functions in <code>db.rs</code> use the <code>pub</code> modifier that is necessary to make them visible from the call site. By default, all functions in Rust are private.</li>
+<li>In <code>main.rs</code>, the statement <code>mod db;</code> declares <code>db</code> as a submodule of <code>main.rs</code>, which is what makes functions defined in <code>db.rs</code> accessible from <code>main.rs</code>.</li>
+<li>The <code>try_find()</code> function calls two database functions by prefixing each of them with the module name. <code>save_to_db()</code> is only called when a submitted number is found in the array, and <code>read_all_from_db()</code> is called every time after a search.</li>
+</ul>
+<p>If you run the application and search for a few numbers, you’ll see that each new found number is saved to the database and immediately displayed in the console along with all numbers found previously: </p>
+<p><img src="https://imgur.com/VFa044R.png" alt="Displaying numbers from the database"></p>
+<h2>Conclusion</h2>
+<p>That’s it! You’ve learned how to create a simple Rust application online using <a href="https://replit.com/">Replit</a>. Now you know how to create a Rust repl, run Rust applications and unit tests, install third-party packages, and interact with Replit’s bundled key-value database.</p>
+<p>With this tutorial, you’ve gotten a good start in learning Rust. Be sure to keep expanding on this knowledge. Experience with this popular language can be a real asset to you as you build your programming career.</p>

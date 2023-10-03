@@ -1,0 +1,128 @@
+<p><strong>Update: Ghostwriter is out now!</strong></p>
+<div style="display: flex; justify-content: center;">
+  <a class="cta-btn" href="https://replit.com/ai" target="_blank">Activate Ghostwriter</a>
+</div>
+
+<p>In <a href="https://blog.replit.com/multi">2018</a> when we announced Multiplayer Mode, we said it&#39;s the most significant evolution of Replit to date. For the first time, you could share a URL with a friend, student, or coworker and get a shared text editor and runtime — no setup required. Replit Multiplayer is changing how an entire generation of programmers learn how to code and make software.</p>
+<p>Today, we&#39;re announcing Ghostwriter, which infuses state-of-the-art intelligence into nearly all IDE features. <strong>Ghostwriter sports an ML-powered pair programmer that completes your code in realtime, tools to generate, transform, and explain code, and an in-editor search utility that lets you find and import open-source code without leaving your editor (think Stackoverflow in your editor).</strong></p>
+<p><video src="https://blog.replit.com/images/ai/aimode.mp4"  class="css-3qjkrt" autoplay muted playsinline loop controls></video></p>
+<p>Ghostwriter is like Multiplayer in that you collaborate in real-time with someone else. However, in this case, you&#39;re not coding with a person; instead, it&#39;s an agent representing the entire programming knowledge of the human race. We believe Ghostwriter will leapfrog traditional IDE features. Ghostwriter is the next major evolution of our platform. We think this will radically change how people write code on Replit — and in the process, will change software writ large. Forever.</p>
+<h1>Complete Code</h1>
+<p>Ghostwriter&#39;s flagship feature is Complete Code: an AI-powered pair programmer. We believe that Ghostwriter Complete Code is faster, more powerful, and more accessible than any other comparable offering. The best thing about Ghostwriter? It makes writing code on mobile devices not only tolerable, but actually enjoyable: Swipe right to accept!</p>
+<p><video src="https://blog.replit.com/images/ai/swipecoding.mp4"  class="css-3qjkrt" autoplay muted playsinline loop controls></video></p>
+<p>Ghostwriter&#39;s Complete Code is in closed beta right now. Please <a href="https://replit.com/@amasad/GhostWriter-Early-Access?v=1">sign up here</a> if you&#39;d like to help us test it. Here is what alpha users are saying about it:</p>
+<ul>
+<li><em>&quot;The first thing me and all my friends noticed was how much faster it is than GitHub Copilot. It is at least 2x faster, maybe 3x. It&#39;s a little detail but it makes a big difference.&quot;</em></li>
+<li><em>&quot;It makes web development so much easier. I feel like I&#39;m only writing 50% of the code.&quot;</em></li>
+<li><em>&quot;After using the feature for only week, I can&#39;t imagine life without it&quot;</em></li>
+<li><em>&quot;It&#39;s crazy how much faster I can learn new things without leaving the editors&quot;</em></li>
+</ul>
+<h2>Building Ghostwriter Complete Code</h2>
+<p>What do you do when you&#39;re <em>not</em> a multi-trillion multi-national corporation (yet) with tons of ML research scientists, infinite budget for training, billions in industry partnerships, and store most of the world&#39;s code but still want to bring state-of-the-art AI to production? You start from open-source!</p>
+<p><video src="https://blog.replit.com/images/ai/ghost.mp4"  class="css-3qjkrt" autoplay muted playsinline loop controls></video></p>
+<p>Open-source Large Language Models (LLMs) like <a href="https://github.com/salesforce/CodeGen">Salesforce&#39;s CodeGen</a> models are a fantastic place to start. However, with billions of parameters, they are insanely high latency off-the-shelf. This is especially a problem for code completion, because the models need to be fast enough not to disrupt the user&#39;s flow. To be able to serve millions of users, we&#39;ve been playing with a few optimization techniques to achieve super low latency at a reasonable cost. And we&#39;ve made tremendous strides in a short amount of time — our median response time today is less than 400ms, which makes our product the fastest in the world.</p>
+<p>Here we&#39;ll go over some of the optimization tactics we&#39;ve used or are actively exploring:</p>
+<h3>FasterTransformer + Triton server:</h3>
+<p>First, we convert CodeGen checkpoint to <a href="https://github.com/NVIDIA/FasterTransformer">FasterTransformer</a> to make use of their highly-optimized decoder blocks (with the possibility of extending to distributed, multi-GPU fashion). Their computational and memory optimizations make inference much faster than popular frameworks like PyTorch or Tensorflow. On top of this, we use Triton, Nvidia&#39;s inference server, which is super fast and scalable.</p>
+<h3>Distillation:</h3>
+<p>For further speedup, we perform <a href="https://arxiv.org/pdf/1910.01108.pdf">knowledge distillation</a> of CodeGen model with 2B parameters down to a lightweight and fast student model with roughly 1B parameters. The student model is trained to reproduce the larger model closely while having far fewer parameters and being less computationally expensive. Hence, it is more practical when operating at scale.</p>
+<h3>Quantization:</h3>
+<p>We are also exploring post-training quantization of weights and activations to int8 precision with <a href="https://arxiv.org/pdf/2206.01861.pdf">quantization-optimized kernels</a> to bring down latency. Performing computation in such low precision with optimized kernels often improves latency without causing a significant loss in the accuracy of the model.</p>
+<h3>Future improvements</h3>
+<p>Work is already underway to improve Ghostwriter further:</p>
+<ol>
+<li>Further training on open-source datasets like <a href="https://huggingface.co/datasets/codeparrot/github-code">CodeParrot</a>.</li>
+<li><a href="https://github.com/lvwerra/trl">Deep</a> <a href="https://arxiv.org/pdf/2207.01780.pdf">Reinforcement Learning</a> to further train LLMs with additional signals like user feedback, accuracy on unit tests, compiler/runtime errors etc.</li>
+<li>Humans don&#39;t code unidirectionally. They go back and forth to add, delete, and edit code. Autoregressive language models generate code in one forward direction. <a href="https://arxiv.org/abs/2204.05999">Recent</a> <a href="https://arxiv.org/pdf/2207.14255.pdf">works</a> have made LMs more flexible by infilling training. They divide code blocks into <code>&lt;prefix, middle, suffix&gt;</code>, mask <code>middle</code> and train the model to predict <code>middle</code> given <code>prefix</code> and <code>suffix</code>. Because Replit&#39;s IDE stores <a href="https://en.wikipedia.org/wiki/Operational_transformation">operational transformation</a> edits, we capture the natural cursor movements of human programmers and their code edits, which contains much richer information than synthetically made infilling datasets. <strong>We plan to train LMs to predict the OT distribution. We think it will make LMs much more of a pair programmer.</strong></li>
+</ol>
+<h2>Editor implementation</h2>
+<p>Getting the model right is only half the battle. Surprisingly, the client-side implementation is equally as challenging as training and running the models.</p>
+<p>The user experience for any AI application is paramount to making it feel helpful (instead of annoying). The nitpicky detail necessary to get this right is immense; here is a sampling of some of the issues we have been working on.</p>
+<h3>Whitespace and brace matching</h3>
+<p>When the model generates a recommendation, it might contain code that already exists in the surrounding context. The simplest form of this is with whitespace and braces. A detail that seems tiny on the surface but matters a lot for a flawless user experience.</p>
+<p>So, to fully understand this, imagine the following (incomplete) code:</p>
+<pre><code class="language-js">const isOdd = useCallback(function isOdd(n) {
+  |
+}, []);
+</code></pre>
+<p>You’ve stopped, with your cursor tabbed in to where the vertical bar is, and are about to receive a suggestion from the model. The model sends back its recommended completion:</p>
+<pre><code class="language-js">  return n % 2 === 1;
+}, []);
+</code></pre>
+<p>This includes a leading tab and a trailing brace, both of which already exist, so if we just blindly dumped the recommendation into your code, you’d be left with:</p>
+<pre><code class="language-js">const isOdd = useCallback(function isOdd(n) {
+    return n % 2 === 1;
+}, []);
+}, []);
+</code></pre>
+<p>A decent recommendation turned frustrating by an incomplete user experience.</p>
+<p>Instead, we match and filter on certain matching whitespace, abstract syntax tree (AST) characteristics to produce the desired recommendation:</p>
+<pre><code class="language-js">const isOdd = useCallback(function isOdd(n) {
+  return n % 2 === 1;
+}, []);
+</code></pre>
+<p>Showing the correct code recommendation is only half of the equation. Very often, users keep typing even after the code recommendation is shown. If you type something that matches the suggestion, we need to adjust the suggestion shown on screen to hide the part the user has typed—and resurface it when you hit backspace.</p>
+<p>What&#39;s more, when you type, the editor would autocomplete a beginning bracket whose corresponding ending bracket; we want to make sure the latter appears in the right spot. As an example, suppose you have typed</p>
+<pre><code class="language-ts">// Merge [number, number] with [string, string]
+const mergeTuples = (first: |)
+</code></pre>
+<p>and the suggestion is</p>
+<pre><code class="language-ts">const mergeTuples = (first: Array&lt;number&gt;, second: Array&lt;string&gt;) =&gt; {
+</code></pre>
+<p>We want to make sure code recommendations do not disrupt existing code, and correctly splits itself into the part before <code>)</code> and after it.</p>
+<p><img src="https://blog.replit.com/images/ai/ux.gif" alt="ux"></p>
+<h3>Heuristic filtering</h3>
+<p>A common challenge with LLMs is that at times, they can generate useless suggestions, annoying repetition, or things that are completely wrong.</p>
+<p>To produce something that actually feels like “intelligence” requires a bit more sophistication. We apply a collection of heuristic filters to decide to discard, truncate or otherwise transform some suggestions; soon, we’ll also apply a reinforcement learning layer to understand the kinds of suggestion that are helpful to users, filtering out suggestions that are unlikely to be accepted to prioritize suggestions that are genuinely helpful.</p>
+<h3>Streaming</h3>
+<p>We can&#39;t overemphasize how much speed matters here. Anyone who has used a sluggish IDE knows how frustrating it is, and outdated suggestions that can get in your way will easily make this feature a net negative on the user experience.</p>
+<p>In addition to all the model optimizations we detailed above, we also implemented streaming. In other words, we don&#39;t have to wait for the entire recommendation to be available, so we literally just start presenting the generated code as soon as possible, chunking it into your UI line-by-line as it becomes available.</p>
+<p>This little detail makes an enormous difference to how fast the AI feels and how easily integrated into your actual programming experience it is. Maybe it also feels a bit more “intelligent” to know it takes time for the computer to figure out exactly how it wants to help.</p>
+<h2>A Society of Models</h2>
+<p>Our conceptual model for Ghostwriter that it&#39;s a pair programming agent. It&#39;s tempting to map this to a single model that runs all the features. However, as we made progress, we realized that it&#39;s better to think of Ghostwriter as a society of models of different shapes and sizes helping you succeed.</p>
+<h3>Semantic Search</h3>
+<p>A large amount of code exists in open source, but it’s hard to search with natural language because natural language and code are two very different modalities.  So instead of deploying traditional approaches like keyword matching, we use embeddings from transformer-based models to power code search. Specifically, we use a finetuned version of <a href="https://arxiv.org/abs/2002.08155">CodeBERT</a> model to get learned representations for code and query. The CodeBERT model is finetuned to map both code and query to vectors in joint vector space that are close to each other. We then conduct nearest neighbor matching between the code and query vectors/representations. Such learned representations of code can encode information about what the code does, in addition to other characteristics like keywords the code has, etc. Hence, during inference, the user can search for code in plain natural language by specifying what the code should do.</p>
+<p>Importantly, users can search for code from inside the editor. This allows us to improve code search even further by making search contextual. Meaning, we give the ML model access to the code the user has already written, whenever searching for upcoming code. This allows us to exploit the clues present in user’s code (like libraries being used) that makes search tailored to that user’s context. We achieve such contextual code search by training CodeBERT model to minimize the distance between single embedding of code context + query, and code. More details can be found in <a href="https://openreview.net/pdf?id=rSxfCiOZk-c">this paper</a>.</p>
+<p><img src="https://blog.replit.com/images/ai/search.jpeg" alt="search"></p>
+<h3>Explain Code</h3>
+<p>Large models are especially good at reasoning tasks, and explaining what a piece of code does benefit from every last bit of model performance we can get. For our <a href="https://blog.replit.com/codex">Explain Code</a> feature, we use the largest state-of-the-art code models, in this case powered by OpenAI.</p>
+<p><img src="https://blog.replit.com/images/ai/explain.gif" alt="explain code"></p>
+<h3>Generate Code</h3>
+<p>While Complete Code is super useful for interactive experiences, sometimes users are willing to take a pause in order to <a href="https://blog.replit.com/generate-code">generate entire programs</a> or files. That kind of generations benefits from the performance of insanely large models (100B+ parameters).</p>
+<p><img src="https://blog.replit.com/images/ai/generate.gif" alt="generate"></p>
+<h3>Transform Code</h3>
+<p>Finally, we leverage exceptionally large models to provide prompt-driven refactor/rewrite experiences.</p>
+<p><img src="https://blog.replit.com/images/ai/transform.gif" alt="transform"></p>
+<h2>The future</h2>
+<p>With the advent of LLMs and generative models in general, we believe that software is entering a new epoch. In the near future, anyone with time and good ideas will be able to build amazing things. AI will guide you as you learn new concept, push just-in-time useful information to you, and even comment on and critique your code. This brings us much closer to our vision of bringing the next billion software creators online, and in the process reducing the distance between ideas and wealth.</p>
+<p>Many of the Ghostwriter features are already available for Hacker subscribers, and more are coming. Ghostwriter Complete Code will be in closed beta for the next few months as we continue to make improvements to it. If you&#39;re interested in trying out, please <a href="https://replit.com/@amasad/GhostWriter-Early-Access?v=1">sign up here</a>.</p>
+<p>Over the next few months we&#39;ll be packaging up Ghostwriter into a Cycles-based power-up that anyone can buy. We&#39;re hoping to make this feature more affordable than other offerings on the market. Eventually, however, the plan is — just like Multiplayer mode — to make Replit AI-powered by default and freely available to everyone.</p>
+<p><video src="https://blog.replit.com/images/ai/aimode_future.mp4"  class="css-3qjkrt" autoplay muted playsinline loop controls></video></p>
+<p>Have some questions? See our <a href="https://docs.replit.com/programming-ide/GhostWriter-FAQ">FAQ document</a>.</p>
+<script>
+  window.addEventListener('load', videoScroll);
+window.addEventListener('scroll', videoScroll);
+
+function videoScroll() {
+
+  if ( document.querySelectorAll('video[autoplay]').length > 0) {
+    var windowHeight = window.innerHeight,
+        videoEl = document.querySelectorAll('video[autoplay]');
+
+    for (var i = 0; i < videoEl.length; i++) {
+
+      var thisVideoEl = videoEl[i],
+          videoHeight = thisVideoEl.clientHeight,
+          videoClientRect = thisVideoEl.getBoundingClientRect().top;
+
+      if ( videoClientRect <= ( (windowHeight) - (videoHeight*.5) ) && videoClientRect >= ( 0 - ( videoHeight*.5 ) ) ) {
+        thisVideoEl.play();
+      } else {
+        thisVideoEl.pause();
+      }
+
+    }
+  }
+
+}
+</script>

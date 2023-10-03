@@ -1,0 +1,33 @@
+<p>My name is <a href="https://twitter.com/brendanfalk">Brendan Falk</a>. I am one of the co-founders of <a href="http://withfig.com?ref=replit">Fig</a> (YC S20). Fig adds visual apps and shortcuts to your Terminal. We make it easy for developers to build visual apps that streamline terminal workflows. We then let developers share apps with their team and the community. Our website gives a good demo.</p>
+<p>After going through various pivots in early 2020, we realised that the Terminal was a huge pain point for us. We wondered if we could build a tool that would make our own lives easier. But rather than creating a new terminal, we wanted to attach to our existing Terminal.</p>
+<p>In late April, we started exploring whether building a tool like Fig was even technically possible. On the 15th of May we decided to go all in on Fig. Roughly two weeks later, we had a simple MVP in users&#39; hands. </p>
+<p>YCombinator pushes companies to move fast. Repl.it helped us move fast.</p>
+<p><img src="https://blog.repl.it/images/fig/fig.png" alt="fig terminal screenshot"></p>
+<h3>Why Did I Personally Use Repl.it</h3>
+<p>Before I answer this, here is some quick context on me: I am the CEO of Fig. Before starting YC I was somewhat technical. Up until about March this year, I knew HTML/CSS and a tiny bit of JavaScript. I had no idea what a server was. <a href="https://news.ycombinator.com/item?id=21795041">Here is my first HN post</a> where I ask how to deploy an ML model haha. My co-founder, <a href="https://twitter.com/mattschrage">Matt</a>, did most of the coding. </p>
+<p>I started learning JavaScript in early May 2020. I had always tried to avoid it. I used no-code tools like Bubble.io instead. Because we were starting YC in a month, I decided it was time to get my act together. We could move faster if I could code too.</p>
+<p>I don&#39;t know how I came across Repl.it. I thought it looked cool so I gave it a go. </p>
+<p>Within a few minutes, almost by accident, I had a server up and running.</p>
+<p><img src="https://blog.repl.it/images/fig/final_replit_node_demo.gif" alt="final_replit_node_demo"></p>
+<p>I thought, wow, not only did I just build a server, it&#39;s at a live URL that I can share with people. I can update the app and that URL would update instantly too. I liked that it managed the whole devops / deployment side of things. I could just code. Pretty cool.</p>
+<p>Naturally, I just kept building in it. As it turned out, Repl.it was just as helpful to our team. </p>
+<h3>Why Did Fig use Repl.it</h3>
+<p><strong>Instant Deploys</strong></p>
+<p>Repl.it let us deploy a live production app to our own domain in a click. Fig is a unique tool. You can think of us like a web browser that attaches to your Terminal. We are a CLI tool that launches a desktop app (built natively in Swift, not Electron) which renders lots of mini web apps (as you can see in the git example below). </p>
+<p>We wanted to move quickly. Setting up dev, testing, and staging environments for the app was going to take us longer than we wanted to implement. We have obviously done this now, but at the time, we wanted to move quickly. </p>
+<p>We wanted a solution that we could set up &amp; deploy to easily, built our app quickly, and pushed to our own custom url. AWS/GCP are too clunky to set up. Heroku is quick to set up, but takes 20 seconds per build and this is really annoying. Repl.it, however, ticked all our boxes. I would change a line of code and it would be live in Fig in 3 seconds.</p>
+<p><strong>Git / Version Control</strong></p>
+<p>I know the basics of git, but Repl.it just made it so easy. I connected a new GitHub repo to my Repl.it app. I clicked a button, typed a commit message, then clicked commit and push. Both my co-founder and I were writing better commit message and were committing more often.</p>
+<p>In fact, we loved Repl.it&#39;s git extension add-on so much, we copied it and turned it into an app on Fig (thanks Amjad haha).</p>
+<p><img src="https://blog.repl.it/images/fig/fig-git-demo.gif" alt="fig-git-demo"></p>
+<p><strong>Multiplayer</strong></p>
+<p>This one is pretty self explanatory... Being able to do pair programming without the hassle of setting it up in VSCode is very very nice. We were very productive with this.</p>
+<p><strong>Free</strong></p>
+<p>Again, pretty obvious. Premium (Hacker) was free for students (we were still in college when we were doing this). I now pay $7/month for this. It&#39;s how much Heroku is but you get a full IDE + speed with it. Totally worth it.</p>
+<h3>How do I use Repl.it Now Fig Transitioned to Heroku and AWS</h3>
+<p>We got really far with Repl.it, but we eventually hit some limits and bugs (that has since been fixed). Repl.it&#39;s Github integration is limited and we needed to get serious about our git workflow and devops. We decided it was time for us to move from Repl.it to Heroku, AWS, and S3. We now do most of our coding for our main app on VSCode.</p>
+<p>Despite this, I still use Repl.it all the time. Whenever I want to test out a new framework or library, I just open up a new repl. I&#39;m also finding my Google searches are yielding more and more posts from the Repl.it&#39;s forum. It&#39;s a fantastic community.</p>
+<h3>Parting Words</h3>
+<p>It&#39;s funny, by recommending Repl.it I realise I am shooting myself in the foot a little bit. Fig&#39;s bet is that the local Terminal isn&#39;t going away. We don&#39;t think it will anytime soon 😉. If you want to be a productive programmer, the Terminal is a tool you should know. But tools like Repl.it are making it very easy to code in the cloud and stay there!</p>
+<p>If you have any questions about YC, Fig, Repl.it, or just want to say hey, feel free to email me (I&#39;m very responsive): <a href="mailto:brendan@withfig.com">brendan@withfig.com</a></p>
+<p>And if you want to sign up for Fig&#39;s private beta, mention this blog post in your sign up and we&#39;ll get you off the waitlist: <a href="https://withfig.com?ref=replit">withfig.com</a></p>

@@ -1,0 +1,22 @@
+<p>On the heels of our Node.js npm support <a href="node_modules">announcement</a>, we&#39;re pleased to announce that we now
+support Ruby <a href="https://rubygems.org/">Gems</a> too. We&#39;re excited to have the Ruby
+community join the fun.</p>
+<p>The way it works is slightly different from our Node or Python
+implementations. In Node or Python you simple require/import the module you&#39;d
+like to use, and we&#39;ll automagically install the package for you. In Ruby,
+unfortunately, we couldn&#39;t find a reliable way to map requires to Gems so we had
+to go with a neat feature of Bundler:
+<a href="https://gist.github.com/chrisroos/0ddf618ac711abe0f465">bundler/inline</a> where
+you can define your gemspec in the code. This works well for Repl.it because
+we&#39;d like to make it easy for people to use the repl without having to add files.</p>
+<p>Here is an example, this uses the gem <code>colorlize</code> to print an ascii drawing of the
+American flag:</p>
+<iframe height="400px" width="100%" src="https://repl.it/@amasad/Murica?lite=true" scrolling="no" frameborder="no" allowtransparency="true" allowfullscreen="true" sandbox="allow-forms allow-pointer-lock allow-popups allow-same-origin allow-scripts allow-modals"></iframe>
+
+<p>We&#39;re still working on improving this, look forward to the following the coming
+days:</p>
+<ul>
+<li>Per repl caching: install once, there forever</li>
+<li>Gemfile support</li>
+</ul>
+<p><a href="/feedback">Feedback</a> welcome!</p>

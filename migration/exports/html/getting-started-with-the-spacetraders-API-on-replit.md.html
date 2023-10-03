@@ -1,0 +1,159 @@
+<p><a href="https://spacetraders.io">SpaceTraders</a> is an online multiplayer game where you buy a spaceship, explore space, and set up trades. But it’s not just any other space exploration game—this one you play by manipulating a <a href="https://www.redhat.com/en/topics/api/what-is-a-rest-api">REST API</a>. It’s a fun, interactive way for new programmers to learn and stretch their skills. </p>
+<p>But where should you build it?</p>
+<p><a href="https://replit.com">Replit</a> is a collaborative, in-browser IDE that supports more than fifty programming languages and can be used on any device or OS. Replit supports GitHub integration, real-time collaboration, and the ability to create teams. It also has an active, global community of users you can collaborate with. </p>
+<p>This tutorial walks you through how to use Replit to play SpaceTraders. Let’s take your first steps toward the complete and total domination of galactic trade, as the <a href="https://spacetraders.io/docs/guide">documentation</a> says.</p>
+<h2>Okay—What’s SpaceTraders?</h2>
+<p>SpaceTraders.io is a unique, multiplayer game that’s played via a RESTful web API. You can play using the command line or a tool like <a href="https://www.postman.com/">Postman</a>, or you can use any programming language you want to automate your API calls or create your own frontend for the game. </p>
+<p>It’s great for learning how to use APIs, but it’s also just fun to play. The basic game mechanics are: players buy ships and travel through space to different planets, where they buy goods and sell them for profit.</p>
+<p>This is achieved by hitting API endpoints using different HTTP methods. For example, to view a list of your ships, you send a <code>GET</code> request to <code>https://api.spacetraders.io/my/ships</code>. To buy a new ship, you send a <code>POST</code> request to the same URL along with parameters specifying the location and type of ship you want to purchase. </p>
+<h2>Getting Started with SpaceTraders</h2>
+<p>You can use <a href="https://replit.com/site/ide">Replit’s browser-based IDE</a> to interact with the SpaceTraders API and play the game with a custom frontend client. </p>
+<p>If you’ve never played SpaceTraders before, you’ll need to set up an account and get an access token before you begin. </p>
+<h3>Setting Up SpaceTraders</h3>
+<p>When you first start playing SpaceTraders, it’s a good idea to follow their <a href="https://spacetraders.io/docs/guide">Getting Started guide</a>. They suggest installing the command-line HTTP client <a href="https://httpie.io/docs#installation">HTTPie</a> and using that to interact with the game API. </p>
+<p>You can follow their instructions to generate an access token and claim a username. Continue following the guide and take out a loan, buy a ship, and buy and sell your first goods. This will help you get to know the game before you start building your client.</p>
+<h3>Creating a SpaceTraders.io Client Using Replit</h3>
+<p>Now that you’ve set up your player account and have a basic understanding of the game, it’s time to use Replit to create a SpaceTraders client. </p>
+<p>For inspiration, you can check out some <a href="https://github.com/SpaceTradersAPI/awesome-spacetraders">SpaceTraders clients</a> created by community members. You can build all of the functionality of the API into your client, but for the purpose of this tutorial, you will be focusing on displaying user and ship information.</p>
+<p>First, create a new repl. You can code in almost any programming language you can imagine, but for this tutorial, you will be using <a href="https://reactjs.org">React</a>. </p>
+<p>Search for <em>React</em> in the template search bar and choose the React.js template. Give your repl a name, and hit <strong>Create Repl</strong>. This will bring up a new workspace.</p>
+<p><img src="https://i.imgur.com/WcLi1r1.png" alt="Repl creation modal with React.js template selected"></p>
+<p>One way to organize your project is to create a components folder and within that, React components for each aspect of the game you would like to represent. For example, you could have a <code>Goods</code> component, a <code>Ships</code> component, a <code>User</code> component, and so on. </p>
+<p><img src="https://i.imgur.com/vbHXNKd.png" alt="Components folder with React component files inside"></p>
+<p>You can start to create some basic functionality by connecting to the SpaceTraders API to get player information. Start by sending a <code>fetch</code> request from the main App.jsx file to the <code>/account</code> endpoint, along with your access token as a parameter.</p>
+<blockquote>
+<p>This is not secure, but it’s quick and easy and will do for the purposes of this tutorial. </p>
+</blockquote>
+<p>In the example below, the <code>useEffect</code> hook performs the fetch request on page load, then the <code>useState</code> hook saves the object that is returned from the request. </p>
+<blockquote>
+<p>Add an array as the second argument to the <code>useEffect</code> hook to make sure it doesn’t run repeatedly. </p>
+</blockquote>
+<pre><code class="language-javascript">import React from &#39;react&#39;;
+import &#39;../styles.css&#39;;
+
+function App() {
+const [playerInfo, setPlayerInfo] = React.useState({});
+const token = YOUR TOKEN HERE;
+
+React.useEffect(() =&gt; {
+  fetch(`https://api.spacetraders.io/my/account?token=${token}`)
+    .then(response=&gt; response.json())
+    .then(data=&gt; {
+      setPlayerInfo(data);
+    })
+}, [])
+
+  return (
+    &lt;div&gt;
+    &lt;/div&gt;
+  )
+}
+
+export default App;
+</code></pre>
+<p>Next, create a Player.jsx file in the components folder. You’ll import this file to App.jsx, which will then return the <code>Player</code> component. The following code represents the entirety of the Player.jsx file. It’s a functional component that takes in the user information object as a prop from App.jsx and displays data from that object on the frontend. </p>
+<pre><code class="language-javascript">import React from &#39;react&#39;;
+import &#39;../styles.css&#39;;
+
+const Player = (props) =&gt; {
+  const user = props.info.user;
+  return (
+    &lt;div className=&quot;dashboard-section&quot;&gt;&lt;h3&gt;Player Info&lt;/h3&gt;
+    &lt;ul&gt;
+    &lt;li&gt;&lt;strong&gt;Username:&lt;/strong&gt; {user.username}&lt;/li&gt;
+    &lt;li&gt;&lt;strong&gt;Credits:&lt;/strong&gt; {user.credits}&lt;/li&gt;
+    &lt;li&gt;&lt;strong&gt;Ships:&lt;/strong&gt; {user.shipCount}&lt;/li&gt;
+    &lt;li&gt;&lt;strong&gt;Structures:&lt;/strong&gt; {user.structureCount}&lt;/li&gt;
+    &lt;/ul&gt;
+    &lt;/div&gt;
+  )
+}
+
+export default Player;
+</code></pre>
+<p>Once you’ve finished making the <code>Player</code> component, alter your App.jsx file to import and display it. The following code only returns the <code>Player</code> component if a user exists, passing the player information to it as <code>info</code>. </p>
+<pre><code class="language-javascript">// Add this to the beginning of App.jsx
+import Player from &#39;../components/Player&#39;;
+
+// Add this to the return statement in App.jsx
+{playerInfo.user &amp;&amp; &lt;Player info={playerInfo} /&gt;}
+</code></pre>
+<p>You should now be able to see your player information displayed on the right side of the Replit workspace. It will look something like this:</p>
+<p><img src="https://i.imgur.com/WbF8F5z.png" alt="User information displayed on frontend"></p>
+<p>Now that you’ve fetched and displayed your user info, you can move on to displaying other information about the game. </p>
+<p>To display information about your ships, for instance, you will follow a very similar series of steps. </p>
+<p>To get a list of your ships, you can send a <code>GET</code> request to <code>https://api.spacetraders.io/my/ships?token=${token}</code> from within <code>useEffect</code> in App.jsx. <code>useEffect</code> will now contain two <code>GET</code> requests: one for the user information and one for a list of ships. </p>
+<p>Then you’ll use the <code>useState</code> hook to store the ship’s object in state, just like you did with the user object. </p>
+<p>Finally, pass the returned object to a <code>Ships</code> component as a prop. Your new App.jsx function will look like this:</p>
+<pre><code class="language-javascript">import React from &#39;react&#39;;
+import &#39;../styles.css&#39;;
+import Player from &#39;../components/Player&#39;;
+import Ships from &#39;../components/Ships&#39;;
+
+function App() {
+const [playerInfo, setPlayerInfo] = React.useState({});
+const [myShips, setMyShips] = React.useState({});
+
+React.useEffect(() =&gt; {
+  
+  // get player info
+  fetch(`https://api.spacetraders.io/my/account?token=${token}`)
+    .then(response=&gt; response.json())
+    .then(data=&gt; {
+      console.log(data);
+      setPlayerInfo(data);
+    })
+
+// get player&#39;s ships
+fetch(`https://api.spacetraders.io/my/ships?token=${token}`)
+  .then(response =&gt; response.json())
+  .then(data =&gt; {
+    setMyShips(data);
+  })
+
+}, [])
+
+  return (
+    &lt;div&gt;
+    {playerInfo.user &amp;&amp; &lt;Player info={playerInfo} /&gt; }
+&lt;Ships myShips={myShips} /&gt;
+    &lt;/div&gt;
+  )
+}
+
+export default App;
+</code></pre>
+<p>Your <code>Ships</code> component, which will be located in the components folder, will look similar to this:</p>
+<pre><code class="language-javascript">import React from &#39;react&#39;;
+import &#39;../styles.css&#39;;
+
+const Ships = (props) =&gt; {
+
+  const myShips = props.myShips.ships;
+
+  return (
+    &lt;div className=&quot;dashboard-section&quot;&gt;
+    &lt;h3&gt;Your ships&lt;/h3&gt;
+    {myShips &amp;&amp; myShips.map((ship) =&gt; 
+      &lt;div className=&quot;ship&quot; key={ship.id}&gt; 
+      &lt;strong&gt;Class: &lt;/strong&gt;{ship.class}&lt;br/&gt;
+      &lt;strong&gt;Location: &lt;/strong&gt;{ship.location}&lt;br/&gt;
+    
+      &lt;/div&gt;
+    )}
+    &lt;/div&gt;
+  )
+}
+
+export default Ships;
+</code></pre>
+<blockquote>
+<p>Note that the ships are returned in an array, so you can map over them and display details about each ship separately. Take a look at the SpaceTraders.io <a href="https://api.spacetraders.io/">API docs</a> to see what each endpoint returns.</p>
+</blockquote>
+<p><img src="https://i.imgur.com/C2O0fPr.png" alt="List of ships with details about each"></p>
+<p>You can follow a similar workflow to display other data such as your loans, information about locations, the leaderboard, and so on. </p>
+<p>Of course, there is more to SpaceTraders than just viewing your stats. You can set your client up to perform functions like purchasing ships, taking out loans, buying and selling goods, and more. </p>
+<p>For example, to purchase a ship, you can use <code>fetch</code> to send a <code>POST</code> request to <code>https://api.spacetraders.io/my/ships</code> along with the location and type of an available ship. Very similar processes can be used for purchasing goods, creating structures, and submitting flight plans.</p>
+<h2>Conclusion</h2>
+<p>One of the wonderful things about Replit is its support for so many different programming languages, which means you don’t have to use React as we did in this tutorial. You can easily adapt this project for <a href="https://www.python.org">Python</a>, <a href="http://vanilla-js.com">vanilla JavaScript</a>, or any other language you would like. </p>
+<p>This article got you started with SpaceTraders, but there is so much more you can do and add to this project. You can add the ability to purchase ships and sell goods, create error handling, and make the UI look really slick. The fun part is customizing your own experience. </p>
