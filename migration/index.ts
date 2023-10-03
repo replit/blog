@@ -55,7 +55,7 @@ const processPost = async (fileName: string) => {
   const html = await marked.parse(body);
 
   // Write the html to a file
-  writeFileSync(`./exports/html/${fileName}.html`, html);
+  // writeFileSync(`./exports/html/${fileName}.html`, html);
 
   // Convert the date to ISO format
   const date = frontmatter.date
