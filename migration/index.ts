@@ -1,126 +1,125 @@
 import { Schema } from '@sanity/schema';
 import jsdom from 'jsdom';
-const { JSDOM } = jsdom;
 import { v4 as uuid } from 'uuid';
-
 import { htmlToBlocks } from '@sanity/block-tools';
-import { stringify } from 'ndjson';
-import { Marked } from 'marked';
-import { readdirSync, readFileSync, writeFileSync, lstatSync } from 'fs';
 import fm from 'front-matter';
+import { lstatSync, readFileSync, readdirSync, writeFileSync } from 'fs';
+import { Marked } from 'marked';
+import { stringify } from 'ndjson';
 import { schema } from './schemas';
+const { JSDOM } = jsdom;
 
+/**
+ * NDJSON Serializer logic
+ * We use new line delimited JSON to create the ndjson file
+ * used by the sanity CLI to import data
+ */
 const ndSerialize = stringify();
-let ndJsonLines = '';
-ndSerialize.on('data', (line) => (ndJsonLines += `${line}`));
-const writeJson = (obj) =>
+let ndJsonLines = ''; // Stores our output json
+ndSerialize.on('data', (line) => (ndJsonLines += `${line}`)); // Called on each addition
+const writeNdJson = (obj: Object) =>
   ndSerialize.write(obj, 'utf8', () => {
     console.log('done');
     ndSerialize.end();
-    writeFileSync('./exports/production.ndjson', ndJsonLines);
+    writeFileSync('./exports/production.ndjson', ndJsonLines); // Write the file
   });
 
-// Convert the md docs in posts/ to html using marked js
-
+// Get all markdown files
 const mdDocs = readdirSync('./posts');
 
-const processPost = (post) => {
-  // if (
-  //   fs.lstatSync(`./posts/${post}`).isDirectory() ||
-  //   !post.includes('.md')
-  // ) {
-  //   return '';
-  // }
-
+// Process a markdown file given a file name
+const processPost = async (fileName: string) => {
   // Grab the file contents
-  let md = readFileSync(`./posts/${post}`, 'utf8');
+  let markdownContent = readFileSync(`./posts/${fileName}`, 'utf8');
 
-  // across all md files, efficiently find and replace the following:
-  // - `](images/` with `](https://blog.replit.com/images/`
-  // - `](/images/` with `](https://blog.replit.com/images/`
-  // - `src="images/` with `src="https://blog.replit.com/images/`
-  // - `src="/images/` with `src="https://blog.replit.com/images/`
-  // you can use a library if needed
-
-  md = md.replace(/]\(images\//g, '](https://blog.replit.com/images/');
-  md = md.replace(/]\(\/images\//g, '](https://blog.replit.com/images/');
-  md = md.replace(/src="images\//g, 'src="https://blog.replit.com/images/');
-  md = md.replace(/src="\/images\//g, 'src="https://blog.replit.com/images/');
+  // Ensure all relative asset URLs are converted to absolute URLs
+  markdownContent = markdownContent.replace(
+    /]\((\/)?(public\/)?images\//g,
+    '](https://blog.replit.com/images/'
+  );
 
   // Parse out the frontmatter and body
   const { attributes: frontmatter, body } = fm<{
-    date: string;
     title: string;
+    author?: string; // sometimes a list, may be separated with commas or &
+    date?: string;
+    cover?: string;
+    categories?: string; // comma separated
     slug?: string;
-  }>(md);
-  // Convert the body to an html string
+    profiles?: string; // comma separated
+  }>(markdownContent);
+
+  // Convert the body to an html string using the same
+  // processor we use on the blog, for 1:1 output
   const marked = new Marked();
-  const contentHtml = marked.parse(body);
-  // Create a head tag with the frontmatter as json
-  const head = `<head><script type="application/json" id="frontmatter">${JSON.stringify(
-    frontmatter
-  )}</script></head>`;
-  // Create the html string
-  // const html = `<html>${head}<body>${contentHtml}</body></html>`;
-  const html = contentHtml.toString();
+  const html = await marked.parse(body);
+
   // Write the html to a file
-  writeFileSync(`./exports/html/${post}.html`, html);
+  writeFileSync(`./exports/html/${fileName}.html`, html);
+
+  // Convert the date to ISO format
+  const date = frontmatter.date
+    ? new Date(frontmatter.date as string).toISOString()
+    : null;
+  // if author is a string, split it at "," or "&"
+  const authors = frontmatter.author ? frontmatter.author.split(/,|&/) : null;
+  const categories = frontmatter.categories ? frontmatter.categories.split(',') : null;
+  const profiles = frontmatter.profiles ? frontmatter.profiles.split(',') : null;
+  const slug = frontmatter.slug || fileName.replace('.md', '');
 
   return {
     html,
     frontmatter: {
       ...frontmatter,
-      date: frontmatter.date
-        ? new Date(frontmatter.date as string).toISOString()
-        : null,
+      date,
+      authors,
+      categories,
+      profiles,
+      slug
     },
   };
 };
 
-// generate html
-const htmlDocs = mdDocs.map(async (doc) => {
+// Process all markdown files
+mdDocs.map(async (doc) => {
   // make sure it's not a directory or a non-md file
-
   if (lstatSync(`./posts/${doc}`).isDirectory()) {
     return null;
   }
 
-  const { frontmatter, html } = processPost(doc);
+  // process the markdown file
+  const { frontmatter, html } = await processPost(doc);
 
-  // console.log(html);
-
+  // convert the html to block content
   const blockContent = await convertHtmlToBlock(html);
 
-  // console.log(blockContent);
-
-  // console.log(html);
-
-  const jsondata = {
-    _id: `post-${uuid()}`,
-    _type: 'post',
-    title: frontmatter.title || undefined,
+  // Create a JSON object representing the post
+  const entryJson = {
+    _id: `post-${frontmatter.slug || doc.replace('.md', '')}`, // persistent id
+    _type: 'post', // sanity type
+    title: frontmatter.title,
     slug: {
       _type: 'slug',
-      current: frontmatter.slug || doc.replace('.md', ''),
+      current: frontmatter.slug
     },
     body: blockContent,
-    publishedAt: frontmatter.date || undefined,
+    publishedAt: frontmatter.date,
   };
 
-  writeJson(jsondata);
-
-  // save json to file
-  writeFileSync(`./exports/json/${doc}.json`, JSON.stringify(jsondata));
+  // TODO Create entries for categories and authors
+  writeNdJson(entryJson);
 });
 
+// This function takes in html and returns the structured block content that Sanity expects
 async function convertHtmlToBlock(html) {
+  // Create a root schema that we can use to parse the html
   const rootSchema = new Schema(schema);
-
+  // Get the blockContent type we need to parse the html
   const bodyContentType = rootSchema.get('blockContent');
 
+  // Return parsed blocks as an array of portable text blocks
   return htmlToBlocks(html, bodyContentType, {
     parseHtml: (html) => {
-      // console.log(html);
       const dom = new JSDOM(html, {
         includeNodeLocations: true,
       }).window.document;
@@ -128,12 +127,14 @@ async function convertHtmlToBlock(html) {
     },
     rules: [
       {
+        // Here is where we hook into the 'deserialize' function and return custom types
         deserialize(el, next, block) {
+          // Typecast the element as an HTMLElement so we can access the element
           const element = el as HTMLElement;
-          // console.log(el)
-          // console.log(el.nodeName)
-          // This is an example of over-riding the 'pre' tag in our
-          // html and returning a custom 'codeBlock' type
+
+          // Generate code blocks from <pre><code/></pre> tags.
+          // Instances of <code/> without <pre/> will be treated automatically
+          // as inline code styles.
           if (element.nodeName.toLowerCase() === 'pre') {
             // the language is stored as a language-* class name
             const code = element.querySelector('code');
@@ -147,31 +148,28 @@ async function convertHtmlToBlock(html) {
             });
           }
 
-          // img
+          // Generate image blocks from <img/> tags.
           if (element.nodeName.toLowerCase() === 'img') {
-            // get the url
             let url = element.getAttribute('src');
             return block({
               _type: 'image',
+              // We need to prefix the url so Sanity knows how to import them
               _sanityAsset: `image@${url}`,
             });
           }
 
-          // if video, return file block
+          // Generate video blocks from <video/> tags.
           if (element.nodeName.toLowerCase() === 'video') {
-            // get the url
             let url = element.getAttribute('src');
             return block({
               _type: 'file',
+              // We need to prefix the url so Sanity knows how to import them
               _sanityAsset: `file@${url}`,
             });
           }
 
-
-          // This is an example of over-riding the 'iframe' tag in our html, detecting
-          // that the src is a github gist, then returning the custom '_type' for 'githubGist'
+          // Generate embed blocks from <iframe/> tags.
           if (element.nodeName.toLowerCase() === 'iframe') {
-            // get the url
             let url = element.getAttribute('src');
             return block({
               _type: 'embed',
@@ -180,7 +178,6 @@ async function convertHtmlToBlock(html) {
             });
           }
 
-
           return undefined;
         },
       },
@@ -188,38 +185,3 @@ async function convertHtmlToBlock(html) {
   });
 }
 
-// const rootSchema = Schema.compile({
-//   name: 'Mux CMS',
-//   types,
-// })
-// const bodyContentType = rootSchema
-//   .get('post')
-//   .fields.find(field => field.name === 'body').type
-
-// // This is a simplified version of processPost - we take a JSON object
-// // that is a 'post' from the Ghost archive and turn it into a 'post' in
-// // sanity's world
-// async function processPost(post) {
-//   const {
-//     html,
-//     meta_title,
-//     meta_description,
-//     published_at,
-//   } = post
-//   // Take html and converts it into the data structure for a post 'body'
-//   const body = await convertHtmlToBlock(html)
-// writeJson({
-//   _id: `post-${post.uuid}`,
-//   _type: 'post',
-//   title,
-//   slug: { _type: 'slug', current: slug },
-//   seoTitle: meta_title || undefined,
-//   seoDescription: meta_description || undefined,
-//   body,
-//   publishedAt: published_at,
-// })
-// }
-
-// // this function takes in html and returns the structured block content that Sanity expects
-// // we hook into the `deserialize` function and return custom types
-// // one example is how w
