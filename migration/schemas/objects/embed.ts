@@ -1,5 +1,5 @@
 export default {
-  name: 'iframeEmbed',
+  name: 'embed',
   title: 'iFrame Embed',
   type: 'object',
   fields: [

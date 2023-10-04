@@ -27,6 +27,9 @@ const writeNdJson = (obj: Object) =>
 // Get all markdown files
 const mdDocs = readdirSync('./posts');
 
+let allCategories: Set<string> = new Set();
+let allAuthors: Set<string> = new Set();
+
 // Process a markdown file given a file name
 const processPost = async (fileName: string) => {
   // Grab the file contents
@@ -63,9 +66,14 @@ const processPost = async (fileName: string) => {
     : null;
   // if author is a string, split it at "," or "&"
   const authors = frontmatter.author ? frontmatter.author.split(/,|&/) : null;
-  const categories = frontmatter.categories ? frontmatter.categories.split(',') : null;
-  const profiles = frontmatter.profiles ? frontmatter.profiles.split(',') : null;
+  const profiles = frontmatter.profiles
+    ? frontmatter.profiles.split(',')
+    : null;
   const slug = frontmatter.slug || fileName.replace('.md', '');
+
+  const categories = frontmatter.categories
+    ? frontmatter.categories.split(',')
+    : null;
 
   return {
     html,
@@ -75,40 +83,119 @@ const processPost = async (fileName: string) => {
       authors,
       categories,
       profiles,
-      slug
+      slug,
     },
   };
 };
 
-// Process all markdown files
-mdDocs.map(async (doc) => {
-  // make sure it's not a directory or a non-md file
-  if (lstatSync(`./posts/${doc}`).isDirectory()) {
-    return null;
-  }
+async function createPosts() {
+  // Process all markdown files
+  await Promise.all(
+    mdDocs.map(async (doc) => {
+      // make sure it's not a directory or a non-md file
+      if (lstatSync(`./posts/${doc}`).isDirectory()) {
+        return null;
+      }
 
-  // process the markdown file
-  const { frontmatter, html } = await processPost(doc);
+      // process the markdown file
+      const { frontmatter, html } = await processPost(doc);
 
-  // convert the html to block content
-  const blockContent = await convertHtmlToBlock(html);
+      // convert the html to block content
+      const blockContent = await convertHtmlToBlock(html);
 
-  // Create a JSON object representing the post
-  const entryJson = {
-    _id: `post-${frontmatter.slug || doc.replace('.md', '')}`, // persistent id
-    _type: 'post', // sanity type
-    title: frontmatter.title,
-    slug: {
-      _type: 'slug',
-      current: frontmatter.slug
-    },
-    body: blockContent,
-    publishedAt: frontmatter.date,
-  };
+      if (frontmatter.categories) {
+        frontmatter.categories.forEach((category) =>
+          allCategories.add(category)
+        );
+      }
 
-  // TODO Create entries for categories and authors
-  writeNdJson(entryJson);
-});
+      if (frontmatter.authors) {
+        frontmatter.authors.forEach((author) => allAuthors.add(author));
+      }
+
+      // Create a JSON object representing the post
+      const entryJson = {
+        _id: `post-${frontmatter.slug || doc.replace('.md', '')}`, // persistent id
+        _type: 'post', // sanity type
+        title: frontmatter.title,
+        slug: {
+          _type: 'slug',
+          current: frontmatter.slug,
+        },
+        body: blockContent,
+        publishedAt: frontmatter.date,
+      };
+
+      if (frontmatter.cover) {
+        entryJson['coverImage'] = {
+          _type: 'image',
+          _sanityAsset: `image@${frontmatter.cover}`,
+        };
+      }
+
+      if (frontmatter.categories) {
+        entryJson['categories'] = frontmatter.categories.map((category) => {
+          const asSlug = category.toLowerCase().replace(/\s/g, '-').replace(/[^a-zA-Z0-9-]/g, '');
+          return {
+            _type: 'reference',
+            _ref: `category-${asSlug}`,
+          }
+        })
+      }
+
+      if (frontmatter.author) {
+        entryJson['authors'] = frontmatter.authors.map((author) => {
+          const asSlug = author.toLowerCase().replace(/\s/g, '-').replace(/[^a-zA-Z0-9-]/g, '');
+          return {
+            _type: 'author',
+            _ref: `author-${asSlug}`,
+          }
+        })
+      }
+
+      // TODO Create entries for categories and authors
+      writeNdJson(entryJson);
+    })
+  );
+
+  console.log(allCategories);
+}
+
+async function createCategories() {
+  console.log('categories', allCategories);
+  allCategories.forEach((category) => {
+    const asSlug = category.toLowerCase().replace(/\s/g, '-').replace(/[^a-zA-Z0-9-]/g, '')
+
+    console.log(category);
+    const entryJson = {
+      _id: `category-${asSlug}`, // persistent id
+      _type: 'category',
+      title: category,
+    };
+
+    writeNdJson(entryJson);
+  });
+}
+
+async function createAuthors() {
+  console.log('authors', allAuthors);
+
+  allAuthors.forEach((author) => {
+    const asSlug = author.toLowerCase().replace(/\s/g, '-').replace(/[^a-zA-Z0-9-]/g, '')
+
+    const entryJson = {
+      _id: `author-${asSlug}`, // persistent id
+      _type: 'author',
+      name: author,
+      slug: {
+        _type: 'slug',
+        current: asSlug,
+      },
+    };
+
+    writeNdJson(entryJson);
+  });
+}
 
 // This function takes in html and returns the structured block content that Sanity expects
 async function convertHtmlToBlock(html) {
@@ -133,8 +220,7 @@ async function convertHtmlToBlock(html) {
           const element = el as HTMLElement;
 
           // Generate code blocks from <pre><code/></pre> tags.
-          // Instances of <code/> without <pre/> will be treated automatically
-          // as inline code styles.
+          // Instances of <code/> without <pre/> will be treated automatically as inline code styles.
           if (element.nodeName.toLowerCase() === 'pre') {
             // the language is stored as a language-* class name
             const code = element.querySelector('code');
@@ -151,20 +237,28 @@ async function convertHtmlToBlock(html) {
           // Generate image blocks from <img/> tags.
           if (element.nodeName.toLowerCase() === 'img') {
             let url = element.getAttribute('src');
+            let alt = element.getAttribute('alt');
             return block({
-              _type: 'image',
-              // We need to prefix the url so Sanity knows how to import them
-              _sanityAsset: `image@${url}`,
+              _type: 'imageFigure',
+              caption: alt,
+              image: {
+                _type: 'image',
+                _sanityAsset: `image@${url}`,
+              },
             });
           }
 
           // Generate video blocks from <video/> tags.
           if (element.nodeName.toLowerCase() === 'video') {
             let url = element.getAttribute('src');
+            let alt = element.getAttribute('alt');
             return block({
-              _type: 'file',
-              // We need to prefix the url so Sanity knows how to import them
-              _sanityAsset: `file@${url}`,
+              _type: 'videoFigure',
+              caption: alt,
+              video: {
+                _type: 'file',
+                _sanityAsset: `file@${url}`,
+              },
             });
           }
 
@@ -178,6 +272,26 @@ async function convertHtmlToBlock(html) {
             });
           }
 
+          if (
+            element.nodeName.toLowerCase() === 'a' &&
+            element.className.includes('cta')
+          ) {
+            // Create a CTA document
+            // writeNdJson({
+            //   _id: `cta-${uuid()}`,
+            //   _type: 'cta',
+            //   text: element.textContent,
+            //   url: element.getAttribute('href'),
+            // })
+
+            return block({
+              _type: 'button',
+              _id: uuid(),
+              text: element.textContent,
+              link: element.getAttribute('href'),
+            });
+          }
+
           return undefined;
         },
       },
@@ -185,3 +299,7 @@ async function convertHtmlToBlock(html) {
   });
 }
 
+createPosts().then(() => {
+  createAuthors();
+  createCategories();
+});

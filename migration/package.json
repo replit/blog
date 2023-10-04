@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "migrate": "ts-node index.ts",
-    "import": "npx sanity dataset import exports/production.ndjson migration --replace --allow-failing-assets -replace-assets"
+    "import": "npx sanity dataset import exports/production.ndjson migration --replace --allow-failing-assets"
   },
   "author": "",
   "license": "ISC",
@@ -25,6 +25,7 @@
     "marked": "^9.0.3",
     "ndjson": "^2.0.0",
     "sanity": "^3.17.0",
+    "sanity-plugin-prefixed-slug": "^2.0.0",
     "uuid": "^9.0.1"
   }
 }
