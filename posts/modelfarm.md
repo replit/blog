@@ -3,7 +3,7 @@ title: "Introducing Replit ModelFarm"
 author: James Austin and the Replit AI team
 date: 2023-09-13
 cover: https://blog.replit.com/images/modelfarm/modelfarm.jpeg
-categories: product,projects
+categories: ai,product,projects
 ---
 
 ![](/images/modelfarm/modelfarm-cover.gif)

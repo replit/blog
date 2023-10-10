@@ -1,12 +1,12 @@
 ---
 title: "Showcasing Startups on Replit"
-author: "The Startups Team"
+author: The Startups Team
 date: 2023-09-29
-cover: https://blog.replit.com/images/startup-showcase-2023-09-29/startup-showcase-2023_09_29-cover.jpg
+cover: https://blog.replit.com/images/startup-showcase-2023_09_29/startup-showcase-2023_09_29-cover.jpg
 categories: ventures, news, other
 ---
 
-![](/images/startup-showcase-2023-09-29/startup-showcase-2023_09_29-cover.jpg)
+![](/images/startup-showcase-2023_09_29/startup-showcase-2023_09_29-cover.jpg)
 
 ## The fastest way to start, ship, and share 
 

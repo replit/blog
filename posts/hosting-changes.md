@@ -5,6 +5,8 @@ date: 2023-09-28
 categories: eng, product
 ---
 
+**We remain committed to providing a powerful free development experience to anyone who wants to code. This post is only about the hosting experience, which we are migrating to our new [Deployments](https://replit.com/site/deployments) product.**
+
 In April of this year, we released Reserved VM deployments. Then, we shipped Static and Autoscale Deployments. Since then, we’ve noticed even more companies hosting anything from microservices to their entire applications on Replit.
 
 Some of our favorite startups to watch include:
