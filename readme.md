@@ -1,3 +1,7 @@
+# This repository has been deprecated!
+
+We're using a CMS now instead of a hand-rolled blog.
+
 # Replit Blog
 
 Welcome to the source code for the Replit blog! 
